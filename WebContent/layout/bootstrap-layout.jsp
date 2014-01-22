@@ -7,19 +7,19 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<tiles:insert attribute="bootstrap-head">
+<tiles:insert attribute="head">
 	<tiles:put name="title" beanName="title" />
 	<tiles:put name="style" beanName="style" />
 </tiles:insert>
 </head>
 
 <body>
-	<logic:equal name="navBarEnabled" value="true">
-		<tiles:insert attribute="bootstrap-navbar" />
+	<logic:equal name="navbarEnabled" value="true">
+		<tiles:insert attribute="navbar" />
 	</logic:equal>
 
 	<!-- Main jumbotron for a primary marketing message or call to action -->
-	<logic:equal name="navBarEnabled" value="true">
+	<logic:equal name="jumbotronEnabled" value="true">
 		<div class="jumbotron">
 			<tiles:insert attribute="jumbotron" />
 		</div>

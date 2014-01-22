@@ -16,7 +16,7 @@
 		<put name="jumbotronEnabled" value="false" />
 		<put name="navbarEnabled" value="true" />
 		<put name="footerEnabled" value="true" />
-		<put name="bootstrap-head" value="/layout/bootstrap-head.jsp" />
+		<put name="head" value="/layout/bootstrap-head.jsp" />
 		<put name="jumbotron" value="/layout/bootstrap-jumbotron.jsp" />
 		<put name="navbar" value="/layout/bootstrap-navbar.jsp" />
 		<put name="footer" value="/layout/bootstrap-footer.jsp" />
