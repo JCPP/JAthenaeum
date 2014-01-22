@@ -14,6 +14,7 @@
 	
 	<action-mappings>
 		<action path="/index" type="org.apache.struts.actions.ForwardAction" parameter="page.index" />
+		<action path="/signin" type="org.apache.struts.actions.ForwardAction" parameter="page.signin" />
 	</action-mappings>
 	
 	<controller processorClass="org.apache.struts.tiles.TilesRequestProcessor" />
