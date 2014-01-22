@@ -8,10 +8,15 @@
 		<put name="navigation" value="/navigation.do" />
 		<put name="footer" value="/layout/footer.jsp" />
 	</definition>
+	
+	<definition name="base.definition.bootstrap" path="/layout/bootstrap-layout.jsp">
+		<put name="jumbotron" value="/layout/bootstrap-jumbotron.jsp" />
+		<put name="footer" value="/layout/bootstrap-footer.jsp" />
+	</definition>
 
 	<!-- Tiles Definition of index page -->
-	<definition name="page.index" extends="base.definition">
-		<put name="title" value="Pagina Principale" />
+	<definition name="page.index" extends="base.definition.bootstrap">
+		<put name="title" value="Pagina Principale - JAthenaeum" />
 		<put name="body" value="/index.jsp" />
 	</definition>
 </tiles-definitions>

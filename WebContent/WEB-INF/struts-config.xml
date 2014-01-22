@@ -13,7 +13,6 @@
 	</global-forwards>
 	
 	<action-mappings>
-		
 		<action path="/index" type="org.apache.struts.actions.ForwardAction" parameter="page.index" />
 	</action-mappings>
 	
