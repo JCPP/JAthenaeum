@@ -12,7 +12,7 @@
 
 	<!-- Base Tiles Bootstrap Definition -->
 	<definition name="base.definition.bootstrap" path="/layout/bootstrap-layout.jsp">
-		<put name="style" value="/css/style" />
+		<put name="style" value="/css/style.css" />
 		<put name="jumbotronEnabled" value="false" />
 		<put name="navbarEnabled" value="true" />
 		<put name="footerEnabled" value="true" />
