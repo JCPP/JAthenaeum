@@ -20,7 +20,7 @@ How it works
 
 1. Import in Eclipse;
 2. Run build.xml (with **retrieve** option);
-3. Go to [url](http://localhost:8080/Struts1.3.10TilesExample/index.do) (if your server is listening on 8080 port);
+3. Go to [url](http://localhost:8080/JAthenaeum/index.do) (if your server is listening on 8080 port);
 4. Laugh hysterically
 
 
