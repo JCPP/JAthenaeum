@@ -34,7 +34,7 @@ public class LibroDAO {
 		PreparedStatement stmt = null;
 		try {
 			con.setAutoCommit(false);
-			String select = "SELECT * FROM Libro(IDLibro) values (?)";
+			final String select = "SELECT * FROM Libro(IDLibro) values (?)";
 			stmt = con.prepareStatement(select);
 			stmt.setInt(1, id);
 			ResultSet resultSet = stmt.executeQuery();
@@ -85,8 +85,8 @@ public class LibroDAO {
 		PreparedStatement stmt = null;
 		try {
 			con.setAutoCommit(false);
-			String insert = "SELECT * FROM students";
-			stmt = con.prepareStatement(insert);
+			final String select = "SELECT * FROM Libro";
+			stmt = con.prepareStatement(select);
 			ResultSet resultSet = stmt.executeQuery();
 			Libro libro;
 			
