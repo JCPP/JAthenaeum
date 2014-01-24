@@ -9,7 +9,7 @@ What you need
 
 * Java EE Eclipse or Eclipse with all the necessary plugin for Java EE;
 * IvyDE;
-* Tomcat v.6
+* Tomcat v.6;
 * Set Ant property: Window -> Preferences -> Ant -> Runtime -> Properties -> Add Property ->
   * Name: **basedir**
   * Value: **${project_loc}**
