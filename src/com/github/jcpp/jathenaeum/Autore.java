@@ -3,6 +3,8 @@
  */
 package com.github.jcpp.jathenaeum;
 
+import java.util.Date;
+
 /**
  * Autore class.
  * @author <a href="https://github.com/DavidePastore">DavidePastore</a>
@@ -14,7 +16,7 @@ public class Autore {
 	private String nome;
 	private String cognome;
 	private String foto;
-	private String dataNascita;
+	private Date dataNascita;
 	private String biografia;
 	
 	
@@ -69,13 +71,13 @@ public class Autore {
 	/**
 	 * @return the dataNascita
 	 */
-	public String getDataNascita() {
+	public Date getDataNascita() {
 		return dataNascita;
 	}
 	/**
 	 * @param dataNascita the dataNascita to set
 	 */
-	public void setDataNascita(String dataNascita) {
+	public void setDataNascita(Date dataNascita) {
 		this.dataNascita = dataNascita;
 	}
 	/**
