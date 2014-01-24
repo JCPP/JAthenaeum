@@ -14,4 +14,22 @@
     <servlet-name>action</servlet-name>
     <url-pattern>*.do</url-pattern>
   </servlet-mapping>
+  
+  <!--  MySql connection -->
+  <context-param>
+    <param-name>dbDriver</param-name>
+    <param-value>com.mysql.jdbc.Driver</param-value>
+  </context-param>
+  <context-param>
+    <param-name>dbURI</param-name>
+    <param-value>jdbc:mysql://localhost/JAthenaeum</param-value>
+  </context-param>
+  <context-param>
+    <param-name>dbUser</param-name>
+    <param-value>root</param-value>
+  </context-param>
+  <context-param>
+    <param-name>dbPassword</param-name>
+    <param-value></param-value>
+  </context-param>
 </web-app>

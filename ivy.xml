@@ -25,9 +25,13 @@
         status="integration">
 	</info>
 	<dependencies>
+		<!-- Struts -->
 		<dependency org="org.apache.struts" name="struts-core" rev="1.3.10"/>
 		<dependency org="org.apache.struts" name="struts-taglib" rev="1.3.10"/>
 		<dependency org="org.apache.struts" name="struts-tiles" rev="1.3.10"/>
 		<dependency org="org.apache.struts" name="struts-extras" rev="1.3.10"/>
+		
+		<!-- MySql connector -->
+		<dependency org="mysql" name="mysql-connector-java" rev="5.1.28"/>
 	</dependencies>
 </ivy-module>
