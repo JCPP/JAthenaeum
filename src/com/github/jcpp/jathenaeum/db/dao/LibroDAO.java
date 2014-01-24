@@ -34,7 +34,7 @@ public class LibroDAO {
 		PreparedStatement stmt = null;
 		try {
 			con.setAutoCommit(false);
-			final String select = "SELECT * FROM Libro(IDLibro) values (?)";
+			final String select = "SELECT * FROM Libro WHERE IDLibro = ?";
 			stmt = con.prepareStatement(select);
 			stmt.setInt(1, id);
 			ResultSet resultSet = stmt.executeQuery();
@@ -121,6 +121,45 @@ public class LibroDAO {
 			}
 		}
 		return libri;
+	}
+	
+	/**
+	 * Get the number of the Libro instances.
+	 * @param isbn the isbn code.
+	 * @return Returns the number of the Libro instances.
+	 */
+	public int getNumberByIsbn(String isbn){
+		Connection con = db.getConnection();
+		int number = 0;
+		PreparedStatement stmt = null;
+		try {
+			con.setAutoCommit(false);
+			final String select = "SELECT COUNT(*) FROM Libro WHERE CodiceIsbnLibro = ?";
+			stmt = con.prepareStatement(select);
+			ResultSet resultSet = stmt.executeQuery();
+			
+			number = resultSet.getInt(1);
+			
+			con.commit();
+		} catch (SQLException sqle) {
+			sqle.printStackTrace();
+			try {
+				con.rollback();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+		} finally {
+			try {
+				if (stmt!=null) {
+					stmt.close();
+					stmt=null;
+				}
+				db.closeConnection(con);
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+		}
+		return number;
 	}
 
 }
