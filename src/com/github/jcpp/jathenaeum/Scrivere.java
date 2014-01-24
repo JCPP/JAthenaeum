@@ -1,9 +1,10 @@
 /**
  * 
  */
-package com.github.jcpp.jathenaeum.db;
+package com.github.jcpp.jathenaeum;
 
 /**
+ * Scrivere class.
  * @author <a href="https://github.com/DavidePastore">DavidePastore</a>
  *
  */

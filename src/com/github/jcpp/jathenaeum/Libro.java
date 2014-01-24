@@ -1,7 +1,7 @@
 /**
  * 
  */
-package com.github.jcpp.jathenaeum.db;
+package com.github.jcpp.jathenaeum;
 
 /**
  * Libro class.

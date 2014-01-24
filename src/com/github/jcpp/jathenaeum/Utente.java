@@ -1,7 +1,7 @@
 /**
  * 
  */
-package com.github.jcpp.jathenaeum.db;
+package com.github.jcpp.jathenaeum;
 
 import java.util.Date;
 
