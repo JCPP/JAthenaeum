@@ -11,7 +11,7 @@ import java.util.ArrayList;
 
 import com.github.jcpp.jathenaeum.Libro;
 import com.github.jcpp.jathenaeum.db.Database;
-import com.github.jcpp.jathenaeum.exceptions.BookNotFoundException;
+import com.github.jcpp.jathenaeum.exceptions.LibroNotFoundException;
 
 /**
  * DAO of Libro.
@@ -21,59 +21,6 @@ import com.github.jcpp.jathenaeum.exceptions.BookNotFoundException;
 public class LibroDAO {
 	
 	private Database db = Database.getInstance();
-	
-	/**
-	 * Get the Libro by id.
-	 * @param id the id of the Libro.
-	 * @return Returns the Libro instance.
-	 * @throws BookNotFoundException Throws an exception if the book is not found.
-	 */
-	public Libro getById(int id) throws BookNotFoundException{
-		Connection con = db.getConnection();
-		Libro libro;
-		PreparedStatement stmt = null;
-		try {
-			con.setAutoCommit(false);
-			final String select = "SELECT * FROM Libro WHERE IDLibro = ?";
-			stmt = con.prepareStatement(select);
-			stmt.setInt(1, id);
-			ResultSet resultSet = stmt.executeQuery();
-			con.commit();
-			
-			if(resultSet.next()){
-				libro = new Libro();
-				libro.setId(resultSet.getInt(1));
-				libro.setTitolo(resultSet.getString(2));
-				libro.setCopertina(resultSet.getString(3));
-				libro.setGenere(resultSet.getString(4));
-				libro.setCodiceIsbn(resultSet.getString(5));
-				libro.setDescrizione(resultSet.getString(6));
-			}
-			else{
-				throw new BookNotFoundException();
-			}
-			
-			return libro;
-		} catch (SQLException sqle) {
-			sqle.printStackTrace();
-			try {
-				con.rollback();
-			} catch (SQLException e) {
-				e.printStackTrace();
-			}
-		} finally {
-			try {
-				if (stmt != null) {
-					stmt.close();
-					stmt = null;
-				}
-				db.closeConnection(con);
-			} catch (SQLException e) {
-				e.printStackTrace();
-			}
-		}
-		return null;
-	}
 	
 	/**
 	 * Get all Libro instances.
@@ -121,6 +68,59 @@ public class LibroDAO {
 			}
 		}
 		return libri;
+	}
+	
+	/**
+	 * Get the Libro by id.
+	 * @param id the id of the Libro.
+	 * @return Returns the Libro instance.
+	 * @throws LibroNotFoundException Throws an exception if the Libro is not found.
+	 */
+	public Libro getById(int id) throws LibroNotFoundException{
+		Connection con = db.getConnection();
+		Libro libro;
+		PreparedStatement stmt = null;
+		try {
+			con.setAutoCommit(false);
+			final String select = "SELECT * FROM Libro WHERE IDLibro = ?";
+			stmt = con.prepareStatement(select);
+			stmt.setInt(1, id);
+			ResultSet resultSet = stmt.executeQuery();
+			con.commit();
+			
+			if(resultSet.next()){
+				libro = new Libro();
+				libro.setId(resultSet.getInt(1));
+				libro.setTitolo(resultSet.getString(2));
+				libro.setCopertina(resultSet.getString(3));
+				libro.setGenere(resultSet.getString(4));
+				libro.setCodiceIsbn(resultSet.getString(5));
+				libro.setDescrizione(resultSet.getString(6));
+			}
+			else{
+				throw new LibroNotFoundException();
+			}
+			
+			return libro;
+		} catch (SQLException sqle) {
+			sqle.printStackTrace();
+			try {
+				con.rollback();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+		} finally {
+			try {
+				if (stmt != null) {
+					stmt.close();
+					stmt = null;
+				}
+				db.closeConnection(con);
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+		}
+		return null;
 	}
 	
 	/**
