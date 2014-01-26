@@ -10,6 +10,7 @@ import java.sql.SQLException;
 
 import com.github.jcpp.jathenaeum.db.Database;
 import com.github.jcpp.jathenaeum.exceptions.LoginException;
+import com.github.jcpp.jathenaeum.exceptions.UtenteNotFound;
 import com.github.jcpp.jathenaeum.Utente;
 
 /**
@@ -43,16 +44,68 @@ public class UtenteDAO {
 			
 			if(resultSet.next()){
 				utente = new Utente();
-				utente.setId(resultSet.getInt(1));
+				utente.setNumeroTessera(resultSet.getInt(1));
 				utente.setEmail(resultSet.getString(2));
 				utente.setPassword(resultSet.getString(3));
 				utente.setNome(resultSet.getString(4));
 				utente.setCognome(resultSet.getString(5));
 				utente.setDataNascita(resultSet.getDate(6));
-				utente.setNumeroTessera(resultSet.getInt(7));
 			}
 			else{
 				throw new LoginException();
+			}
+			
+			return utente;
+		} catch (SQLException sqle) {
+			sqle.printStackTrace();
+			try {
+				con.rollback();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+		} finally {
+			try {
+				if (stmt != null) {
+					stmt.close();
+					stmt = null;
+				}
+				db.closeConnection(con);
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+		}
+		return null;
+	}
+	
+	/**
+	 * Get a Utente by Numero Tessera.
+	 * @param numeroTesseraUtente the numeroTessera.
+	 * @return A Utente instance.
+	 * @throws UtenteNotFound If the user is not found.
+	 */
+	public Utente getByNumeroTessera(int numeroTesseraUtente) throws UtenteNotFound{
+		Connection con = db.getConnection();
+		Utente utente;
+		PreparedStatement stmt = null;
+		try {
+			con.setAutoCommit(false);
+			String select = "SELECT * FROM Utente WHERE NumeroTesseraUtente = ?";
+			stmt = con.prepareStatement(select);
+			stmt.setInt(1, numeroTesseraUtente);
+			ResultSet resultSet = stmt.executeQuery();
+			con.commit();
+			
+			if(resultSet.next()){
+				utente = new Utente();
+				utente.setNumeroTessera(resultSet.getInt(1));
+				utente.setEmail(resultSet.getString(2));
+				utente.setPassword(resultSet.getString(3));
+				utente.setNome(resultSet.getString(4));
+				utente.setCognome(resultSet.getString(5));
+				utente.setDataNascita(resultSet.getDate(6));
+			}
+			else{
+				throw new UtenteNotFound();
 			}
 			
 			return utente;
