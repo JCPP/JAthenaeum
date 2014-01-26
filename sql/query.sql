@@ -8,13 +8,12 @@ USE JAthenaeum;
 
 /* Create table Utente */
 CREATE TABLE Utente (
-	IDUtente integer AUTO_INCREMENT PRIMARY KEY,
+	NumeroTesseraUtente integer AUTO_INCREMENT PRIMARY KEY,
 	EmailUtente varchar(50) NOT NULL,
 	PasswordUtente varchar(50) NOT NULL,
 	NomeUtente varchar(50),
 	CognomeUtente varchar(50),
-	DataNascitaUtente date,
-	NumeroTesseraUtente integer
+	DataNascitaUtente date
 );
 
 
@@ -32,11 +31,11 @@ CREATE TABLE Libro (
 /* Create table Prestito */
 CREATE TABLE Prestito (
 	IDPrestito integer AUTO_INCREMENT PRIMARY KEY,
-	IDUtente integer NOT NULL,
+	NumeroTesseraUtente integer NOT NULL,
 	IDLibro integer NOT NULL,
 	DataInizioPrestito date NOT NULL,
 	DataFinePrestito date NOT NULL,
-	FOREIGN KEY (IDUtente) REFERENCES Utente(IDUtente),
+	FOREIGN KEY (NumeroTesseraUtente) REFERENCES Utente(NumeroTesseraUtente),
 	FOREIGN KEY (IDLibro) REFERENCES Libro(IDLibro)
 );
 

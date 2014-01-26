@@ -40,7 +40,7 @@ public class PrestitoDAO {
 			while(resultSet.next()){
 				prestito = new Prestito();
 				prestito.setId(resultSet.getInt(1));
-				prestito.setIdUtente(resultSet.getInt(2));
+				prestito.setNumeroTesseraUtente(resultSet.getInt(2));
 				prestito.setIdLibro(resultSet.getInt(3));
 				prestito.setDataInizio(resultSet.getDate(4));
 				prestito.setDataFine(resultSet.getDate(5));
@@ -90,7 +90,7 @@ public class PrestitoDAO {
 			if(resultSet.next()){
 				prestito = new Prestito();
 				prestito.setId(resultSet.getInt(1));
-				prestito.setIdUtente(resultSet.getInt(2));
+				prestito.setNumeroTesseraUtente(resultSet.getInt(2));
 				prestito.setIdLibro(resultSet.getInt(3));
 				prestito.setDataInizio(resultSet.getDate(4));
 				prestito.setDataFine(resultSet.getDate(5));
@@ -124,25 +124,25 @@ public class PrestitoDAO {
 
 	/**
 	 * Get all Prestito instances of an Utente.
-	 * @param idUtente the idUtente.
+	 * @param numeroTesseraUtente the numeroTesseraUtente.
 	 * @return Returns all Prestito instances in an ArrayList<Prestito> of an Utente.
 	 */
-	public ArrayList<Prestito> getAllByIdUtente(int idUtente){
+	public ArrayList<Prestito> getAllByIdUtente(int numeroTesseraUtente){
 		Connection con = db.getConnection();
 		ArrayList<Prestito> prestiti = new ArrayList<Prestito>();
 		PreparedStatement stmt = null;
 		try {
 			con.setAutoCommit(false);
-			final String select = "SELECT * FROM Prestito WHERE IDUtente = ?";
+			final String select = "SELECT * FROM Prestito WHERE NumeroTesseraUtente = ?";
 			stmt = con.prepareStatement(select);
-			stmt.setInt(1, idUtente);
+			stmt.setInt(1, numeroTesseraUtente);
 			ResultSet resultSet = stmt.executeQuery();
 			Prestito prestito;
 			
 			while(resultSet.next()){
 				prestito = new Prestito();
 				prestito.setId(resultSet.getInt(1));
-				prestito.setIdUtente(resultSet.getInt(2));
+				prestito.setNumeroTesseraUtente(resultSet.getInt(2));
 				prestito.setIdLibro(resultSet.getInt(3));
 				prestito.setDataInizio(resultSet.getDate(4));
 				prestito.setDataFine(resultSet.getDate(5));
@@ -192,7 +192,7 @@ public class PrestitoDAO {
 			while(resultSet.next()){
 				prestito = new Prestito();
 				prestito.setId(resultSet.getInt(1));
-				prestito.setIdUtente(resultSet.getInt(2));
+				prestito.setNumeroTesseraUtente(resultSet.getInt(2));
 				prestito.setIdLibro(resultSet.getInt(3));
 				prestito.setDataInizio(resultSet.getDate(4));
 				prestito.setDataFine(resultSet.getDate(5));

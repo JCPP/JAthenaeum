@@ -13,7 +13,7 @@ import java.util.Date;
 public class Prestito {
 	
 	private int id;
-	private int idUtente;
+	private int numeroTesseraUtente;
 	private int idLibro;
 	private Date dataInizio;
 	private Date dataFine;
@@ -32,16 +32,16 @@ public class Prestito {
 		this.id = id;
 	}
 	/**
-	 * @return the idUtente
+	 * @return the numeroTesseraUtente
 	 */
-	public int getIdUtente() {
-		return idUtente;
+	public int getNumeroTesseraUtente() {
+		return numeroTesseraUtente;
 	}
 	/**
-	 * @param idUtente the idUtente to set
+	 * @param numeroTesseraUtente the numeroTesseraUtente to set
 	 */
-	public void setIdUtente(int idUtente) {
-		this.idUtente = idUtente;
+	public void setNumeroTesseraUtente(int numeroTesseraUtente) {
+		this.numeroTesseraUtente = numeroTesseraUtente;
 	}
 	/**
 	 * @return the idLibro

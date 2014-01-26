@@ -11,7 +11,6 @@ import java.util.Date;
  *
  */
 public class Utente {
-	private int id;
 	private String email;
 	private String password;
 	private String nome;
@@ -20,18 +19,6 @@ public class Utente {
 	private int numeroTessera;
 	
 	
-	/**
-	 * @return the id
-	 */
-	public int getId() {
-		return id;
-	}
-	/**
-	 * @param id the id to set
-	 */
-	public void setId(int id) {
-		this.id = id;
-	}
 	/**
 	 * @return the email
 	 */
