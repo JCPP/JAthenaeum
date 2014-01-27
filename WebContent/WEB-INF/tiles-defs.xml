@@ -30,13 +30,39 @@
 		<put name="body" value="/layout/index.jsp" />
 	</definition>
 
-
-	<!-- Login page -->
+	<!-- Sign in page -->
 	<definition name="page.signin" extends="base.definition.bootstrap">
 		<put name="navbarEnabled" value="false" />
 		<put name="footerEnabled" value="false" />
 		<put name="title" value="Signin - JAthenaeum" />
 		<put name="body" value="/layout/signin.jsp" />
 		<put name="style" value="css/signin.css" />
+	</definition>
+	
+	<!-- Sign up page -->
+	<definition name="page.signup" extends="base.definition.bootstrap">
+		<put name="navbarEnabled" value="false" />
+		<put name="footerEnabled" value="false" />
+		<put name="title" value="Signup - JAthenaeum" />
+		<put name="body" value="/layout/signup.jsp" />
+		<put name="style" value="css/signup.css" />
+	</definition>
+	
+	<!-- Failed registration -->
+	<definition name="page.failedRegistration" extends="base.definition.bootstrap">
+		<put name="navbarEnabled" value="true" />
+		<put name="footerEnabled" value="true" />
+		<put name="title" value="Failed Registration - JAthenaeum" />
+		<put name="body" value="/layout/failedRegistration.jsp" />
+		<put name="style" value="css/signup.css" />
+	</definition>
+	
+	<!-- Confirm registration -->
+	<definition name="page.confirmRegistration" extends="base.definition.bootstrap">
+		<put name="navbarEnabled" value="true" />
+		<put name="footerEnabled" value="true" />
+		<put name="title" value="Confirm Registration - JAthenaeum" />
+		<put name="body" value="/layout/confirmRegistration.jsp" />
+		<put name="style" value="css/signup.css" />
 	</definition>
 </tiles-definitions>

@@ -129,5 +129,53 @@ public class UtenteDAO {
 		}
 		return null;
 	}
+	
+	/**
+	 * Try to register.
+	 * @param user The user
+	 * @return a boolean value to confirm the insert
+	 * @throws RegistrationException 
+	 */
+	public boolean register(Utente user){
+		Connection con = db.getConnection();
+		PreparedStatement stmt = null;
+		boolean workIt = false;
+
+		try {
+			con.setAutoCommit(false);
+			String insert = "INSERT INTO Utente (EmailUtente, PasswordUtente, NomeUtente, CognomeUtente, DataNascitaUtente, NumeroTesseraUtente)"
+					+ "VALUES ("+user.getEmail()+", "+user.getPassword()+", "+user.getNome()+", "+user.getCognome()+", "+user.getDataNascita()+")";
+			stmt = con.prepareStatement(insert);
+			ResultSet resultSet = stmt.executeQuery();
+			con.commit();
+
+			if(resultSet.next()){
+				workIt = true;
+			}
+			else{
+				//throw new RegistrationException();
+			}
+
+			return workIt;
+		} catch (SQLException sqle) {
+			sqle.printStackTrace();
+			try {
+				con.rollback();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+		} finally {
+			try {
+				if (stmt != null) {
+					stmt.close();
+					stmt = null;
+				}
+				db.closeConnection(con);
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+		}
+		return workIt;
+	}
 
 }
