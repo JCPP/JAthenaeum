@@ -20,13 +20,13 @@ import com.github.jcpp.jathenaeum.exceptions.LibroNotFoundException;
  */
 public class LibroDAO {
 	
-	private Database db = Database.getInstance();
+	private static Database db = Database.getInstance();
 	
 	/**
 	 * Get all Libro instances.
 	 * @return Returns all Libro instances in an ArrayList<Libro>.
 	 */
-	public ArrayList<Libro> getAll(){
+	public static ArrayList<Libro> getAll(){
 		Connection con = db.getConnection();
 		ArrayList<Libro> libri = new ArrayList<Libro>();
 		PreparedStatement stmt = null;
@@ -76,7 +76,7 @@ public class LibroDAO {
 	 * @return Returns the Libro instance.
 	 * @throws LibroNotFoundException Throws an exception if the Libro is not found.
 	 */
-	public Libro getById(int id) throws LibroNotFoundException{
+	public static Libro getById(int id) throws LibroNotFoundException{
 		Connection con = db.getConnection();
 		Libro libro;
 		PreparedStatement stmt = null;
@@ -128,7 +128,7 @@ public class LibroDAO {
 	 * @param isbn the isbn code.
 	 * @return Returns the number of the Libro instances.
 	 */
-	public int getNumberByIsbn(String isbn){
+	public static int getNumberByIsbn(String isbn){
 		Connection con = db.getConnection();
 		int number = 0;
 		PreparedStatement stmt = null;

@@ -20,13 +20,13 @@ import com.github.jcpp.jathenaeum.exceptions.PrestitoNotFoundException;
  */
 public class PrestitoDAO {
 	
-	private Database db = Database.getInstance();
+	private static Database db = Database.getInstance();
 	
 	/**
 	 * Get all Prestito instances.
 	 * @return Returns all Prestito instances in an ArrayList<Prestito>.
 	 */
-	public ArrayList<Prestito> getAll(){
+	public static ArrayList<Prestito> getAll(){
 		Connection con = db.getConnection();
 		ArrayList<Prestito> prestiti = new ArrayList<Prestito>();
 		PreparedStatement stmt = null;
@@ -75,7 +75,7 @@ public class PrestitoDAO {
 	 * @return Returns the Prestito instance.
 	 * @throws PrestitoNotFoundException Throws an exception if the Prestito is not found.
 	 */
-	public Prestito getById(int id) throws PrestitoNotFoundException{
+	public static Prestito getById(int id) throws PrestitoNotFoundException{
 		Connection con = db.getConnection();
 		Prestito prestito;
 		PreparedStatement stmt = null;
@@ -127,7 +127,7 @@ public class PrestitoDAO {
 	 * @param numeroTesseraUtente the numeroTesseraUtente.
 	 * @return Returns all Prestito instances in an ArrayList<Prestito> of an Utente.
 	 */
-	public ArrayList<Prestito> getAllByIdUtente(int numeroTesseraUtente){
+	public static ArrayList<Prestito> getAllByIdUtente(int numeroTesseraUtente){
 		Connection con = db.getConnection();
 		ArrayList<Prestito> prestiti = new ArrayList<Prestito>();
 		PreparedStatement stmt = null;
@@ -177,7 +177,7 @@ public class PrestitoDAO {
 	 * @param idLibro the idLibro.
 	 * @return Returns all Prestito instances in an ArrayList<Prestito> of an Libro.
 	 */
-	public ArrayList<Prestito> getAllByIdLibro(int idLibro){
+	public static ArrayList<Prestito> getAllByIdLibro(int idLibro){
 		Connection con = db.getConnection();
 		ArrayList<Prestito> prestiti = new ArrayList<Prestito>();
 		PreparedStatement stmt = null;

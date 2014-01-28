@@ -21,7 +21,7 @@ import com.github.jcpp.jathenaeum.Utente;
  */
 public class UtenteDAO {
 	
-	private Database db = Database.getInstance();
+	private static Database db = Database.getInstance();
 	
 	/**
 	 * Try to login.
@@ -30,7 +30,7 @@ public class UtenteDAO {
 	 * @return Return an instance of Utente if the login is successful.
 	 * @throws LoginException Throws an exception if the login is failed.
 	 */
-	public Utente login(String email, String password) throws LoginException {
+	public static Utente login(String email, String password) throws LoginException {
 		Connection con = db.getConnection();
 		Utente utente;
 		PreparedStatement stmt = null;
@@ -85,7 +85,7 @@ public class UtenteDAO {
 	 * @return A Utente instance.
 	 * @throws UtenteNotFound If the user is not found.
 	 */
-	public Utente getByNumeroTessera(int numeroTesseraUtente) throws UtenteNotFound{
+	public static Utente getByNumeroTessera(int numeroTesseraUtente) throws UtenteNotFound{
 		Connection con = db.getConnection();
 		Utente utente;
 		PreparedStatement stmt = null;
@@ -137,7 +137,7 @@ public class UtenteDAO {
 	 * @param email The Utente email.
 	 * @return a boolean value to confirm the presence
 	 */
-	public boolean exists(String email){
+	public static boolean exists(String email){
 		Connection con = db.getConnection();
 		PreparedStatement stmt = null;
 
@@ -180,7 +180,7 @@ public class UtenteDAO {
 	 * @return a boolean value to confirm the insert
 	 * @throws RegistrationException 
 	 */
-	public boolean register(Utente user) throws RegistrationException{
+	public static boolean register(Utente user) throws RegistrationException{
 		Connection con = db.getConnection();
 		PreparedStatement stmt = null;
 		boolean workIt = false;

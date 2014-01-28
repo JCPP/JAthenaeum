@@ -20,13 +20,13 @@ import com.github.jcpp.jathenaeum.exceptions.AutoreNotFoundException;
  */
 public class AutoreDAO {
 	
-	private Database db = Database.getInstance();
+	private static Database db = Database.getInstance();
 	
 	/**
 	 * Get all Autore instances.
 	 * @return Returns all Autore instances in an ArrayList<Autore>.
 	 */
-	public ArrayList<Autore> getAll(){
+	public static ArrayList<Autore> getAll(){
 		Connection con = db.getConnection();
 		ArrayList<Autore> autori = new ArrayList<Autore>();
 		PreparedStatement stmt = null;
@@ -77,7 +77,7 @@ public class AutoreDAO {
 	 * @return Returns the Autore instance.
 	 * @throws AutoreNotFoundException Throws an exception if the Autore is not found.
 	 */
-	public Autore getById(int id) throws AutoreNotFoundException{
+	public static Autore getById(int id) throws AutoreNotFoundException{
 		Connection con = db.getConnection();
 		Autore autore;
 		PreparedStatement stmt = null;
@@ -129,7 +129,7 @@ public class AutoreDAO {
 	 * @param libroId the libroId.
 	 * @return Returns the Autore instances who write the libroId in an ArrayList<Autore>.
 	 */
-	public ArrayList<Autore> getAllByLibroId(int libroId){
+	public static ArrayList<Autore> getAllByLibroId(int libroId){
 		Connection con = db.getConnection();
 		ArrayList<Autore> autori = new ArrayList<Autore>();
 		PreparedStatement stmt = null;

@@ -23,14 +23,14 @@ import com.github.jcpp.jathenaeum.exceptions.ScrivereNotFoundException;
  */
 public class ScrivereDAO {
 	
-	private Database db = Database.getInstance();
+	private static Database db = Database.getInstance();
 	
 	
 	/**
 	 * Get all Scrivere instances.
 	 * @return Returns all Scrivere instances in an ArrayList<Scrivere>.
 	 */
-	public ArrayList<Scrivere> getAll(){
+	public static ArrayList<Scrivere> getAll(){
 		Connection con = db.getConnection();
 		ArrayList<Scrivere> scrivereArray = new ArrayList<Scrivere>();
 		PreparedStatement stmt = null;
@@ -78,7 +78,7 @@ public class ScrivereDAO {
 	 * @return Returns the Scrivere instance.
 	 * @throws ScrivereNotFoundException Throws an exception if the Scrivere is not found.
 	 */
-	public Scrivere getById(int id) throws ScrivereNotFoundException{
+	public static Scrivere getById(int id) throws ScrivereNotFoundException{
 		Connection con = db.getConnection();
 		Scrivere scrivere;
 		PreparedStatement stmt = null;
