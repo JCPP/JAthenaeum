@@ -4,6 +4,7 @@
 package com.github.jcpp.jathenaeum.db.dao;
 
 import java.sql.Connection;
+import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -188,8 +189,13 @@ public class UtenteDAO {
 		try {
 			con.setAutoCommit(false);
 			String insert = "INSERT INTO Utente (EmailUtente, PasswordUtente, NomeUtente, CognomeUtente, DataNascitaUtente, NumeroTesseraUtente)"
-					+ "VALUES ("+user.getEmail()+", "+user.getPassword()+", "+user.getNome()+", "+user.getCognome()+", "+user.getDataNascita()+")";
+					+ "VALUES (?, ?, ?, ?, ?)";
 			stmt = con.prepareStatement(insert);
+			stmt.setString(1, user.getEmail());
+			stmt.setString(2, user.getPassword());
+			stmt.setString(3, user.getNome());
+			stmt.setString(4, user.getCognome());
+			stmt.setDate(5, new Date(user.getDataNascita().getTime()));
 			ResultSet resultSet = stmt.executeQuery();
 			con.commit();
 
