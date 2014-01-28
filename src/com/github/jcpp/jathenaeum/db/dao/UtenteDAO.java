@@ -10,6 +10,7 @@ import java.sql.SQLException;
 
 import com.github.jcpp.jathenaeum.db.Database;
 import com.github.jcpp.jathenaeum.exceptions.LoginException;
+import com.github.jcpp.jathenaeum.exceptions.RegistrationException;
 import com.github.jcpp.jathenaeum.exceptions.UtenteNotFound;
 import com.github.jcpp.jathenaeum.Utente;
 
@@ -77,6 +78,7 @@ public class UtenteDAO {
 		return null;
 	}
 	
+	
 	/**
 	 * Get a Utente by Numero Tessera.
 	 * @param numeroTesseraUtente the numeroTessera.
@@ -132,11 +134,53 @@ public class UtenteDAO {
 	
 	/**
 	 * Try to register.
+	 * @param email The Utente email.
+	 * @return a boolean value to confirm the presence
+	 */
+	public boolean exists(String email){
+		Connection con = db.getConnection();
+		PreparedStatement stmt = null;
+
+		try {
+			con.setAutoCommit(false);
+			String select = "SELECT * FROM Utente WHERE EmailUtente = ?";
+			stmt = con.prepareStatement(select);
+			stmt.setString(1, email);
+			ResultSet resultSet = stmt.executeQuery();
+			con.commit();
+
+			return resultSet.next();
+			
+		} catch (SQLException sqle) {
+			sqle.printStackTrace();
+			try {
+				con.rollback();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+		} finally {
+			try {
+				if (stmt != null) {
+					stmt.close();
+					stmt = null;
+				}
+				db.closeConnection(con);
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+		}
+		return false;
+	}
+	
+	
+	
+	/**
+	 * Try to register.
 	 * @param user The user
 	 * @return a boolean value to confirm the insert
 	 * @throws RegistrationException 
 	 */
-	public boolean register(Utente user){
+	public boolean register(Utente user) throws RegistrationException{
 		Connection con = db.getConnection();
 		PreparedStatement stmt = null;
 		boolean workIt = false;
@@ -153,7 +197,7 @@ public class UtenteDAO {
 				workIt = true;
 			}
 			else{
-				//throw new RegistrationException();
+				throw new RegistrationException();
 			}
 
 			return workIt;
