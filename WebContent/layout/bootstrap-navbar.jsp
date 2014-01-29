@@ -29,9 +29,11 @@
 						<li><a href="#">One more separated link</a></li>
 					</ul></li>
 			</ul>
-			<html:link styleClass="btn btn-default navbar-btn navbar-right" href="signup.do">Sign up</html:link>
-			<html:link styleClass="btn btn-default navbar-btn navbar-right" href="signin.do">Sign in</html:link>
-			<!-- <a class="btn btn-default navbar-btn navbar-right" href="/signin">Sign in</a> -->
+			<ul class="navbar-right">
+				<html:link styleClass="btn btn-default navbar-btn" href="signup.do">Sign up</html:link>
+				<html:link styleClass="btn btn-default navbar-btn" href="signin.do">Sign in</html:link>
+				<!-- <a class="btn btn-default navbar-btn navbar-right" href="/signin">Sign in</a> -->
+			</ul>
 		</div>
 		<!-- /.navbar-collapse -->
 	</nav>
