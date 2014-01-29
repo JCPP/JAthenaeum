@@ -14,7 +14,7 @@
 		<!-- Collect the nav links, forms, and other content for toggling -->
 		<div class="collapse navbar-collapse"
 			id="bs-example-navbar-collapse-1">
-			<ul class="nav navbar-nav">
+			<ul class="nav navbar-nav navbar-left">
 				<li class="active"><a href="#">Link</a></li>
 				<li><a href="#">Link</a></li>
 				<li class="dropdown"><a href="#" class="dropdown-toggle"
@@ -29,11 +29,11 @@
 						<li><a href="#">One more separated link</a></li>
 					</ul></li>
 			</ul>
-			<ul class="navbar-right">
-				<html:link styleClass="btn btn-default navbar-btn" href="signup.do">Sign up</html:link>
+			<div class="nav navbar-nav navbar-right">
+				<html:link styleClass="btn btn-default" href="signup.do">Sign up</html:link>
 				<html:link styleClass="btn btn-default navbar-btn" href="signin.do">Sign in</html:link>
 				<!-- <a class="btn btn-default navbar-btn navbar-right" href="/signin">Sign in</a> -->
-			</ul>
+			</div>
 		</div>
 		<!-- /.navbar-collapse -->
 	</nav>
