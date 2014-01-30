@@ -3,7 +3,6 @@
  */
 package com.github.jcpp.jathenaeum;
 
-import java.util.Date;
 
 /**
  * Utente class.
@@ -15,9 +14,8 @@ public class Utente {
 	private String password;
 	private String nome;
 	private String cognome;
-	private Date dataNascita;
+	private String dataNascita;
 	private int numeroTessera;
-	
 	
 	/**
 	 * @return the email
@@ -70,14 +68,14 @@ public class Utente {
 	/**
 	 * @return the dataNascita
 	 */
-	public Date getDataNascita() {
+	public String getDataNascita() {
 		return dataNascita;
 	}
 	/**
-	 * @param dataNascita the dataNascita to set
+	 * @param string the dataNascita to set
 	 */
-	public void setDataNascita(Date dataNascita) {
-		this.dataNascita = dataNascita;
+	public void setDataNascita(String string) {
+		this.dataNascita = string;
 	}
 	/**
 	 * @return the numeroTessera

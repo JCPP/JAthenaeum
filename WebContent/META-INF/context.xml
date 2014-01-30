@@ -1,0 +1,17 @@
+<Context docBase="JAthenaeum" path="/JAthenaeum" reloadable="true">
+	<Resource
+	    name="jdbc/jathenaeum"
+	    type="javax.sql.DataSource"
+		factory="org.apache.tomcat.dbcp.dbcp.BasicDataSourceFactory"
+		auth="Container"
+		driverClassName="com.mysql.jdbc.Driver"
+		maxActive="10" maxIdle="5"
+		maxWait="-1"
+		username="root"
+		password=""
+		url="jdbc:mysql://localhost/jathenaeum"
+		validationQuery="SELECT 1"
+		removeAbandoned="true"
+		removeAbandonedTimeout="60"
+		logAbandoned="true" />
+</Context>

@@ -43,7 +43,7 @@ public class Database {
 		try {
 			initCtx = new InitialContext();
 			Context envCtx = (Context) initCtx.lookup("java:comp/env");
-			BasicDataSource ds = (BasicDataSource) envCtx.lookup("jdbc/JAthenaeum");
+			BasicDataSource ds = (BasicDataSource) envCtx.lookup("jdbc/jathenaeum");
 			con = ds.getConnection();
 			System.out.println("##db## - 'Pooled Connection' acquisita.");
 		} catch (NamingException e1) {

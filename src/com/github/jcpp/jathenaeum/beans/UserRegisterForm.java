@@ -1,7 +1,5 @@
 package com.github.jcpp.jathenaeum.beans;
 
-import java.sql.Date;
-
 import org.apache.struts.action.ActionForm;
 
 public class UserRegisterForm extends ActionForm{
@@ -13,7 +11,7 @@ public class UserRegisterForm extends ActionForm{
 	private String password_control;
 	private String name;
 	private String surname;
-	private Date born_date;
+	private String bornDate;
 	
 	/*METODI*/
 	
@@ -51,11 +49,11 @@ public class UserRegisterForm extends ActionForm{
 	public void setSurname(String surname) {
 		this.surname = surname;
 	}
-	public Date getBornDate() {
-		return born_date;
+	public String getBornDate() {
+		return bornDate;
 	}
-	public void setDate(Date date) {
-		this.born_date = date;
+	public void setDate(String date) {
+		this.bornDate = date;
 	}
 	
 	

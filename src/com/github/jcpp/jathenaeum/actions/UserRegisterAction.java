@@ -1,7 +1,5 @@
 package com.github.jcpp.jathenaeum.actions;
 
-import java.util.Random;
-
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
@@ -23,8 +21,6 @@ public class UserRegisterAction extends Action{
 		
 		//boolean action_perform = false;
 		String action_target = null;
-		Random rnd = new Random();
-		UtenteDAO userDao = new UtenteDAO();
 		
 		Utente user = new Utente();
 		//ActionMessages errors_mesg = new ActionMessages();
@@ -34,12 +30,12 @@ public class UserRegisterAction extends Action{
         	user.setPassword(uf.getPassword());
         	user.setNome(uf.getName());
         	user.setCognome(uf.getSurname());
+        	System.out.println("ActionForm: " + uf.getBornDate());
         	user.setDataNascita(uf.getBornDate());
-        	user.setNumeroTessera(rnd.nextInt(999999)+1);
         	
         	
         	try{
-        		if(userDao.register(user)){
+        		if(UtenteDAO.register(user)){
         			action_target = "success";
         		}
         		

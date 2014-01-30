@@ -2,15 +2,17 @@
 <%@ taglib uri="http://struts.apache.org/tags-bean" prefix="bean" %>
 <%@ taglib uri="http://struts.apache.org/tags-html" prefix="html" %>
 
-<form action="doRegister.do" class="form-signup" >
-
-	<h2 class="form-signup-heading">Please sign up</h2>
-	<input type="email" class="form-control" placeholder="Email address" required autofocus>
-	<input type="password" class="form-control" placeholder="Password" required>
-	<input type="password" class="form-control" placeholder="Password control" required>
-	<input type="text" class="form-control" placeholder="Name" required>
-	<input type="text" class="form-control" placeholder="Surname" required>
-	<input type="date" class="form-control" placeholder="Born date" required>
-	
-	<button class="btn btn-lg btn-primary btn-block" type="submit">Sign up</button>
-</form>
+	<html:form action="/doRegister" styleClass="form-signup" method="post">
+	<div>
+		<html:errors/>
+	</div>
+	<br/>	
+    Email : <html:text property="email" errorKey="email"/><br/><br/>
+    Password : <html:password property="password" errorKey="password"/><br/><br/>
+    Password control : <html:password property="password_control" errorKey="password_control"/><br/><br/>
+    Nome : <html:text property="name" errorKey="name"/><br/><br/>
+    Cognome : <html:text property="surname" errorKey="surname"/><br/><br/>
+    Date : <html:text property="bornDate" errorKey="date"/><br/><br/>
+    <html:submit value="Submit"/>
+    
+    </html:form>
