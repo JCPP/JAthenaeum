@@ -4,12 +4,14 @@
 <tiles:useAttribute name="jumbotronEnabled" />
 <tiles:useAttribute name="navbarEnabled" />
 <tiles:useAttribute name="footerEnabled" />
+<tiles:useAttribute name="redirect" />
 <!DOCTYPE html>
 <html lang="en">
 <head>
 <tiles:insert attribute="head">
 	<tiles:put name="title" beanName="title" />
 	<tiles:put name="style" beanName="style" />
+	<tiles:put name="redirect" beanName="redirect" />
 </tiles:insert>
 </head>
 

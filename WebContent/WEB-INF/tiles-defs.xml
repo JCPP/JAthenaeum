@@ -16,6 +16,7 @@
 		<put name="jumbotronEnabled" value="false" />
 		<put name="navbarEnabled" value="true" />
 		<put name="footerEnabled" value="true" />
+		<put name="redirect" value="" />
 		<put name="head" value="/layout/bootstrap-head.jsp" />
 		<put name="jumbotron" value="/layout/bootstrap-jumbotron.jsp" />
 		<put name="navbar" value="/layout/bootstrap-navbar.jsp" />
@@ -52,18 +53,18 @@
 	<definition name="page.failedRegistration" extends="base.definition.bootstrap">
 		<put name="navbarEnabled" value="true" />
 		<put name="footerEnabled" value="true" />
+		<put name="redirect" value="index.do" />
 		<put name="title" value="Failed Registration - JAthenaeum" />
 		<put name="body" value="/layout/failedRegistration.jsp" />
-		<put name="style" value="css/signup.css" />
 	</definition>
 	
 	<!-- Confirm registration -->
 	<definition name="page.confirmRegistration" extends="base.definition.bootstrap">
 		<put name="navbarEnabled" value="true" />
 		<put name="footerEnabled" value="true" />
+		<put name="redirect" value="index.do" />
 		<put name="title" value="Confirm Registration - JAthenaeum" />
 		<put name="body" value="/layout/confirmRegistration.jsp" />
-		<put name="style" value="css/signup.css" />
 	</definition>
 	
 	<!-- New Author -->
