@@ -17,36 +17,36 @@ public class NewAuthorAction extends Action{
 	@Override
 	public ActionForward execute(ActionMapping mapping, ActionForm form,
 			HttpServletRequest request, HttpServletResponse response)
-			throws Exception {
+					throws Exception {
 
 		//boolean action_perform = false;
-				String action_target = null;
-				
-				Autore autore = new Autore();
-				//ActionMessages errors_mesg = new ActionMessages();
-		        NewAuthorForm uf = (NewAuthorForm) form;
-		        if(form != null){
-		        	autore.setNome(uf.getNome());
-		        	autore.setCognome(uf.getCognome());
-		        	autore.setFoto(uf.getFoto());
-		        	autore.setDataNascita(uf.getData());
-		        	autore.setBiografia(uf.getBiografia());
-		        	
-		        	
-		        	try{
-		        		if(AutoreDAO.register(autore)){
-		        			action_target = "success";
-		        		}
-		        		
-		        	}catch(Exception e){
-		        		action_target = "failed";
-		        		//throw new RegistrationException();
-		        	}
-		        }
+		String action_target = null;
 
-				return mapping.findForward(action_target);
+		Autore autore = new Autore();
+		//ActionMessages errors_mesg = new ActionMessages();
+		NewAuthorForm uf = (NewAuthorForm) form;
+		if(form != null){
+			autore.setNome(uf.getNome());
+			autore.setCognome(uf.getCognome());
+			autore.setFoto(uf.getFoto());
+			autore.setDataNascita(uf.getData());
+			autore.setBiografia(uf.getBiografia());
+
+
+			try{
+				if(AutoreDAO.register(autore)){
+					action_target = "success";
+				}
+
+			}catch(Exception e){
+				action_target = "failed";
+				//throw new RegistrationException();
+			}
+		}
+
+		return mapping.findForward(action_target);
 	}
 
-	
-	
+
+
 }
