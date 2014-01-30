@@ -65,4 +65,31 @@
 		<put name="body" value="/layout/confirmRegistration.jsp" />
 		<put name="style" value="css/signup.css" />
 	</definition>
+	
+	<!-- New Author -->
+	<definition name="page.newAuthor" extends="base.definition.bootstrap">
+		<put name="navbarEnabled" value="true" />
+		<put name="footerEnabled" value="true" />
+		<put name="title" value="New Author - JAthenaeum" />
+		<put name="body" value="/layout/newAuthor.jsp" />
+		<put name="style" value="css/signup.css" />
+	</definition>
+	
+		<!-- Confirm insert -->
+	<definition name="page.confirmInsert" extends="base.definition.bootstrap">
+		<put name="navbarEnabled" value="true" />
+		<put name="footerEnabled" value="true" />
+		<put name="title" value="Confirm Insert Author - JAthenaeum" />
+		<put name="body" value="/layout/confirmInsert.jsp" />
+		<put name="style" value="css/signup.css" />
+	</definition>
+	
+		<!-- Failed insert -->
+	<definition name="page.failedInsert" extends="base.definition.bootstrap">
+		<put name="navbarEnabled" value="true" />
+		<put name="footerEnabled" value="true" />
+		<put name="title" value="Failed Insert Author - JAthenaeum" />
+		<put name="body" value="/layout/failedInsert.jsp" />
+		<put name="style" value="css/signup.css" />
+	</definition>
 </tiles-definitions>

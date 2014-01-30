@@ -12,6 +12,7 @@ import java.util.ArrayList;
 import com.github.jcpp.jathenaeum.Autore;
 import com.github.jcpp.jathenaeum.db.Database;
 import com.github.jcpp.jathenaeum.exceptions.AutoreNotFoundException;
+import com.github.jcpp.jathenaeum.exceptions.RegistrationException;
 
 /**
  * DAO of Autore.
@@ -43,7 +44,7 @@ public class AutoreDAO {
 				autore.setNome(resultSet.getString(2));
 				autore.setCognome(resultSet.getString(3));
 				autore.setFoto(resultSet.getString(4));
-				autore.setDataNascita(resultSet.getDate(5));
+				//autore.setDataNascita(resultSet.getDate(5));
 				autore.setBiografia(resultSet.getString(6));
 				autori.add(autore);
 			}
@@ -95,7 +96,7 @@ public class AutoreDAO {
 				autore.setNome(resultSet.getString(2));
 				autore.setCognome(resultSet.getString(3));
 				autore.setFoto(resultSet.getString(4));
-				autore.setDataNascita(resultSet.getDate(5));
+				//autore.setDataNascita(resultSet.getDate(5));
 				autore.setBiografia(resultSet.getString(6));
 			}
 			else{
@@ -147,7 +148,7 @@ public class AutoreDAO {
 				autore.setNome(resultSet.getString(2));
 				autore.setCognome(resultSet.getString(3));
 				autore.setFoto(resultSet.getString(4));
-				autore.setDataNascita(resultSet.getDate(5));
+				//autore.setDataNascita(resultSet.getDate(5));
 				autore.setBiografia(resultSet.getString(6));
 				autori.add(autore);
 			}
@@ -172,6 +173,55 @@ public class AutoreDAO {
 			}
 		}
 		return autori;
+	}
+
+	public static boolean register(Autore author) throws RegistrationException{
+		Connection con = db.getConnection();
+		PreparedStatement stmt = null;
+		boolean workIt = false;
+
+		try {
+			con.setAutoCommit(false);
+			String insert = "INSERT INTO Autore (NomeAutore, CognomeAutore, FotoAutore, DataNascitaAutore, BiografiaAutore)"
+					+ "VALUES (?, ?, ?, ?, ?)";
+			stmt = con.prepareStatement(insert);
+			stmt.setString(1, author.getNome());
+			stmt.setString(2, author.getCognome());
+			stmt.setString(3, author.getFoto());
+			stmt.setString(4, author.getDataNascita());
+			stmt.setString(5, author.getBiografia());
+			
+			int result = stmt.executeUpdate();
+			con.commit();
+			
+			if(result == 1 || result== 2){
+				
+				workIt = true;
+			}
+			else{
+				throw new RegistrationException();
+			}
+
+			return workIt;
+		} catch (SQLException sqle) {
+			sqle.printStackTrace();
+			try {
+				con.rollback();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+		} finally {
+			try {
+				if (stmt != null) {
+					stmt.close();
+					stmt = null;
+				}
+				db.closeConnection(con);
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+		}
+		return workIt;
 	}
 
 }
