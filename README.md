@@ -10,6 +10,10 @@ What you need
 * Java EE Eclipse or Eclipse with all the necessary plugin for Java EE;
 * IvyDE;
 * Tomcat v.6;
+* Set the build path from **Build Path** -> **Configure Build Path...**
+   * add JDK;
+   * add Tomcat server.
+* **Ivy** -> **Resolve**;
 * Set Ant property: Window -> Preferences -> Ant -> Runtime -> Properties -> Add Property ->
   * Name: **basedir**
   * Value: **${project_loc}**
