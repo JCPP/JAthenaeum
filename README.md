@@ -17,6 +17,7 @@ What you need
 * Set Ant property: Window -> Preferences -> Ant -> Runtime -> Properties -> Add Property ->
   * Name: **basedir**
   * Value: **${project_loc}**
+* Set **Targeted Runtimes** for the project.
 
 
 How it works
