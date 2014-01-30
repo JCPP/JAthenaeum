@@ -25,7 +25,8 @@
 	                name="registerform"
 	                scope="request"
 	                validate="true"
-	                input="/signup">
+	                input="/signup.do"
+	                cancellable="true">
 	                <forward name="success" path="page.confirmRegistration"/>
 	                <forward name="failed" path="page.failedRegistration"/>
 	        </action>
@@ -42,6 +43,8 @@
 	</action-mappings>
 	
 	<controller processorClass="org.apache.struts.tiles.TilesRequestProcessor" />
+	
+	<message-resources parameter="com.github.jcpp.jathenaeum.resources.MessageResources" />
 	
 	<plug-in className="org.apache.struts.tiles.TilesPlugin">
 		<set-property property="definitions-config" value="/WEB-INF/tiles-defs.xml" />

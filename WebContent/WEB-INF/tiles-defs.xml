@@ -53,7 +53,6 @@
 	<definition name="page.failedRegistration" extends="base.definition.bootstrap">
 		<put name="navbarEnabled" value="true" />
 		<put name="footerEnabled" value="true" />
-		<put name="redirect" value="index.do" />
 		<put name="title" value="Failed Registration - JAthenaeum" />
 		<put name="body" value="/layout/failedRegistration.jsp" />
 	</definition>

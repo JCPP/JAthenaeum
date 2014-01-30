@@ -1,6 +1,15 @@
 package com.github.jcpp.jathenaeum.beans;
 
+import java.util.regex.Pattern;
+
+import javax.servlet.http.HttpServletRequest;
+
+import org.apache.struts.action.ActionErrors;
 import org.apache.struts.action.ActionForm;
+import org.apache.struts.action.ActionMapping;
+import org.apache.struts.action.ActionMessage;
+
+import com.github.jcpp.jathenaeum.db.dao.UtenteDAO;
 
 public class UserRegisterForm extends ActionForm{
 
@@ -12,6 +21,10 @@ public class UserRegisterForm extends ActionForm{
 	private String name;
 	private String surname;
 	private String bornDate;
+	
+	private static final String EMAIL_PATTERN = 
+			"^[_A-Za-z0-9-\\+]+(\\.[_A-Za-z0-9-]+)*@"
+			+ "[A-Za-z0-9-]+(\\.[A-Za-z0-9]+)*(\\.[A-Za-z]{2,})$";
 	
 	/*METODI*/
 	
@@ -56,6 +69,34 @@ public class UserRegisterForm extends ActionForm{
 		this.bornDate = date;
 	}
 	
+	@Override
+	public ActionErrors validate(ActionMapping mapping,
+			HttpServletRequest request) {
+		ActionErrors errors = new ActionErrors();
+		
+		
+		//Check email
+		if(email == null || email.isEmpty()){
+			errors.add("email", new ActionMessage("signup.email.empty"));
+		}
+		
+		if(Pattern.compile(EMAIL_PATTERN).matcher(email).matches()){
+			errors.add("email", new ActionMessage("signup.email.invalid"));
+		}
+		
+		if(email != null && UtenteDAO.exists(email)){
+			errors.add("email", new ActionMessage("signup.email.exists"));
+		}
+		
+		
+		//Check password
+		if(!password.equals(password_control)) {
+			errors.add("password", new ActionMessage("signup.password.different"));
+		}
+		
+		return errors;
+	}
+
 	
 	
 }
