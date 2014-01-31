@@ -6,8 +6,8 @@
 
 <struts-config>
 	<form-beans>
-	<form-bean name="registerform" type="com.github.jcpp.jathenaeum.beans.UserRegisterForm"/>
-	<form-bean name="newAuthorForm" type="com.github.jcpp.jathenaeum.beans.NewAuthorForm"/>
+		<form-bean name="registerform" type="com.github.jcpp.jathenaeum.beans.UserRegisterForm"/>
+		<form-bean name="newAuthorForm" type="com.github.jcpp.jathenaeum.beans.NewAuthorForm"/>
 	</form-beans>
 	
 	<global-forwards>
@@ -19,27 +19,27 @@
 		<action path="/signin" type="org.apache.struts.actions.ForwardAction" parameter="page.signin" />
 		<action path="/signup" type="org.apache.struts.actions.ForwardAction" parameter="page.signup" />
 		<action path="/newAuthor" type="org.apache.struts.actions.ForwardAction" parameter="page.newAuthor" />
-			<action
-	                path="/doRegister"
-	                type="com.github.jcpp.jathenaeum.actions.UserRegisterAction"
-	                name="registerform"
-	                scope="request"
-	                validate="true"
-	                input="/signup.do"
-	                cancellable="true">
-	                <forward name="success" path="page.confirmRegistration"/>
-	                <forward name="failed" path="page.failedRegistration"/>
-	        </action>
-	            	<action
-	                path="/doNewAuthor"
-	                type="com.github.jcpp.jathenaeum.actions.NewAuthorAction"
-	                name="newAuthorForm"
-	                scope="request"
-	                validate="true"
-	                input="/newAuthor.jsp">
-	                <forward name="success" path="page.confirmInsert"/>
-	                <forward name="failed" path="page.failedInsert"/>
-	        </action>
+		<action
+	        path="/doRegister"
+	        type="com.github.jcpp.jathenaeum.actions.UserRegisterAction"
+	        name="registerform"
+	        scope="request"
+	        validate="true"
+	        input="/signup.do"
+	        cancellable="true">
+	        <forward name="success" path="page.confirmRegistration"/>
+	        <forward name="failed" path="page.failedRegistration"/>
+        </action>
+      	<action
+	        path="/doNewAuthor"
+	        type="com.github.jcpp.jathenaeum.actions.NewAuthorAction"
+	        name="newAuthorForm"
+	        scope="request"
+	        validate="true"
+	        input="/newAuthor.jsp">
+	        <forward name="success" path="page.confirmInsert"/>
+	        <forward name="failed" path="page.failedInsert"/>
+        </action>
 	</action-mappings>
 	
 	<controller processorClass="org.apache.struts.tiles.TilesRequestProcessor" />
