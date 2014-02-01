@@ -4,7 +4,6 @@
 <tiles:useAttribute name="jumbotronEnabled" />
 <tiles:useAttribute name="navbarEnabled" />
 <tiles:useAttribute name="footerEnabled" />
-<tiles:useAttribute name="redirect" />
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -45,6 +44,6 @@
     ================================================== -->
 	<!-- Placed at the end of the document so the pages load faster -->
 	<script src="https://code.jquery.com/jquery-1.10.2.min.js"></script>
-	<script src="bootstrap-3.0.3/dist/js/bootstrap.min.js"></script>
+	<script src="bootstrap-3.1.0/dist/js/bootstrap.min.js"></script>
 </body>
 </html>

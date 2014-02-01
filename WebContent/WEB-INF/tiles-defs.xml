@@ -30,6 +30,8 @@
 		<put name="title" value="Home - JAthenaeum" />
 		<put name="body" value="/layout/index.jsp" />
 	</definition>
+	
+	
 
 	<!-- Sign in page -->
 	<definition name="page.signin" extends="base.definition.bootstrap">
@@ -39,6 +41,25 @@
 		<put name="body" value="/layout/signin.jsp" />
 		<put name="style" value="css/signin.css" />
 	</definition>
+	
+	<!-- Failed sign in -->
+	<definition name="page.failedSignin" extends="base.definition.bootstrap">
+		<put name="navbarEnabled" value="true" />
+		<put name="footerEnabled" value="true" />
+		<put name="title" value="Failed Sign In - JAthenaeum" />
+		<put name="body" value="/layout/failedSignin.jsp" />
+	</definition>
+	
+	<!-- Confirm sign in -->
+	<definition name="page.confirmSignin" extends="base.definition.bootstrap">
+		<put name="navbarEnabled" value="true" />
+		<put name="footerEnabled" value="true" />
+		<put name="redirect" value="index.do" />
+		<put name="title" value="Confirm Sign In - JAthenaeum" />
+		<put name="body" value="/layout/confirmSignin.jsp" />
+	</definition>
+	
+	
 	
 	<!-- Sign up page -->
 	<definition name="page.signup" extends="base.definition.bootstrap">
@@ -66,6 +87,8 @@
 		<put name="body" value="/layout/confirmRegistration.jsp" />
 	</definition>
 	
+	
+	
 	<!-- New Author -->
 	<definition name="page.newAuthor" extends="base.definition.bootstrap">
 		<put name="navbarEnabled" value="true" />
@@ -75,7 +98,7 @@
 		<put name="style" value="css/signup.css" />
 	</definition>
 	
-		<!-- Confirm insert -->
+	<!-- Confirm insert -->
 	<definition name="page.confirmInsert" extends="base.definition.bootstrap">
 		<put name="navbarEnabled" value="true" />
 		<put name="footerEnabled" value="true" />
@@ -84,7 +107,7 @@
 		<put name="style" value="css/signup.css" />
 	</definition>
 	
-		<!-- Failed insert -->
+	<!-- Failed insert -->
 	<definition name="page.failedInsert" extends="base.definition.bootstrap">
 		<put name="navbarEnabled" value="true" />
 		<put name="footerEnabled" value="true" />

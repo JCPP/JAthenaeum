@@ -6,7 +6,11 @@
 
 <struts-config>
 	<form-beans>
+		<!-- User -->
 		<form-bean name="registerform" type="com.github.jcpp.jathenaeum.beans.UserRegisterForm"/>
+		<form-bean name="signinform" type="com.github.jcpp.jathenaeum.beans.SigninForm"/>
+		
+		<!-- Author -->
 		<form-bean name="newAuthorForm" type="com.github.jcpp.jathenaeum.beans.NewAuthorForm"/>
 	</form-beans>
 	
@@ -16,9 +20,9 @@
 	
 	<action-mappings>
 		<action path="/index" type="org.apache.struts.actions.ForwardAction" parameter="page.index" />
-		<action path="/signin" type="org.apache.struts.actions.ForwardAction" parameter="page.signin" />
+		
+		<!-- User -->
 		<action path="/signup" type="org.apache.struts.actions.ForwardAction" parameter="page.signup" />
-		<action path="/newAuthor" type="org.apache.struts.actions.ForwardAction" parameter="page.newAuthor" />
 		<action
 	        path="/doRegister"
 	        type="com.github.jcpp.jathenaeum.actions.UserRegisterAction"
@@ -30,6 +34,22 @@
 	        <forward name="success" path="page.confirmRegistration"/>
 	        <forward name="failed" path="page.failedRegistration"/>
         </action>
+        
+        <action path="/signin" type="org.apache.struts.actions.ForwardAction" parameter="page.signin" />
+        <action
+	        path="/doSignin"
+	        type="com.github.jcpp.jathenaeum.actions.SigninAction"
+	        name="signinform"
+	        scope="request"
+	        validate="true"
+	        input="/signin.do"
+	        cancellable="true">
+	        <forward name="success" path="page.confirmSignin"/>
+	        <forward name="failed" path="page.failedSignin"/>
+        </action>
+        
+        <!-- Author -->
+        <action path="/newAuthor" type="org.apache.struts.actions.ForwardAction" parameter="page.newAuthor" />
       	<action
 	        path="/doNewAuthor"
 	        type="com.github.jcpp.jathenaeum.actions.NewAuthorAction"

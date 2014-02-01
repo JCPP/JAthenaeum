@@ -38,7 +38,7 @@ public class UtenteDAO {
 		PreparedStatement stmt = null;
 		try {
 			con.setAutoCommit(false);
-			String select = "SELECT * FROM Utente WHERE EmailUtente = ? AND PasswordUtente = ?)";
+			String select = "SELECT * FROM Utente WHERE EmailUtente = ? AND PasswordUtente = ?";
 			stmt = con.prepareStatement(select);
 			stmt.setString(1, email);
 			stmt.setString(2, password);

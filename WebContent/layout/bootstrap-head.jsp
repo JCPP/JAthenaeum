@@ -1,5 +1,7 @@
 <%@ taglib uri="http://struts.apache.org/tags-logic" prefix="logic"%>
 <%@ taglib uri="http://struts.apache.org/tags-tiles" prefix="tiles"%>
+<tiles:useAttribute name="redirect" />
+
 <meta charset="utf-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -13,7 +15,7 @@
 <title><tiles:getAsString name="title" /></title>
 
 <!-- Bootstrap core CSS -->
-<link href="bootstrap-3.0.3/dist/css/bootstrap.css" rel="stylesheet">
+<link href="bootstrap-3.1.0/dist/css/bootstrap.css" rel="stylesheet">
 
 <!-- Custom styles for this template -->
 <link href="<tiles:getAsString name="style" />" rel="stylesheet">
