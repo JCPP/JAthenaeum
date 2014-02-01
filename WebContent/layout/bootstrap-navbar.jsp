@@ -1,4 +1,5 @@
 <%@ taglib uri="http://struts.apache.org/tags-html" prefix="html"%>
+<%@ taglib uri="http://struts.apache.org/tags-logic" prefix="logic"%>
 <nav class="navbar navbar-default navbar-inverse" role="navigation">
 		<!-- Brand and toggle get grouped for better mobile display -->
 		<div class="navbar-header">
@@ -30,9 +31,17 @@
 					</ul></li>
 			</ul>
 			<div class="nav navbar-nav navbar-right">
-				<html:link styleClass="btn btn-default" href="signup.do">Sign up</html:link>
-				<html:link styleClass="btn btn-default navbar-btn" href="signin.do">Sign in</html:link>
-				<!-- <a class="btn btn-default navbar-btn navbar-right" href="/signin">Sign in</a> -->
+				<!-- User not present -->
+				<logic:notPresent name="user" scope="session">
+					<a class="btn btn-default" href="signup.do">Sign up</a>
+					<a class="btn btn-default navbar-btn" href="signin.do">Sign in</a>
+				</logic:notPresent>
+				
+				<!-- User present -->
+				<logic:present name="user" scope="session">
+					<a class="btn btn-default navbar-btn navbar-right" href="/manageAccount.do">Manage Account</a>
+					<a class="btn btn-default navbar-btn navbar-right" href="/logout.do">Logout</a>
+				</logic:present>
 			</div>
 		</div>
 		<!-- /.navbar-collapse -->

@@ -2,6 +2,7 @@ package com.github.jcpp.jathenaeum.actions;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import org.apache.struts.action.Action;
 import org.apache.struts.action.ActionForm;
@@ -36,6 +37,9 @@ public class UserRegisterAction extends Action{
         		if(UtenteDAO.register(user)){
         			action_target = "success";
         		}
+        		
+        		HttpSession session = request.getSession();
+        		session.setAttribute("user", user);
         		
         	}catch(Exception e){
         		action_target = "failed";
