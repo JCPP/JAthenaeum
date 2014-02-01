@@ -183,7 +183,7 @@ public class AutoreDAO {
 		try {
 			con.setAutoCommit(false);
 			String insert = "INSERT INTO Autore (NomeAutore, CognomeAutore, FotoAutore, DataNascitaAutore, BiografiaAutore)"
-					+ "VALUES (?, ?, ?, ?, ?)";
+					+ " VALUES (?, ?, ?, ?, ?)";
 			stmt = con.prepareStatement(insert);
 			stmt.setString(1, author.getNome());
 			stmt.setString(2, author.getCognome());
@@ -194,7 +194,7 @@ public class AutoreDAO {
 			int result = stmt.executeUpdate();
 			con.commit();
 			
-			if(result == 1 || result== 2){
+			if(result == 1 || result== 0){
 				
 				workIt = true;
 			}
@@ -202,7 +202,6 @@ public class AutoreDAO {
 				throw new RegistrationException();
 			}
 
-			return workIt;
 		} catch (SQLException sqle) {
 			sqle.printStackTrace();
 			try {

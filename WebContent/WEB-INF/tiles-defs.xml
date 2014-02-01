@@ -102,6 +102,7 @@
 	<definition name="page.confirmInsert" extends="base.definition.bootstrap">
 		<put name="navbarEnabled" value="true" />
 		<put name="footerEnabled" value="true" />
+		<put name="redirect" value="index.do" />
 		<put name="title" value="Confirm Insert Author - JAthenaeum" />
 		<put name="body" value="/layout/confirmInsert.jsp" />
 		<put name="style" value="css/signup.css" />
@@ -111,6 +112,7 @@
 	<definition name="page.failedInsert" extends="base.definition.bootstrap">
 		<put name="navbarEnabled" value="true" />
 		<put name="footerEnabled" value="true" />
+		<put name="redirect" value="index.do" />
 		<put name="title" value="Failed Insert Author - JAthenaeum" />
 		<put name="body" value="/layout/failedInsert.jsp" />
 		<put name="style" value="css/signup.css" />
