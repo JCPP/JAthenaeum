@@ -7,12 +7,14 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Types;
 
 import com.github.jcpp.jathenaeum.Utente;
 import com.github.jcpp.jathenaeum.db.Database;
 import com.github.jcpp.jathenaeum.exceptions.LoginException;
 import com.github.jcpp.jathenaeum.exceptions.RegistrationException;
 import com.github.jcpp.jathenaeum.exceptions.UtenteNotFound;
+import com.github.jcpp.jathenaeum.utils.Converter;
 
 /**
  * DAO of Utente.
@@ -188,20 +190,26 @@ public class UtenteDAO {
 		try {
 			con.setAutoCommit(false);
 			String insert = "INSERT INTO Utente (EmailUtente, PasswordUtente, NomeUtente, CognomeUtente, DataNascitaUtente)"
-					+ "VALUES (?, ?, ?, ?, ?)";
+					+ " VALUES (?, ?, ?, ?, ?)";
 			stmt = con.prepareStatement(insert);
 			stmt.setString(1, user.getEmail());
 			stmt.setString(2, user.getPassword());
 			stmt.setString(3, user.getNome());
 			stmt.setString(4, user.getCognome());
-			System.out.println(user.getDataNascita());
-			stmt.setString(5, user.getDataNascita());
+			
+			if(user.getDataNascita() == null){
+				stmt.setNull(5, Types.DATE);
+			}
+			else{
+				stmt.setDate(5, Converter.fromUtilDateToSqlDate(user.getDataNascita()));
+			}
+			
 			System.out.println(stmt);
 			
 			int result = stmt.executeUpdate();
 			con.commit();
 			
-			if(result == 1 || result== 2){
+			if(result == 1 || result == 0){
 				
 				workIt = true;
 			}
@@ -209,7 +217,6 @@ public class UtenteDAO {
 				throw new RegistrationException();
 			}
 
-			return workIt;
 		} catch (SQLException sqle) {
 			sqle.printStackTrace();
 			try {

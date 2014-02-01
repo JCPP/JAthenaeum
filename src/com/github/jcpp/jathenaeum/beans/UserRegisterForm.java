@@ -1,5 +1,6 @@
 package com.github.jcpp.jathenaeum.beans;
 
+import java.util.Map;
 import java.util.regex.Pattern;
 
 import javax.servlet.http.HttpServletRequest;
@@ -10,21 +11,17 @@ import org.apache.struts.action.ActionMapping;
 import org.apache.struts.action.ActionMessage;
 
 import com.github.jcpp.jathenaeum.db.dao.UtenteDAO;
+import com.github.jcpp.jathenaeum.utils.Validator;
 
 public class UserRegisterForm extends ActionForm{
-
-	private static final long serialVersionUID = 1;
 	
 	private String email;
 	private String password;
-	private String password_control;
+	private String passwordControl;
 	private String name;
 	private String surname;
 	private String bornDate;
 	
-	private static final String EMAIL_PATTERN = 
-			"^[_A-Za-z0-9-\\+]+(\\.[_A-Za-z0-9-]+)*@"
-			+ "[A-Za-z0-9-]+(\\.[A-Za-z0-9]+)*(\\.[A-Za-z]{2,})$";
 	
 	/*METODI*/
 	
@@ -44,11 +41,11 @@ public class UserRegisterForm extends ActionForm{
 	public void setPassword(String password) {
 		this.password = password;
 	}
-	public String getPassword_control() {
-		return password_control;
+	public String getPasswordControl() {
+		return passwordControl;
 	}
-	public void setPassword_control(String password_control) {
-		this.password_control = password_control;
+	public void setPasswordControl(String passwordControl) {
+		this.passwordControl = passwordControl;
 	}
 	public String getName() {
 		return name;
@@ -65,22 +62,30 @@ public class UserRegisterForm extends ActionForm{
 	public String getBornDate() {
 		return bornDate;
 	}
-	public void setDate(String date) {
+	public void setBornDate(String date) {
 		this.bornDate = date;
 	}
 	
-	@Override
+	
 	public ActionErrors validate(ActionMapping mapping,
 			HttpServletRequest request) {
 		ActionErrors errors = new ActionErrors();
 		
+		/*
+		System.out.println("email: " + email);
+		System.out.println("password: " + password);
+		System.out.println("passwordControl: " + passwordControl);
+		System.out.println("name: " + name);
+		System.out.println("surname: " + surname);
+		System.out.println("BornDate: " + bornDate);
+		*/
 		
 		//Check email
 		if(email == null || email.isEmpty()){
 			errors.add("email", new ActionMessage("signup.email.empty"));
 		}
 		
-		if(Pattern.compile(EMAIL_PATTERN).matcher(email).matches()){
+		if(!Validator.isValidEmail(email)){
 			errors.add("email", new ActionMessage("signup.email.invalid"));
 		}
 		
@@ -89,9 +94,20 @@ public class UserRegisterForm extends ActionForm{
 		}
 		
 		
-		//Check password
-		if(!password.equals(password_control)) {
+		//Check password and password control
+		if(password == null || password.isEmpty()) {
+			errors.add("password", new ActionMessage("signup.password.empty"));
+		}
+		
+		if(!password.equals(passwordControl)) {
 			errors.add("password", new ActionMessage("signup.password.different"));
+		}
+		
+		//Check born date
+		if(bornDate != null && !bornDate.isEmpty()){
+			if(!Validator.isValidDate(bornDate)){
+				errors.add("bornDate", new ActionMessage("signup.borndate.invalid"));
+			}
 		}
 		
 		return errors;

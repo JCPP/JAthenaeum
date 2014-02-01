@@ -11,6 +11,7 @@ import org.apache.struts.action.ActionMapping;
 import com.github.jcpp.jathenaeum.Utente;
 import com.github.jcpp.jathenaeum.beans.UserRegisterForm;
 import com.github.jcpp.jathenaeum.db.dao.UtenteDAO;
+import com.github.jcpp.jathenaeum.utils.Converter;
 
 public class UserRegisterAction extends Action{
 
@@ -18,8 +19,6 @@ public class UserRegisterAction extends Action{
 	public ActionForward execute(ActionMapping mapping, ActionForm form,
 			HttpServletRequest request, HttpServletResponse response)
 			throws Exception {
-		
-		//boolean action_perform = false;
 		String action_target = null;
 		
 		Utente user = new Utente();
@@ -30,8 +29,7 @@ public class UserRegisterAction extends Action{
         	user.setPassword(uf.getPassword());
         	user.setNome(uf.getName());
         	user.setCognome(uf.getSurname());
-        	System.out.println("ActionForm: " + uf.getBornDate());
-        	user.setDataNascita(uf.getBornDate());
+        	user.setDataNascita(Converter.fromStringToDate(uf.getBornDate()));
         	
         	
         	try{
