@@ -18,7 +18,7 @@ What you need
   * Name: **basedir**
   * Value: **${project_loc}**
 * Set **Targeted Runtimes** for the project;
-* Click **F5** on the project name in the **Project Explorer**.
+* Press **F5** on the project name in the **Project Explorer**.
 
 
 How it works
