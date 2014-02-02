@@ -12,6 +12,9 @@
 		
 		<!-- Author -->
 		<form-bean name="addAuthorForm" type="com.github.jcpp.jathenaeum.beans.AddAuthorForm"/>
+		
+		<!-- Book -->
+		<form-bean name="addBookForm" type="com.github.jcpp.jathenaeum.beans.AddBookForm"/>
 	</form-beans>
 	
 	<global-forwards>
@@ -53,6 +56,8 @@
 	        <forward name="failed" path="page.failedLogout"/>
         </action>
         
+        
+        
         <!-- Author -->
         <action path="/addAuthor" type="org.apache.struts.actions.ForwardAction" parameter="page.addAuthor" />
       	<action
@@ -64,6 +69,23 @@
 	        input="/addAuthor.do">
 	        <forward name="success" path="page.confirmAuthorInsert"/>
 	        <forward name="failed" path="page.failedAuthorInsert"/>
+        </action>
+        
+        
+        
+        <!-- Book -->
+        <action path="/addBook" type="com.github.jcpp.jathenaeum.actions.BookAction" parameter="page.addBook">
+        	<forward name="success" path="page.addBook"/>
+        </action>
+      	<action
+	        path="/doAddBook"
+	        type="com.github.jcpp.jathenaeum.actions.AddBookAction"
+	        name="addBookForm"
+	        scope="request"
+	        validate="true"
+	        input="/addBook.do">
+	        <forward name="success" path="page.confirmBookInsert"/>
+	        <forward name="failed" path="page.failedBookInsert"/>
         </action>
 	</action-mappings>
 	

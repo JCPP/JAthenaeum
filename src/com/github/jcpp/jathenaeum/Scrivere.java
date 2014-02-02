@@ -11,7 +11,7 @@ package com.github.jcpp.jathenaeum;
 public class Scrivere {
 	
 	private int id;
-	private int idLibro;
+	private long idLibro;
 	private int idAutore;
 	/**
 	 * @return the id
@@ -28,13 +28,13 @@ public class Scrivere {
 	/**
 	 * @return the idLibro
 	 */
-	public int getIdLibro() {
+	public long getIdLibro() {
 		return idLibro;
 	}
 	/**
 	 * @param idLibro the idLibro to set
 	 */
-	public void setIdLibro(int idLibro) {
+	public void setIdLibro(long idLibro) {
 		this.idLibro = idLibro;
 	}
 	/**

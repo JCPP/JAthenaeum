@@ -10,6 +10,7 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 
 import com.github.jcpp.jathenaeum.Autore;
+import com.github.jcpp.jathenaeum.Libro;
 import com.github.jcpp.jathenaeum.Scrivere;
 import com.github.jcpp.jathenaeum.db.Database;
 import com.github.jcpp.jathenaeum.exceptions.AutoreNotFoundException;
@@ -120,6 +121,53 @@ public class ScrivereDAO {
 			}
 		}
 		return null;
+	}
+	
+	
+	/**
+	 * Insert a new Scrivere.
+	 * @param scrivere the Scrivere object to insert. 
+	 * @return
+	 */
+	public static boolean insert(Scrivere scrivere){
+		Connection con = db.getConnection();
+		PreparedStatement stmt = null;
+		boolean workIt = false;
+
+		try {
+			con.setAutoCommit(false);
+			String insert = "INSERT INTO Scrivere (IDLibro, IDAutore)"
+					+ " VALUES (?, ?)";
+			stmt = con.prepareStatement(insert);
+			stmt.setLong(1, scrivere.getIdLibro());
+			stmt.setInt(2, scrivere.getIdAutore());
+			
+			int result = stmt.executeUpdate();
+			con.commit();
+			
+			if(result == 1 || result== 0){
+				workIt = true;
+			}
+
+		} catch (SQLException sqle) {
+			sqle.printStackTrace();
+			try {
+				con.rollback();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+		} finally {
+			try {
+				if (stmt != null) {
+					stmt.close();
+					stmt = null;
+				}
+				db.closeConnection(con);
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+		}
+		return workIt;
 	}
 
 }

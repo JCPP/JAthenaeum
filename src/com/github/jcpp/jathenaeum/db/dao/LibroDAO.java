@@ -7,6 +7,8 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Statement;
+import java.sql.Types;
 import java.util.ArrayList;
 
 import com.github.jcpp.jathenaeum.Libro;
@@ -160,6 +162,59 @@ public class LibroDAO {
 			}
 		}
 		return number;
+	}
+	
+	/**
+	 * Insert a new book.
+	 * @param book the book to insert. 
+	 * @return Returns the id of the inserted book. 
+	 */
+	public static long insert(Libro book){
+		Connection con = db.getConnection();
+		PreparedStatement stmt = null;
+		long result = 0;
+
+		try {
+			con.setAutoCommit(false);
+			String insert = "INSERT INTO Libro (TitoloLibro, CopertinaLibro, GenereLibro, CodiceIsbnLibro, DescrizioneLibro)"
+					+ " VALUES (?, ?, ?, ?, ?)";
+			stmt = con.prepareStatement(insert, Statement.RETURN_GENERATED_KEYS);
+			stmt.setString(1, book.getTitolo());
+			stmt.setString(2, book.getCopertina());
+			stmt.setString(3, book.getGenere());
+			stmt.setString(4, book.getCodiceIsbn());
+			stmt.setString(5, book.getDescrizione());
+			
+			result = stmt.executeUpdate();
+			
+			ResultSet generatedKeys = stmt.getGeneratedKeys();
+			
+			if (generatedKeys.next()) {
+	            result = generatedKeys.getLong(1);
+	        }
+			
+			con.commit();
+			
+
+		} catch (SQLException sqle) {
+			sqle.printStackTrace();
+			try {
+				con.rollback();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+		} finally {
+			try {
+				if (stmt != null) {
+					stmt.close();
+					stmt = null;
+				}
+				db.closeConnection(con);
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+		}
+		return result;
 	}
 
 }
