@@ -32,7 +32,8 @@ public class BookAction extends ForwardAction {
 		ArrayList<Autore> authors = AutoreDAO.getAll();
 		request.setAttribute("authors", authors);
 		action_target = "success";
-		return mapping.findForward(action_target);
+		//return mapping.findForward(action_target);
+		return super.execute(mapping, form, request, response);
 	}
 
 
