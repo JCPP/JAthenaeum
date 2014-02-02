@@ -7,12 +7,14 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Types;
 import java.util.ArrayList;
 
 import com.github.jcpp.jathenaeum.Autore;
 import com.github.jcpp.jathenaeum.db.Database;
 import com.github.jcpp.jathenaeum.exceptions.AutoreNotFoundException;
 import com.github.jcpp.jathenaeum.exceptions.RegistrationException;
+import com.github.jcpp.jathenaeum.utils.Converter;
 
 /**
  * DAO of Autore.
@@ -188,7 +190,14 @@ public class AutoreDAO {
 			stmt.setString(1, author.getNome());
 			stmt.setString(2, author.getCognome());
 			stmt.setString(3, author.getFoto());
-			stmt.setString(4, author.getDataNascita());
+			
+			if(author.getDataNascita() == null){
+				stmt.setNull(4, Types.DATE);
+			}
+			else{
+				stmt.setDate(4, Converter.fromUtilDateToSqlDate(author.getDataNascita()));
+			}
+			
 			stmt.setString(5, author.getBiografia());
 			
 			int result = stmt.executeUpdate();

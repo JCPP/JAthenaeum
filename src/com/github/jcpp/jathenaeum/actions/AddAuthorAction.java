@@ -9,10 +9,11 @@ import org.apache.struts.action.ActionForward;
 import org.apache.struts.action.ActionMapping;
 
 import com.github.jcpp.jathenaeum.Autore;
-import com.github.jcpp.jathenaeum.beans.NewAuthorForm;
+import com.github.jcpp.jathenaeum.beans.AddAuthorForm;
 import com.github.jcpp.jathenaeum.db.dao.AutoreDAO;
+import com.github.jcpp.jathenaeum.utils.Converter;
 
-public class NewAuthorAction extends Action{
+public class AddAuthorAction extends Action{
 
 	@Override
 	public ActionForward execute(ActionMapping mapping, ActionForm form,
@@ -24,13 +25,13 @@ public class NewAuthorAction extends Action{
 
 		Autore autore = new Autore();
 		//ActionMessages errors_mesg = new ActionMessages();
-		NewAuthorForm uf = (NewAuthorForm) form;
+		AddAuthorForm uf = (AddAuthorForm) form;
 		if(form != null){
-			autore.setNome(uf.getNome());
-			autore.setCognome(uf.getCognome());
-			autore.setFoto(uf.getFoto());
-			autore.setDataNascita(uf.getData());
-			autore.setBiografia(uf.getBiografia());
+			autore.setNome(uf.getName());
+			autore.setCognome(uf.getSurname());
+			autore.setFoto(uf.getPhoto());
+			autore.setDataNascita(Converter.fromStringToDate(uf.getBornDate()));
+			autore.setBiografia(uf.getBiography());
 
 
 			try{

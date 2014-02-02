@@ -11,7 +11,7 @@
 		<form-bean name="signinform" type="com.github.jcpp.jathenaeum.beans.SigninForm"/>
 		
 		<!-- Author -->
-		<form-bean name="newAuthorForm" type="com.github.jcpp.jathenaeum.beans.NewAuthorForm"/>
+		<form-bean name="addAuthorForm" type="com.github.jcpp.jathenaeum.beans.AddAuthorForm"/>
 	</form-beans>
 	
 	<global-forwards>
@@ -49,16 +49,16 @@
         </action>
         
         <!-- Author -->
-        <action path="/newAuthor" type="org.apache.struts.actions.ForwardAction" parameter="page.newAuthor" />
+        <action path="/addAuthor" type="org.apache.struts.actions.ForwardAction" parameter="page.addAuthor" />
       	<action
-	        path="/doNewAuthor"
-	        type="com.github.jcpp.jathenaeum.actions.NewAuthorAction"
-	        name="newAuthorForm"
+	        path="/doAddAuthor"
+	        type="com.github.jcpp.jathenaeum.actions.AddAuthorAction"
+	        name="addAuthorForm"
 	        scope="request"
 	        validate="true"
-	        input="/newAuthor.jsp">
-	        <forward name="success" path="page.confirmInsert"/>
-	        <forward name="failed" path="page.failedInsert"/>
+	        input="/addAuthor.do">
+	        <forward name="success" path="page.confirmAuthorInsert"/>
+	        <forward name="failed" path="page.failedAuthorInsert"/>
         </action>
 	</action-mappings>
 	

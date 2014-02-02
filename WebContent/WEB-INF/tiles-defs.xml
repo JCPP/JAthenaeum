@@ -35,8 +35,6 @@
 
 	<!-- Sign in page -->
 	<definition name="page.signin" extends="base.definition.bootstrap">
-		<put name="navbarEnabled" value="false" />
-		<put name="footerEnabled" value="false" />
 		<put name="title" value="Signin - JAthenaeum" />
 		<put name="body" value="/layout/user/signin.jsp" />
 		<put name="style" value="css/signin.css" />
@@ -44,16 +42,12 @@
 	
 	<!-- Failed sign in -->
 	<definition name="page.failedSignin" extends="base.definition.bootstrap">
-		<put name="navbarEnabled" value="true" />
-		<put name="footerEnabled" value="true" />
 		<put name="title" value="Failed Sign In - JAthenaeum" />
 		<put name="body" value="/layout/user/failedSignin.jsp" />
 	</definition>
 	
 	<!-- Confirm sign in -->
 	<definition name="page.confirmSignin" extends="base.definition.bootstrap">
-		<put name="navbarEnabled" value="true" />
-		<put name="footerEnabled" value="true" />
 		<put name="redirect" value="index.do" />
 		<put name="title" value="Confirm Sign In - JAthenaeum" />
 		<put name="body" value="/layout/user/confirmSignin.jsp" />
@@ -63,8 +57,6 @@
 	
 	<!-- Sign up page -->
 	<definition name="page.signup" extends="base.definition.bootstrap">
-		<put name="navbarEnabled" value="false" />
-		<put name="footerEnabled" value="false" />
 		<put name="title" value="Signup - JAthenaeum" />
 		<put name="body" value="/layout/user/signup.jsp" />
 		<put name="style" value="css/signup.css" />
@@ -72,16 +64,12 @@
 	
 	<!-- Failed registration -->
 	<definition name="page.failedRegistration" extends="base.definition.bootstrap">
-		<put name="navbarEnabled" value="true" />
-		<put name="footerEnabled" value="true" />
 		<put name="title" value="Failed Registration - JAthenaeum" />
 		<put name="body" value="/layout/user/failedRegistration.jsp" />
 	</definition>
 	
 	<!-- Confirm registration -->
 	<definition name="page.confirmRegistration" extends="base.definition.bootstrap">
-		<put name="navbarEnabled" value="true" />
-		<put name="footerEnabled" value="true" />
 		<put name="redirect" value="index.do" />
 		<put name="title" value="Confirm Registration - JAthenaeum" />
 		<put name="body" value="/layout/user/confirmRegistration.jsp" />
@@ -89,19 +77,15 @@
 	
 	
 	
-	<!-- New Author -->
-	<definition name="page.newAuthor" extends="base.definition.bootstrap">
-		<put name="navbarEnabled" value="true" />
-		<put name="footerEnabled" value="true" />
-		<put name="title" value="New Author - JAthenaeum" />
-		<put name="body" value="/layout/author/newAuthor.jsp" />
+	<!-- Add Author -->
+	<definition name="page.addAuthor" extends="base.definition.bootstrap">
+		<put name="title" value="Add Author - JAthenaeum" />
+		<put name="body" value="/layout/author/addAuthor.jsp" />
 		<put name="style" value="css/signup.css" />
 	</definition>
 	
 	<!-- Confirm insert -->
-	<definition name="page.confirmInsert" extends="base.definition.bootstrap">
-		<put name="navbarEnabled" value="true" />
-		<put name="footerEnabled" value="true" />
+	<definition name="page.confirmAuthorInsert" extends="base.definition.bootstrap">
 		<put name="redirect" value="index.do" />
 		<put name="title" value="Confirm Insert Author - JAthenaeum" />
 		<put name="body" value="/layout/author/confirmAuthorInsert.jsp" />
@@ -109,9 +93,7 @@
 	</definition>
 	
 	<!-- Failed insert -->
-	<definition name="page.failedInsert" extends="base.definition.bootstrap">
-		<put name="navbarEnabled" value="true" />
-		<put name="footerEnabled" value="true" />
+	<definition name="page.failedAuthorInsert" extends="base.definition.bootstrap">
 		<put name="redirect" value="index.do" />
 		<put name="title" value="Failed Insert Author - JAthenaeum" />
 		<put name="body" value="/layout/author/failedAuthorInsert.jsp" />
