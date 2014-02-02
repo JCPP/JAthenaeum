@@ -6,57 +6,57 @@ USE JAthenaeum;
 /* Create tables */
 
 
-/* Create table Utente */
-CREATE TABLE Utente (
-	NumeroTesseraUtente integer AUTO_INCREMENT PRIMARY KEY,
-	EmailUtente varchar(50) NOT NULL,
-	PasswordUtente varchar(50) NOT NULL,
-	NomeUtente varchar(50),
-	CognomeUtente varchar(50),
-	DataNascitaUtente date
+/* Create table User */
+CREATE TABLE User (
+	UserCardNumber integer AUTO_INCREMENT PRIMARY KEY,
+	UserEmail varchar(50) NOT NULL,
+	UserPassword varchar(50) NOT NULL,
+	UserName varchar(50),
+	UserSurname varchar(50),
+	UserBornDate date
 );
 
 
-/* Create table Libro */
-CREATE TABLE Libro (
-	IDLibro integer AUTO_INCREMENT PRIMARY KEY,
-	TitoloLibro varchar(50) NOT NULL,
-	CopertinaLibro varchar(200),
-	GenereLibro varchar(50),
-	CodiceIsbnLibro varchar(13),
-	DescrizioneLibro varchar(500)
+/* Create table Book */
+CREATE TABLE Book (
+	BookID integer AUTO_INCREMENT PRIMARY KEY,
+	BookTitle varchar(50) NOT NULL,
+	BookCover varchar(200),
+	BookGenre varchar(50),
+	BookIsbnCode varchar(13),
+	BookDescription varchar(500)
 );
 
 
-/* Create table Prestito */
-CREATE TABLE Prestito (
-	IDPrestito integer AUTO_INCREMENT PRIMARY KEY,
-	NumeroTesseraUtente integer NOT NULL,
-	IDLibro integer NOT NULL,
-	DataInizioPrestito date NOT NULL,
-	DataFinePrestito date NOT NULL,
-	FOREIGN KEY (NumeroTesseraUtente) REFERENCES Utente(NumeroTesseraUtente),
-	FOREIGN KEY (IDLibro) REFERENCES Libro(IDLibro)
+/* Create table Loan */
+CREATE TABLE Loan (
+	IDLoan integer AUTO_INCREMENT PRIMARY KEY,
+	UserCardNumber integer NOT NULL,
+	BookID integer NOT NULL,
+	LoanStartDate date NOT NULL,
+	LoanEndDate date NOT NULL,
+	FOREIGN KEY (UserCardNumber) REFERENCES User(UserCardNumber),
+	FOREIGN KEY (BookID) REFERENCES Book(BookID)
 );
 
 
-/* Create table Autore */
-CREATE TABLE Autore (
-	IDAutore integer AUTO_INCREMENT PRIMARY KEY,
-	NomeAutore varchar(50) NOT NULL,
-	CognomeAutore varchar(50) NOT NULL,
-	FotoAutore varchar(200),
-	DataNascitaAutore date,
-	BiografiaAutore varchar(1000)
+/* Create table Author */
+CREATE TABLE Author (
+	AuthorID integer AUTO_INCREMENT PRIMARY KEY,
+	AuthorName varchar(50) NOT NULL,
+	AuthorSurname varchar(50) NOT NULL,
+	AuthorPhoto varchar(200),
+	AuthorBornDate date,
+	AuthorBiography varchar(1000)
 );
 
 
-/* Create table Scrivere */
-CREATE TABLE Scrivere (
-	IDScrivere integer AUTO_INCREMENT PRIMARY KEY,
-	IDLibro integer NOT NULL,
-	IDAutore integer NOT NULL,
-	FOREIGN KEY (IDLibro) REFERENCES Libro(IDLibro),
-	FOREIGN KEY (IDAutore) REFERENCES Autore(IDAutore)
+/* Create table Writes */
+CREATE TABLE Writes (
+	IDWrites integer AUTO_INCREMENT PRIMARY KEY,
+	BookID integer NOT NULL,
+	AuthorID integer NOT NULL,
+	FOREIGN KEY (BookID) REFERENCES Book(BookID),
+	FOREIGN KEY (AuthorID) REFERENCES Author(AuthorID)
 );
 

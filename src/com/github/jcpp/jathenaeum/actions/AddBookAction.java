@@ -8,11 +8,11 @@ import org.apache.struts.action.ActionForm;
 import org.apache.struts.action.ActionForward;
 import org.apache.struts.action.ActionMapping;
 
-import com.github.jcpp.jathenaeum.Libro;
-import com.github.jcpp.jathenaeum.Scrivere;
+import com.github.jcpp.jathenaeum.Book;
+import com.github.jcpp.jathenaeum.Writes;
 import com.github.jcpp.jathenaeum.beans.AddBookForm;
-import com.github.jcpp.jathenaeum.db.dao.LibroDAO;
-import com.github.jcpp.jathenaeum.db.dao.ScrivereDAO;
+import com.github.jcpp.jathenaeum.db.dao.BookDAO;
+import com.github.jcpp.jathenaeum.db.dao.WritesDAO;
 
 /**
  * Add book action.
@@ -27,26 +27,26 @@ public class AddBookAction extends Action{
 					throws Exception {
 		String action_target = null;
 
-		Libro book = new Libro();
+		Book book = new Book();
 		AddBookForm uf = (AddBookForm) form;
 		if(form != null){
-			book.setTitolo(uf.getTitle());
-			book.setCopertina(uf.getCover());
-			book.setGenere(uf.getGenre());
-			book.setCodiceIsbn(uf.getIsbn());
-			book.setDescrizione(uf.getDescription());
+			book.setTitle(uf.getTitle());
+			book.setCover(uf.getCover());
+			book.setGenre(uf.getGenre());
+			book.setIsbnCode(uf.getIsbn());
+			book.setDescription(uf.getDescription());
 
 
 			try{
-				long bookId = LibroDAO.insert(book);
+				long bookId = BookDAO.insert(book);
 				if(bookId != 0){
 					String authors[] = uf.getAuthors();
-					Scrivere scrivere;
+					Writes writes;
 					for(int i = 0; i < authors.length; i++){
-						scrivere = new Scrivere();
-						scrivere.setIdAutore(Integer.parseInt(authors[i]));
-						scrivere.setIdLibro(bookId);
-						ScrivereDAO.insert(scrivere);
+						writes = new Writes();
+						writes.setAuthorId(Integer.parseInt(authors[i]));
+						writes.setBookId(bookId);
+						WritesDAO.insert(writes);
 					}
 					
 					action_target = "success";

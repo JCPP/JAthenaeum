@@ -10,7 +10,7 @@ import org.apache.struts.action.ActionForm;
 import org.apache.struts.action.ActionMapping;
 import org.apache.struts.action.ActionMessage;
 
-import com.github.jcpp.jathenaeum.db.dao.UtenteDAO;
+import com.github.jcpp.jathenaeum.db.dao.UserDAO;
 import com.github.jcpp.jathenaeum.exceptions.LoginException;
 import com.github.jcpp.jathenaeum.utils.Validator;
 
@@ -75,7 +75,7 @@ public class SigninForm extends ActionForm {
 			errors.add("email", new ActionMessage("signup.email.invalid"));
 		}
 		
-		if(email != null && !UtenteDAO.exists(email)){
+		if(email != null && !UserDAO.exists(email)){
 			errors.add("email", new ActionMessage("signin.user.invalid"));
 		}
 		
@@ -86,7 +86,7 @@ public class SigninForm extends ActionForm {
 		}
 		
 		try {
-			UtenteDAO.login(email, password);
+			UserDAO.login(email, password);
 		} catch (LoginException e) {
 			if(errors.isEmpty()){
 				errors.add("email", new ActionMessage("signin.user.invalid"));

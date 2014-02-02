@@ -10,7 +10,7 @@ import org.apache.struts.action.ActionForm;
 import org.apache.struts.action.ActionMapping;
 import org.apache.struts.action.ActionMessage;
 
-import com.github.jcpp.jathenaeum.db.dao.UtenteDAO;
+import com.github.jcpp.jathenaeum.db.dao.UserDAO;
 import com.github.jcpp.jathenaeum.utils.Validator;
 
 public class UserRegisterForm extends ActionForm{
@@ -89,7 +89,7 @@ public class UserRegisterForm extends ActionForm{
 			errors.add("email", new ActionMessage("signup.email.invalid"));
 		}
 		
-		if(email != null && UtenteDAO.exists(email)){
+		if(email != null && UserDAO.exists(email)){
 			errors.add("email", new ActionMessage("signup.email.exists"));
 		}
 		

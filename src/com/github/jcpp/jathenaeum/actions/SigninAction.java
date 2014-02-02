@@ -12,7 +12,7 @@ import org.apache.struts.action.ActionForm;
 import org.apache.struts.action.ActionForward;
 import org.apache.struts.action.ActionMapping;
 
-import com.github.jcpp.jathenaeum.Utente;
+import com.github.jcpp.jathenaeum.User;
 import com.github.jcpp.jathenaeum.beans.SigninForm;
 
 /**
@@ -27,7 +27,7 @@ public class SigninAction extends Action {
 			throws Exception {
 		String actionTarget = null;
 		
-		Utente user = new Utente();
+		User user = new User();
 		//ActionMessages errors_mesg = new ActionMessages();
 		SigninForm uf = (SigninForm) form;
         if(form != null){

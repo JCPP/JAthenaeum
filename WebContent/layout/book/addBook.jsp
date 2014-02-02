@@ -12,7 +12,7 @@
 	<input type="text" name="description" class="form-control" placeholder="Description" value="${addBookForm.description}">
 	<select name="authors" multiple class="form-control">
 		<logic:iterate name="authors" id="authorsId">
-			<option value="${authorsId.id}">${authorsId.nome} ${authorsId.cognome}</option>
+			<option value="${authorsId.id}">${authorsId.name} ${authorsId.surname}</option>
 		</logic:iterate>
 	</select>
 	<button class="btn btn-lg btn-primary btn-block" type="submit">Add Book</button>

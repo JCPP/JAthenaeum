@@ -9,9 +9,9 @@ import org.apache.struts.action.ActionForm;
 import org.apache.struts.action.ActionForward;
 import org.apache.struts.action.ActionMapping;
 
-import com.github.jcpp.jathenaeum.Utente;
+import com.github.jcpp.jathenaeum.User;
 import com.github.jcpp.jathenaeum.beans.UserRegisterForm;
-import com.github.jcpp.jathenaeum.db.dao.UtenteDAO;
+import com.github.jcpp.jathenaeum.db.dao.UserDAO;
 import com.github.jcpp.jathenaeum.utils.Converter;
 
 public class UserRegisterAction extends Action{
@@ -22,19 +22,19 @@ public class UserRegisterAction extends Action{
 			throws Exception {
 		String action_target = null;
 		
-		Utente user = new Utente();
+		User user = new User();
 		//ActionMessages errors_mesg = new ActionMessages();
         UserRegisterForm uf = (UserRegisterForm) form;
         if(form != null){
         	user.setEmail(uf.getEmail());
         	user.setPassword(uf.getPassword());
-        	user.setNome(uf.getName());
-        	user.setCognome(uf.getSurname());
-        	user.setDataNascita(Converter.fromStringToDate(uf.getBornDate()));
+        	user.setName(uf.getName());
+        	user.setSurname(uf.getSurname());
+        	user.setBornDate(Converter.fromStringToDate(uf.getBornDate()));
         	
         	
         	try{
-        		if(UtenteDAO.register(user)){
+        		if(UserDAO.register(user)){
         			action_target = "success";
         		}
         		

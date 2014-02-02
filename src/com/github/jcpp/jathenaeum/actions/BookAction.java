@@ -13,8 +13,8 @@ import org.apache.struts.action.ActionForward;
 import org.apache.struts.action.ActionMapping;
 import org.apache.struts.actions.ForwardAction;
 
-import com.github.jcpp.jathenaeum.Autore;
-import com.github.jcpp.jathenaeum.db.dao.AutoreDAO;
+import com.github.jcpp.jathenaeum.Author;
+import com.github.jcpp.jathenaeum.db.dao.AuthorDAO;
 
 /**
  * Book action.
@@ -29,7 +29,7 @@ public class BookAction extends ForwardAction {
 					throws Exception {
 		String action_target = null;
 
-		ArrayList<Autore> authors = AutoreDAO.getAll();
+		ArrayList<Author> authors = AuthorDAO.getAll();
 		request.setAttribute("authors", authors);
 		action_target = "success";
 		//return mapping.findForward(action_target);

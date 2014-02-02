@@ -8,9 +8,9 @@ import org.apache.struts.action.ActionForm;
 import org.apache.struts.action.ActionForward;
 import org.apache.struts.action.ActionMapping;
 
-import com.github.jcpp.jathenaeum.Autore;
+import com.github.jcpp.jathenaeum.Author;
 import com.github.jcpp.jathenaeum.beans.AddAuthorForm;
-import com.github.jcpp.jathenaeum.db.dao.AutoreDAO;
+import com.github.jcpp.jathenaeum.db.dao.AuthorDAO;
 import com.github.jcpp.jathenaeum.utils.Converter;
 
 public class AddAuthorAction extends Action{
@@ -23,19 +23,19 @@ public class AddAuthorAction extends Action{
 		//boolean action_perform = false;
 		String action_target = null;
 
-		Autore autore = new Autore();
+		Author author = new Author();
 		//ActionMessages errors_mesg = new ActionMessages();
 		AddAuthorForm uf = (AddAuthorForm) form;
 		if(form != null){
-			autore.setNome(uf.getName());
-			autore.setCognome(uf.getSurname());
-			autore.setFoto(uf.getPhoto());
-			autore.setDataNascita(Converter.fromStringToDate(uf.getBornDate()));
-			autore.setBiografia(uf.getBiography());
+			author.setName(uf.getName());
+			author.setSurname(uf.getSurname());
+			author.setPhoto(uf.getPhoto());
+			author.setBornDate(Converter.fromStringToDate(uf.getBornDate()));
+			author.setBiography(uf.getBiography());
 
 
 			try{
-				if(AutoreDAO.register(autore)){
+				if(AuthorDAO.insert(author)){
 					action_target = "success";
 				}
 
