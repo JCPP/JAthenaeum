@@ -1,4 +1,16 @@
+<%@ taglib uri="http://struts.apache.org/tags-logic" prefix="logic" %>
+
+<div class="row">
+	<logic:iterate name="books" id="booksId">
+		<div class="col-md-4">
+			<h2>${booksId.title}</h2>
+			<p>${booksId.description}</p>
+		</div>
+	</logic:iterate>
+</div>
+
 <!-- Example row of columns -->
+<!--
 <div class="row">
 	<div class="col-md-4">
 		<h2>Heading</h2>
@@ -34,3 +46,4 @@
 		</p>
 	</div>
 </div>
+-->

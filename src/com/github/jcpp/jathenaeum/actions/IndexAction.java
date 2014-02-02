@@ -13,15 +13,15 @@ import org.apache.struts.action.ActionForward;
 import org.apache.struts.action.ActionMapping;
 import org.apache.struts.actions.ForwardAction;
 
-import com.github.jcpp.jathenaeum.Author;
-import com.github.jcpp.jathenaeum.db.dao.AuthorDAO;
+import com.github.jcpp.jathenaeum.Book;
+import com.github.jcpp.jathenaeum.db.dao.BookDAO;
 
 /**
- * Book action. This action retrieves all the authors.
+ * Index action. This action retrieves all the books.
  * @author <a href="https://github.com/DavidePastore">DavidePastore</a>
  *
  */
-public class BookAction extends ForwardAction {
+public class IndexAction extends ForwardAction {
 	
 	@Override
 	public ActionForward execute(ActionMapping mapping, ActionForm form,
@@ -29,12 +29,11 @@ public class BookAction extends ForwardAction {
 					throws Exception {
 		String action_target = null;
 
-		ArrayList<Author> authors = AuthorDAO.getAll();
-		request.setAttribute("authors", authors);
+		ArrayList<Book> books = BookDAO.getAll();
+		request.setAttribute("books", books);
 		action_target = "success";
 		//return mapping.findForward(action_target);
 		return super.execute(mapping, form, request, response);
 	}
-
 
 }
