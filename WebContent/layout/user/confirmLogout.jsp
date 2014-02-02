@@ -1,0 +1,1 @@
+<h2>Logout successful</h2>

@@ -39,8 +39,8 @@
 				
 				<!-- User present -->
 				<logic:present name="user" scope="session">
-					<a class="btn btn-default navbar-btn navbar-right" href="/manageAccount.do">Manage Account</a>
-					<a class="btn btn-default navbar-btn navbar-right" href="/logout.do">Logout</a>
+					<a class="btn btn-default navbar-btn" href="/manageAccount.do">Manage Account</a>
+					<a class="btn btn-default navbar-btn" href="logout.do">Logout</a>
 				</logic:present>
 			</div>
 		</div>

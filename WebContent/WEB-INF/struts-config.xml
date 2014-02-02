@@ -48,6 +48,11 @@
 	        <forward name="failed" path="page.failedSignin"/>
         </action>
         
+        <action path="/logout" type="com.github.jcpp.jathenaeum.actions.LogoutAction" parameter="page.logout">
+	        <forward name="success" path="page.confirmLogout"/>
+	        <forward name="failed" path="page.failedLogout"/>
+        </action>
+        
         <!-- Author -->
         <action path="/addAuthor" type="org.apache.struts.actions.ForwardAction" parameter="page.addAuthor" />
       	<action

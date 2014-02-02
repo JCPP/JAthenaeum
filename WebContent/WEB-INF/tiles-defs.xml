@@ -77,6 +77,28 @@
 	
 	
 	
+	<!-- Logout -->
+	<definition name="page.logout" extends="base.definition.bootstrap">
+		<put name="title" value="Logout - JAthenaeum" />
+		<put name="body" value="/layout/user/logout.jsp" />
+		<put name="style" value="css/signup.css" />
+	</definition>
+	
+	<!-- Failed logout -->
+	<definition name="page.failedLogout" extends="base.definition.bootstrap">
+		<put name="title" value="Failed Logout - JAthenaeum" />
+		<put name="body" value="/layout/user/failedLogout.jsp" />
+	</definition>
+	
+	<!-- Confirm logout -->
+	<definition name="page.confirmLogout" extends="base.definition.bootstrap">
+		<put name="redirect" value="index.do" />
+		<put name="title" value="Confirm Logout - JAthenaeum" />
+		<put name="body" value="/layout/user/confirmLogout.jsp" />
+	</definition>
+	
+	
+	
 	<!-- Add Author -->
 	<definition name="page.addAuthor" extends="base.definition.bootstrap">
 		<put name="title" value="Add Author - JAthenaeum" />
