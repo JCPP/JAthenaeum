@@ -12,7 +12,7 @@
 </logic:notEqual>
 <!-- <link rel="shortcut icon" href="../../docs-assets/ico/favicon.png"> -->
 
-<title><tiles:getAsString name="title" /></title>
+<title><tiles:getAsString name="title" /> - JAthenaeum</title>
 
 <!-- Bootstrap core CSS -->
 <link href="bootstrap-3.1.0/dist/css/bootstrap.css" rel="stylesheet">

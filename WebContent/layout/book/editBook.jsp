@@ -3,7 +3,7 @@
 <%@ taglib uri="http://struts.apache.org/tags-html" prefix="html" %>
 <%@ taglib uri="http://struts.apache.org/tags-logic" prefix="logic" %>
 <html:errors/>
-<form class="form-signup" role="form" action="doBook.do?op=add" method="post" name="addBookForm">
+<form class="form-signup" role="form" action="doBook.do?op=edit&id=id" method="post" name="addBookForm">
 	<h2 class="form-signup-heading">Add a Book</h2>
 	<input type="text" name="title" class="form-control" placeholder="Title" value="${addBookForm.title}" required autofocus>
 	<input type="text" name="cover" class="form-control" placeholder="Cover" value="${addBookForm.cover}">

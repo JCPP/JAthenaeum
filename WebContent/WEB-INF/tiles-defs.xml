@@ -131,6 +131,12 @@
 		<put name="style" value="css/signup.css" />
 	</definition>
 	
+	<definition name="page.editBook" extends="base.definition.bootstrap">
+		<put name="title" value="Edit Book - JAthenaeum" />
+		<put name="body" value="/layout/book/editBook.jsp" />
+		<put name="style" value="css/signup.css" />
+	</definition>
+	
 	<!-- Confirm insert -->
 	<definition name="page.confirmBookInsert" extends="base.definition.bootstrap">
 		<put name="redirect" value="index.do" />
@@ -145,5 +151,11 @@
 		<put name="title" value="Failed Insert Book - JAthenaeum" />
 		<put name="body" value="/layout/book/failedBookInsert.jsp" />
 		<put name="style" value="css/signup.css" />
+	</definition>
+	
+	<!-- View All insert -->
+	<definition name="page.viewAllBooks" extends="base.definition.bootstrap">
+		<put name="title" value="Books" />
+		<put name="body" value="/layout/book/viewAll.jsp" />
 	</definition>
 </tiles-definitions>

@@ -19,15 +19,16 @@
 				<li class="active"><a href="#">Link</a></li>
 				<li><a href="#">Link</a></li>
 				<li class="dropdown"><a href="#" class="dropdown-toggle"
-					data-toggle="dropdown">Dropdown <b class="caret"></b></a>
+					data-toggle="dropdown">Book <b class="caret"></b></a>
 					<ul class="dropdown-menu">
-						<li><a href="addAuthor.do">Add an Author</a></li>
-						<li><a href="addBook.do">Add a Book</a></li>
-						<li><a href="#">Something else here</a></li>
-						<li class="divider"></li>
-						<li><a href="#">Separated link</a></li>
-						<li class="divider"></li>
-						<li><a href="#">One more separated link</a></li>
+						<li><a href="book.do?op=add">Add</a></li>
+						<li><a href="book.do?op=viewAll">View All</a></li>
+						<li><a href="book.do?op=search">Search</a></li>
+					</ul></li>
+				<li class="dropdown"><a href="#" class="dropdown-toggle"
+					data-toggle="dropdown">Author <b class="caret"></b></a>
+					<ul class="dropdown-menu">
+						<li><a href="addAuthor.do">Add</a></li>
 					</ul></li>
 			</ul>
 			<div class="nav navbar-nav navbar-right">

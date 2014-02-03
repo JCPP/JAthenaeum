@@ -1,6 +1,7 @@
 <%@ taglib uri="http://struts.apache.org/tags-html" prefix="html"%>
 <%@ taglib uri="http://struts.apache.org/tags-logic" prefix="logic"%>
 <%@ taglib uri="http://struts.apache.org/tags-tiles" prefix="tiles"%>
+<tiles:useAttribute name="title" />
 <tiles:useAttribute name="jumbotronEnabled" />
 <tiles:useAttribute name="navbarEnabled" />
 <tiles:useAttribute name="footerEnabled" />
@@ -27,7 +28,9 @@
 	</logic:equal>
 
 	<div class="container">
-		<tiles:insert attribute="body" />
+		<tiles:insert attribute="body">
+			<tiles:put name="title" beanName="title" />
+		</tiles:insert>
 
 		<logic:equal name="footerEnabled" value="true">
 			<hr>

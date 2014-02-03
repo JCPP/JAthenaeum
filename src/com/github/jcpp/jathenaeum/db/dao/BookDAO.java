@@ -216,5 +216,60 @@ public class BookDAO {
 		}
 		return result;
 	}
+	
+	
+	/**
+	 * Update a book.
+	 * @param book the book to update. 
+	 * @return Returns the id of the updated book. 
+	 */
+	public static long update(Book book){
+		Connection con = db.getConnection();
+		PreparedStatement stmt = null;
+		long result = 0;
+
+		try {
+			con.setAutoCommit(false);
+			String insert = "UPDATE Book SET BookTitle = ?, BookCover = ?, BookGenre = ?, BookIsbnCode = ?, BookDescription = ? "
+					+ " WHERE BookID = ?";
+			stmt = con.prepareStatement(insert, Statement.RETURN_GENERATED_KEYS);
+			stmt.setString(1, book.getTitle());
+			stmt.setString(2, book.getCover());
+			stmt.setString(3, book.getGenre());
+			stmt.setString(4, book.getIsbnCode());
+			stmt.setString(5, book.getDescription());
+			stmt.setInt(6, book.getId());
+			
+			result = stmt.executeUpdate();
+			
+			ResultSet generatedKeys = stmt.getGeneratedKeys();
+			
+			if (generatedKeys.next()) {
+	            result = generatedKeys.getLong(1);
+	        }
+			
+			con.commit();
+			
+
+		} catch (SQLException sqle) {
+			sqle.printStackTrace();
+			try {
+				con.rollback();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+		} finally {
+			try {
+				if (stmt != null) {
+					stmt.close();
+					stmt = null;
+				}
+				db.closeConnection(con);
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+		}
+		return result;
+	}
 
 }
