@@ -47,7 +47,7 @@ public class UserDAO {
 			
 			if(resultSet.next()){
 				user = new User();
-				user.setCardNumber(resultSet.getInt(1));
+				user.setId(resultSet.getInt(1));
 				user.setEmail(resultSet.getString(2));
 				user.setPassword(resultSet.getString(3));
 				user.setName(resultSet.getString(4));
@@ -82,26 +82,26 @@ public class UserDAO {
 	
 	
 	/**
-	 * Get a User by CardNumber.
-	 * @param cardNumber the CardNumber.
+	 * Get a User by id.
+	 * @param id the id.
 	 * @return A User instance.
 	 * @throws UserNotFound If the user is not found.
 	 */
-	public static User getByCardNumber(int cardNumber) throws UserNotFound{
+	public static User getByCardNumber(int id) throws UserNotFound{
 		Connection con = db.getConnection();
 		User user;
 		PreparedStatement stmt = null;
 		try {
 			con.setAutoCommit(false);
-			String select = "SELECT * FROM User WHERE UserCardNumber = ?";
+			String select = "SELECT * FROM User WHERE UserID = ?";
 			stmt = con.prepareStatement(select);
-			stmt.setInt(1, cardNumber);
+			stmt.setInt(1, id);
 			ResultSet resultSet = stmt.executeQuery();
 			con.commit();
 			
 			if(resultSet.next()){
 				user = new User();
-				user.setCardNumber(resultSet.getInt(1));
+				user.setId(resultSet.getInt(1));
 				user.setEmail(resultSet.getString(2));
 				user.setPassword(resultSet.getString(3));
 				user.setName(resultSet.getString(4));

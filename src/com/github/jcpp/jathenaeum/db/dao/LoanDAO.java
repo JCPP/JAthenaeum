@@ -40,7 +40,7 @@ public class LoanDAO {
 			while(resultSet.next()){
 				loan = new Loan();
 				loan.setId(resultSet.getInt(1));
-				loan.setUserCardNumber(resultSet.getInt(2));
+				loan.setCustomerCardNumber(resultSet.getInt(2));
 				loan.setBookId(resultSet.getInt(3));
 				loan.setStartDate(resultSet.getDate(4));
 				loan.setEndDate(resultSet.getDate(5));
@@ -90,7 +90,7 @@ public class LoanDAO {
 			if(resultSet.next()){
 				loan = new Loan();
 				loan.setId(resultSet.getInt(1));
-				loan.setUserCardNumber(resultSet.getInt(2));
+				loan.setCustomerCardNumber(resultSet.getInt(2));
 				loan.setBookId(resultSet.getInt(3));
 				loan.setStartDate(resultSet.getDate(4));
 				loan.setEndDate(resultSet.getDate(5));
@@ -124,25 +124,25 @@ public class LoanDAO {
 
 	/**
 	 * Get all Loan instances of an User.
-	 * @param userCardNumber the userCardNumber.
+	 * @param customerCardNumber the CustomerCardNumber.
 	 * @return Returns all Loan instances in an ArrayList<Loan> of an User.
 	 */
-	public static ArrayList<Loan> getAllByIdUtente(int userCardNumber){
+	public static ArrayList<Loan> getAllByIdUtente(int customerCardNumber){
 		Connection con = db.getConnection();
 		ArrayList<Loan> loans = new ArrayList<Loan>();
 		PreparedStatement stmt = null;
 		try {
 			con.setAutoCommit(false);
-			final String select = "SELECT * FROM Loan WHERE UserCardNumber = ?";
+			final String select = "SELECT * FROM Loan WHERE CustomerCardNumber = ?";
 			stmt = con.prepareStatement(select);
-			stmt.setInt(1, userCardNumber);
+			stmt.setInt(1, customerCardNumber);
 			ResultSet resultSet = stmt.executeQuery();
 			Loan loan;
 			
 			while(resultSet.next()){
 				loan = new Loan();
 				loan.setId(resultSet.getInt(1));
-				loan.setUserCardNumber(resultSet.getInt(2));
+				loan.setCustomerCardNumber(resultSet.getInt(2));
 				loan.setBookId(resultSet.getInt(3));
 				loan.setStartDate(resultSet.getDate(4));
 				loan.setEndDate(resultSet.getDate(5));
@@ -192,7 +192,7 @@ public class LoanDAO {
 			while(resultSet.next()){
 				loan = new Loan();
 				loan.setId(resultSet.getInt(1));
-				loan.setUserCardNumber(resultSet.getInt(2));
+				loan.setCustomerCardNumber(resultSet.getInt(2));
 				loan.setBookId(resultSet.getInt(3));
 				loan.setStartDate(resultSet.getDate(4));
 				loan.setEndDate(resultSet.getDate(5));

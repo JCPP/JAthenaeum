@@ -6,9 +6,9 @@ USE JAthenaeum;
 /* Create tables */
 
 
-/* Create table User */
+/* Create User table */
 CREATE TABLE User (
-	UserCardNumber integer AUTO_INCREMENT PRIMARY KEY,
+	UserID integer AUTO_INCREMENT PRIMARY KEY,
 	UserEmail varchar(50) NOT NULL,
 	UserPassword varchar(50) NOT NULL,
 	UserName varchar(50),
@@ -17,7 +17,16 @@ CREATE TABLE User (
 );
 
 
-/* Create table Book */
+/* Create Customer table */
+CREATE TABLE Customer (
+	CustomerCardNumber integer AUTO_INCREMENT PRIMARY KEY,
+	CustomerEmail varchar(50) NOT NULL,
+	CustomerName varchar(50) NOT NULL,
+	CustomerSurname varchar(50) NOT NULL
+);
+
+
+/* Create Book table */
 CREATE TABLE Book (
 	BookID integer AUTO_INCREMENT PRIMARY KEY,
 	BookTitle varchar(50) NOT NULL,
@@ -28,19 +37,19 @@ CREATE TABLE Book (
 );
 
 
-/* Create table Loan */
+/* Create Loan table */
 CREATE TABLE Loan (
 	IDLoan integer AUTO_INCREMENT PRIMARY KEY,
-	UserCardNumber integer NOT NULL,
+	CustomerCardNumber integer NOT NULL,
 	BookID integer NOT NULL,
 	LoanStartDate date NOT NULL,
 	LoanEndDate date NOT NULL,
-	FOREIGN KEY (UserCardNumber) REFERENCES User(UserCardNumber),
+	FOREIGN KEY (CustomerCardNumber) REFERENCES Customer(CustomerCardNumber),
 	FOREIGN KEY (BookID) REFERENCES Book(BookID)
 );
 
 
-/* Create table Author */
+/* Create Author table */
 CREATE TABLE Author (
 	AuthorID integer AUTO_INCREMENT PRIMARY KEY,
 	AuthorName varchar(50) NOT NULL,
@@ -51,7 +60,7 @@ CREATE TABLE Author (
 );
 
 
-/* Create table Writes */
+/* Create Writes table */
 CREATE TABLE Writes (
 	IDWrites integer AUTO_INCREMENT PRIMARY KEY,
 	BookID integer NOT NULL,

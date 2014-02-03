@@ -12,12 +12,12 @@ import java.util.Date;
  *
  */
 public class User {
+	private int id;
 	private String email;
 	private String password;
 	private String name;
 	private String surname;
 	private Date bornDate;
-	private int cardNumber;
 	
 	/**
 	 * @return the email
@@ -82,14 +82,14 @@ public class User {
 	/**
 	 * @return the cardNumber
 	 */
-	public int getCardNumber() {
-		return cardNumber;
+	public int getId() {
+		return id;
 	}
 	/**
-	 * @param cardNumber the cardNumber to set
+	 * @param id the id to set
 	 */
-	public void setCardNumber(int cardNumber) {
-		this.cardNumber = cardNumber;
+	public void setId(int id) {
+		this.id = id;
 	}
 
 }

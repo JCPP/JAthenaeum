@@ -13,7 +13,7 @@ import java.util.Date;
 public class Loan {
 	
 	private int id;
-	private int userCardNumber;
+	private int customerCardNumber;
 	private int bookId;
 	private Date startDate;
 	private Date endDate;
@@ -34,14 +34,14 @@ public class Loan {
 	/**
 	 * @return the userCardNumber
 	 */
-	public int getUserCardNumber() {
-		return userCardNumber;
+	public int getCustomerCardNumber() {
+		return customerCardNumber;
 	}
 	/**
-	 * @param userCardNumber the userCardNumber to set
+	 * @param customerCardNumber the customerCardNumber to set
 	 */
-	public void setUserCardNumber(int userCardNumber) {
-		this.userCardNumber = userCardNumber;
+	public void setCustomerCardNumber(int customerCardNumber) {
+		this.customerCardNumber = customerCardNumber;
 	}
 	/**
 	 * @return the bookId
