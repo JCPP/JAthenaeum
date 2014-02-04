@@ -138,9 +138,10 @@ public class AuthorDAO {
 		PreparedStatement stmt = null;
 		try {
 			con.setAutoCommit(false);
-			final String select = "SELECT A.* FROM Author A, Book B, Write W WHERE B.BookID = ? AND B.BookID = W.BookID AND W.AuthorID = A.AuthorID";
+			final String select = "SELECT A.* FROM Author A, Book B, Writes W WHERE B.BookID = ? AND B.BookID = W.BookID AND W.AuthorID = A.AuthorID";
 			stmt = con.prepareStatement(select);
 			stmt.setInt(1, bookId);
+			System.out.println(stmt.toString());
 			ResultSet resultSet = stmt.executeQuery();
 			Author author;
 			
