@@ -131,10 +131,17 @@
 		<put name="style" value="css/signup.css" />
 	</definition>
 	
+	<!-- Edit Book -->
 	<definition name="page.editBook" extends="base.definition.bootstrap">
 		<put name="title" value="Edit Book - JAthenaeum" />
 		<put name="body" value="/layout/book/editBook.jsp" />
 		<put name="style" value="css/signup.css" />
+	</definition>
+	
+	<!-- No authors -->
+	<definition name="page.noAuthors" extends="base.definition.bootstrap">
+		<put name="title" value="No Authors - JAthenaeum" />
+		<put name="body" value="/layout/book/noAuthors.jsp" />
 	</definition>
 	
 	<!-- Confirm insert -->
