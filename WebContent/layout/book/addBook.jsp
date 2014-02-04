@@ -9,7 +9,7 @@
 	<input type="text" name="cover" class="form-control" placeholder="Cover" value="${addBookForm.cover}">
 	<input type="text" name="genre" class="form-control" placeholder="Genre" value="${addBookForm.genre}">
 	<input type="text" name="isbn" class="form-control" placeholder="ISBN" value="${addBookForm.isbn}">
-	<input type="text" name="description" class="form-control" placeholder="Description" value="${addBookForm.description}">
+	<textarea name="description" class="form-control" rows="3" placeholder="Description">${addBookForm.description}</textarea>
 	<select name="authors" multiple class="form-control">
 		<logic:iterate name="authors" id="authorsId">
 			<option value="${authorsId.id}">${authorsId.name} ${authorsId.surname}</option>
