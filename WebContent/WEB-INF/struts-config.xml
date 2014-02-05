@@ -14,7 +14,6 @@
 		<form-bean name="addAuthorForm" type="com.github.jcpp.jathenaeum.beans.AddAuthorForm"/>
 		
 		<!-- Book -->
-		<form-bean name="addBookForm" type="com.github.jcpp.jathenaeum.beans.AddBookForm"/>
 		<form-bean name="bookForm" type="com.github.jcpp.jathenaeum.beans.BookForm"/>
 	</form-beans>
 	
@@ -81,20 +80,6 @@
         	<forward name="viewAll" path="page.viewAllBooks"/>
         	<forward name="noAuthors" path="page.noAuthors" />
         </action>
-
-		<!-- Add Book 
-      	<action
-	        path="/doBook"
-	        type="com.github.jcpp.jathenaeum.actions.BookActionDo"
-	        name="bookForm"
-	        scope="request"
-	        validate="true"
-	        input="/book.do?op=add"
-	        parameter="op">
-	        <forward name="success" path="page.confirmBookInsert"/>
-	        <forward name="failed" path="page.failedBookInsert"/>
-        </action>
-        -->
         
         <!-- Book Operations -->
         <action
@@ -113,11 +98,6 @@
 	        <forward name="editErrors" path="/book.do?op=edit" redirect="true"/>
 	        <forward name="editSuccess" path="page.confirmBookEdit" />
 	        <forward name="editFailed" path="page.failedBookEdit" />
-	        
-	        
-	        <!-- Old -->
-	        <forward name="success" path="page.confirmBookEdit"/>
-	        <forward name="failed" path="page.failedBookInsert"/>
         </action>
         
 	</action-mappings>

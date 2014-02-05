@@ -111,7 +111,6 @@
 		<put name="redirect" value="index.do" />
 		<put name="title" value="Confirm Insert Author - JAthenaeum" />
 		<put name="body" value="/layout/author/confirmAuthorInsert.jsp" />
-		<put name="style" value="css/signup.css" />
 	</definition>
 	
 	<!-- Failed insert -->
@@ -119,7 +118,6 @@
 		<put name="redirect" value="index.do" />
 		<put name="title" value="Failed Insert Author - JAthenaeum" />
 		<put name="body" value="/layout/author/failedAuthorInsert.jsp" />
-		<put name="style" value="css/signup.css" />
 	</definition>
 	
 	
@@ -129,6 +127,20 @@
 		<put name="title" value="Add Book - JAthenaeum" />
 		<put name="body" value="/layout/book/addBook.jsp" />
 		<put name="style" value="css/signup.css" />
+	</definition>
+	
+	<!-- Confirm insert -->
+	<definition name="page.confirmBookInsert" extends="base.definition.bootstrap">
+		<put name="redirect" value="index.do" />
+		<put name="title" value="Confirm Insert Book - JAthenaeum" />
+		<put name="body" value="/layout/book/confirmBookInsert.jsp" />
+	</definition>
+	
+	<!-- Failed insert -->
+	<definition name="page.failedBookInsert" extends="base.definition.bootstrap">
+		<put name="redirect" value="index.do" />
+		<put name="title" value="Failed Insert Book - JAthenaeum" />
+		<put name="body" value="/layout/book/failedBookInsert.jsp" />
 	</definition>
 	
 	<!-- Edit Book -->
@@ -151,24 +163,10 @@
 		<put name="body" value="/layout/book/noAuthors.jsp" />
 	</definition>
 	
-	
-	<!-- Confirm insert -->
-	<definition name="page.confirmBookInsert" extends="base.definition.bootstrap">
-		<put name="redirect" value="index.do" />
-		<put name="title" value="Confirm Insert Book - JAthenaeum" />
-		<put name="body" value="/layout/book/confirmBookInsert.jsp" />
-	</definition>
-	
-	<!-- Failed insert -->
-	<definition name="page.failedBookInsert" extends="base.definition.bootstrap">
-		<put name="redirect" value="index.do" />
-		<put name="title" value="Failed Insert Book - JAthenaeum" />
-		<put name="body" value="/layout/book/failedBookInsert.jsp" />
-	</definition>
-	
-	<!-- View All insert -->
+	<!-- View All -->
 	<definition name="page.viewAllBooks" extends="base.definition.bootstrap">
 		<put name="title" value="Books" />
 		<put name="body" value="/layout/book/viewAll.jsp" />
 	</definition>
+	
 </tiles-definitions>
