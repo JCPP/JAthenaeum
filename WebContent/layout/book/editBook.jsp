@@ -12,7 +12,7 @@
 %>
 
 <html:errors/>
-<form class="form-signup" role="form" action="doBook.do?op=edit&id=${book.id}" method="post" name="addBookForm">
+<form class="form-signup" role="form" action="doBook.do?op=edit&id=${book.id}" method="post" name="editBookForm">
 	<h2 class="form-signup-heading">Edit a Book</h2>
 	<input type="text" name="title" class="form-control" placeholder="Title" value="${book.title}" required autofocus>
 	<input type="text" name="cover" class="form-control" placeholder="Cover" value="${book.cover}">
@@ -22,16 +22,18 @@
 	<select name="authors" multiple class="form-control">
 		<%
 			for(int i = 0; i < authors.size(); i++){
+				Author author = authors.get(i);
+				int id = author.getId();
+				out.write("<option value=\"" + id + "\"");
+				
+				//Set the selected books
 				for(int j = 0; j < bookAuthors.size(); j++){
-					Author author = authors.get(i);
-					int id = author.getId();
-					
-					out.write("<option value=\"" + id + "\"");
 					if(author.getId() == bookAuthors.get(j).getId()){
 						out.write(" selected");
 					}
-					out.write(">" + author.getName() + " " + author.getSurname() + "</option>");
 				}
+				
+				out.write(">" + author.getName() + " " + author.getSurname() + "</option>");
 			}
 		%>
 	</select>

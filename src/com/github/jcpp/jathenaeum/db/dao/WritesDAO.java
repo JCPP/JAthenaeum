@@ -74,6 +74,54 @@ public class WritesDAO {
 	
 	
 	/**
+	 * Get all Writes instances.
+	 * @param bookId The Book ID.
+	 * @return Returns all Writes instances of a Book in an ArrayList<Writes>.
+	 */
+	public static ArrayList<Writes> getAllByBookId(int bookId){
+		Connection con = db.getConnection();
+		ArrayList<Writes> writeArray = new ArrayList<Writes>();
+		PreparedStatement stmt = null;
+		try {
+			con.setAutoCommit(false);
+			final String select = "SELECT * FROM Writes WHERE BookID = ?";
+			stmt = con.prepareStatement(select);
+			stmt.setInt(1, bookId);
+			ResultSet resultSet = stmt.executeQuery();
+			Writes writes;
+			
+			while(resultSet.next()){
+				writes = new Writes();
+				writes.setId(resultSet.getInt(1));
+				writes.setBookId(resultSet.getInt(2));
+				writes.setAuthorId(resultSet.getInt(3));
+				writeArray.add(writes);
+			}
+			
+			con.commit();
+		} catch (SQLException sqle) {
+			sqle.printStackTrace();
+			try {
+				con.rollback();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+		} finally {
+			try {
+				if (stmt != null) {
+					stmt.close();
+					stmt = null;
+				}
+				db.closeConnection(con);
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+		}
+		return writeArray;
+	}
+	
+	
+	/**
 	 * Get the Writes by id.
 	 * @param id the id of the Writes.
 	 * @return Returns the Writes instance.
@@ -141,6 +189,51 @@ public class WritesDAO {
 			stmt = con.prepareStatement(insert);
 			stmt.setLong(1, writes.getBookId());
 			stmt.setInt(2, writes.getAuthorId());
+			
+			int result = stmt.executeUpdate();
+			con.commit();
+			
+			if(result == 1 || result== 0){
+				workIt = true;
+			}
+
+		} catch (SQLException sqle) {
+			sqle.printStackTrace();
+			try {
+				con.rollback();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+		} finally {
+			try {
+				if (stmt != null) {
+					stmt.close();
+					stmt = null;
+				}
+				db.closeConnection(con);
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+		}
+		return workIt;
+	}
+	
+	
+	/**
+	 * Delete a Writes.
+	 * @param writes the Writes object to delete. 
+	 * @return
+	 */
+	public static boolean delete(Writes writes){
+		Connection con = db.getConnection();
+		PreparedStatement stmt = null;
+		boolean workIt = false;
+
+		try {
+			con.setAutoCommit(false);
+			final String delete = "DELETE FROM Writes WHERE WritesID = ?";
+			stmt = con.prepareStatement(delete);
+			stmt.setLong(1, writes.getId());
 			
 			int result = stmt.executeUpdate();
 			con.commit();

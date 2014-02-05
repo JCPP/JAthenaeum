@@ -62,7 +62,7 @@ CREATE TABLE Author (
 
 /* Create Writes table */
 CREATE TABLE Writes (
-	IDWrites integer AUTO_INCREMENT PRIMARY KEY,
+	WritesID integer AUTO_INCREMENT PRIMARY KEY,
 	BookID integer NOT NULL,
 	AuthorID integer NOT NULL,
 	FOREIGN KEY (BookID) REFERENCES Book(BookID),
