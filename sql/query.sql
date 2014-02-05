@@ -1,5 +1,5 @@
 /* Create database */
-CREATE DATABASE JAthenaeum;
+CREATE DATABASE JAthenaeum CHARACTER SET utf8 COLLATE utf8_general_ci;
 
 USE JAthenaeum;
 
@@ -44,8 +44,12 @@ CREATE TABLE Loan (
 	BookID integer NOT NULL,
 	LoanStartDate date NOT NULL,
 	LoanEndDate date NOT NULL,
-	FOREIGN KEY (CustomerCardNumber) REFERENCES Customer(CustomerCardNumber),
+	FOREIGN KEY (CustomerCardNumber) REFERENCES Customer(CustomerCardNumber)
+		ON UPDATE CASCADE
+		ON DELETE CASCADE,
 	FOREIGN KEY (BookID) REFERENCES Book(BookID)
+		ON UPDATE CASCADE
+		ON DELETE CASCADE
 );
 
 
@@ -65,7 +69,11 @@ CREATE TABLE Writes (
 	WritesID integer AUTO_INCREMENT PRIMARY KEY,
 	BookID integer NOT NULL,
 	AuthorID integer NOT NULL,
-	FOREIGN KEY (BookID) REFERENCES Book(BookID),
+	FOREIGN KEY (BookID) REFERENCES Book(BookID)
+		ON UPDATE CASCADE
+		ON DELETE CASCADE,
 	FOREIGN KEY (AuthorID) REFERENCES Author(AuthorID)
+		ON UPDATE CASCADE
+		ON DELETE CASCADE
 );
 
