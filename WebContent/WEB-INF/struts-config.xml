@@ -96,16 +96,25 @@
         </action>
         -->
         
-        <!-- Edit Book -->
+        <!-- Book Operations -->
         <action
 	        path="/doBook"
 	        type="com.github.jcpp.jathenaeum.actions.BookActionDo"
 	        name="bookForm"
 	        scope="request"
+	        validate="false"
 	        parameter="op">
+	        <!-- Add -->
 	        <forward name="add" path="page.confirmBookInsert"/>
-	        <forward name="edit" path="page.confirmBookInsert"/>
-	        <forward name="success" path="page.confirmBookInsert"/>
+	        
+	        <!-- Edit -->
+	        <forward name="editErrors" path="/book.do?op=edit" redirect="true"/>
+	        <forward name="editSuccess" path="page.confirmBookEdit" />
+	        <forward name="editFailed" path="page.failedBookEdit" />
+	        
+	        
+	        <!-- Old -->
+	        <forward name="success" path="page.confirmBookEdit"/>
 	        <forward name="failed" path="page.failedBookInsert"/>
         </action>
         

@@ -125,6 +125,7 @@ public class BookDAO {
 		return null;
 	}
 	
+	
 	/**
 	 * Get the number of the Book instances.
 	 * @param isbn the isbn code.
@@ -242,12 +243,6 @@ public class BookDAO {
 			
 			result = stmt.executeUpdate();
 			
-			ResultSet generatedKeys = stmt.getGeneratedKeys();
-			
-			if (generatedKeys.next()) {
-	            result = generatedKeys.getLong(1);
-	        }
-			
 			con.commit();
 			
 
@@ -269,7 +264,7 @@ public class BookDAO {
 				e.printStackTrace();
 			}
 		}
-		return result;
+		return book.getId();
 	}
 
 }

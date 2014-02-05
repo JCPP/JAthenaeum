@@ -138,18 +138,25 @@
 		<put name="style" value="css/signup.css" />
 	</definition>
 	
+	<!-- Confirm edit -->
+	<definition name="page.confirmBookEdit" extends="base.definition.bootstrap">
+		<put name="redirect" value="index.do" />
+		<put name="title" value="Confirm Edit Book - JAthenaeum" />
+		<put name="body" value="/layout/book/confirmBookEdit.jsp" />
+	</definition>
+	
 	<!-- No authors -->
 	<definition name="page.noAuthors" extends="base.definition.bootstrap">
 		<put name="title" value="No Authors - JAthenaeum" />
 		<put name="body" value="/layout/book/noAuthors.jsp" />
 	</definition>
 	
+	
 	<!-- Confirm insert -->
 	<definition name="page.confirmBookInsert" extends="base.definition.bootstrap">
 		<put name="redirect" value="index.do" />
 		<put name="title" value="Confirm Insert Book - JAthenaeum" />
 		<put name="body" value="/layout/book/confirmBookInsert.jsp" />
-		<put name="style" value="css/signup.css" />
 	</definition>
 	
 	<!-- Failed insert -->
@@ -157,7 +164,6 @@
 		<put name="redirect" value="index.do" />
 		<put name="title" value="Failed Insert Book - JAthenaeum" />
 		<put name="body" value="/layout/book/failedBookInsert.jsp" />
-		<put name="style" value="css/signup.css" />
 	</definition>
 	
 	<!-- View All insert -->
