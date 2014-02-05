@@ -32,10 +32,27 @@ public class BookActionDo extends DispatchAction {
 	public ActionForward add(ActionMapping mapping, ActionForm form,
 			HttpServletRequest request, HttpServletResponse response)
 					throws Exception {
-		String action_target = null;
+		String actionTarget = null;
 		
 		Book book = new Book();
 		BookForm uf = (BookForm) form;
+		
+		ActionErrors actionErrors = uf.validate(mapping, request);
+		
+		//If there are some errors, redirect to the form page
+		if(!actionErrors.isEmpty()){
+			actionTarget = "addErrors";
+			saveErrors(request, actionErrors); //Save the errors
+			
+			HttpSession session = request.getSession();
+    		session.setAttribute("errors", actionErrors);
+    		session.setAttribute("form", uf);
+			
+			ActionRedirect redirect = new ActionRedirect(mapping.findForward(actionTarget));
+			return redirect;
+		}
+		
+		
 		if(form != null){
 			book.setTitle(uf.getTitle());
 			book.setCover(uf.getCover());
@@ -56,17 +73,17 @@ public class BookActionDo extends DispatchAction {
 						WritesDAO.insert(writes);
 					}
 					
-					action_target = "success";
+					actionTarget = "addSuccess";
 				}
 				
 				
 
 			}catch(Exception e){
-				action_target = "failed";
+				actionTarget = "addFailed";
 			}
 		}
 
-		return mapping.findForward(action_target);
+		return mapping.findForward(actionTarget);
 	}
 	
 	
@@ -94,51 +111,50 @@ public class BookActionDo extends DispatchAction {
 			redirect.addParameter("id", Integer.toString(id));
 			return redirect;
 		}
-		else{
-			if(form != null){
-				book.setId(id);
-				book.setTitle(uf.getTitle());
-				book.setCover(uf.getCover());
-				book.setGenre(uf.getGenre());
-				book.setIsbnCode(uf.getIsbn());
-				book.setDescription(uf.getDescription());
+
+		if(form != null){
+			book.setId(id);
+			book.setTitle(uf.getTitle());
+			book.setCover(uf.getCover());
+			book.setGenre(uf.getGenre());
+			book.setIsbnCode(uf.getIsbn());
+			book.setDescription(uf.getDescription());
 
 
-				try{
-					int bookId = (int) BookDAO.update(book);
-					if(bookId != 0){
-						String authors[] = uf.getAuthors();
-						Writes writes;
-						ArrayList<Writes> oldWritesList = WritesDAO.getAllByBookId(bookId);
+			try{
+				int bookId = (int) BookDAO.update(book);
+				if(bookId != 0){
+					String authors[] = uf.getAuthors();
+					Writes writes;
+					ArrayList<Writes> oldWritesList = WritesDAO.getAllByBookId(bookId);
+					
+					ArrayList<Writes> newWrites = getNewAuthors(authors, oldWritesList, bookId);
+					ArrayList<Writes> oldWrites = getOldAuthors(authors, oldWritesList, bookId);
+					
+					
+					//Remove deleted authors
+					for(int i = 0; i < oldWrites.size(); i++){
+						writes = oldWrites.get(i);
 						
-						ArrayList<Writes> newWrites = getNewAuthors(authors, oldWritesList, bookId);
-						ArrayList<Writes> oldWrites = getOldAuthors(authors, oldWritesList, bookId);
-						
-						
-						//Remove deleted authors
-						for(int i = 0; i < oldWrites.size(); i++){
-							writes = oldWrites.get(i);
-							
-							System.out.println("Deleting writes with Author ID: " + writes.getAuthorId());
-							WritesDAO.delete(writes);
-						}
-						
-						//Add new authors
-						for(int i = 0; i < newWrites.size(); i++){
-							writes = newWrites.get(i);
-							
-							System.out.println("Adding writes with Author ID: " + writes.getAuthorId());
-							WritesDAO.insert(writes);
-						}
-						
-						actionTarget = "editSuccess";
+						System.out.println("Deleting writes with Author ID: " + writes.getAuthorId());
+						WritesDAO.delete(writes);
 					}
 					
+					//Add new authors
+					for(int i = 0; i < newWrites.size(); i++){
+						writes = newWrites.get(i);
+						
+						System.out.println("Adding writes with Author ID: " + writes.getAuthorId());
+						WritesDAO.insert(writes);
+					}
 					
-
-				}catch(Exception e){
-					actionTarget = "editFailed";
+					actionTarget = "editSuccess";
 				}
+				
+				
+
+			}catch(Exception e){
+				actionTarget = "editFailed";
 			}
 		}
 		

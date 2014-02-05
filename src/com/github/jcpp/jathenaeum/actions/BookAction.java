@@ -4,8 +4,6 @@
 package com.github.jcpp.jathenaeum.actions;
 
 import java.util.ArrayList;
-import java.util.Arrays;
-
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
@@ -35,12 +33,49 @@ public class BookAction extends DispatchAction {
 		String actionTarget = null;
 
 		ArrayList<Author> authors = AuthorDAO.getAll();
+		ArrayList<Author> selectedAuthors = new ArrayList<Author>();
+		
+		HttpSession session = request.getSession();
+		ActionErrors actionErrors = (ActionErrors) session.getAttribute("errors");
+		BookForm bookForm = (BookForm) session.getAttribute("form");
+		
+		
+		if(actionErrors != null){
+			//Save the errors in this action
+			saveErrors(request, actionErrors);
+		}
+		
+		/* Add the already selected authors */
+		if(bookForm != null){
+			
+			String[] oldAuthors = bookForm.getAuthors();
+			
+			if(oldAuthors != null){
+				for(int i = 0; i < authors.size(); i++){
+					Author author = authors.get(i);
+					for(int j = 0; j < oldAuthors.length; j++){
+						if(author.getId() == Integer.parseInt(oldAuthors[j]) ){
+							selectedAuthors.add(author);
+						}
+					}
+				}
+			}
+		}
+		
+		
+		//Remove attributes from session
+		session.removeAttribute("errors");
+		session.removeAttribute("form");
+		
 		
 		if(authors.isEmpty()){
 			actionTarget = "noAuthors";
 		}
 		else{
+			//Set the request
+			request.setAttribute("addBookForm", bookForm);
 			request.setAttribute("authors", authors);
+			request.setAttribute("selectedAuthors", selectedAuthors);
 			actionTarget = "add";
 		}
 		

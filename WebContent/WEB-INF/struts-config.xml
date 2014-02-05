@@ -105,7 +105,9 @@
 	        validate="false"
 	        parameter="op">
 	        <!-- Add -->
-	        <forward name="add" path="page.confirmBookInsert"/>
+	        <forward name="addErrors" path="/book.do?op=add" redirect="true"/>
+	        <forward name="addSuccess" path="page.confirmBookInsert"/>
+	        <forward name="addFailed" path="page.failedBookInsert"/>
 	        
 	        <!-- Edit -->
 	        <forward name="editErrors" path="/book.do?op=edit" redirect="true"/>
