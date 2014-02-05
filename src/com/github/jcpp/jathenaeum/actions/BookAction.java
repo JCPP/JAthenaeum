@@ -149,6 +149,40 @@ public class BookAction extends DispatchAction {
 	}
 	
 	
+	public ActionForward delete(ActionMapping mapping, ActionForm form,
+			HttpServletRequest request, HttpServletResponse response)
+					throws Exception {
+		String actionTarget = null;
+		
+		String id = request.getParameter("id");
+		
+		if(request.getParameter("id") == null){
+			System.out.println("ID not present.");
+		}
+		
+		Book book = BookDAO.getById(Integer.parseInt(id));
+		
+		HttpSession session = request.getSession();
+		ActionErrors actionErrors = (ActionErrors) session.getAttribute("errors");
+		
+		
+		if(actionErrors != null){
+			//Save the errors in this action
+			saveErrors(request, actionErrors);
+		}
+		
+		//Remove attributes from session
+		session.removeAttribute("errors");
+		session.removeAttribute("form");
+		
+		//Set the request
+		request.setAttribute("book", book);
+		
+		actionTarget = "delete";
+		return mapping.findForward(actionTarget);
+	}
+	
+	
 	public ActionForward viewAll(ActionMapping mapping, ActionForm form,
 			HttpServletRequest request, HttpServletResponse response)
 					throws Exception {

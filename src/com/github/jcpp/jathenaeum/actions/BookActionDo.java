@@ -164,6 +164,63 @@ public class BookActionDo extends DispatchAction {
 	}
 	
 	
+	public ActionForward delete(ActionMapping mapping, ActionForm form,
+			HttpServletRequest request, HttpServletResponse response)
+					throws Exception {
+		String actionTarget = null;
+		
+		BookForm uf = (BookForm) form;
+		int id = Integer.parseInt(request.getParameter("id"));
+		
+		//ActionErrors actionErrors = uf.validate(mapping, request);
+		
+		//If there are some errors, redirect to the form page
+		/*
+		if(!actionErrors.isEmpty()){
+			actionTarget = "deleteErrors";
+			saveErrors(request, actionErrors); //Save the errors
+			
+			HttpSession session = request.getSession();
+    		session.setAttribute("errors", actionErrors);
+    		session.setAttribute("form", uf);
+			
+			ActionRedirect redirect = new ActionRedirect(mapping.findForward(actionTarget));
+			redirect.addParameter("id", Integer.toString(id));
+			return redirect;
+		}
+		*/
+		if(form != null){
+			try{
+				int bookId = (int) BookDAO.delete(id);
+				if(bookId != 0){
+					Writes writes;
+					ArrayList<Writes> oldWritesList = WritesDAO.getAllByBookId(bookId);
+					
+					
+					//Remove deleted authors
+					for(int i = 0; i < oldWritesList.size(); i++){
+						writes = oldWritesList.get(i);
+						
+						System.out.println("Deleting writes with Author ID: " + writes.getAuthorId());
+						WritesDAO.delete(writes);
+					}
+					
+					actionTarget = "deleteSuccess";
+				}
+				
+				
+
+			}catch(Exception e){
+				actionTarget = "deleteFailed";
+			}
+		}
+		
+		
+
+		return mapping.findForward(actionTarget);
+	}
+	
+	
 	/**
 	 * Get all the new authors (those to insert). 
 	 * @param authorsId the array with all the authors added from the user.

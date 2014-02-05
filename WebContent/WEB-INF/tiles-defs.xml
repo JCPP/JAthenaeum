@@ -157,6 +157,34 @@
 		<put name="body" value="/layout/book/confirmBookEdit.jsp" />
 	</definition>
 	
+	<!-- Failed edit -->
+	<definition name="page.failedBookEdit" extends="base.definition.bootstrap">
+		<put name="redirect" value="index.do" />
+		<put name="title" value="Failed Edit Book - JAthenaeum" />
+		<put name="body" value="/layout/book/failedBookEdit.jsp" />
+	</definition>
+	
+	<!-- Delete Book -->
+	<definition name="page.deleteBook" extends="base.definition.bootstrap">
+		<put name="title" value="Delete Book - JAthenaeum" />
+		<put name="body" value="/layout/book/deleteBook.jsp" />
+		<put name="style" value="css/signup.css" />
+	</definition>
+	
+	<!-- Confirm delete -->
+	<definition name="page.confirmBookDelete" extends="base.definition.bootstrap">
+		<put name="redirect" value="index.do" />
+		<put name="title" value="Confirm Delete Book - JAthenaeum" />
+		<put name="body" value="/layout/book/confirmBookDelete.jsp" />
+	</definition>
+	
+	<!-- Failed delete -->
+	<definition name="page.failedBookDelete" extends="base.definition.bootstrap">
+		<put name="redirect" value="index.do" />
+		<put name="title" value="Failed Delete Book - JAthenaeum" />
+		<put name="body" value="/layout/book/failedBookDelete.jsp" />
+	</definition>
+	
 	<!-- No authors -->
 	<definition name="page.noAuthors" extends="base.definition.bootstrap">
 		<put name="title" value="No Authors - JAthenaeum" />

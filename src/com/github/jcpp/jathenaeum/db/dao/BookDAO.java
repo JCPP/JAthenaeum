@@ -266,5 +266,48 @@ public class BookDAO {
 		}
 		return book.getId();
 	}
+	
+	
+	/**
+	 * Delete a book.
+	 * @param bookId the ID of the book to delete. 
+	 * @return Returns the id of the deleted book. 
+	 */
+	public static long delete(int bookId){
+		Connection con = db.getConnection();
+		PreparedStatement stmt = null;
+		long result = 0;
+
+		try {
+			con.setAutoCommit(false);
+			final String delete = "DELETE FROM Book WHERE BookID = ?";
+			stmt = con.prepareStatement(delete);
+			stmt.setInt(1, bookId);
+			
+			result = stmt.executeUpdate();
+			
+			con.commit();
+			
+
+		} catch (SQLException sqle) {
+			sqle.printStackTrace();
+			try {
+				con.rollback();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+		} finally {
+			try {
+				if (stmt != null) {
+					stmt.close();
+					stmt = null;
+				}
+				db.closeConnection(con);
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+		}
+		return bookId;
+	}
 
 }

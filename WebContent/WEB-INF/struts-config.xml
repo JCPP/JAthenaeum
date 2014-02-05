@@ -98,6 +98,11 @@
 	        <forward name="editErrors" path="/book.do?op=edit" redirect="true"/>
 	        <forward name="editSuccess" path="page.confirmBookEdit" />
 	        <forward name="editFailed" path="page.failedBookEdit" />
+	        
+	        <!-- Delete -->
+	        <forward name="deleteErrors" path="/book.do?op=delete" redirect="true"/>
+	        <forward name="deleteSuccess" path="page.confirmBookDelete" />
+	        <forward name="deleteFailed" path="page.failedBookDelete" />
         </action>
         
 	</action-mappings>

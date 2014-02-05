@@ -14,6 +14,7 @@
 				<p>${booksId.description}</p>
 				<p>
 					<a class="btn btn-default" href="book.do?op=edit&id=${booksId.id}" role="button">Edit &raquo;</a>
+					<a class="btn btn-danger" href="book.do?op=delete&id=${booksId.id}" role="button">Delete &raquo;</a>
 				</p>
 			</div>
 		</logic:iterate>
