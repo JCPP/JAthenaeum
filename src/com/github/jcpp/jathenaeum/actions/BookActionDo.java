@@ -123,20 +123,20 @@ public class BookActionDo extends DispatchAction {
 
 			try{
 				int bookId = (int) BookDAO.update(book);
-				if(bookId != 0){
+				if(id != 0){
 					String authors[] = uf.getAuthors();
 					Writes writes;
-					ArrayList<Writes> oldWritesList = WritesDAO.getAllByBookId(bookId);
+					ArrayList<Writes> oldWritesList = WritesDAO.getAllByBookId(id);
 					
-					ArrayList<Writes> newWrites = getNewAuthors(authors, oldWritesList, bookId);
-					ArrayList<Writes> oldWrites = getOldAuthors(authors, oldWritesList, bookId);
+					ArrayList<Writes> newWrites = getNewWrites(authors, oldWritesList, id);
+					ArrayList<Writes> oldWrites = getOldWrites(authors, oldWritesList, id);
 					
 					
 					//Remove deleted authors
 					for(int i = 0; i < oldWrites.size(); i++){
 						writes = oldWrites.get(i);
 						
-						System.out.println("Deleting writes with Author ID: " + writes.getAuthorId());
+						System.out.println("Deleting writes with ID: " + writes.getId());
 						WritesDAO.delete(writes);
 					}
 					
@@ -144,7 +144,7 @@ public class BookActionDo extends DispatchAction {
 					for(int i = 0; i < newWrites.size(); i++){
 						writes = newWrites.get(i);
 						
-						System.out.println("Adding writes with Author ID: " + writes.getAuthorId());
+						System.out.println("Adding writes with ID: " + writes.getId());
 						WritesDAO.insert(writes);
 					}
 					
@@ -201,7 +201,7 @@ public class BookActionDo extends DispatchAction {
 					for(int i = 0; i < oldWritesList.size(); i++){
 						writes = oldWritesList.get(i);
 						
-						System.out.println("Deleting writes with Author ID: " + writes.getAuthorId());
+						System.out.println("Deleting writes with ID: " + writes.getId());
 						WritesDAO.delete(writes);
 					}
 					
@@ -228,21 +228,24 @@ public class BookActionDo extends DispatchAction {
 	 * @param bookId the Book ID.
 	 * @return The list with all the authors to delete.
 	 */
-	private static ArrayList<Writes> getNewAuthors(String[] authorsId, ArrayList<Writes> oldWritesList, int bookId){
+	private static ArrayList<Writes> getNewWrites(String[] authorsId, ArrayList<Writes> oldWritesList, int bookId){
 		ArrayList<Writes> newWrites = new ArrayList<Writes>();
 		
 		for(int i = 0; i < authorsId.length; i++){
 			boolean isNew = true;
+			int writesId = 0;
 			
 			for(int j = 0; j < oldWritesList.size(); j++){
 				if(Integer.parseInt(authorsId[i]) == oldWritesList.get(j).getAuthorId()){
 					isNew = false;
 				}
+				writesId = oldWritesList.get(j).getId();
 			}
 			if(isNew){
 				Writes writes = new Writes();
 				writes.setAuthorId(Integer.parseInt(authorsId[i]));
 				writes.setBookId(bookId);
+				writes.setId(writesId);
 				newWrites.add(writes);
 			}
 			
@@ -259,23 +262,25 @@ public class BookActionDo extends DispatchAction {
 	 * @param bookId the Book ID.
 	 * @return The list with all the authors to delete.
 	 */
-	private static ArrayList<Writes> getOldAuthors(String[] authorsId, ArrayList<Writes> oldWritesList, int bookId){
+	private static ArrayList<Writes> getOldWrites(String[] authorsId, ArrayList<Writes> oldWritesList, int bookId){
 		ArrayList<Writes> oldWrites = new ArrayList<Writes>();
 		
 		
 		for(int i = 0; i < oldWritesList.size(); i++){
 			boolean isOld = true;
+			Writes tempWrite = oldWritesList.get(i);
 			
 			for(int j = 0; j < authorsId.length; j++){
-				if(Integer.parseInt(authorsId[j]) == oldWritesList.get(i).getAuthorId()){
+				if(Integer.parseInt(authorsId[j]) == tempWrite.getAuthorId()){
 					isOld = false;
 				}
 			}
 			
 			if(isOld){
 				Writes writes = new Writes();
-				writes.setAuthorId(oldWritesList.get(i).getAuthorId());
+				writes.setAuthorId(tempWrite.getAuthorId());
 				writes.setBookId(bookId);
+				writes.setId(tempWrite.getId());
 				oldWrites.add(writes);
 			}
 			

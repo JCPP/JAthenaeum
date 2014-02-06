@@ -233,7 +233,7 @@ public class WritesDAO {
 			con.setAutoCommit(false);
 			final String delete = "DELETE FROM Writes WHERE WritesID = ?";
 			stmt = con.prepareStatement(delete);
-			stmt.setLong(1, writes.getId());
+			stmt.setInt(1, writes.getId());
 			
 			int result = stmt.executeUpdate();
 			con.commit();
