@@ -26,19 +26,22 @@
 					</logic:iterate>
 				</h4>
 				<h5>${booksId.genre}</h5>
-				
-				<logic:notEmpty name="booksId" property="cover">
-					<a class="pull-left" href="${booksId.cover}">
-					    <img src="${booksId.cover}" class="img" style="min-height:50px; height:150px;" />
-				  	</a>
-				</logic:notEmpty>
-				
 				<h6>${booksId.isbnCode}</h6>
-				<p>${booksId.description}</p>
-				<p>
-					<a class="btn btn-default" href="book.do?op=edit&id=${booksId.id}" role="button">Edit &raquo;</a>
-					<a class="btn btn-danger" href="book.do?op=delete&id=${booksId.id}" role="button">Delete &raquo;</a>
-				</p>
+				
+				<div class="media">
+					<logic:notEmpty name="booksId" property="cover">
+						<a class="pull-left" href="${booksId.cover}" target="_blank">
+						    <img src="${booksId.cover}" class="img" style="min-height:50px; height:150px;" />
+					  	</a>
+					</logic:notEmpty>
+					<div class="media-body">
+						${booksId.description}
+						<p>
+							<a class="btn btn-default" href="book.do?op=edit&id=${booksId.id}" role="button">Edit &raquo;</a>
+							<a class="btn btn-danger" href="book.do?op=delete&id=${booksId.id}" role="button">Delete &raquo;</a>
+						</p>
+					</div>
+				</div>
 			</div>
 		</logic:iterate>
 	</div>
