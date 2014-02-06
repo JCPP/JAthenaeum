@@ -30,7 +30,10 @@ public class UserRegisterAction extends Action{
         	user.setPassword(uf.getPassword());
         	user.setName(uf.getName());
         	user.setSurname(uf.getSurname());
-        	user.setBornDate(Converter.fromStringToDate(uf.getBornDate()));
+        	
+        	if(Converter.checkStringToDate(uf.getBornDate())){
+        		user.setBornDate(Converter.fromStringToDate(uf.getBornDate()));
+			}
         	
         	
         	try{

@@ -48,7 +48,7 @@ public class AuthorDAO {
 				author.setName(resultSet.getString(2));
 				author.setSurname(resultSet.getString(3));
 				author.setPhoto(resultSet.getString(4));
-				//author.setBornDate(resultSet.getDate(5));
+				author.setBornDate(resultSet.getDate(5));
 				author.setBiography(resultSet.getString(6));
 				authors.add(author);
 			}
@@ -100,7 +100,7 @@ public class AuthorDAO {
 				author.setName(resultSet.getString(2));
 				author.setSurname(resultSet.getString(3));
 				author.setPhoto(resultSet.getString(4));
-				//autore.setBornDate(resultSet.getDate(5));
+				author.setBornDate(resultSet.getDate(5));
 				author.setBiography(resultSet.getString(6));
 			}
 			else{
@@ -152,7 +152,7 @@ public class AuthorDAO {
 				author.setName(resultSet.getString(2));
 				author.setSurname(resultSet.getString(3));
 				author.setPhoto(resultSet.getString(4));
-				//autore.setBornDate(resultSet.getDate(5));
+				author.setBornDate(resultSet.getDate(5));
 				author.setBiography(resultSet.getString(6));
 				authors.add(author);
 			}

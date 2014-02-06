@@ -61,7 +61,11 @@ public class AuthorActionDo extends DispatchAction {
 			author.setName(uf.getName());
 			author.setSurname(uf.getSurname());
 			author.setPhoto(uf.getPhoto());
-			author.setBornDate(Converter.fromStringToDate(uf.getBornDate()));
+			
+			if(Converter.checkStringToDate(uf.getBornDate())){
+				author.setBornDate(Converter.fromStringToDate(uf.getBornDate()));
+			}
+			
 			author.setBiography(uf.getBiography());
 
 
@@ -108,7 +112,11 @@ public class AuthorActionDo extends DispatchAction {
 			author.setName(uf.getName());
 			author.setSurname(uf.getSurname());
 			author.setPhoto(uf.getPhoto());
-			author.setBornDate(Converter.fromStringToDate(uf.getBornDate()));
+			
+			if(Converter.checkStringToDate(uf.getBornDate())){
+				author.setBornDate(Converter.fromStringToDate(uf.getBornDate()));
+			}
+			
 			author.setBiography(uf.getBiography());
 
 

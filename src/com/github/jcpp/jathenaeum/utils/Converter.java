@@ -15,11 +15,26 @@ import java.util.Date;
 public class Converter {
 	
 	/**
+	 * Check if the String is a valid Date.
+	 * @param dateToCheck the String date to check.
+	 * @return True if the String is a valid Date, false otherwise.
+	 */
+	public static boolean checkStringToDate(String dateToCheck){
+		try {
+			fromStringToDate(dateToCheck);
+		} catch (ParseException e) {
+			return false;
+		}
+		return true;
+	}
+	
+	/**
 	 * Converts string to date. It uses the <b>dd/MM/yyyy</b> format.
 	 * @param dateToConvert the string date to convert.
 	 * @return The Date object.
+	 * @throws ParseException 
 	 */
-	public static Date fromStringToDate(String dateToConvert){
+	public static Date fromStringToDate(String dateToConvert) throws ParseException{
 		return fromStringToDate(dateToConvert, "dd/MM/yyyy");
 	}
 	
@@ -28,17 +43,13 @@ public class Converter {
 	 * @param dateToConvert the string date to convert.
 	 * @param dateFormat the date format.
 	 * @return The date object.
+	 * @throws ParseException 
 	 */
-	public static Date fromStringToDate(String dateToConvert, String dateFormat){
+	public static Date fromStringToDate(String dateToConvert, String dateFormat) throws ParseException{
 		Date date = null;
 		SimpleDateFormat sdf = new SimpleDateFormat(dateFormat);
 		sdf.setLenient(false);
-		try {
-			date = sdf.parse(dateToConvert);
-		} catch (ParseException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
+		date = sdf.parse(dateToConvert);
 		return date;
 	}
 	

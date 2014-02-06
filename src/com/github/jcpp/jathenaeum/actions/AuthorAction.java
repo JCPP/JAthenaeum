@@ -4,6 +4,7 @@
 package com.github.jcpp.jathenaeum.actions;
 
 import java.util.ArrayList;
+import java.util.Calendar;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -39,17 +40,10 @@ public class AuthorAction extends DispatchAction {
 		ActionErrors actionErrors = (ActionErrors) session.getAttribute("errors");
 		AuthorForm authorForm = (AuthorForm) session.getAttribute("form");
 		
-		
 		if(actionErrors != null){
 			//Save the errors in this action
 			saveErrors(request, actionErrors);
 		}
-		
-		/* Add the already selected authors */
-		if(authorForm != null){
-			
-		}
-		
 		
 		//Remove attributes from session
 		session.removeAttribute("errors");
@@ -88,13 +82,15 @@ public class AuthorAction extends DispatchAction {
 		
 		if(authorForm != null){
 			
-			System.out.println("BornDate: " + authorForm.getBornDate());
-			
 			//Overwrite the attributes
 			author.setName(authorForm.getName());
 			author.setSurname(authorForm.getSurname());
 			author.setPhoto(authorForm.getPhoto());
-			author.setBornDate(Converter.fromStringToDate(authorForm.getBornDate()));
+			
+			if(Converter.checkStringToDate(authorForm.getBornDate())){
+				author.setBornDate(Converter.fromStringToDate(authorForm.getBornDate()));
+			}
+			
 			author.setBiography(authorForm.getBiography());
 			
 		}
