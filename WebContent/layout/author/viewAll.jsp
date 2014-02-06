@@ -12,30 +12,17 @@
 	<div class="row">
 		<logic:iterate name="authors" id="authorsId">
 			<div class="col-md-4">
-				<h2>${authorsId.title}</h2>
-				<h4>
-					<bean:size id="length" name="authorsId" property="authors"/>
-					<% int counter = 0; %>
-					<logic:iterate name="booksId" property="authors" id="authors" >
-						${authors.name} ${authors.surname}<%
-							counter++;
-							if(counter < length){
-								out.write(", ");
-							}
-						%>
-					</logic:iterate>
-				</h4>
-				<h5>${authorsId.genre}</h5>
-				<h6>${authorsId.isbnCode}</h6>
+				<h2>${authorsId.name} ${authorsId.surname}</h2>
+				<h5>${authorsId.bornDate}</h5>
 				
 				<div class="media">
-					<logic:notEmpty name="authorsId" property="cover">
-						<a class="pull-left" href="${authorsId.cover}" target="_blank">
-						    <img src="${authorsId.cover}" class="img" style="min-height:50px; height:150px;" />
+					<logic:notEmpty name="authorsId" property="photo">
+						<a class="pull-left" href="${authorsId.photo}" target="_blank">
+						    <img src="${authorsId.photo}" class="img" style="min-height:50px; height:150px;" />
 					  	</a>
 					</logic:notEmpty>
 					<div class="media-body">
-						${authorsId.description}
+						${authorsId.biography}
 						<p>
 							<a class="btn btn-default" href="author.do?op=edit&id=${authorsId.id}" role="button">Edit &raquo;</a>
 							<a class="btn btn-danger" href="author.do?op=delete&id=${authorsId.id}" role="button">Delete &raquo;</a>
