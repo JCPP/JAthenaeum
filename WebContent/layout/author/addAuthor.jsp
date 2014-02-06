@@ -2,7 +2,7 @@
 <%@ taglib uri="http://struts.apache.org/tags-bean" prefix="bean" %>
 <%@ taglib uri="http://struts.apache.org/tags-html" prefix="html" %>
 <html:errors/>
-<form class="form-signup" role="form" action="doAddAuthor.do" method="post" name="addAuthorForm">
+<form class="form-signup" role="form" action="doAuthor.do?op=add" method="post" name="addAuthorForm">
 	<h2 class="form-signup-heading">Add an Author</h2>
 	<input type="text" name="name" class="form-control" placeholder="Name" value="${addAuthorForm.name}" required autofocus>
 	<input type="text" name="surname" class="form-control" placeholder="Surname" value="${addAuthorForm.surname}" required>

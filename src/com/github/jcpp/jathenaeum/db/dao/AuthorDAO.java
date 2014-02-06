@@ -7,6 +7,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Statement;
 import java.sql.Types;
 import java.util.ArrayList;
 
@@ -177,16 +178,21 @@ public class AuthorDAO {
 		return authors;
 	}
 
-	public static boolean insert(Author author) throws RegistrationException{
+	/**
+	 * Insert a new author.
+	 * @param author the author to insert.
+	 * @return Returns the id of the inserted author. 
+	 */
+	public static long insert(Author author){
 		Connection con = db.getConnection();
 		PreparedStatement stmt = null;
-		boolean workIt = false;
+		long result = 0;
 
 		try {
 			con.setAutoCommit(false);
-			String insert = "INSERT INTO Author (AuthorName, AuthorSurname, AuthorPhoto, AuthorBornDate, AuthorBiography)"
+			final String insert = "INSERT INTO Author (AuthorName, AuthorSurname, AuthorPhoto, AuthorBornDate, AuthorBiography)"
 					+ " VALUES (?, ?, ?, ?, ?)";
-			stmt = con.prepareStatement(insert);
+			stmt = con.prepareStatement(insert, Statement.RETURN_GENERATED_KEYS);
 			stmt.setString(1, author.getName());
 			stmt.setString(2, author.getSurname());
 			stmt.setString(3, author.getPhoto());
@@ -200,16 +206,16 @@ public class AuthorDAO {
 			
 			stmt.setString(5, author.getBiography());
 			
-			int result = stmt.executeUpdate();
-			con.commit();
 			
-			if(result == 1 || result== 0){
-				
-				workIt = true;
-			}
-			else{
-				throw new RegistrationException();
-			}
+			result = stmt.executeUpdate();
+			
+			ResultSet generatedKeys = stmt.getGeneratedKeys();
+			
+			if (generatedKeys.next()) {
+	            result = generatedKeys.getLong(1);
+	        }
+			
+			con.commit();
 
 		} catch (SQLException sqle) {
 			sqle.printStackTrace();
@@ -229,7 +235,7 @@ public class AuthorDAO {
 				e.printStackTrace();
 			}
 		}
-		return workIt;
+		return result;
 	}
 
 }

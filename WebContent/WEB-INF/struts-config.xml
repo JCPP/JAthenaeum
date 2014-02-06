@@ -11,7 +11,7 @@
 		<form-bean name="signinform" type="com.github.jcpp.jathenaeum.beans.SigninForm"/>
 		
 		<!-- Author -->
-		<form-bean name="addAuthorForm" type="com.github.jcpp.jathenaeum.beans.AddAuthorForm"/>
+		<form-bean name="authorForm" type="com.github.jcpp.jathenaeum.beans.AuthorForm"/>
 		
 		<!-- Book -->
 		<form-bean name="bookForm" type="com.github.jcpp.jathenaeum.beans.BookForm"/>
@@ -59,17 +59,38 @@
         
         
         <!-- Author -->
-        <action path="/addAuthor" type="org.apache.struts.actions.ForwardAction" parameter="page.addAuthor" />
-      	<action
-	        path="/doAddAuthor"
-	        type="com.github.jcpp.jathenaeum.actions.AddAuthorAction"
-	        name="addAuthorForm"
-	        scope="request"
-	        validate="true"
-	        input="/addAuthor.do">
-	        <forward name="success" path="page.confirmAuthorInsert"/>
-	        <forward name="failed" path="page.failedAuthorInsert"/>
+        <action path="/author" type="com.github.jcpp.jathenaeum.actions.AuthorAction" parameter="op">
+        	<forward name="add" path="page.addAuthor"/>
+        	<forward name="edit" path="page.editAuthor"/>
+        	<forward name="delete" path="page.deleteAuthor"/>
+        	<forward name="viewAll" path="page.viewAllAuthors"/>
+        	<forward name="noAuthors" path="page.noAuthors" />
         </action>
+        
+        <!-- Author Operations -->
+        <action
+	        path="/doAuthor"
+	        type="com.github.jcpp.jathenaeum.actions.AuthorActionDo"
+	        name="authorForm"
+	        scope="request"
+	        validate="false"
+	        parameter="op">
+	        <!-- Add -->
+	        <forward name="addErrors" path="/author.do?op=add" redirect="true"/>
+	        <forward name="addSuccess" path="page.confirmAuthorInsert"/>
+	        <forward name="addFailed" path="page.failedAuthorInsert"/>
+	        
+	        <!-- Edit -->
+	        <forward name="editErrors" path="/book.do?op=edit" redirect="true"/>
+	        <forward name="editSuccess" path="page.confirmBookEdit" />
+	        <forward name="editFailed" path="page.failedBookEdit" />
+	        
+	        <!-- Delete -->
+	        <forward name="deleteErrors" path="/book.do?op=delete" redirect="true"/>
+	        <forward name="deleteSuccess" path="page.confirmBookDelete" />
+	        <forward name="deleteFailed" path="page.failedBookDelete" />
+        </action>
+        
         
         
         <!-- Book -->

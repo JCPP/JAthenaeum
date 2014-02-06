@@ -27,11 +27,11 @@ public class IndexAction extends ForwardAction {
 	public ActionForward execute(ActionMapping mapping, ActionForm form,
 			HttpServletRequest request, HttpServletResponse response)
 					throws Exception {
-		String action_target = null;
+		String actionTarget = null;
 
 		ArrayList<Book> books = BookDAO.getAll();
 		request.setAttribute("books", books);
-		action_target = "success";
+		actionTarget = "success";
 		//return mapping.findForward(action_target);
 		return super.execute(mapping, form, request, response);
 	}

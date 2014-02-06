@@ -28,7 +28,7 @@
 				<li class="dropdown"><a href="#" class="dropdown-toggle"
 					data-toggle="dropdown">Author <b class="caret"></b></a>
 					<ul class="dropdown-menu">
-						<li><a href="addAuthor.do">Add</a></li>
+						<li><a href="author.do?op=add">Add</a></li>
 					</ul></li>
 			</ul>
 			<div class="nav navbar-nav navbar-right">
