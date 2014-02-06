@@ -3,6 +3,8 @@
  */
 package com.github.jcpp.jathenaeum;
 
+import java.util.ArrayList;
+
 /**
  * Book class.
  * @author <a href="https://github.com/DavidePastore">DavidePastore</a>
@@ -15,6 +17,7 @@ public class Book {
 	private String genre;
 	private String isbnCode;
 	private String description;
+	private ArrayList<Author> authors;
 	
 	
 	/**
@@ -88,6 +91,18 @@ public class Book {
 	 */
 	public void setDescription(String description) {
 		this.description = description;
+	}
+	/**
+	 * @return the authors
+	 */
+	public ArrayList<Author> getAuthors() {
+		return authors;
+	}
+	/**
+	 * @param authors the authors to set
+	 */
+	public void setAuthors(ArrayList<Author> authors) {
+		this.authors = authors;
 	}
 	
 }

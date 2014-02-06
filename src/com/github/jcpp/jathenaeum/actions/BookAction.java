@@ -188,7 +188,7 @@ public class BookAction extends DispatchAction {
 					throws Exception {
 		String actionTarget = null;
 
-		ArrayList<Book> books = BookDAO.getAll();
+		ArrayList<Book> books = BookDAO.getAllWithAuthors();
 		request.setAttribute("books", books);
 		actionTarget = "viewAll";
 		return mapping.findForward(actionTarget);
