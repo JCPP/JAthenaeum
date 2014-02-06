@@ -12,6 +12,7 @@ import java.sql.Types;
 import java.util.ArrayList;
 
 import com.github.jcpp.jathenaeum.Author;
+import com.github.jcpp.jathenaeum.Book;
 import com.github.jcpp.jathenaeum.db.Database;
 import com.github.jcpp.jathenaeum.exceptions.AuthorNotFoundException;
 import com.github.jcpp.jathenaeum.exceptions.RegistrationException;
@@ -236,6 +237,61 @@ public class AuthorDAO {
 			}
 		}
 		return result;
+	}
+	
+	/**
+	 * Update an author.
+	 * @param author the author to update. 
+	 * @return Returns the id of the updated author. 
+	 */
+	public static long update(Author author){
+		Connection con = db.getConnection();
+		PreparedStatement stmt = null;
+		long result = 0;
+
+		try {
+			con.setAutoCommit(false);
+			String insert = "UPDATE Author SET AuthorName = ?, AuthorSurname = ?, AuthorPhoto = ?, AuthorBornDate = ?, AuthorBiography = ? "
+					+ " WHERE AuthorID = ?";
+			stmt = con.prepareStatement(insert, Statement.RETURN_GENERATED_KEYS);
+			stmt.setString(1, author.getName());
+			stmt.setString(2, author.getSurname());
+			stmt.setString(3, author.getPhoto());
+			
+			if(author.getBornDate() == null){
+				stmt.setNull(4, Types.DATE);
+			}
+			else{
+				stmt.setDate(4, Converter.fromUtilDateToSqlDate(author.getBornDate()));
+			}
+			
+			stmt.setString(5, author.getBiography());
+			stmt.setInt(6, author.getId());
+			
+			result = stmt.executeUpdate();
+			
+			con.commit();
+			
+
+		} catch (SQLException sqle) {
+			sqle.printStackTrace();
+			try {
+				con.rollback();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+		} finally {
+			try {
+				if (stmt != null) {
+					stmt.close();
+					stmt = null;
+				}
+				db.closeConnection(con);
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+		}
+		return author.getId();
 	}
 
 }

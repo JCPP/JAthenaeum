@@ -120,6 +120,33 @@
 		<put name="body" value="/layout/author/failedAuthorInsert.jsp" />
 	</definition>
 	
+	<!-- Edit Author -->
+	<definition name="page.editAuthor" extends="base.definition.bootstrap">
+		<put name="title" value="Edit Author - JAthenaeum" />
+		<put name="body" value="/layout/author/editAuthor.jsp" />
+		<put name="style" value="css/signup.css" />
+	</definition>
+	
+	<!-- Confirm edit -->
+	<definition name="page.confirmAuthorEdit" extends="base.definition.bootstrap">
+		<put name="redirect" value="index.do" />
+		<put name="title" value="Confirm Edit Author - JAthenaeum" />
+		<put name="body" value="/layout/author/confirmAuthorEdit.jsp" />
+	</definition>
+	
+	<!-- Failed edit -->
+	<definition name="page.failedAuthorEdit" extends="base.definition.bootstrap">
+		<put name="redirect" value="index.do" />
+		<put name="title" value="Failed Edit Author - JAthenaeum" />
+		<put name="body" value="/layout/author/failedAuthorEdit.jsp" />
+	</definition>
+	
+	<!-- View All -->
+	<definition name="page.viewAllAuthors" extends="base.definition.bootstrap">
+		<put name="title" value="Authors - JAthenaeum" />
+		<put name="body" value="/layout/author/viewAll.jsp" />
+	</definition>
+	
 	
 	
 	<!-- Add Book -->
@@ -193,7 +220,7 @@
 	
 	<!-- View All -->
 	<definition name="page.viewAllBooks" extends="base.definition.bootstrap">
-		<put name="title" value="Books" />
+		<put name="title" value="Books - JAthenaeum" />
 		<put name="body" value="/layout/book/viewAll.jsp" />
 	</definition>
 	

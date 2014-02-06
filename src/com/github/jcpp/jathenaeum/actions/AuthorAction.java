@@ -74,13 +74,11 @@ public class AuthorAction extends DispatchAction {
 			System.out.println("ID not present.");
 		}
 		
-		Book book = BookDAO.getById(Integer.parseInt(id));
-		ArrayList<Author> authors = AuthorDAO.getAll();
-		ArrayList<Author> bookAuthors = AuthorDAO.getAllByLibroId(book.getId());
+		Author author = AuthorDAO.getById(Integer.parseInt(id));
 		
 		HttpSession session = request.getSession();
 		ActionErrors actionErrors = (ActionErrors) session.getAttribute("errors");
-		BookForm bookForm = (BookForm) session.getAttribute("form");
+		AuthorForm authorForm = (AuthorForm) session.getAttribute("form");
 		
 		
 		if(actionErrors != null){
@@ -88,31 +86,17 @@ public class AuthorAction extends DispatchAction {
 			saveErrors(request, actionErrors);
 		}
 		
-		if(bookForm != null){
+		if(authorForm != null){
+			
+			System.out.println("BornDate: " + authorForm.getBornDate());
 			
 			//Overwrite the attributes
-			book.setCover(bookForm.getCover());
-			book.setDescription(bookForm.getDescription());
-			book.setGenre(bookForm.getGenre());
-			book.setIsbnCode(bookForm.getIsbn());
-			book.setTitle(bookForm.getTitle());
+			author.setName(authorForm.getName());
+			author.setSurname(authorForm.getSurname());
+			author.setPhoto(authorForm.getPhoto());
+			author.setBornDate(Converter.fromStringToDate(authorForm.getBornDate()));
+			author.setBiography(authorForm.getBiography());
 			
-			String[] oldAuthors = bookForm.getAuthors();
-			
-			ArrayList<Author> tempBookAuthors = new ArrayList<Author>();
-			
-			if(oldAuthors != null){
-				for(int i = 0; i < bookAuthors.size(); i++){
-					Author author = bookAuthors.get(i);
-					for(int j = 0; j < oldAuthors.length; j++){
-						if(author.getId() == Integer.parseInt(oldAuthors[j]) ){
-							tempBookAuthors.add(author);
-						}
-					}
-				}
-			}
-			
-			bookAuthors = tempBookAuthors;
 		}
 		
 		
@@ -121,9 +105,8 @@ public class AuthorAction extends DispatchAction {
 		session.removeAttribute("form");
 		
 		//Set the request
-		request.setAttribute("book", book);
-		request.setAttribute("authors", authors);
-		request.setAttribute("bookAuthors", bookAuthors);
+		request.setAttribute("id", id);
+		request.setAttribute("editAuthorForm", author);
 		
 		actionTarget = "edit";
 		return mapping.findForward(actionTarget);
