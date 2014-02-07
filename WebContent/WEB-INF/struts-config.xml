@@ -99,6 +99,7 @@
         	<forward name="edit" path="page.editBook"/>
         	<forward name="delete" path="page.deleteBook"/>
         	<forward name="viewAll" path="page.viewAllBooks"/>
+        	<forward name="search" path="page.searchBooks"/>
         	<forward name="noAuthors" path="page.noAuthors" />
         </action>
         
@@ -124,6 +125,9 @@
 	        <forward name="deleteErrors" path="/book.do?op=delete" redirect="true"/>
 	        <forward name="deleteSuccess" path="page.confirmBookDelete" />
 	        <forward name="deleteFailed" path="page.failedBookDelete" />
+	        
+	        <!-- Search -->
+	        <forward name="search" path="/book.do?op=search" redirect="true"/>
         </action>
         
 	</action-mappings>

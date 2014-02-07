@@ -315,7 +315,7 @@ public class AuthorDAO {
 			
 			con.commit();
 			
-			BookDAO.deleteAllOrphansByAuthorId(authorId);
+			BookDAO.deleteAllOrphansByAuthorId();
 			
 
 		} catch (SQLException sqle) {

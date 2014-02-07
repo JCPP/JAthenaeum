@@ -62,5 +62,24 @@ public class Converter {
 	public static java.sql.Date fromUtilDateToSqlDate(Date utilDate){
 	    return new java.sql.Date(utilDate.getTime());
 	}
+	
+	
+	/**
+	 * Converts a String array to a Integer array.
+	 * @param stringArray the String array to convert.
+	 * @return The converted Integer array.
+	 */
+	public static Integer[] fromStringArrayToIntegerArray(String[] stringArray){
+		if(stringArray == null){
+			return null;
+		}
+		Integer[] integerArray = new Integer[stringArray.length];
+		
+		for(int i = 0; i < stringArray.length; i++){
+			integerArray[i] = Integer.parseInt(stringArray[i]);
+		}
+		
+		return integerArray;
+	}
 
 }

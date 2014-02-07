@@ -193,5 +193,46 @@ public class BookAction extends DispatchAction {
 		actionTarget = "viewAll";
 		return mapping.findForward(actionTarget);
 	}
+	
+	
+	public ActionForward search(ActionMapping mapping, ActionForm form,
+			HttpServletRequest request, HttpServletResponse response)
+					throws Exception {
+		String actionTarget = null;
+		
+		HttpSession session = request.getSession();
+		ArrayList<Book> books = (ArrayList<Book>) session.getAttribute("books");
+		BookForm bookForm = (BookForm) session.getAttribute("form");
+		
+		Book book = new Book();
+		
+		if(bookForm != null){
+			
+			//Overwrite the attributes
+			book.setCover(bookForm.getCover());
+			book.setDescription(bookForm.getDescription());
+			book.setGenre(bookForm.getGenre());
+			book.setIsbnCode(bookForm.getIsbn());
+			book.setTitle(bookForm.getTitle());
+		}
+			
+		
+		if(session.getAttribute("books") == null){
+			books = BookDAO.getAllWithAuthors();
+		}
+		else{
+			request.setAttribute("search", true);
+			request.setAttribute("book", book);
+		}
+		
+		//Remove attributes from session
+		session.removeAttribute("books");
+		session.removeAttribute("form");
+		
+		request.setAttribute("books", books);
+		request.setAttribute("authors", AuthorDAO.getAll());
+		actionTarget = "search";
+		return mapping.findForward(actionTarget);
+	}
 
 }

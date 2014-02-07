@@ -120,7 +120,6 @@ public class BookActionDo extends DispatchAction {
 			book.setIsbnCode(uf.getIsbn());
 			book.setDescription(uf.getDescription());
 
-
 			try{
 				int bookId = (int) BookDAO.update(book);
 				if(id != 0){
@@ -219,6 +218,60 @@ public class BookActionDo extends DispatchAction {
 
 		return mapping.findForward(actionTarget);
 	}
+	
+	
+	
+	public ActionForward search(ActionMapping mapping, ActionForm form,
+			HttpServletRequest request, HttpServletResponse response)
+					throws Exception {
+		String actionTarget = null;
+		
+		BookForm uf = (BookForm) form;
+		
+		//ActionErrors actionErrors = uf.validate(mapping, request);
+		
+		//If there are some errors, redirect to the form page
+		/*
+		if(!actionErrors.isEmpty()){
+			actionTarget = "deleteErrors";
+			saveErrors(request, actionErrors); //Save the errors
+			
+			HttpSession session = request.getSession();
+    		session.setAttribute("errors", actionErrors);
+    		session.setAttribute("form", uf);
+			
+			ActionRedirect redirect = new ActionRedirect(mapping.findForward(actionTarget));
+			redirect.addParameter("id", Integer.toString(id));
+			return redirect;
+		}
+		*/
+		
+		ArrayList<Book> books = new ArrayList<Book>();
+		
+		if(form != null){
+			try{
+				books = BookDAO.searchWithAuthors(uf);
+				
+				actionTarget = "search";
+				
+				HttpSession session = request.getSession();
+	    		session.setAttribute("books", books);
+	    		session.setAttribute("form", uf);
+				
+				ActionRedirect redirect = new ActionRedirect(mapping.findForward(actionTarget));
+				return redirect;
+
+			}catch(Exception e){
+				e.printStackTrace();
+				actionTarget = "searchFailed";
+			}
+		}
+		
+		
+
+		return mapping.findForward(actionTarget);
+	}
+	
 	
 	
 	/**
