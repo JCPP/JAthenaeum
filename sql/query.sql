@@ -39,7 +39,7 @@ CREATE TABLE Book (
 
 /* Create Loan table */
 CREATE TABLE Loan (
-	IDLoan integer AUTO_INCREMENT PRIMARY KEY,
+	LoanID integer AUTO_INCREMENT PRIMARY KEY,
 	CustomerCardNumber integer NOT NULL,
 	BookID integer NOT NULL,
 	LoanStartDate date NOT NULL,
