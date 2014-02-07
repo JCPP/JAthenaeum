@@ -12,6 +12,7 @@ import java.sql.Types;
 import java.util.ArrayList;
 
 import com.github.jcpp.jathenaeum.Book;
+import com.github.jcpp.jathenaeum.Writes;
 import com.github.jcpp.jathenaeum.db.Database;
 import com.github.jcpp.jathenaeum.exceptions.BookNotFoundException;
 
@@ -360,6 +361,45 @@ public class BookDAO {
 			}
 		}
 		return bookId;
+	}
+	
+	
+	public static void deleteAllOrphansByAuthorId(int authorId){
+		Connection con = db.getConnection();
+		PreparedStatement stmt = null;
+		long result = 0;
+
+		try {
+			con.setAutoCommit(false);
+			
+			final String select = "SELECT B.BookID FROM Book B WHERE NOT EXISTS (SELECT * FROM Writes W WHERE W.BookID = B.BookID)";
+			stmt = con.prepareStatement(select);
+			ResultSet resultSet = stmt.executeQuery();
+			con.commit();
+			
+			//Delete all the orphans books
+			if(resultSet.next()){
+				BookDAO.delete(resultSet.getInt(1));
+			}
+
+		} catch (SQLException sqle) {
+			sqle.printStackTrace();
+			try {
+				con.rollback();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+		} finally {
+			try {
+				if (stmt != null) {
+					stmt.close();
+					stmt = null;
+				}
+				db.closeConnection(con);
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+		}
 	}
 
 }

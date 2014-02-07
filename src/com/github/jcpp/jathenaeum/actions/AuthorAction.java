@@ -120,7 +120,7 @@ public class AuthorAction extends DispatchAction {
 			System.out.println("ID not present.");
 		}
 		
-		Book book = BookDAO.getById(Integer.parseInt(id));
+		Author author = AuthorDAO.getById(Integer.parseInt(id));
 		
 		HttpSession session = request.getSession();
 		ActionErrors actionErrors = (ActionErrors) session.getAttribute("errors");
@@ -136,7 +136,7 @@ public class AuthorAction extends DispatchAction {
 		session.removeAttribute("form");
 		
 		//Set the request
-		request.setAttribute("book", book);
+		request.setAttribute("author", author);
 		
 		actionTarget = "delete";
 		return mapping.findForward(actionTarget);

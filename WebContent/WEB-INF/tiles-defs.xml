@@ -141,6 +141,27 @@
 		<put name="body" value="/layout/author/failedAuthorEdit.jsp" />
 	</definition>
 	
+	<!-- Delete Author -->
+	<definition name="page.deleteAuthor" extends="base.definition.bootstrap">
+		<put name="title" value="Delete Author - JAthenaeum" />
+		<put name="body" value="/layout/author/deleteAuthor.jsp" />
+		<put name="style" value="css/signup.css" />
+	</definition>
+	
+	<!-- Confirm delete -->
+	<definition name="page.confirmAuthorDelete" extends="base.definition.bootstrap">
+		<put name="redirect" value="index.do" />
+		<put name="title" value="Confirm Delete Author - JAthenaeum" />
+		<put name="body" value="/layout/author/confirmAuthorDelete.jsp" />
+	</definition>
+	
+	<!-- Failed delete -->
+	<definition name="page.failedAuthorDelete" extends="base.definition.bootstrap">
+		<put name="redirect" value="index.do" />
+		<put name="title" value="Failed Delete Author - JAthenaeum" />
+		<put name="body" value="/layout/author/failedAuthorDelete.jsp" />
+	</definition>
+	
 	<!-- View All -->
 	<definition name="page.viewAllAuthors" extends="base.definition.bootstrap">
 		<put name="title" value="Authors - JAthenaeum" />

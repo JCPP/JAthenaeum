@@ -3,8 +3,6 @@
  */
 package com.github.jcpp.jathenaeum.actions;
 
-import java.util.ArrayList;
-
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
@@ -17,13 +15,8 @@ import org.apache.struts.action.ActionRedirect;
 import org.apache.struts.actions.DispatchAction;
 
 import com.github.jcpp.jathenaeum.Author;
-import com.github.jcpp.jathenaeum.Book;
-import com.github.jcpp.jathenaeum.Writes;
 import com.github.jcpp.jathenaeum.beans.AuthorForm;
-import com.github.jcpp.jathenaeum.beans.BookForm;
 import com.github.jcpp.jathenaeum.db.dao.AuthorDAO;
-import com.github.jcpp.jathenaeum.db.dao.BookDAO;
-import com.github.jcpp.jathenaeum.db.dao.WritesDAO;
 import com.github.jcpp.jathenaeum.utils.Converter;
 
 /**
@@ -128,8 +121,28 @@ public class AuthorActionDo extends DispatchAction {
 				actionTarget = "editFailed";
 			}
 		}
+
+		return mapping.findForward(actionTarget);
+	}
+	
+	
+	public ActionForward delete(ActionMapping mapping, ActionForm form,
+			HttpServletRequest request, HttpServletResponse response)
+					throws Exception {
+		String actionTarget = null;
 		
-		
+		AuthorForm uf = (AuthorForm) form;
+		int id = Integer.parseInt(request.getParameter("id"));
+
+		if(form != null){
+			try{
+				AuthorDAO.delete(id);
+				actionTarget = "deleteSuccess";
+
+			}catch(Exception e){
+				actionTarget = "deleteFailed";
+			}
+		}
 
 		return mapping.findForward(actionTarget);
 	}

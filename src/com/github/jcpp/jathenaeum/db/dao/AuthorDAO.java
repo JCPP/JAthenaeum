@@ -293,5 +293,50 @@ public class AuthorDAO {
 		}
 		return author.getId();
 	}
+	
+	
+	/**
+	 * Delete an author.
+	 * @param authorId the ID of the author to delete. 
+	 * @return Returns the id of the deleted author. 
+	 */
+	public static long delete(int authorId){
+		Connection con = db.getConnection();
+		PreparedStatement stmt = null;
+		long result = 0;
+
+		try {
+			con.setAutoCommit(false);
+			final String delete = "DELETE FROM Author WHERE AuthorID = ?";
+			stmt = con.prepareStatement(delete);
+			stmt.setInt(1, authorId);
+			
+			result = stmt.executeUpdate();
+			
+			con.commit();
+			
+			BookDAO.deleteAllOrphansByAuthorId(authorId);
+			
+
+		} catch (SQLException sqle) {
+			sqle.printStackTrace();
+			try {
+				con.rollback();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+		} finally {
+			try {
+				if (stmt != null) {
+					stmt.close();
+					stmt = null;
+				}
+				db.closeConnection(con);
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+		}
+		return authorId;
+	}
 
 }
