@@ -168,6 +168,12 @@
 		<put name="body" value="/layout/author/viewAll.jsp" />
 	</definition>
 	
+	<!-- Search -->
+	<definition name="page.searchAuthors" extends="base.definition.bootstrap">
+		<put name="title" value="Search Authors - JAthenaeum" />
+		<put name="body" value="/layout/author/search.jsp" />
+	</definition>
+	
 	
 	
 	<!-- Add Book -->

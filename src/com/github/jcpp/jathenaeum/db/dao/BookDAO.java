@@ -410,7 +410,7 @@ public class BookDAO {
 	
 	
 	/**
-	 * Search all the book that has the form fields.
+	 * Search all the books that has the form fields.
 	 * @param bookForm the form with all the fields.
 	 * @return Returns an ArrayList<Book> with all the found books.
 	 */

@@ -9,10 +9,13 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.sql.Types;
+import java.text.ParseException;
 import java.util.ArrayList;
 
 import com.github.jcpp.jathenaeum.Author;
 import com.github.jcpp.jathenaeum.Book;
+import com.github.jcpp.jathenaeum.beans.AuthorForm;
+import com.github.jcpp.jathenaeum.beans.BookForm;
 import com.github.jcpp.jathenaeum.db.Database;
 import com.github.jcpp.jathenaeum.exceptions.AuthorNotFoundException;
 import com.github.jcpp.jathenaeum.exceptions.RegistrationException;
@@ -337,6 +340,87 @@ public class AuthorDAO {
 			}
 		}
 		return authorId;
+	}
+	
+	
+	/**
+	 * Search all the authors that has the form fields.
+	 * @param authorForm the form with all the fields.
+	 * @return Returns an ArrayList<Author> with all the found authors.
+	 */
+	public static ArrayList<Author> search(AuthorForm authorForm){
+		Connection con = db.getConnection();
+		PreparedStatement stmt = null;
+		ArrayList<Author> authors = new ArrayList<Author>();
+
+		try {
+			con.setAutoCommit(false);
+			
+			final String select = "SELECT A.* FROM Author A WHERE (A.AuthorName = ? OR ? = '') AND (A.AuthorSurname = ? OR ? = '') AND (A.AuthorPhoto = ? OR ? = '') AND (A.AuthorBornDate = ? OR ? IS NULL)";
+			
+			stmt = con.prepareStatement(select);
+			
+			//Name
+			stmt.setString(1, authorForm.getName());
+			stmt.setString(2, authorForm.getName());
+			
+			//Surname
+			stmt.setString(3, authorForm.getSurname());
+			stmt.setString(4, authorForm.getSurname());
+			
+			//Photo
+			stmt.setString(5, authorForm.getPhoto());
+			stmt.setString(6, authorForm.getPhoto());
+			
+			//Born Date
+			try {
+				stmt.setDate(7, Converter.fromUtilDateToSqlDate(Converter.fromStringToDate(authorForm.getBornDate())));
+				stmt.setDate(8, Converter.fromUtilDateToSqlDate(Converter.fromStringToDate(authorForm.getBornDate())));
+			} catch (ParseException e) {
+				stmt.setNull(7, Types.DATE);
+				stmt.setNull(8, Types.DATE);
+			}
+			
+			System.out.println("Query: " + stmt.toString());
+			
+			ResultSet resultSet = stmt.executeQuery();
+			con.commit();
+			Author author;
+			
+			while(resultSet.next()){
+				author = new Author();
+				author.setId(resultSet.getInt(1));
+				author.setName(resultSet.getString(2));
+				author.setSurname(resultSet.getString(3));
+				author.setPhoto(resultSet.getString(4));
+				author.setBornDate(resultSet.getDate(5));
+				author.setBiography(resultSet.getString(6));
+				
+				authors.add(author);
+				
+				System.out.println("Found: " + author.getName() + " " + author.getSurname());
+			}
+
+		} catch (SQLException sqle) {
+			sqle.printStackTrace();
+			try {
+				con.rollback();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+		} finally {
+			try {
+				if (stmt != null) {
+					stmt.close();
+					stmt = null;
+				}
+				db.closeConnection(con);
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+		}
+		
+		return authors;
 	}
 
 }

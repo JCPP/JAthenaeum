@@ -64,6 +64,7 @@
         	<forward name="edit" path="page.editAuthor"/>
         	<forward name="delete" path="page.deleteAuthor"/>
         	<forward name="viewAll" path="page.viewAllAuthors"/>
+        	<forward name="search" path="page.searchAuthors"/>
         	<forward name="noAuthors" path="page.noAuthors" />
         </action>
         
@@ -89,6 +90,9 @@
 	        <forward name="deleteErrors" path="/author.do?op=delete" redirect="true"/>
 	        <forward name="deleteSuccess" path="page.confirmAuthorDelete" />
 	        <forward name="deleteFailed" path="page.failedAuthorDelete" />
+	        
+	        <!-- Search -->
+	        <forward name="search" path="/author.do?op=search" redirect="true"/>
         </action>
         
         

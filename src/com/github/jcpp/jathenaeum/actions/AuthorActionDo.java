@@ -3,6 +3,8 @@
  */
 package com.github.jcpp.jathenaeum.actions;
 
+import java.util.ArrayList;
+
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
@@ -15,8 +17,11 @@ import org.apache.struts.action.ActionRedirect;
 import org.apache.struts.actions.DispatchAction;
 
 import com.github.jcpp.jathenaeum.Author;
+import com.github.jcpp.jathenaeum.Book;
 import com.github.jcpp.jathenaeum.beans.AuthorForm;
+import com.github.jcpp.jathenaeum.beans.BookForm;
 import com.github.jcpp.jathenaeum.db.dao.AuthorDAO;
+import com.github.jcpp.jathenaeum.db.dao.BookDAO;
 import com.github.jcpp.jathenaeum.utils.Converter;
 
 /**
@@ -143,6 +148,58 @@ public class AuthorActionDo extends DispatchAction {
 				actionTarget = "deleteFailed";
 			}
 		}
+
+		return mapping.findForward(actionTarget);
+	}
+	
+	
+	public ActionForward search(ActionMapping mapping, ActionForm form,
+			HttpServletRequest request, HttpServletResponse response)
+					throws Exception {
+		String actionTarget = null;
+		
+		AuthorForm uf = (AuthorForm) form;
+		
+		//ActionErrors actionErrors = uf.validate(mapping, request);
+		
+		//If there are some errors, redirect to the form page
+		/*
+		if(!actionErrors.isEmpty()){
+			actionTarget = "deleteErrors";
+			saveErrors(request, actionErrors); //Save the errors
+			
+			HttpSession session = request.getSession();
+    		session.setAttribute("errors", actionErrors);
+    		session.setAttribute("form", uf);
+			
+			ActionRedirect redirect = new ActionRedirect(mapping.findForward(actionTarget));
+			redirect.addParameter("id", Integer.toString(id));
+			return redirect;
+		}
+		*/
+		
+		ArrayList<Author> authors = new ArrayList<Author>();
+		
+		if(form != null){
+			try{
+				authors = AuthorDAO.search(uf);
+				
+				actionTarget = "search";
+				
+				HttpSession session = request.getSession();
+	    		session.setAttribute("authors", authors);
+	    		session.setAttribute("form", uf);
+				
+				ActionRedirect redirect = new ActionRedirect(mapping.findForward(actionTarget));
+				return redirect;
+
+			}catch(Exception e){
+				e.printStackTrace();
+				actionTarget = "searchFailed";
+			}
+		}
+		
+		
 
 		return mapping.findForward(actionTarget);
 	}

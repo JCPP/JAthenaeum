@@ -21,7 +21,7 @@ import com.github.jcpp.jathenaeum.Book;
 import com.github.jcpp.jathenaeum.beans.AuthorForm;
 import com.github.jcpp.jathenaeum.beans.BookForm;
 import com.github.jcpp.jathenaeum.db.dao.AuthorDAO;
-import com.github.jcpp.jathenaeum.db.dao.BookDAO;
+import com.github.jcpp.jathenaeum.db.dao.AuthorDAO;
 import com.github.jcpp.jathenaeum.utils.Converter;
 
 /**
@@ -151,6 +151,51 @@ public class AuthorAction extends DispatchAction {
 		ArrayList<Author> authors = AuthorDAO.getAll();
 		request.setAttribute("authors", authors);
 		actionTarget = "viewAll";
+		return mapping.findForward(actionTarget);
+	}
+	
+	
+	public ActionForward search(ActionMapping mapping, ActionForm form,
+			HttpServletRequest request, HttpServletResponse response)
+					throws Exception {
+		String actionTarget = null;
+		
+		HttpSession session = request.getSession();
+		ArrayList<Author> authors = (ArrayList<Author>) session.getAttribute("authors");
+		AuthorForm authorForm = (AuthorForm) session.getAttribute("form");
+		
+		Author author = new Author();
+		
+		if(authorForm != null){
+			
+			//Overwrite the attributes
+			author.setName(authorForm.getName());
+			author.setSurname(authorForm.getSurname());
+			author.setPhoto(authorForm.getPhoto());
+			
+			if(Converter.checkStringToDate(authorForm.getBornDate())){
+				author.setBornDate(Converter.fromStringToDate(authorForm.getBornDate()));
+			}
+			
+			
+			author.setBiography(authorForm.getBiography());
+		}
+			
+		
+		if(session.getAttribute("authors") == null){
+			authors = AuthorDAO.getAll();
+		}
+		else{
+			request.setAttribute("search", true);
+		}
+		
+		//Remove attributes from session
+		session.removeAttribute("authors");
+		session.removeAttribute("form");
+		
+		request.setAttribute("author", author);
+		request.setAttribute("authors", authors);
+		actionTarget = "search";
 		return mapping.findForward(actionTarget);
 	}
 

@@ -30,6 +30,7 @@
 					<ul class="dropdown-menu">
 						<li><a href="author.do?op=add">Add</a></li>
 						<li><a href="author.do?op=viewAll">View All</a></li>
+						<li><a href="author.do?op=search">Search</a></li>
 					</ul></li>
 			</ul>
 			<div class="nav navbar-nav navbar-right">

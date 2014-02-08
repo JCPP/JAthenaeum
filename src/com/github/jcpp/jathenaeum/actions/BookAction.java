@@ -222,7 +222,6 @@ public class BookAction extends DispatchAction {
 		}
 		else{
 			request.setAttribute("search", true);
-			request.setAttribute("book", book);
 		}
 		
 		//Remove attributes from session
@@ -231,6 +230,7 @@ public class BookAction extends DispatchAction {
 		
 		request.setAttribute("books", books);
 		request.setAttribute("authors", AuthorDAO.getAll());
+		request.setAttribute("book", book);
 		actionTarget = "search";
 		return mapping.findForward(actionTarget);
 	}
