@@ -13,7 +13,13 @@
 		<logic:iterate name="authors" id="authorsId">
 			<div class="col-md-4">
 				<h2>${authorsId.name} ${authorsId.surname}</h2>
-				<h5>${authorsId.bornDate}</h5>
+				
+				<logic:notEmpty name="authorsId" property="bornDate">
+		  			<h5>${authorsId.bornDate.date}/${authorsId.bornDate.month+1}/${authorsId.bornDate.year+1900}</h5>
+		  		</logic:notEmpty>
+		  		<logic:empty name="authorsId" property="bornDate">
+					<h5></h5>
+				</logic:empty>
 				
 				<div class="media">
 					<logic:notEmpty name="authorsId" property="photo">
