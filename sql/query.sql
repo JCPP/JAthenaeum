@@ -37,17 +37,27 @@ CREATE TABLE Book (
 );
 
 
+/* Create Copy table */
+CREATE TABLE Copy (
+	CopyID integer AUTO_INCREMENT PRIMARY KEY,
+	BookID integer NOT NULL,
+	FOREIGN KEY (BookID) REFERENCES Book(BookID)
+		ON UPDATE CASCADE
+		ON DELETE CASCADE
+);
+
+
 /* Create Loan table */
 CREATE TABLE Loan (
 	LoanID integer AUTO_INCREMENT PRIMARY KEY,
 	CustomerCardNumber integer NOT NULL,
-	BookID integer NOT NULL,
+	CopyID integer NOT NULL,
 	LoanStartDate date NOT NULL,
 	LoanEndDate date NOT NULL,
 	FOREIGN KEY (CustomerCardNumber) REFERENCES Customer(CustomerCardNumber)
 		ON UPDATE CASCADE
 		ON DELETE CASCADE,
-	FOREIGN KEY (BookID) REFERENCES Book(BookID)
+	FOREIGN KEY (CopyID) REFERENCES Copy(CopyID)
 		ON UPDATE CASCADE
 		ON DELETE CASCADE
 );
