@@ -129,6 +129,57 @@ public class BookDAO {
 	
 	
 	/**
+	 * Get all Book instances with the associated authors and number of copies.
+	 * @return Returns all Book instances in an ArrayList<Book> with all the authors and number of copies.
+	 */
+	public static ArrayList<Book> getAllWithAuthorsAndCopies(){
+		Connection con = db.getConnection();
+		ArrayList<Book> books = new ArrayList<Book>();
+		PreparedStatement stmt = null;
+		try {
+			con.setAutoCommit(false);
+			final String select = "SELECT * FROM Book";
+			stmt = con.prepareStatement(select);
+			ResultSet resultSet = stmt.executeQuery();
+			Book book;
+			
+			while(resultSet.next()){
+				book = new Book();
+				book.setId(resultSet.getInt(1));
+				book.setTitle(resultSet.getString(2));
+				book.setCover(resultSet.getString(3));
+				book.setGenre(resultSet.getString(4));
+				book.setIsbnCode(resultSet.getString(5));
+				book.setDescription(resultSet.getString(6));
+				book.setAuthors(AuthorDAO.getAllByLibroId(book.getId()));
+				book.setNumberOfCopies(CopyDAO.getNumberByBookId(book.getId()));
+				books.add(book);
+			}
+			
+			con.commit();
+		} catch (SQLException sqle) {
+			sqle.printStackTrace();
+			try {
+				con.rollback();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+		} finally {
+			try {
+				if (stmt!=null) {
+					stmt.close();
+					stmt=null;
+				}
+				db.closeConnection(con);
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+		}
+		return books;
+	}
+	
+	
+	/**
 	 * Get the Book by id.
 	 * @param bookId the id of the Book.
 	 * @return Returns the Book instance.

@@ -66,5 +66,47 @@ public class CopyDAO {
 		}
 		return copies;
 	}
+	
+	
+	/**
+	 * Get the number of the copy from the Book ID.
+	 * @return Returns all the number of the copy by the Book ID.
+	 */
+	public static int getNumberByBookId(int bookId){
+		Connection con = db.getConnection();
+		int copyNumber = 0;
+		PreparedStatement stmt = null;
+		try {
+			con.setAutoCommit(false);
+			final String select = "SELECT COUNT(*) FROM Copy WHERE BookID = ?";
+			stmt = con.prepareStatement(select);
+			stmt.setInt(1, bookId);
+			ResultSet resultSet = stmt.executeQuery();
+			
+			if(resultSet.next()){
+				copyNumber = resultSet.getInt(1);
+			}
+			
+			con.commit();
+		} catch (SQLException sqle) {
+			sqle.printStackTrace();
+			try {
+				con.rollback();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+		} finally {
+			try {
+				if (stmt!=null) {
+					stmt.close();
+					stmt=null;
+				}
+				db.closeConnection(con);
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+		}
+		return copyNumber;
+	}
 
 }

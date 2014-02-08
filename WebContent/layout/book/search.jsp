@@ -56,6 +56,7 @@
 		  		<th>Authors</th>
 		  		<th>Genre</th>
 		  		<th>Isbn</th>
+		  		<th>Number of Copies</th>
 		  		<th>Operations</th>
 		  	</tr>
 		  </thead>
@@ -78,7 +79,9 @@
 					</td>
 					<td>${booksId.genre}</td>
 					<td>${booksId.isbnCode}</td>
+					<td>${booksId.numberOfCopies}</td>
 					<td>
+						<a class="btn btn-success" href="book.do?op=addCopies&id=${booksId.id}" role="button">Add copies &raquo;</a>
 						<a class="btn btn-default" href="book.do?op=edit&id=${booksId.id}" role="button">Edit &raquo;</a>
 						<a class="btn btn-danger" href="book.do?op=delete&id=${booksId.id}" role="button">Delete &raquo;</a>
 					</td>

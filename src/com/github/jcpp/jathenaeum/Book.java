@@ -18,6 +18,7 @@ public class Book {
 	private String isbnCode;
 	private String description;
 	private ArrayList<Author> authors;
+	private int numberOfCopies;
 	
 	
 	/**
@@ -104,5 +105,18 @@ public class Book {
 	public void setAuthors(ArrayList<Author> authors) {
 		this.authors = authors;
 	}
+	/**
+	 * @return the numberOfCopies
+	 */
+	public int getNumberOfCopies() {
+		return numberOfCopies;
+	}
+	/**
+	 * @param numberOfCopies the numberOfCopies to set
+	 */
+	public void setNumberOfCopies(int numberOfCopies) {
+		this.numberOfCopies = numberOfCopies;
+	}
+	
 	
 }

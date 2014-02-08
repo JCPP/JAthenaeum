@@ -218,7 +218,7 @@ public class BookAction extends DispatchAction {
 			
 		
 		if(session.getAttribute("books") == null){
-			books = BookDAO.getAllWithAuthors();
+			books = BookDAO.getAllWithAuthorsAndCopies();
 		}
 		else{
 			request.setAttribute("search", true);
