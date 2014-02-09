@@ -17,7 +17,9 @@
 
 <body>
 	<logic:equal name="navbarEnabled" value="true">
-		<tiles:insert attribute="navbar" />
+		<tiles:insert attribute="navbar">
+			<tiles:put name="title" beanName="title" />
+		</tiles:insert>
 	</logic:equal>
 
 	<!-- Main jumbotron for a primary marketing message or call to action -->
