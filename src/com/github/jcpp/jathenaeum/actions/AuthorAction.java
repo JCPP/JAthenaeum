@@ -4,8 +4,6 @@
 package com.github.jcpp.jathenaeum.actions;
 
 import java.util.ArrayList;
-import java.util.Calendar;
-
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
@@ -17,10 +15,7 @@ import org.apache.struts.action.ActionMapping;
 import org.apache.struts.actions.DispatchAction;
 
 import com.github.jcpp.jathenaeum.Author;
-import com.github.jcpp.jathenaeum.Book;
 import com.github.jcpp.jathenaeum.beans.AuthorForm;
-import com.github.jcpp.jathenaeum.beans.BookForm;
-import com.github.jcpp.jathenaeum.db.dao.AuthorDAO;
 import com.github.jcpp.jathenaeum.db.dao.AuthorDAO;
 import com.github.jcpp.jathenaeum.utils.Converter;
 
