@@ -322,6 +322,27 @@
 		<put name="body" value="/layout/customer/failedEdit.jsp" />
 	</definition>
 	
+	<!-- Delete Customer -->
+	<definition name="page.deleteCustomer" extends="base.definition.bootstrap">
+		<put name="title" value="Delete Customer - JAthenaeum" />
+		<put name="body" value="/layout/customer/delete.jsp" />
+		<put name="style" value="css/signup.css" />
+	</definition>
+	
+	<!-- Confirm delete -->
+	<definition name="page.confirmCustomerDelete" extends="base.definition.bootstrap">
+		<put name="redirect" value="index.do" />
+		<put name="title" value="Confirm Delete Customer - JAthenaeum" />
+		<put name="body" value="/layout/customer/confirmDelete.jsp" />
+	</definition>
+	
+	<!-- Failed delete -->
+	<definition name="page.failedCustomerDelete" extends="base.definition.bootstrap">
+		<put name="redirect" value="index.do" />
+		<put name="title" value="Failed Delete Customer - JAthenaeum" />
+		<put name="body" value="/layout/customer/failedCustomerDelete.jsp" />
+	</definition>
+	
 	<!-- View All -->
 	<definition name="page.viewAllCustomers" extends="base.definition.bootstrap">
 		<put name="title" value="Customers - JAthenaeum" />

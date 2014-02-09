@@ -112,5 +112,27 @@ public class CustomerActionDo extends DispatchAction {
 
 		return mapping.findForward(actionTarget);
 	}
+	
+	
+	public ActionForward delete(ActionMapping mapping, ActionForm form,
+			HttpServletRequest request, HttpServletResponse response)
+					throws Exception {
+		String actionTarget = null;
+		
+		CustomerForm uf = (CustomerForm) form;
+		int id = Integer.parseInt(request.getParameter("id"));
+
+		if(form != null){
+			try{
+				CustomerDAO.delete(id);
+				actionTarget = "deleteSuccess";
+
+			}catch(Exception e){
+				actionTarget = "deleteFailed";
+			}
+		}
+
+		return mapping.findForward(actionTarget);
+	}
 
 }
