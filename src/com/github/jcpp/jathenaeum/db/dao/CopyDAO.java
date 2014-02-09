@@ -7,6 +7,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Statement;
 import java.util.ArrayList;
 
 import com.github.jcpp.jathenaeum.Copy;
@@ -69,7 +70,56 @@ public class CopyDAO {
 	
 	
 	/**
+	 * Get all Copy instances.
+	 * @param bookId the book ID of the copy.
+	 * @return Returns all Copy instances in an ArrayList<Copy>.
+	 */
+	public static ArrayList<Copy> getAllByBookId(int bookId){
+		Connection con = db.getConnection();
+		ArrayList<Copy> copies = new ArrayList<Copy>();
+		PreparedStatement stmt = null;
+		try {
+			con.setAutoCommit(false);
+			final String select = "SELECT * FROM Copy WHERE BookID = ?";
+			stmt = con.prepareStatement(select);
+			stmt.setInt(1, bookId);
+			ResultSet resultSet = stmt.executeQuery();
+			Copy copy;
+			
+			while(resultSet.next()){
+				copy = new Copy();
+				copy.setId(resultSet.getInt(1));
+				copy.setBookId(resultSet.getInt(2));
+				
+				copies.add(copy);
+			}
+			
+			con.commit();
+		} catch (SQLException sqle) {
+			sqle.printStackTrace();
+			try {
+				con.rollback();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+		} finally {
+			try {
+				if (stmt!=null) {
+					stmt.close();
+					stmt=null;
+				}
+				db.closeConnection(con);
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+		}
+		return copies;
+	}
+	
+	
+	/**
 	 * Get the number of the copy from the Book ID.
+	 * @param bookId the Book ID.
 	 * @return Returns all the number of the copy by the Book ID.
 	 */
 	public static int getNumberByBookId(int bookId){
@@ -107,6 +157,116 @@ public class CopyDAO {
 			}
 		}
 		return copyNumber;
+	}
+	
+	
+	/**
+	 * Insert a new copy.
+	 * @param bookId the book ID to insert. 
+	 * @return Returns the result of the query. 
+	 */
+	public static int insert(int bookId){
+		Connection con = db.getConnection();
+		PreparedStatement stmt = null;
+		int result = 0;
+		
+		try {
+			con.setAutoCommit(false);
+			final String insert = "INSERT INTO Copy (BookID) VALUES (?)";
+			
+			stmt = con.prepareStatement(insert, Statement.RETURN_GENERATED_KEYS);
+			stmt.setInt(1, bookId);
+
+			result = stmt.executeUpdate();
+			
+			con.commit();
+		} catch (SQLException sqle) {
+			sqle.printStackTrace();
+			try {
+				con.rollback();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+		} finally {
+			try {
+				if (stmt!=null) {
+					stmt.close();
+					stmt=null;
+				}
+				db.closeConnection(con);
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+		}
+		return result;
+	}
+	
+	
+	/**
+	 * Insert number copies of the Book ID.
+	 * @param bookId the Book ID.
+	 * @param number the number of copies to add.
+	 */
+	public static void multipleInsert(int bookId, int number){
+		for(int i = 0; i < number; i++){
+			insert(bookId);
+		}
+	}
+	
+	
+	/**
+	 * Delete a copy.
+	 * @param copyId the ID of the copy to delete. 
+	 * @return Returns the id of the deleted copy.
+	 */
+	public static long delete(int copyId){
+		Connection con = db.getConnection();
+		PreparedStatement stmt = null;
+		long result = 0;
+
+		try {
+			con.setAutoCommit(false);
+			final String delete = "DELETE FROM Copy WHERE CopyID = ?";
+			stmt = con.prepareStatement(delete);
+			stmt.setInt(1, copyId);
+			
+			result = stmt.executeUpdate();
+			
+			con.commit();
+			
+
+		} catch (SQLException sqle) {
+			sqle.printStackTrace();
+			try {
+				con.rollback();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+		} finally {
+			try {
+				if (stmt != null) {
+					stmt.close();
+					stmt = null;
+				}
+				db.closeConnection(con);
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+		}
+		return copyId;
+	}
+	
+	
+	/**
+	 * Delete number copies of the Book ID.
+	 * @param bookId the Book ID.
+	 * @param number the number of copies to delete.
+	 */
+	public static void multipleDelete(int bookId, int number){
+		ArrayList<Copy> copies = getAllByBookId(bookId);
+		for(int i = 0; i < number; i++){
+			delete(copies.get(i).getId());
+		}
 	}
 
 }

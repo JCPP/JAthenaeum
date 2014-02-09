@@ -67,5 +67,21 @@ public class Validator {
 	public static boolean isValidDate(String dateToValidate){
 		return isValidDate(dateToValidate, "dd/MM/yyyy");
 	}
+	
+	
+	/**
+	 * Validate the number.
+	 * @param number the String number to check.
+	 * @return Return true if number is a valid int.
+	 */
+	public static boolean isValidInt(String number){
+		try { 
+	        Integer.parseInt(number); 
+	    } catch(NumberFormatException e) { 
+	        return false; 
+	    }
+	    // only got here if we didn't return false
+	    return true;
+	}
 
 }

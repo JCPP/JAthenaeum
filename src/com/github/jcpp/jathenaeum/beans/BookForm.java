@@ -11,6 +11,8 @@ import org.apache.struts.action.ActionForm;
 import org.apache.struts.action.ActionMapping;
 import org.apache.struts.action.ActionMessage;
 
+import com.github.jcpp.jathenaeum.utils.Validator;
+
 
 /**
  * Add a book form.
@@ -25,6 +27,7 @@ public class BookForm extends ActionForm {
 	private String isbn;
 	private String description;
 	private String[] authors;
+	private String numberOfCopies;
 	
 	public BookForm(){
 		super();
@@ -114,7 +117,21 @@ public class BookForm extends ActionForm {
 		this.authors = authors;
 	}
 
+	/**
+	 * @return the numberOfCopies
+	 */
+	public String getNumberOfCopies() {
+		return numberOfCopies;
+	}
 
+	/**
+	 * @param numberOfCopies the numberOfCopies to set
+	 */
+	public void setNumberOfCopies(String numberOfCopies) {
+		this.numberOfCopies = numberOfCopies;
+	}
+
+	
 	public ActionErrors validate(ActionMapping mapping,
 			HttpServletRequest request) {
 		ActionErrors errors = new ActionErrors();
@@ -137,6 +154,29 @@ public class BookForm extends ActionForm {
 		if(authors == null || authors.length == 0){
 			errors.add("authors", new ActionMessage("book.authors.empty"));
 		}
+		
+		return errors;
+	}
+	
+	
+	public ActionErrors validateNumberOfCopies(ActionMapping mapping,
+			HttpServletRequest request) {
+		ActionErrors errors = new ActionErrors();
+		
+		/*
+		System.out.println("numberOfCopies: " + numberOfCopies);
+		*/
+		
+		//Check number of copies
+		if(numberOfCopies == null || numberOfCopies.isEmpty()){
+			errors.add("numberOfCopies", new ActionMessage("book.numberofcopies.empty"));
+		}
+		
+		if(!Validator.isValidInt(numberOfCopies) || Integer.parseInt(numberOfCopies) < 0){
+			errors.add("numberOfCopies", new ActionMessage("book.numberofcopies.invalid"));
+		}
+		
+		
 		
 		return errors;
 	}

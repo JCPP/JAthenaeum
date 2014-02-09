@@ -3,6 +3,7 @@
  */
 package com.github.jcpp.jathenaeum.actions;
 
+import java.awt.font.NumericShaper;
 import java.util.ArrayList;
 
 import javax.servlet.http.HttpServletRequest;
@@ -20,6 +21,7 @@ import com.github.jcpp.jathenaeum.Book;
 import com.github.jcpp.jathenaeum.Writes;
 import com.github.jcpp.jathenaeum.beans.BookForm;
 import com.github.jcpp.jathenaeum.db.dao.BookDAO;
+import com.github.jcpp.jathenaeum.db.dao.CopyDAO;
 import com.github.jcpp.jathenaeum.db.dao.WritesDAO;
 
 /**
@@ -265,6 +267,57 @@ public class BookActionDo extends DispatchAction {
 				e.printStackTrace();
 				actionTarget = "searchFailed";
 			}
+		}
+		
+		
+
+		return mapping.findForward(actionTarget);
+	}
+	
+	
+	public ActionForward manageCopies(ActionMapping mapping, ActionForm form,
+			HttpServletRequest request, HttpServletResponse response)
+					throws Exception {
+		String actionTarget = null;
+		int id = Integer.parseInt(request.getParameter("id"));
+		
+		BookForm uf = (BookForm) form;
+		
+		ActionErrors actionErrors = uf.validateNumberOfCopies(mapping, request);
+		
+		//If there are some errors, redirect to the form page
+		if(!actionErrors.isEmpty()){
+			actionTarget = "manageCopiesErrors";
+			saveErrors(request, actionErrors); //Save the errors
+			
+			HttpSession session = request.getSession();
+    		session.setAttribute("errors", actionErrors);
+    		session.setAttribute("form", uf);
+			
+			ActionRedirect redirect = new ActionRedirect(mapping.findForward(actionTarget));
+			redirect.addParameter("id", Integer.toString(id));
+			return redirect;
+		}
+		
+		
+		if(form != null){
+			int numberOfCopies = Integer.parseInt(uf.getNumberOfCopies());
+			int actualCopies = CopyDAO.getNumberByBookId(id);
+			
+			if(actualCopies > numberOfCopies){
+				//Remove
+				System.out.println("Removing " +  (actualCopies - numberOfCopies) + " copies.");
+				
+				CopyDAO.multipleDelete(id, actualCopies - numberOfCopies);
+			}
+			else if(actualCopies < numberOfCopies){
+				//Add
+				System.out.println("Adding " +  (numberOfCopies - actualCopies) + " copies.");
+				
+				CopyDAO.multipleInsert(id, numberOfCopies - actualCopies);
+			}
+			
+			actionTarget = "manageCopiesSuccess";
 		}
 		
 		

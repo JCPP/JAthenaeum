@@ -104,6 +104,7 @@
         	<forward name="delete" path="page.deleteBook"/>
         	<forward name="viewAll" path="page.viewAllBooks"/>
         	<forward name="search" path="page.searchBooks"/>
+        	<forward name="manageCopies" path="page.manageBookCopies"/>
         	<forward name="noAuthors" path="page.noAuthors" />
         </action>
         
@@ -132,6 +133,11 @@
 	        
 	        <!-- Search -->
 	        <forward name="search" path="/book.do?op=search" redirect="true"/>
+	        
+	        <!-- Manage Copies -->
+	        <forward name="manageCopiesErrors" path="/book.do?op=manageCopies" redirect="true"/>
+	        <forward name="manageCopiesSuccess" path="page.confirmManageBookCopies" />
+	        <forward name="manageCopiesFailed" path="page.failedManageBookCopies" />
         </action>
         
 	</action-mappings>

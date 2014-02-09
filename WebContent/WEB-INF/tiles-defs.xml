@@ -257,4 +257,25 @@
 		<put name="body" value="/layout/book/search.jsp" />
 	</definition>
 	
+	<!-- Manage Book Copies -->
+	<definition name="page.manageBookCopies" extends="base.definition.bootstrap">
+		<put name="title" value="Manage Book Copies - JAthenaeum" />
+		<put name="body" value="/layout/book/manageCopies.jsp" />
+		<put name="style" value="css/signup.css" />
+	</definition>
+	
+	<!-- Confirm Manage Book Copies -->
+	<definition name="page.confirmManageBookCopies" extends="base.definition.bootstrap">
+		<put name="redirect" value="index.do" />
+		<put name="title" value="Confirm Manage Book Copies - JAthenaeum" />
+		<put name="body" value="/layout/book/confirmManageCopies.jsp" />
+	</definition>
+	
+	<!-- Failed Manage Book Copies -->
+	<definition name="page.failedManageBookCopies" extends="base.definition.bootstrap">
+		<put name="redirect" value="index.do" />
+		<put name="title" value="Failed Manage Book Copies - JAthenaeum" />
+		<put name="body" value="/layout/book/failedManageCopies.jsp" />
+	</definition>
+	
 </tiles-definitions>

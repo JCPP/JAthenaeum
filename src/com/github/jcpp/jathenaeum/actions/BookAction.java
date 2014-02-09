@@ -4,6 +4,7 @@
 package com.github.jcpp.jathenaeum.actions;
 
 import java.util.ArrayList;
+
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
@@ -19,6 +20,8 @@ import com.github.jcpp.jathenaeum.Book;
 import com.github.jcpp.jathenaeum.beans.BookForm;
 import com.github.jcpp.jathenaeum.db.dao.AuthorDAO;
 import com.github.jcpp.jathenaeum.db.dao.BookDAO;
+import com.github.jcpp.jathenaeum.db.dao.CopyDAO;
+import com.github.jcpp.jathenaeum.utils.Validator;
 
 /**
  * 
@@ -232,6 +235,55 @@ public class BookAction extends DispatchAction {
 		request.setAttribute("authors", AuthorDAO.getAll());
 		request.setAttribute("book", book);
 		actionTarget = "search";
+		return mapping.findForward(actionTarget);
+	}
+	
+	
+	public ActionForward manageCopies(ActionMapping mapping, ActionForm form,
+			HttpServletRequest request, HttpServletResponse response)
+					throws Exception {
+		String actionTarget = null;
+		
+		String id = request.getParameter("id");
+		
+		if(request.getParameter("id") == null){
+			System.out.println("ID not present.");
+		}
+		
+		HttpSession session = request.getSession();
+		BookForm bookForm = (BookForm) session.getAttribute("form");
+		ActionErrors actionErrors = (ActionErrors) session.getAttribute("errors");
+		
+		Book book = new Book();
+
+		//Overwrite the attributes
+		if(bookForm != null){
+			if(Validator.isValidInt(bookForm.getNumberOfCopies())){
+				book.setNumberOfCopies(Integer.parseInt(bookForm.getNumberOfCopies()));
+			}
+			else{
+				book.setNumberOfCopies(CopyDAO.getNumberByBookId(Integer.parseInt(id)));
+			}
+		}
+		else{
+			book.setNumberOfCopies(CopyDAO.getNumberByBookId(Integer.parseInt(id)));
+		}
+		
+		book.setId(Integer.parseInt(id));
+		
+		
+		if(actionErrors != null){
+			//Save the errors in this action
+			saveErrors(request, actionErrors);
+		}
+		
+		//Remove attributes from session
+		session.removeAttribute("errors");
+		session.removeAttribute("form");
+		
+		
+		request.setAttribute("book", book);
+		actionTarget = "manageCopies";
 		return mapping.findForward(actionTarget);
 	}
 
