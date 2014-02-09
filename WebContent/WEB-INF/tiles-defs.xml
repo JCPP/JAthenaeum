@@ -322,4 +322,10 @@
 		<put name="body" value="/layout/customer/failedEdit.jsp" />
 	</definition>
 	
+	<!-- View All -->
+	<definition name="page.viewAllCustomers" extends="base.definition.bootstrap">
+		<put name="title" value="Customers - JAthenaeum" />
+		<put name="body" value="/layout/customer/viewAll.jsp" />
+	</definition>
+	
 </tiles-definitions>

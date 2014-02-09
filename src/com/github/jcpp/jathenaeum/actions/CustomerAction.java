@@ -3,6 +3,8 @@
  */
 package com.github.jcpp.jathenaeum.actions;
 
+import java.util.ArrayList;
+
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
@@ -95,6 +97,18 @@ public class CustomerAction extends DispatchAction {
 		request.setAttribute("editCustomerForm", customer);
 		
 		actionTarget = "edit";
+		return mapping.findForward(actionTarget);
+	}
+	
+	
+	public ActionForward viewAll(ActionMapping mapping, ActionForm form,
+			HttpServletRequest request, HttpServletResponse response)
+					throws Exception {
+		String actionTarget = null;
+
+		ArrayList<Customer> customers = CustomerDAO.getAll();
+		request.setAttribute("customers", customers);
+		actionTarget = "viewAll";
 		return mapping.findForward(actionTarget);
 	}
 
