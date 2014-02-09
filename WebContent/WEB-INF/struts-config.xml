@@ -148,6 +148,7 @@
         <!-- Customer -->
         <action path="/customer" type="com.github.jcpp.jathenaeum.actions.CustomerAction" parameter="op">
         	<forward name="add" path="page.addCustomer"/>
+        	<forward name="edit" path="page.editCustomer"/>
         </action>
         
         <!-- Customer Operations -->
@@ -162,6 +163,11 @@
 	        <forward name="addErrors" path="/customer.do?op=add" redirect="true"/>
 	        <forward name="addSuccess" path="page.confirmCustomerInsert"/>
 	        <forward name="addFailed" path="page.failedCustomerInsert"/>
+	        
+	        <!-- Edit -->
+	        <forward name="editErrors" path="/customer.do?op=edit" redirect="true"/>
+	        <forward name="editSuccess" path="page.confirmCustomerEdit" />
+	        <forward name="editFailed" path="page.failedCustomerEdit" />
         </action>
         
 	</action-mappings>

@@ -14,6 +14,8 @@ import java.util.ArrayList;
 import com.github.jcpp.jathenaeum.Author;
 import com.github.jcpp.jathenaeum.Customer;
 import com.github.jcpp.jathenaeum.db.Database;
+import com.github.jcpp.jathenaeum.exceptions.AuthorNotFoundException;
+import com.github.jcpp.jathenaeum.exceptions.CustomerNotFoundException;
 import com.github.jcpp.jathenaeum.utils.Converter;
 
 /**
@@ -71,6 +73,57 @@ private static Database db = Database.getInstance();
 		return customers;
 	}
 	
+	/**
+	 * Get the Customer by id.
+	 * @param cardNumber the card number of the Customer.
+	 * @return Returns the Customer instance.
+	 * @throws CustomerNotFoundException Throws an exception if the Customer is not found.
+	 */
+	public static Customer getById(int cardNumber) throws CustomerNotFoundException{
+		Connection con = db.getConnection();
+		Customer customer;
+		PreparedStatement stmt = null;
+		try {
+			con.setAutoCommit(false);
+			final String select = "SELECT * FROM Customer WHERE CustomerCardNumber = ?";
+			stmt = con.prepareStatement(select);
+			stmt.setInt(1, cardNumber);
+			ResultSet resultSet = stmt.executeQuery();
+			con.commit();
+			
+			if(resultSet.next()){
+				customer = new Customer();
+				customer.setCardNumber(resultSet.getInt(1));
+				customer.setEmail(resultSet.getString(2));
+				customer.setName(resultSet.getString(3));
+				customer.setSurname(resultSet.getString(4));
+			}
+			else{
+				throw new CustomerNotFoundException();
+			}
+			
+			return customer;
+		} catch (SQLException sqle) {
+			sqle.printStackTrace();
+			try {
+				con.rollback();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+		} finally {
+			try {
+				if (stmt != null) {
+					stmt.close();
+					stmt = null;
+				}
+				db.closeConnection(con);
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+		}
+		return null;
+	}
+	
 	
 	/**
 	 * Insert a new customer.
@@ -119,6 +172,52 @@ private static Database db = Database.getInstance();
 			}
 		}
 		return result;
+	}
+	
+	
+	/**
+	 * Update a customer.
+	 * @param customer the customer to update. 
+	 * @return Returns the id of the updated customer. 
+	 */
+	public static long update(Customer customer){
+		Connection con = db.getConnection();
+		PreparedStatement stmt = null;
+		long result = 0;
+
+		try {
+			con.setAutoCommit(false);
+			String insert = "UPDATE Customer SET CustomerName = ?, CustomerSurname = ?, CustomerEmail = ? WHERE CustomerCardNumber = ?";
+			stmt = con.prepareStatement(insert, Statement.RETURN_GENERATED_KEYS);
+			stmt.setString(1, customer.getName());
+			stmt.setString(2, customer.getSurname());
+			stmt.setString(3, customer.getEmail());
+			stmt.setInt(4, customer.getCardNumber());
+
+			result = stmt.executeUpdate();
+			
+			con.commit();
+			
+
+		} catch (SQLException sqle) {
+			sqle.printStackTrace();
+			try {
+				con.rollback();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+		} finally {
+			try {
+				if (stmt != null) {
+					stmt.close();
+					stmt = null;
+				}
+				db.closeConnection(con);
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+		}
+		return customer.getCardNumber();
 	}
 
 }

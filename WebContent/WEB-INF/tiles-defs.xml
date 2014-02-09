@@ -301,4 +301,25 @@
 		<put name="body" value="/layout/customer/failedInsert.jsp" />
 	</definition>
 	
+	<!-- Edit Customer -->
+	<definition name="page.editCustomer" extends="base.definition.bootstrap">
+		<put name="title" value="Edit Customer - JAthenaeum" />
+		<put name="body" value="/layout/customer/edit.jsp" />
+		<put name="style" value="css/signup.css" />
+	</definition>
+	
+	<!-- Confirm edit -->
+	<definition name="page.confirmCustomerEdit" extends="base.definition.bootstrap">
+		<put name="redirect" value="index.do" />
+		<put name="title" value="Confirm Edit Customer - JAthenaeum" />
+		<put name="body" value="/layout/customer/confirmEdit.jsp" />
+	</definition>
+	
+	<!-- Failed edit -->
+	<definition name="page.failedCustomerEdit" extends="base.definition.bootstrap">
+		<put name="redirect" value="index.do" />
+		<put name="title" value="Failed Edit Customer - JAthenaeum" />
+		<put name="body" value="/layout/customer/failedEdit.jsp" />
+	</definition>
+	
 </tiles-definitions>
