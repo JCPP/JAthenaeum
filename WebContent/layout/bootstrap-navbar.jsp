@@ -32,6 +32,11 @@
 						<li><a href="author.do?op=viewAll">View All</a></li>
 						<li><a href="author.do?op=search">Search</a></li>
 					</ul></li>
+				<li class="dropdown"><a href="#" class="dropdown-toggle"
+					data-toggle="dropdown">Customer <b class="caret"></b></a>
+					<ul class="dropdown-menu">
+						<li><a href="customer.do?op=add">Add</a></li>
+					</ul></li>
 			</ul>
 			<div class="nav navbar-nav navbar-right">
 				<!-- User not present -->

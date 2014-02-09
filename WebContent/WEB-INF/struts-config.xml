@@ -15,6 +15,9 @@
 		
 		<!-- Book -->
 		<form-bean name="bookForm" type="com.github.jcpp.jathenaeum.beans.BookForm"/>
+		
+		<!-- Customer -->
+		<form-bean name="customerForm" type="com.github.jcpp.jathenaeum.beans.CustomerForm"/>
 	</form-beans>
 	
 	<global-forwards>
@@ -138,6 +141,27 @@
 	        <forward name="manageCopiesErrors" path="/book.do?op=manageCopies" redirect="true"/>
 	        <forward name="manageCopiesSuccess" path="page.confirmManageBookCopies" />
 	        <forward name="manageCopiesFailed" path="page.failedManageBookCopies" />
+        </action>
+        
+        
+        
+        <!-- Customer -->
+        <action path="/customer" type="com.github.jcpp.jathenaeum.actions.CustomerAction" parameter="op">
+        	<forward name="add" path="page.addCustomer"/>
+        </action>
+        
+        <!-- Customer Operations -->
+        <action
+	        path="/doCustomer"
+	        type="com.github.jcpp.jathenaeum.actions.CustomerActionDo"
+	        name="customerForm"
+	        scope="request"
+	        validate="false"
+	        parameter="op">
+	        <!-- Add -->
+	        <forward name="addErrors" path="/customer.do?op=add" redirect="true"/>
+	        <forward name="addSuccess" path="page.confirmCustomerInsert"/>
+	        <forward name="addFailed" path="page.failedCustomerInsert"/>
         </action>
         
 	</action-mappings>

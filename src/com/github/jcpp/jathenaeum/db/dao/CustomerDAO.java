@@ -7,10 +7,14 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Statement;
+import java.sql.Types;
 import java.util.ArrayList;
 
+import com.github.jcpp.jathenaeum.Author;
 import com.github.jcpp.jathenaeum.Customer;
 import com.github.jcpp.jathenaeum.db.Database;
+import com.github.jcpp.jathenaeum.utils.Converter;
 
 /**
  * DAO of Customer.
@@ -65,6 +69,56 @@ private static Database db = Database.getInstance();
 			}
 		}
 		return customers;
+	}
+	
+	
+	/**
+	 * Insert a new customer.
+	 * @param customer the customer to insert.
+	 * @return Returns the id of the inserted customer. 
+	 */
+	public static long insert(Customer customer){
+		Connection con = db.getConnection();
+		PreparedStatement stmt = null;
+		long result = 0;
+
+		try {
+			con.setAutoCommit(false);
+			final String insert = "INSERT INTO Customer (CustomerEmail, CustomerName, CustomerSurname) VALUES (?, ?, ?)";
+			stmt = con.prepareStatement(insert, Statement.RETURN_GENERATED_KEYS);
+			stmt.setString(1, customer.getEmail());
+			stmt.setString(2, customer.getName());
+			stmt.setString(3, customer.getSurname());
+			
+			result = stmt.executeUpdate();
+			
+			ResultSet generatedKeys = stmt.getGeneratedKeys();
+			
+			if (generatedKeys.next()) {
+	            result = generatedKeys.getLong(1);
+	        }
+			
+			con.commit();
+
+		} catch (SQLException sqle) {
+			sqle.printStackTrace();
+			try {
+				con.rollback();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+		} finally {
+			try {
+				if (stmt != null) {
+					stmt.close();
+					stmt = null;
+				}
+				db.closeConnection(con);
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+		}
+		return result;
 	}
 
 }

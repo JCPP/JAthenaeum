@@ -278,4 +278,27 @@
 		<put name="body" value="/layout/book/failedManageCopies.jsp" />
 	</definition>
 	
+	
+	
+	<!-- Add Customer -->
+	<definition name="page.addCustomer" extends="base.definition.bootstrap">
+		<put name="title" value="Add Customer - JAthenaeum" />
+		<put name="body" value="/layout/customer/add.jsp" />
+		<put name="style" value="css/signup.css" />
+	</definition>
+	
+	<!-- Confirm insert -->
+	<definition name="page.confirmCustomerInsert" extends="base.definition.bootstrap">
+		<put name="redirect" value="index.do" />
+		<put name="title" value="Confirm Insert Customer - JAthenaeum" />
+		<put name="body" value="/layout/customer/confirmInsert.jsp" />
+	</definition>
+	
+	<!-- Failed insert -->
+	<definition name="page.failedCustomerInsert" extends="base.definition.bootstrap">
+		<put name="redirect" value="index.do" />
+		<put name="title" value="Failed Insert Customer - JAthenaeum" />
+		<put name="body" value="/layout/customer/failedInsert.jsp" />
+	</definition>
+	
 </tiles-definitions>
