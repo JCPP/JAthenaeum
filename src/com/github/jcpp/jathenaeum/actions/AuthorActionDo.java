@@ -20,6 +20,7 @@ import com.github.jcpp.jathenaeum.Author;
 import com.github.jcpp.jathenaeum.beans.AuthorForm;
 import com.github.jcpp.jathenaeum.db.dao.AuthorDAO;
 import com.github.jcpp.jathenaeum.utils.Converter;
+import com.github.jcpp.jathenaeum.utils.Validator;
 
 /**
  * 
@@ -57,7 +58,7 @@ public class AuthorActionDo extends DispatchAction {
 			author.setSurname(uf.getSurname());
 			author.setPhoto(uf.getPhoto());
 			
-			if(Converter.checkStringToDate(uf.getBornDate())){
+			if(Validator.isValidDate(uf.getBornDate())){
 				author.setBornDate(Converter.fromStringToDate(uf.getBornDate()));
 			}
 			
@@ -108,7 +109,7 @@ public class AuthorActionDo extends DispatchAction {
 			author.setSurname(uf.getSurname());
 			author.setPhoto(uf.getPhoto());
 			
-			if(Converter.checkStringToDate(uf.getBornDate())){
+			if(Validator.isValidDate(uf.getBornDate())){
 				author.setBornDate(Converter.fromStringToDate(uf.getBornDate()));
 			}
 			

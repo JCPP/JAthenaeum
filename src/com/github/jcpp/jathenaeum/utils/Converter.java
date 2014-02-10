@@ -15,20 +15,6 @@ import java.util.Date;
 public class Converter {
 	
 	/**
-	 * Check if the String is a valid Date.
-	 * @param dateToCheck the String date to check.
-	 * @return True if the String is a valid Date, false otherwise.
-	 */
-	public static boolean checkStringToDate(String dateToCheck){
-		try {
-			fromStringToDate(dateToCheck);
-		} catch (ParseException e) {
-			return false;
-		}
-		return true;
-	}
-	
-	/**
 	 * Converts string to date. It uses the <b>dd/MM/yyyy</b> format.
 	 * @param dateToConvert the string date to convert.
 	 * @return The Date object.

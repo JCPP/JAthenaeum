@@ -4,6 +4,7 @@
 package com.github.jcpp.jathenaeum.actions;
 
 import java.util.ArrayList;
+
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
@@ -18,6 +19,7 @@ import com.github.jcpp.jathenaeum.Author;
 import com.github.jcpp.jathenaeum.beans.AuthorForm;
 import com.github.jcpp.jathenaeum.db.dao.AuthorDAO;
 import com.github.jcpp.jathenaeum.utils.Converter;
+import com.github.jcpp.jathenaeum.utils.Validator;
 
 /**
  * 
@@ -82,7 +84,7 @@ public class AuthorAction extends DispatchAction {
 			author.setSurname(authorForm.getSurname());
 			author.setPhoto(authorForm.getPhoto());
 			
-			if(Converter.checkStringToDate(authorForm.getBornDate())){
+			if(Validator.isValidDate(authorForm.getBornDate())){
 				author.setBornDate(Converter.fromStringToDate(authorForm.getBornDate()));
 			}
 			
@@ -168,7 +170,7 @@ public class AuthorAction extends DispatchAction {
 			author.setSurname(authorForm.getSurname());
 			author.setPhoto(authorForm.getPhoto());
 			
-			if(Converter.checkStringToDate(authorForm.getBornDate())){
+			if(Validator.isValidDate(authorForm.getBornDate())){
 				author.setBornDate(Converter.fromStringToDate(authorForm.getBornDate()));
 			}
 			

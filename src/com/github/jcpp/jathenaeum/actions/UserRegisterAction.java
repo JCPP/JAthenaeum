@@ -13,6 +13,7 @@ import com.github.jcpp.jathenaeum.User;
 import com.github.jcpp.jathenaeum.beans.UserRegisterForm;
 import com.github.jcpp.jathenaeum.db.dao.UserDAO;
 import com.github.jcpp.jathenaeum.utils.Converter;
+import com.github.jcpp.jathenaeum.utils.Validator;
 
 public class UserRegisterAction extends Action{
 
@@ -31,7 +32,7 @@ public class UserRegisterAction extends Action{
         	user.setName(uf.getName());
         	user.setSurname(uf.getSurname());
         	
-        	if(Converter.checkStringToDate(uf.getBornDate())){
+        	if(Validator.isValidDate(uf.getBornDate())){
         		user.setBornDate(Converter.fromStringToDate(uf.getBornDate()));
 			}
         	
