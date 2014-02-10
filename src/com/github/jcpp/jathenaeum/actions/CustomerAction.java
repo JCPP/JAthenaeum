@@ -15,13 +15,9 @@ import org.apache.struts.action.ActionForward;
 import org.apache.struts.action.ActionMapping;
 import org.apache.struts.actions.DispatchAction;
 
-import com.github.jcpp.jathenaeum.Author;
 import com.github.jcpp.jathenaeum.Customer;
-import com.github.jcpp.jathenaeum.beans.AuthorForm;
 import com.github.jcpp.jathenaeum.beans.CustomerForm;
-import com.github.jcpp.jathenaeum.db.dao.AuthorDAO;
 import com.github.jcpp.jathenaeum.db.dao.CustomerDAO;
-import com.github.jcpp.jathenaeum.utils.Converter;
 
 /**
  * @author <a href="https://github.com/DavidePastore">DavidePastore</a>
@@ -36,7 +32,7 @@ public class CustomerAction extends DispatchAction {
 		
 		HttpSession session = request.getSession();
 		ActionErrors actionErrors = (ActionErrors) session.getAttribute("errors");
-		AuthorForm authorForm = (AuthorForm) session.getAttribute("form");
+		CustomerForm customerForm = (CustomerForm) session.getAttribute("form");
 		
 		if(actionErrors != null){
 			//Save the errors in this action
@@ -49,7 +45,7 @@ public class CustomerAction extends DispatchAction {
 		
 
 		//Set the request
-		request.setAttribute("addCustomerForm", authorForm);
+		request.setAttribute("addCustomerForm", customerForm);
 		actionTarget = "add";
 		
 		return mapping.findForward(actionTarget);

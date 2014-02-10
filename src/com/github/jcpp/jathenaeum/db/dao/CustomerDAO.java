@@ -8,15 +8,11 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
-import java.sql.Types;
 import java.util.ArrayList;
 
-import com.github.jcpp.jathenaeum.Author;
 import com.github.jcpp.jathenaeum.Customer;
 import com.github.jcpp.jathenaeum.db.Database;
-import com.github.jcpp.jathenaeum.exceptions.AuthorNotFoundException;
 import com.github.jcpp.jathenaeum.exceptions.CustomerNotFoundException;
-import com.github.jcpp.jathenaeum.utils.Converter;
 
 /**
  * DAO of Customer.
@@ -172,6 +168,100 @@ private static Database db = Database.getInstance();
 			}
 		}
 		return result;
+	}
+	
+	
+	/**
+	 * Get a customer by the email.
+	 * @param email the email.
+	 * @return Returns a customer by the email.
+	 * @throws CustomerNotFoundException Throws a CustomerNotFoundException if the Customer is not found.
+	 */
+	public static Customer getByEmail(String email) throws CustomerNotFoundException{
+		Connection con = db.getConnection();
+		Customer customer = null;
+		PreparedStatement stmt = null;
+		try {
+			con.setAutoCommit(false);
+			final String select = "SELECT * FROM Customer WHERE CustomerEmail = ?";
+			stmt = con.prepareStatement(select);
+			stmt.setString(1, email);
+			ResultSet resultSet = stmt.executeQuery();
+			
+			if(resultSet.next()){
+				customer = new Customer();
+				customer.setCardNumber(resultSet.getInt(1));
+				customer.setEmail(resultSet.getString(2));
+				customer.setName(resultSet.getString(3));
+				customer.setSurname(resultSet.getString(4));
+			}
+			else{
+				throw new CustomerNotFoundException();
+			}
+			
+			con.commit();
+		} catch (SQLException sqle) {
+			sqle.printStackTrace();
+			try {
+				con.rollback();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+		} finally {
+			try {
+				if (stmt!=null) {
+					stmt.close();
+					stmt=null;
+				}
+				db.closeConnection(con);
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+		}
+		return customer;
+	}
+	
+	
+	/**
+	 * Get the number of the customers by the email.
+	 * @param email the email.
+	 * @return Returns all the number of the customers by the email.
+	 */
+	public static int getNumberByEmail(String email){
+		Connection con = db.getConnection();
+		int customerNumber = 0;
+		PreparedStatement stmt = null;
+		try {
+			con.setAutoCommit(false);
+			final String select = "SELECT COUNT(*) FROM Customer WHERE CustomerEmail = ?";
+			stmt = con.prepareStatement(select);
+			stmt.setString(1, email);
+			ResultSet resultSet = stmt.executeQuery();
+			
+			if(resultSet.next()){
+				customerNumber = resultSet.getInt(1);
+			}
+			
+			con.commit();
+		} catch (SQLException sqle) {
+			sqle.printStackTrace();
+			try {
+				con.rollback();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+		} finally {
+			try {
+				if (stmt!=null) {
+					stmt.close();
+					stmt=null;
+				}
+				db.closeConnection(con);
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+		}
+		return customerNumber;
 	}
 	
 	

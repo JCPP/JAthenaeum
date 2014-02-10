@@ -14,13 +14,9 @@ import org.apache.struts.action.ActionMapping;
 import org.apache.struts.action.ActionRedirect;
 import org.apache.struts.actions.DispatchAction;
 
-import com.github.jcpp.jathenaeum.Author;
 import com.github.jcpp.jathenaeum.Customer;
-import com.github.jcpp.jathenaeum.beans.AuthorForm;
 import com.github.jcpp.jathenaeum.beans.CustomerForm;
-import com.github.jcpp.jathenaeum.db.dao.AuthorDAO;
 import com.github.jcpp.jathenaeum.db.dao.CustomerDAO;
-import com.github.jcpp.jathenaeum.utils.Converter;
 
 /**
  * @author <a href="https://github.com/DavidePastore">DavidePastore</a>
@@ -37,6 +33,8 @@ public class CustomerActionDo extends DispatchAction {
 		CustomerForm uf = (CustomerForm) form;
 		
 		ActionErrors actionErrors = uf.validate(mapping, request);
+		actionErrors.add(uf.validateEmailInDb(mapping, request));
+		
 		
 		//If there are some errors, redirect to the form page
 		if(!actionErrors.isEmpty()){
@@ -80,6 +78,13 @@ public class CustomerActionDo extends DispatchAction {
 		int id = Integer.parseInt(request.getParameter("id"));
 		
 		ActionErrors actionErrors = uf.validate(mapping, request);
+		
+		customer = CustomerDAO.getById(id);
+		
+		//If the customer set a different email it need to check it
+		if(!customer.getEmail().equals(uf.getEmail())){
+			actionErrors.add(uf.validateEmailInDb(mapping, request));
+		}
 		
 		//If there are some errors, redirect to the form page
 		if(!actionErrors.isEmpty()){

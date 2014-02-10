@@ -10,6 +10,7 @@ import org.apache.struts.action.ActionForm;
 import org.apache.struts.action.ActionMapping;
 import org.apache.struts.action.ActionMessage;
 
+import com.github.jcpp.jathenaeum.db.dao.CustomerDAO;
 import com.github.jcpp.jathenaeum.utils.Validator;
 
 /**
@@ -87,6 +88,18 @@ public class CustomerForm extends ActionForm {
 		
 		if(!Validator.isValidEmail(email)){
 			errors.add("email", new ActionMessage("signup.email.invalid"));
+		}
+		
+		return errors;
+	}
+	
+	
+	public ActionErrors validateEmailInDb(ActionMapping mapping,
+			HttpServletRequest request) {
+		ActionErrors errors = new ActionErrors();
+		
+		if(CustomerDAO.getNumberByEmail(email) > 0){
+			errors.add("email", new ActionMessage("customer.email.alreadyused"));
 		}
 		
 		return errors;
