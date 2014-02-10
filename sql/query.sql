@@ -54,6 +54,7 @@ CREATE TABLE Loan (
 	CopyID integer NOT NULL,
 	LoanStartDate date NOT NULL,
 	LoanEndDate date NOT NULL,
+	LoanReturned boolean NOT NULL,
 	FOREIGN KEY (CustomerCardNumber) REFERENCES Customer(CustomerCardNumber)
 		ON UPDATE CASCADE
 		ON DELETE CASCADE,

@@ -22,6 +22,8 @@ public class LoanForm extends ActionForm {
 	private String bookId;
 	private String startDate;
 	private String endDate;
+	private String returned;
+	
 	/**
 	 * @return the customerCardNumber
 	 */
@@ -70,17 +72,31 @@ public class LoanForm extends ActionForm {
 	public void setEndDate(String endDate) {
 		this.endDate = endDate;
 	}
+	/**
+	 * @return the returned
+	 */
+	public String getReturned() {
+		return returned;
+	}
+	/**
+	 * @param returned the returned to set
+	 */
+	public void setReturned(String returned) {
+		this.returned = returned;
+	}
+	
 	
 	public ActionErrors validate(ActionMapping mapping,
 			HttpServletRequest request) {
 		ActionErrors errors = new ActionErrors();
 		
-		/*
+		/**/
 		System.out.println("customer card number: " + customerCardNumber);
 		System.out.println("book id: " + bookId);
 		System.out.println("start date: " + startDate);
 		System.out.println("end date: " + endDate);
-		*/
+		System.out.println("returned: " + returned);
+		
 		
 		//Check customer card number
 		if(customerCardNumber == null || customerCardNumber.isEmpty()){

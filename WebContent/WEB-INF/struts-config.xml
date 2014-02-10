@@ -185,6 +185,7 @@
         	<forward name="add" path="page.addLoan"/>
         	<forward name="edit" path="page.editLoan"/>
         	<forward name="noBooks" path="page.noBooks" />
+        	<forward name="noCopies" path="page.noCopies" />
         	<forward name="noCustomers" path="page.noCustomers" />
         </action>
         

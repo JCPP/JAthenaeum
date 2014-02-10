@@ -372,6 +372,18 @@
 		<put name="body" value="/layout/loan/failedInsert.jsp" />
 	</definition>
 	
+	<!-- No books -->
+	<definition name="page.noBooks" extends="base.definition.bootstrap">
+		<put name="title" value="No Books" />
+		<put name="body" value="/layout/loan/noBooks.jsp" />
+	</definition>
+	
+	<!-- No copies -->
+	<definition name="page.noCopies" extends="base.definition.bootstrap">
+		<put name="title" value="No Copies" />
+		<put name="body" value="/layout/loan/noCopies.jsp" />
+	</definition>
+	
 	<!-- No customers -->
 	<definition name="page.noCustomers" extends="base.definition.bootstrap">
 		<put name="title" value="No Customers" />

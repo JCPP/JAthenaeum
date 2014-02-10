@@ -11,7 +11,6 @@ import java.sql.Statement;
 import java.sql.Types;
 import java.util.ArrayList;
 
-import com.github.jcpp.jathenaeum.Author;
 import com.github.jcpp.jathenaeum.Loan;
 import com.github.jcpp.jathenaeum.db.Database;
 import com.github.jcpp.jathenaeum.exceptions.LoanNotFoundException;
@@ -48,6 +47,7 @@ public class LoanDAO {
 				loan.setCopyId(resultSet.getInt(3));
 				loan.setStartDate(resultSet.getDate(4));
 				loan.setEndDate(resultSet.getDate(5));
+				loan.setReturned(resultSet.getBoolean(6));
 				loans.add(loan);
 			}
 			
@@ -98,6 +98,7 @@ public class LoanDAO {
 				loan.setCopyId(resultSet.getInt(3));
 				loan.setStartDate(resultSet.getDate(4));
 				loan.setEndDate(resultSet.getDate(5));
+				loan.setReturned(resultSet.getBoolean(6));
 			}
 			else{
 				throw new LoanNotFoundException();
@@ -150,6 +151,7 @@ public class LoanDAO {
 				loan.setCopyId(resultSet.getInt(3));
 				loan.setStartDate(resultSet.getDate(4));
 				loan.setEndDate(resultSet.getDate(5));
+				loan.setReturned(resultSet.getBoolean(6));
 				loans.add(loan);
 			}
 			
@@ -177,11 +179,11 @@ public class LoanDAO {
 	
 	
 	/**
-	 * Get all Loan instances of an Book.
+	 * Get all Loan instances of a Book.
 	 * @param bookId the bookId.
-	 * @return Returns all Loan instances in an ArrayList<Loan> of an Book.
+	 * @return Returns all Loan instances in an ArrayList<Loan> of a Book.
 	 */
-	public static ArrayList<Loan> getAllByIdLibro(int bookId){
+	public static ArrayList<Loan> getAllByBookId(int bookId){
 		Connection con = db.getConnection();
 		ArrayList<Loan> loans = new ArrayList<Loan>();
 		PreparedStatement stmt = null;
@@ -200,6 +202,7 @@ public class LoanDAO {
 				loan.setCopyId(resultSet.getInt(3));
 				loan.setStartDate(resultSet.getDate(4));
 				loan.setEndDate(resultSet.getDate(5));
+				loan.setReturned(resultSet.getBoolean(6));
 				loans.add(loan);
 			}
 			
@@ -238,7 +241,7 @@ public class LoanDAO {
 
 		try {
 			con.setAutoCommit(false);
-			String insert = "INSERT INTO Loan (CustomerCardNumber, CopyID, LoanStartDate, LoanEndDate) VALUES (?, ?, ?, ?)";
+			String insert = "INSERT INTO Loan (CustomerCardNumber, CopyID, LoanStartDate, LoanEndDate, LoanReturned) VALUES (?, ?, ?, ?, ?)";
 			stmt = con.prepareStatement(insert, Statement.RETURN_GENERATED_KEYS);
 			stmt.setInt(1, loan.getCustomerCardNumber());
 			stmt.setInt(2, loan.getCopyId());
@@ -256,6 +259,8 @@ public class LoanDAO {
 			else{
 				stmt.setDate(4, Converter.fromUtilDateToSqlDate(loan.getEndDate()));
 			}
+			
+			stmt.setBoolean(5, loan.isReturned());
 			
 			result = stmt.executeUpdate();
 			
@@ -302,7 +307,7 @@ public class LoanDAO {
 
 		try {
 			con.setAutoCommit(false);
-			String insert = "UPDATE Loan SET CustomerCardNumber = ?, CopyId = ?, LoanStartDate = ?, LoanEndDate = ? WHERE LoanID = ?";
+			String insert = "UPDATE Loan SET CustomerCardNumber = ?, CopyId = ?, LoanStartDate = ?, LoanEndDate = ?, LoanReturned = ? WHERE LoanID = ?";
 			stmt = con.prepareStatement(insert, Statement.RETURN_GENERATED_KEYS);
 			stmt.setInt(1, loan.getCustomerCardNumber());
 			stmt.setInt(2, loan.getCopyId());
@@ -321,7 +326,9 @@ public class LoanDAO {
 				stmt.setDate(4, Converter.fromUtilDateToSqlDate(loan.getEndDate()));
 			}
 			
-			stmt.setInt(5, loan.getId());
+			stmt.setBoolean(5, loan.isReturned());
+			
+			stmt.setInt(6, loan.getId());
 			
 			result = stmt.executeUpdate();
 			

@@ -39,5 +39,10 @@
 	</select>
 	<input type="date" name="startDate" class="form-control" placeholder="01/02/2014" value="${loan.startDate.date}/${loan.startDate.month+1}/${loan.startDate.year+1900}" required>
 	<input type="date" name="endDate" class="form-control" placeholder="20/02/2014" value="${loan.endDate.date}/${loan.endDate.month+1}/${loan.endDate.year+1900}" required>
+	<label class="checkbox"> <input type="checkbox" value="returned" name="returned"
+	<logic:equal name="loan" property="returned" value="true">
+		checked
+	</logic:equal>
+	>Returned</label>
 	<button class="btn btn-lg btn-primary btn-block" type="submit">Edit Loan</button>
 </form>

@@ -17,6 +17,7 @@ public class Loan {
 	private int copyId;
 	private Date startDate;
 	private Date endDate;
+	private boolean returned;
 	
 	
 	/**
@@ -78,6 +79,18 @@ public class Loan {
 	 */
 	public void setEndDate(Date endDate) {
 		this.endDate = endDate;
+	}
+	/**
+	 * @return the returned
+	 */
+	public boolean isReturned() {
+		return returned;
+	}
+	/**
+	 * @param returned the returned to set
+	 */
+	public void setReturned(boolean returned) {
+		this.returned = returned;
 	}
 
 }

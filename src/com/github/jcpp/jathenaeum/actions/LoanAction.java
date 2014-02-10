@@ -15,13 +15,10 @@ import org.apache.struts.action.ActionForward;
 import org.apache.struts.action.ActionMapping;
 import org.apache.struts.actions.DispatchAction;
 
-import com.github.jcpp.jathenaeum.Author;
 import com.github.jcpp.jathenaeum.Book;
 import com.github.jcpp.jathenaeum.Customer;
 import com.github.jcpp.jathenaeum.Loan;
-import com.github.jcpp.jathenaeum.beans.AuthorForm;
 import com.github.jcpp.jathenaeum.beans.LoanForm;
-import com.github.jcpp.jathenaeum.db.dao.AuthorDAO;
 import com.github.jcpp.jathenaeum.db.dao.BookDAO;
 import com.github.jcpp.jathenaeum.db.dao.CustomerDAO;
 import com.github.jcpp.jathenaeum.db.dao.LoanDAO;
@@ -40,7 +37,8 @@ public class LoanAction extends DispatchAction {
 					throws Exception {
 		String actionTarget = null;
 
-		ArrayList<Book> books = BookDAO.getAllWithAtLeastOneCopy();
+		ArrayList<Book> booksWithCopies = BookDAO.getAllWithAtLeastOneCopy();
+		int numberOfBook = BookDAO.getNumber();
 		ArrayList<Customer> customers = CustomerDAO.getAll();
 		
 		HttpSession session = request.getSession();
@@ -57,6 +55,10 @@ public class LoanAction extends DispatchAction {
 		if(loanForm != null){
 			loan.setCustomerCardNumber(Integer.parseInt(loanForm.getCustomerCardNumber()));
 			loan.setCopyId(Integer.parseInt(loanForm.getBookId()));
+
+			if(loanForm.getReturned() != null){
+				loan.setReturned(true);
+			}
 		}
 		
 		//Remove attributes from session
@@ -64,20 +66,21 @@ public class LoanAction extends DispatchAction {
 		session.removeAttribute("form");
 		
 		
-		if(books.isEmpty()){
+		if(booksWithCopies.isEmpty()){
+			actionTarget = "noCopies";
+		}
+		else if(customers.isEmpty()){
+			actionTarget = "noCustomers";
+		}
+		else if(numberOfBook == 0){
 			actionTarget = "noBooks";
 		}
 		else{
-			if(customers.isEmpty()){
-				actionTarget = "noCustomers";
-			}
-			else{
-				//Set the request
-				request.setAttribute("loan", loan);
-				request.setAttribute("books", books);
-				request.setAttribute("customers", customers);
-				actionTarget = "add";
-			}
+			//Set the request
+			request.setAttribute("loan", loan);
+			request.setAttribute("books", booksWithCopies);
+			request.setAttribute("customers", customers);
+			actionTarget = "add";
 		}
 		
 		
@@ -123,6 +126,10 @@ public class LoanAction extends DispatchAction {
 			
 			if(Validator.isValidDate(loanForm.getEndDate())){
 				loan.setEndDate(Converter.fromStringToDate(loanForm.getEndDate()));
+			}
+			
+			if(loanForm.getReturned() != null){
+				loan.setReturned(true);
 			}
 			
 		}

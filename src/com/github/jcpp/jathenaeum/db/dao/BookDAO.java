@@ -290,6 +290,45 @@ public class BookDAO {
 	
 	
 	/**
+	 * Get the number of the Book instances
+	 * @return Returns the number of the Book instances.
+	 */
+	public static int getNumber(){
+		Connection con = db.getConnection();
+		int number = 0;
+		PreparedStatement stmt = null;
+		try {
+			con.setAutoCommit(false);
+			final String select = "SELECT COUNT(*) FROM Book";
+			stmt = con.prepareStatement(select);
+			ResultSet resultSet = stmt.executeQuery();
+			resultSet.next();
+			number = resultSet.getInt(1);
+			
+			con.commit();
+		} catch (SQLException sqle) {
+			sqle.printStackTrace();
+			try {
+				con.rollback();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+		} finally {
+			try {
+				if (stmt!=null) {
+					stmt.close();
+					stmt=null;
+				}
+				db.closeConnection(con);
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+		}
+		return number;
+	}
+	
+	
+	/**
 	 * Get the number of the Book instances.
 	 * @param isbn the isbn code.
 	 * @return Returns the number of the Book instances.
@@ -303,7 +342,7 @@ public class BookDAO {
 			final String select = "SELECT COUNT(*) FROM Book WHERE BookIsbnCode = ?";
 			stmt = con.prepareStatement(select);
 			ResultSet resultSet = stmt.executeQuery();
-			
+			resultSet.next();
 			number = resultSet.getInt(1);
 			
 			con.commit();

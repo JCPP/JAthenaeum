@@ -70,7 +70,53 @@ public class CopyDAO {
 	
 	
 	/**
-	 * Get one Copy instances by the book id.
+	 * Get one <b>free</b> Copy instance by the book id.
+	 * @param bookId the book ID of the copy.
+	 * @return Returns one <b>free</b> Copy instance.
+	 */
+	public static Copy getOneFreeByBookId(int bookId){
+		Connection con = db.getConnection();
+		PreparedStatement stmt = null;
+		Copy copy = null;
+		try {
+			con.setAutoCommit(false);
+			final String select = "SELECT * FROM Copy WHERE BookID = ? LIMIT 1";
+			stmt = con.prepareStatement(select);
+			stmt.setInt(1, bookId);
+			ResultSet resultSet = stmt.executeQuery();
+			
+			
+			if(resultSet.next()){
+				copy = new Copy();
+				copy.setId(resultSet.getInt(1));
+				copy.setBookId(resultSet.getInt(2));
+			}
+			
+			con.commit();
+		} catch (SQLException sqle) {
+			sqle.printStackTrace();
+			try {
+				con.rollback();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+		} finally {
+			try {
+				if (stmt!=null) {
+					stmt.close();
+					stmt=null;
+				}
+				db.closeConnection(con);
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+		}
+		return copy;
+	}
+	
+	
+	/**
+	 * Get one Copy instance by the book id.
 	 * @param bookId the book ID of the copy.
 	 * @return Returns one Copy instance.
 	 */
