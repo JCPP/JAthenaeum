@@ -37,7 +37,7 @@ public class LoanAction extends DispatchAction {
 					throws Exception {
 		String actionTarget = null;
 
-		ArrayList<Book> booksWithCopies = BookDAO.getAllWithAtLeastOneCopy();
+		ArrayList<Book> booksWithCopies = BookDAO.getAllWithAtLeastOneFreeCopy();
 		int numberOfBook = BookDAO.getNumber();
 		ArrayList<Customer> customers = CustomerDAO.getAll();
 		
@@ -93,7 +93,7 @@ public class LoanAction extends DispatchAction {
 					throws Exception {
 		String actionTarget = null;
 		
-		ArrayList<Book> books = BookDAO.getAllWithAtLeastOneCopy();
+		ArrayList<Book> books = BookDAO.getAllWithAtLeastOneFreeCopy();
 		ArrayList<Customer> customers = CustomerDAO.getAll();
 		
 		String id = request.getParameter("id");

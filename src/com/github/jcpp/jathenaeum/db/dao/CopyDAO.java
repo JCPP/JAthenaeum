@@ -253,6 +253,50 @@ public class CopyDAO {
 	
 	
 	/**
+	 * Get the number of the <b>free</b> copies from the Book ID.
+	 * @param bookId the Book ID.
+	 * @return Returns all the number of the free copies by the Book ID.
+	 */
+	public static int getFreeNumberByBookId(int bookId){
+		Connection con = db.getConnection();
+		int copyNumber = 0;
+		PreparedStatement stmt = null;
+		try {
+			con.setAutoCommit(false);
+			final String select = "SELECT * FROM Copy C LEFT OUTER JOIN Loan L ON L.CopyID = C.CopyID " 
+								  + "WHERE C.BookID = ? AND COALESCE(L.LoanReturned, TRUE) != FALSE GROUP BY C.CopyID";
+			stmt = con.prepareStatement(select);
+			stmt.setInt(1, bookId);
+			ResultSet resultSet = stmt.executeQuery();
+			
+			if(resultSet.next()){
+				copyNumber = resultSet.getInt(1);
+			}
+			
+			con.commit();
+		} catch (SQLException sqle) {
+			sqle.printStackTrace();
+			try {
+				con.rollback();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+		} finally {
+			try {
+				if (stmt!=null) {
+					stmt.close();
+					stmt=null;
+				}
+				db.closeConnection(con);
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+		}
+		return copyNumber;
+	}
+	
+	
+	/**
 	 * Insert a new copy.
 	 * @param bookId the book ID to insert. 
 	 * @return Returns the result of the query. 
