@@ -7,13 +7,14 @@
 <%@ taglib uri="http://struts.apache.org/tags-bean" prefix="bean" %>
 <%@ taglib uri="http://struts.apache.org/tags-html" prefix="html" %>
 <%@ taglib uri="http://struts.apache.org/tags-logic" prefix="logic" %>
+<%@ taglib uri="http://struts.apache.org/tags-tiles" prefix="tiles" %>
 <%
 	Loan loan = (Loan) request.getAttribute("loan");
 %>
 
 <html:errors/>
-<form class="form-signup" role="form" action="doLoan.do?op=add" method="post" name="addLoanForm">
-	<h2 class="form-signup-heading">Add a Loan</h2>
+<form class="form-signup" role="form" action="doLoan.do?op=edit&id=${loan.id}" method="post" name="editLoanForm">
+	<h2 class="form-signup-heading">Edit Loan</h2>
 	<select name="customerCardNumber" class="form-control" required>
 		<logic:iterate name="customers" id="customersId">
 			<option value="${customersId.cardNumber}"
@@ -36,7 +37,7 @@
 			>${booksId.title}</option>
 		</logic:iterate>
 	</select>
-	<input type="date" name="startDate" class="form-control" placeholder="01/02/2014" value="${loan.startDate}" required>
-	<input type="date" name="endDate" class="form-control" placeholder="20/02/2014" value="${loan.endDate}" required>
-	<button class="btn btn-lg btn-primary btn-block" type="submit">Add Loan</button>
+	<input type="date" name="startDate" class="form-control" placeholder="01/02/2014" value="${loan.startDate.date}/${loan.startDate.month+1}/${loan.startDate.year+1900}" required>
+	<input type="date" name="endDate" class="form-control" placeholder="20/02/2014" value="${loan.endDate.date}/${loan.endDate.month+1}/${loan.endDate.year+1900}" required>
+	<button class="btn btn-lg btn-primary btn-block" type="submit">Edit Loan</button>
 </form>

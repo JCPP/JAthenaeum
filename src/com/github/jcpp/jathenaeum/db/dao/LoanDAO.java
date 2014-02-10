@@ -11,6 +11,7 @@ import java.sql.Statement;
 import java.sql.Types;
 import java.util.ArrayList;
 
+import com.github.jcpp.jathenaeum.Author;
 import com.github.jcpp.jathenaeum.Loan;
 import com.github.jcpp.jathenaeum.db.Database;
 import com.github.jcpp.jathenaeum.exceptions.LoanNotFoundException;
@@ -286,6 +287,66 @@ public class LoanDAO {
 			}
 		}
 		return result;
+	}
+	
+	
+	/**
+	 * Update a loan.
+	 * @param loan the loan to update. 
+	 * @return Returns the id of the updated loan. 
+	 */
+	public static long update(Loan loan){
+		Connection con = db.getConnection();
+		PreparedStatement stmt = null;
+		long result = 0;
+
+		try {
+			con.setAutoCommit(false);
+			String insert = "UPDATE Loan SET CustomerCardNumber = ?, CopyId = ?, LoanStartDate = ?, LoanEndDate = ? WHERE LoanID = ?";
+			stmt = con.prepareStatement(insert, Statement.RETURN_GENERATED_KEYS);
+			stmt.setInt(1, loan.getCustomerCardNumber());
+			stmt.setInt(2, loan.getCopyId());
+			
+			if(loan.getStartDate() == null){
+				stmt.setNull(3, Types.DATE);
+			}
+			else{
+				stmt.setDate(3, Converter.fromUtilDateToSqlDate(loan.getStartDate()));
+			}
+			
+			if(loan.getEndDate() == null){
+				stmt.setNull(4, Types.DATE);
+			}
+			else{
+				stmt.setDate(4, Converter.fromUtilDateToSqlDate(loan.getEndDate()));
+			}
+			
+			stmt.setInt(5, loan.getId());
+			
+			result = stmt.executeUpdate();
+			
+			con.commit();
+			
+
+		} catch (SQLException sqle) {
+			sqle.printStackTrace();
+			try {
+				con.rollback();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+		} finally {
+			try {
+				if (stmt != null) {
+					stmt.close();
+					stmt = null;
+				}
+				db.closeConnection(con);
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+		}
+		return loan.getId();
 	}
 
 }

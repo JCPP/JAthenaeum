@@ -183,6 +183,7 @@
         <!-- Loan -->
         <action path="/loan" type="com.github.jcpp.jathenaeum.actions.LoanAction" parameter="op">
         	<forward name="add" path="page.addLoan"/>
+        	<forward name="edit" path="page.editLoan"/>
         	<forward name="noBooks" path="page.noBooks" />
         	<forward name="noCustomers" path="page.noCustomers" />
         </action>
@@ -199,6 +200,11 @@
 	        <forward name="addErrors" path="/loan.do?op=add" redirect="true"/>
 	        <forward name="addSuccess" path="page.confirmLoanInsert"/>
 	        <forward name="addFailed" path="page.failedLoanInsert"/>
+	        
+	        <!-- Edit -->
+	        <forward name="editErrors" path="/loan.do?op=edit" redirect="true"/>
+	        <forward name="editSuccess" path="page.confirmLoanEdit" />
+	        <forward name="editFailed" path="page.failedLoanEdit" />
         </action>
         
 	</action-mappings>

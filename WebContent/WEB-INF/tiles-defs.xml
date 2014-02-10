@@ -378,4 +378,25 @@
 		<put name="body" value="/layout/loan/noCustomers.jsp" />
 	</definition>
 	
+	<!-- Edit Loan -->
+	<definition name="page.editLoan" extends="base.definition.bootstrap">
+		<put name="title" value="Edit Loan" />
+		<put name="body" value="/layout/loan/edit.jsp" />
+		<put name="style" value="css/signup.css" />
+	</definition>
+	
+	<!-- Confirm edit -->
+	<definition name="page.confirmLoanEdit" extends="base.definition.bootstrap">
+		<put name="redirect" value="index.do" />
+		<put name="title" value="Confirm Edit Loan" />
+		<put name="body" value="/layout/loan/confirmEdit.jsp" />
+	</definition>
+	
+	<!-- Failed edit -->
+	<definition name="page.failedLoanEdit" extends="base.definition.bootstrap">
+		<put name="redirect" value="index.do" />
+		<put name="title" value="Failed Edit Loan" />
+		<put name="body" value="/layout/loan/failedEdit.jsp" />
+	</definition>
+	
 </tiles-definitions>
