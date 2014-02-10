@@ -18,6 +18,9 @@
 		
 		<!-- Customer -->
 		<form-bean name="customerForm" type="com.github.jcpp.jathenaeum.beans.CustomerForm"/>
+		
+		<!-- Loan -->
+		<form-bean name="loanForm" type="com.github.jcpp.jathenaeum.beans.LoanForm"/>
 	</form-beans>
 	
 	<global-forwards>
@@ -68,7 +71,6 @@
         	<forward name="delete" path="page.deleteAuthor"/>
         	<forward name="viewAll" path="page.viewAllAuthors"/>
         	<forward name="search" path="page.searchAuthors"/>
-        	<forward name="noAuthors" path="page.noAuthors" />
         </action>
         
         <!-- Author Operations -->
@@ -175,6 +177,28 @@
 	        <forward name="deleteErrors" path="/customer.do?op=delete" redirect="true"/>
 	        <forward name="deleteSuccess" path="page.confirmCustomerDelete" />
 	        <forward name="deleteFailed" path="page.failedCustomerDelete" />
+        </action>
+        
+        
+        <!-- Loan -->
+        <action path="/loan" type="com.github.jcpp.jathenaeum.actions.LoanAction" parameter="op">
+        	<forward name="add" path="page.addLoan"/>
+        	<forward name="noBooks" path="page.noBooks" />
+        	<forward name="noCustomers" path="page.noCustomers" />
+        </action>
+        
+        <!-- Loan Operations -->
+        <action
+	        path="/doLoan"
+	        type="com.github.jcpp.jathenaeum.actions.LoanActionDo"
+	        name="loanForm"
+	        scope="request"
+	        validate="false"
+	        parameter="op">
+	        <!-- Add -->
+	        <forward name="addErrors" path="/loan.do?op=add" redirect="true"/>
+	        <forward name="addSuccess" path="page.confirmLoanInsert"/>
+	        <forward name="addFailed" path="page.failedLoanInsert"/>
         </action>
         
 	</action-mappings>

@@ -7,11 +7,14 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Statement;
+import java.sql.Types;
 import java.util.ArrayList;
 
 import com.github.jcpp.jathenaeum.Loan;
 import com.github.jcpp.jathenaeum.db.Database;
 import com.github.jcpp.jathenaeum.exceptions.LoanNotFoundException;
+import com.github.jcpp.jathenaeum.utils.Converter;
 
 /**
  * DAO of Loan.
@@ -41,7 +44,7 @@ public class LoanDAO {
 				loan = new Loan();
 				loan.setId(resultSet.getInt(1));
 				loan.setCustomerCardNumber(resultSet.getInt(2));
-				loan.setBookId(resultSet.getInt(3));
+				loan.setCopyId(resultSet.getInt(3));
 				loan.setStartDate(resultSet.getDate(4));
 				loan.setEndDate(resultSet.getDate(5));
 				loans.add(loan);
@@ -91,7 +94,7 @@ public class LoanDAO {
 				loan = new Loan();
 				loan.setId(resultSet.getInt(1));
 				loan.setCustomerCardNumber(resultSet.getInt(2));
-				loan.setBookId(resultSet.getInt(3));
+				loan.setCopyId(resultSet.getInt(3));
 				loan.setStartDate(resultSet.getDate(4));
 				loan.setEndDate(resultSet.getDate(5));
 			}
@@ -127,7 +130,7 @@ public class LoanDAO {
 	 * @param customerCardNumber the CustomerCardNumber.
 	 * @return Returns all Loan instances in an ArrayList<Loan> of an User.
 	 */
-	public static ArrayList<Loan> getAllByIdUtente(int customerCardNumber){
+	public static ArrayList<Loan> getAllByCustomerCardNumber(int customerCardNumber){
 		Connection con = db.getConnection();
 		ArrayList<Loan> loans = new ArrayList<Loan>();
 		PreparedStatement stmt = null;
@@ -143,7 +146,7 @@ public class LoanDAO {
 				loan = new Loan();
 				loan.setId(resultSet.getInt(1));
 				loan.setCustomerCardNumber(resultSet.getInt(2));
-				loan.setBookId(resultSet.getInt(3));
+				loan.setCopyId(resultSet.getInt(3));
 				loan.setStartDate(resultSet.getDate(4));
 				loan.setEndDate(resultSet.getDate(5));
 				loans.add(loan);
@@ -193,7 +196,7 @@ public class LoanDAO {
 				loan = new Loan();
 				loan.setId(resultSet.getInt(1));
 				loan.setCustomerCardNumber(resultSet.getInt(2));
-				loan.setBookId(resultSet.getInt(3));
+				loan.setCopyId(resultSet.getInt(3));
 				loan.setStartDate(resultSet.getDate(4));
 				loan.setEndDate(resultSet.getDate(5));
 				loans.add(loan);
@@ -219,6 +222,70 @@ public class LoanDAO {
 			}
 		}
 		return loans;
+	}
+	
+	
+	/**
+	 * Insert a new loan.
+	 * @param loan the loan to insert. 
+	 * @return Returns the id of the inserted loan. 
+	 */
+	public static long insert(Loan loan){
+		Connection con = db.getConnection();
+		PreparedStatement stmt = null;
+		long result = 0;
+
+		try {
+			con.setAutoCommit(false);
+			String insert = "INSERT INTO Loan (CustomerCardNumber, CopyID, LoanStartDate, LoanEndDate) VALUES (?, ?, ?, ?)";
+			stmt = con.prepareStatement(insert, Statement.RETURN_GENERATED_KEYS);
+			stmt.setInt(1, loan.getCustomerCardNumber());
+			stmt.setInt(2, loan.getCopyId());
+			
+			if(loan.getStartDate() == null){
+				stmt.setNull(3, Types.DATE);
+			}
+			else{
+				stmt.setDate(3, Converter.fromUtilDateToSqlDate(loan.getStartDate()));
+			}
+			
+			if(loan.getEndDate() == null){
+				stmt.setNull(4, Types.DATE);
+			}
+			else{
+				stmt.setDate(4, Converter.fromUtilDateToSqlDate(loan.getEndDate()));
+			}
+			
+			result = stmt.executeUpdate();
+			
+			ResultSet generatedKeys = stmt.getGeneratedKeys();
+			
+			if (generatedKeys.next()) {
+	            result = generatedKeys.getLong(1);
+	        }
+			
+			con.commit();
+			
+
+		} catch (SQLException sqle) {
+			sqle.printStackTrace();
+			try {
+				con.rollback();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+		} finally {
+			try {
+				if (stmt != null) {
+					stmt.close();
+					stmt = null;
+				}
+				db.closeConnection(con);
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+		}
+		return result;
 	}
 
 }

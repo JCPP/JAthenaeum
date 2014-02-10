@@ -14,7 +14,7 @@ public class Loan {
 	
 	private int id;
 	private int customerCardNumber;
-	private int bookId;
+	private int copyId;
 	private Date startDate;
 	private Date endDate;
 	
@@ -44,16 +44,16 @@ public class Loan {
 		this.customerCardNumber = customerCardNumber;
 	}
 	/**
-	 * @return the bookId
+	 * @return the copyId
 	 */
-	public int getBookId() {
-		return bookId;
+	public int getCopyId() {
+		return copyId;
 	}
 	/**
-	 * @param bookId the bookId to set
+	 * @param copyId the copyId to set
 	 */
-	public void setBookId(int bookId) {
-		this.bookId = bookId;
+	public void setCopyId(int copyId) {
+		this.copyId = copyId;
 	}
 	/**
 	 * @return the startDate
@@ -70,7 +70,7 @@ public class Loan {
 	/**
 	 * @return the endDate
 	 */
-	public Date getDataFine() {
+	public Date getEndDate() {
 		return endDate;
 	}
 	/**

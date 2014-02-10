@@ -54,6 +54,16 @@
 						<li><a href="customer.do?op=add">Add</a></li>
 						<li><a href="customer.do?op=viewAll">View All</a></li>
 					</ul></li>
+					
+				<li class="dropdown
+				<% if(((String)title).contains("Loan")){
+					out.write("active");
+				}%>
+				"><a href="#" class="dropdown-toggle"
+					data-toggle="dropdown">Loan <b class="caret"></b></a>
+					<ul class="dropdown-menu">
+						<li><a href="loan.do?op=add">Add</a></li>
+					</ul></li>
 			</ul>
 			<div class="nav navbar-nav navbar-right">
 				<!-- User not present -->

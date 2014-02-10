@@ -3,7 +3,6 @@
  */
 package com.github.jcpp.jathenaeum.actions;
 
-import java.awt.font.NumericShaper;
 import java.util.ArrayList;
 
 import javax.servlet.http.HttpServletRequest;

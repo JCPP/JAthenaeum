@@ -349,4 +349,33 @@
 		<put name="body" value="/layout/customer/viewAll.jsp" />
 	</definition>
 	
+	
+	
+	<!-- Add Loan -->
+	<definition name="page.addLoan" extends="base.definition.bootstrap">
+		<put name="title" value="Add Loan" />
+		<put name="body" value="/layout/loan/add.jsp" />
+		<put name="style" value="css/signup.css" />
+	</definition>
+	
+	<!-- Confirm insert -->
+	<definition name="page.confirmLoanInsert" extends="base.definition.bootstrap">
+		<put name="redirect" value="index.do" />
+		<put name="title" value="Confirm Insert Loan" />
+		<put name="body" value="/layout/loan/confirmInsert.jsp" />
+	</definition>
+	
+	<!-- Failed insert -->
+	<definition name="page.failedLoanInsert" extends="base.definition.bootstrap">
+		<put name="redirect" value="index.do" />
+		<put name="title" value="Failed Insert Loan" />
+		<put name="body" value="/layout/loan/failedInsert.jsp" />
+	</definition>
+	
+	<!-- No customers -->
+	<definition name="page.noCustomers" extends="base.definition.bootstrap">
+		<put name="title" value="No Customers" />
+		<put name="body" value="/layout/loan/noCustomers.jsp" />
+	</definition>
+	
 </tiles-definitions>
