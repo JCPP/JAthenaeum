@@ -80,11 +80,13 @@ public class CopyDAO {
 		Copy copy = null;
 		try {
 			con.setAutoCommit(false);
-			final String select = "SELECT * FROM Copy WHERE BookID = ? LIMIT 1";
+			final String select = "SELECT C.* FROM Copy C "
+					+ "LEFT OUTER JOIN Loan L ON (L.CopyID = C.CopyID) "
+					+ "LEFT JOIN Loan L2 ON (L.LoanID < L2.LoanID AND L.CopyID = L2.CopyID) "
+					+ "WHERE L2.LoanID IS NULL AND C.BookID = ? AND COALESCE(L.LoanReturned, TRUE) != FALSE";
 			stmt = con.prepareStatement(select);
 			stmt.setInt(1, bookId);
 			ResultSet resultSet = stmt.executeQuery();
-			
 			
 			if(resultSet.next()){
 				copy = new Copy();

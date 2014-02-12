@@ -53,7 +53,7 @@ public class LoanActionDo extends DispatchAction {
 		
 		if(form != null){
 			//Get a copy
-			Copy copy = CopyDAO.getOneByBookId(Integer.parseInt(uf.getBookId()));
+			Copy copy = CopyDAO.getOneFreeByBookId(Integer.parseInt(uf.getBookId()));
 			
 			//Set the loan
 			loan.setCopyId(copy.getId());
@@ -105,7 +105,7 @@ public class LoanActionDo extends DispatchAction {
 
 		if(form != null){
 			//Get a copy
-			Copy copy = CopyDAO.getOneByBookId(Integer.parseInt(uf.getBookId()));
+			Copy copy = CopyDAO.getOneFreeByBookId(Integer.parseInt(uf.getBookId()));
 			
 			
 			//Set the loan
