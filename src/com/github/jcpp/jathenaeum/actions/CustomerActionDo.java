@@ -51,9 +51,7 @@ public class CustomerActionDo extends DispatchAction {
 		
 		
 		if(form != null){
-			customer.setName(uf.getName());
-			customer.setSurname(uf.getSurname());
-			customer.setEmail(uf.getEmail());
+			customer = new Customer(uf);
 
 			try{
 				CustomerDAO.insert(customer);
@@ -101,10 +99,8 @@ public class CustomerActionDo extends DispatchAction {
 		}
 
 		if(form != null){
+			customer = new Customer(uf);
 			customer.setCardNumber(id);
-			customer.setName(uf.getName());
-			customer.setSurname(uf.getSurname());
-			customer.setEmail(uf.getEmail());
 
 			try{
 				CustomerDAO.update(customer);
