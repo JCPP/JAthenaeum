@@ -420,6 +420,7 @@ public class LoanDAO {
 			
 			String firstPart = "SELECT L.* FROM Loan L WHERE (L.CustomerCardNumber = ? OR ? = '') AND (L.CopyID ";
 			
+			//Create a dynamic query for the <b>in</b> clause
 			if(Validator.isValidInt(loanForm.getBookId())){
 				copies = CopyDAO.getAllByBookId(Integer.parseInt(loanForm.getBookId()));
 				
@@ -473,7 +474,12 @@ public class LoanDAO {
 			}
 			else{
 				stmt.setString(counter++, "");
-				stmt.setString(counter++, "");
+				if(!Validator.isValidInt(loanForm.getBookId())){
+					stmt.setString(counter++, "");
+				}
+				else{
+					stmt.setString(counter++, "PINGAS");
+				}
 			}
 			
 			//Start Date
