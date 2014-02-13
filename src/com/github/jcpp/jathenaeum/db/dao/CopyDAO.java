@@ -39,9 +39,7 @@ public class CopyDAO {
 			Copy copy;
 			
 			while(resultSet.next()){
-				copy = new Copy();
-				copy.setId(resultSet.getInt(1));
-				copy.setBookId(resultSet.getInt(2));
+				copy = new Copy(resultSet);
 				
 				copies.add(copy);
 			}
@@ -89,9 +87,7 @@ public class CopyDAO {
 			ResultSet resultSet = stmt.executeQuery();
 			
 			if(resultSet.next()){
-				copy = new Copy();
-				copy.setId(resultSet.getInt(1));
-				copy.setBookId(resultSet.getInt(2));
+				copy = new Copy(resultSet);
 			}
 			
 			con.commit();
@@ -135,9 +131,7 @@ public class CopyDAO {
 			
 			
 			if(resultSet.next()){
-				copy = new Copy();
-				copy.setId(resultSet.getInt(1));
-				copy.setBookId(resultSet.getInt(2));
+				copy = new Copy(resultSet);
 			}
 			
 			con.commit();
@@ -181,9 +175,7 @@ public class CopyDAO {
 			Copy copy;
 			
 			while(resultSet.next()){
-				copy = new Copy();
-				copy.setId(resultSet.getInt(1));
-				copy.setBookId(resultSet.getInt(2));
+				copy = new Copy(resultSet);
 				
 				copies.add(copy);
 			}

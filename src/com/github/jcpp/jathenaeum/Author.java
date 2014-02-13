@@ -32,7 +32,7 @@ public class Author {
 	
 	
 	/**
-	 * Create an Author instance from a resultSet
+	 * Create an Author instance from a ResultSet
 	 * @param resultSet
 	 * @throws SQLException 
 	 */
