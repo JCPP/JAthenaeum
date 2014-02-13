@@ -3,6 +3,9 @@
  */
 package com.github.jcpp.jathenaeum.beans;
 
+import java.text.ParseException;
+import java.util.Date;
+
 import javax.servlet.http.HttpServletRequest;
 
 import org.apache.struts.action.ActionErrors;
@@ -10,6 +13,7 @@ import org.apache.struts.action.ActionForm;
 import org.apache.struts.action.ActionMapping;
 import org.apache.struts.action.ActionMessage;
 
+import com.github.jcpp.jathenaeum.utils.Converter;
 import com.github.jcpp.jathenaeum.utils.Validator;
 
 /**
@@ -116,6 +120,22 @@ public class LoanForm extends ActionForm {
 		//Check end date
 		if(!Validator.isValidDate(endDate)){
 			errors.add("endDate", new ActionMessage("loan.enddate.invalid"));
+		}
+		
+		//Check if start date is greater than end date
+		if(Validator.isValidDate(startDate) && Validator.isValidDate(endDate)){
+			try {
+				Date sqlStartDate = Converter.fromStringToDate(startDate);
+				Date sqlEndDate = Converter.fromStringToDate(endDate);
+				
+				if(!sqlStartDate.before(sqlEndDate)){
+					errors.add("startDate", new ActionMessage("loan.startdate.greater"));
+				}
+				
+			} catch (ParseException e) {
+				e.printStackTrace();
+			}
+			
 		}
 		
 		return errors;
