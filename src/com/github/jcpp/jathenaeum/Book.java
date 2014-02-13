@@ -7,6 +7,8 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 
+import com.github.jcpp.jathenaeum.beans.BookForm;
+
 /**
  * Book class.
  * @author <a href="https://github.com/DavidePastore">DavidePastore</a>
@@ -44,6 +46,19 @@ public class Book {
 		description = resultSet.getString(6);
 	}
 	
+	/**
+	 * Create a Book instance from an BookForm.
+	 * @param bookForm
+	 */
+	public Book(BookForm bookForm) {
+		cover = bookForm.getCover();
+		description = bookForm.getDescription();
+		genre = bookForm.getGenre();
+		isbnCode = bookForm.getIsbn();
+		title = bookForm.getTitle();
+	}
+
+
 	/**
 	 * @return the id
 	 */

@@ -111,13 +111,8 @@ public class BookAction extends DispatchAction {
 		}
 		
 		if(bookForm != null){
-			
 			//Overwrite the attributes
-			book.setCover(bookForm.getCover());
-			book.setDescription(bookForm.getDescription());
-			book.setGenre(bookForm.getGenre());
-			book.setIsbnCode(bookForm.getIsbn());
-			book.setTitle(bookForm.getTitle());
+			book = new Book(bookForm);
 			
 			String[] oldAuthors = bookForm.getAuthors();
 			
@@ -210,13 +205,7 @@ public class BookAction extends DispatchAction {
 		Book book = new Book();
 		
 		if(bookForm != null){
-			
-			//Overwrite the attributes
-			book.setCover(bookForm.getCover());
-			book.setDescription(bookForm.getDescription());
-			book.setGenre(bookForm.getGenre());
-			book.setIsbnCode(bookForm.getIsbn());
-			book.setTitle(bookForm.getTitle());
+			book = new Book(bookForm);
 		}
 			
 		
