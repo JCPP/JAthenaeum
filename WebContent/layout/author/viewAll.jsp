@@ -21,7 +21,7 @@
 	%>
 	<logic:iterate name="authors" id="authorsId">
 		<%
-			//Opena the tag if this is the third element
+			//Open the tag if this is the third element
 			if(counter % 3 == 0){
 				out.write("<div class=\"row\">");
 			}
