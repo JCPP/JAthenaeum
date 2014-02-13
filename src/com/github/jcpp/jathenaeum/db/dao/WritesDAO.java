@@ -9,12 +9,8 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 
-import com.github.jcpp.jathenaeum.Author;
-import com.github.jcpp.jathenaeum.Book;
 import com.github.jcpp.jathenaeum.Writes;
 import com.github.jcpp.jathenaeum.db.Database;
-import com.github.jcpp.jathenaeum.exceptions.AuthorNotFoundException;
-import com.github.jcpp.jathenaeum.exceptions.BookNotFoundException;
 import com.github.jcpp.jathenaeum.exceptions.WriteNotFoundException;
 
 /**
@@ -43,10 +39,7 @@ public class WritesDAO {
 			Writes writes;
 			
 			while(resultSet.next()){
-				writes = new Writes();
-				writes.setId(resultSet.getInt(1));
-				writes.setBookId(resultSet.getInt(2));
-				writes.setAuthorId(resultSet.getInt(3));
+				writes = new Writes(resultSet);
 				writeArray.add(writes);
 			}
 			
@@ -91,10 +84,7 @@ public class WritesDAO {
 			Writes writes;
 			
 			while(resultSet.next()){
-				writes = new Writes();
-				writes.setId(resultSet.getInt(1));
-				writes.setBookId(resultSet.getInt(2));
-				writes.setAuthorId(resultSet.getInt(3));
+				writes = new Writes(resultSet);
 				writeArray.add(writes);
 			}
 			
@@ -140,10 +130,7 @@ public class WritesDAO {
 			con.commit();
 			
 			if(resultSet.next()){
-				writes = new Writes();
-				writes.setId(resultSet.getInt(1));
-				writes.setBookId(resultSet.getInt(2));
-				writes.setAuthorId(resultSet.getInt(3));
+				writes = new Writes(resultSet);
 			}
 			else{
 				throw new WriteNotFoundException();

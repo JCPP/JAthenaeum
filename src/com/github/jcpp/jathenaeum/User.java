@@ -22,7 +22,7 @@ public class User {
 	private Date bornDate;
 	
 	/**
-	 * Create a User instance.
+	 * Create an User instance.
 	 */
 	public User(){
 		
