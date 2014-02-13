@@ -55,12 +55,7 @@ public class BookActionDo extends DispatchAction {
 		
 		
 		if(form != null){
-			book.setTitle(uf.getTitle());
-			book.setCover(uf.getCover());
-			book.setGenre(uf.getGenre());
-			book.setIsbnCode(uf.getIsbn());
-			book.setDescription(uf.getDescription());
-
+			book = new Book(uf);
 
 			try{
 				long bookId = BookDAO.insert(book);
@@ -114,12 +109,8 @@ public class BookActionDo extends DispatchAction {
 		}
 
 		if(form != null){
+			book = new Book(uf);
 			book.setId(id);
-			book.setTitle(uf.getTitle());
-			book.setCover(uf.getCover());
-			book.setGenre(uf.getGenre());
-			book.setIsbnCode(uf.getIsbn());
-			book.setDescription(uf.getDescription());
 
 			try{
 				int bookId = (int) BookDAO.update(book);
