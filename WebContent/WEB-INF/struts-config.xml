@@ -31,7 +31,7 @@
 		<action path="/index" type="com.github.jcpp.jathenaeum.actions.IndexAction" parameter="page.index" />
 		
 		<!-- User -->
-		<action path="/signup" type="org.apache.struts.actions.ForwardAction" parameter="page.signup" />
+		<action path="/signup" type="org.apache.struts.actions.ForwardAction" parameter="page.user.signup" />
 		<action
 	        path="/doRegister"
 	        type="com.github.jcpp.jathenaeum.actions.UserRegisterAction"
@@ -40,11 +40,11 @@
 	        validate="true"
 	        input="/signup.do"
 	        cancellable="true">
-	        <forward name="success" path="page.confirmRegistration"/>
-	        <forward name="failed" path="page.failedRegistration"/>
+	        <forward name="success" path="page.user.signup.confirm"/>
+	        <forward name="failed" path="page.user.signup.failed"/>
         </action>
         
-        <action path="/signin" type="org.apache.struts.actions.ForwardAction" parameter="page.signin" />
+        <action path="/signin" type="org.apache.struts.actions.ForwardAction" parameter="page.user.signin" />
         <action
 	        path="/doSignin"
 	        type="com.github.jcpp.jathenaeum.actions.SigninAction"
@@ -53,24 +53,24 @@
 	        validate="true"
 	        input="/signin.do"
 	        cancellable="true">
-	        <forward name="success" path="page.confirmSignin"/>
-	        <forward name="failed" path="page.failedSignin"/>
+	        <forward name="success" path="page.user.signin.confirm"/>
+	        <forward name="failed" path="page.user.signin.failed"/>
         </action>
         
-        <action path="/logout" type="com.github.jcpp.jathenaeum.actions.LogoutAction" parameter="page.logout">
-	        <forward name="success" path="page.confirmLogout"/>
-	        <forward name="failed" path="page.failedLogout"/>
+        <action path="/logout" type="com.github.jcpp.jathenaeum.actions.LogoutAction" parameter="page.user.logout">
+	        <forward name="success" path="page.user.logout.confirm"/>
+	        <forward name="failed" path="page.user.logout.failed"/>
         </action>
         
         
         
         <!-- Author -->
         <action path="/author" type="com.github.jcpp.jathenaeum.actions.AuthorAction" parameter="op">
-        	<forward name="add" path="page.addAuthor"/>
-        	<forward name="edit" path="page.editAuthor"/>
-        	<forward name="delete" path="page.deleteAuthor"/>
-        	<forward name="viewAll" path="page.viewAllAuthors"/>
-        	<forward name="search" path="page.searchAuthors"/>
+        	<forward name="add" path="page.author.add"/>
+        	<forward name="edit" path="page.author.edit"/>
+        	<forward name="delete" path="page.author.delete"/>
+        	<forward name="viewAll" path="page.author.viewall"/>
+        	<forward name="search" path="page.author.search"/>
         </action>
         
         <!-- Author Operations -->
@@ -83,18 +83,18 @@
 	        parameter="op">
 	        <!-- Add -->
 	        <forward name="addErrors" path="/author.do?op=add" redirect="true"/>
-	        <forward name="addSuccess" path="page.confirmAuthorInsert"/>
-	        <forward name="addFailed" path="page.failedAuthorInsert"/>
+	        <forward name="addSuccess" path="page.author.add.confirm"/>
+	        <forward name="addFailed" path="page.author.add.failed"/>
 	        
 	        <!-- Edit -->
 	        <forward name="editErrors" path="/author.do?op=edit" redirect="true"/>
-	        <forward name="editSuccess" path="page.confirmAuthorEdit" />
-	        <forward name="editFailed" path="page.failedAuthorEdit" />
+	        <forward name="editSuccess" path="page.author.edit.confirm" />
+	        <forward name="editFailed" path="page.author.edit.failed" />
 	        
 	        <!-- Delete -->
 	        <forward name="deleteErrors" path="/author.do?op=delete" redirect="true"/>
-	        <forward name="deleteSuccess" path="page.confirmAuthorDelete" />
-	        <forward name="deleteFailed" path="page.failedAuthorDelete" />
+	        <forward name="deleteSuccess" path="page.author.delete.confirm" />
+	        <forward name="deleteFailed" path="page.author.delete.failed" />
 	        
 	        <!-- Search -->
 	        <forward name="search" path="/author.do?op=search" redirect="true"/>
@@ -104,13 +104,13 @@
         
         <!-- Book -->
         <action path="/book" type="com.github.jcpp.jathenaeum.actions.BookAction" parameter="op">
-        	<forward name="add" path="page.addBook"/>
-        	<forward name="edit" path="page.editBook"/>
-        	<forward name="delete" path="page.deleteBook"/>
-        	<forward name="viewAll" path="page.viewAllBooks"/>
-        	<forward name="search" path="page.searchBooks"/>
-        	<forward name="manageCopies" path="page.manageBookCopies"/>
-        	<forward name="noAuthors" path="page.noAuthors" />
+        	<forward name="add" path="page.book.add"/>
+        	<forward name="edit" path="page.book.edit"/>
+        	<forward name="delete" path="page.book.delete"/>
+        	<forward name="viewAll" path="page.book.viewall"/>
+        	<forward name="search" path="page.book.search"/>
+        	<forward name="manageCopies" path="page.book.managecopies"/>
+        	<forward name="noAuthors" path="page.author.none" />
         </action>
         
         <!-- Book Operations -->
@@ -123,36 +123,36 @@
 	        parameter="op">
 	        <!-- Add -->
 	        <forward name="addErrors" path="/book.do?op=add" redirect="true"/>
-	        <forward name="addSuccess" path="page.confirmBookInsert"/>
-	        <forward name="addFailed" path="page.failedBookInsert"/>
+	        <forward name="addSuccess" path="page.book.add.confirm"/>
+	        <forward name="addFailed" path="page.book.add.failed"/>
 	        
 	        <!-- Edit -->
 	        <forward name="editErrors" path="/book.do?op=edit" redirect="true"/>
-	        <forward name="editSuccess" path="page.confirmBookEdit" />
-	        <forward name="editFailed" path="page.failedBookEdit" />
+	        <forward name="editSuccess" path="page.book.edit.confirm" />
+	        <forward name="editFailed" path="page.book.edit.failed" />
 	        
 	        <!-- Delete -->
 	        <forward name="deleteErrors" path="/book.do?op=delete" redirect="true"/>
-	        <forward name="deleteSuccess" path="page.confirmBookDelete" />
-	        <forward name="deleteFailed" path="page.failedBookDelete" />
+	        <forward name="deleteSuccess" path="page.book.delete.confirm" />
+	        <forward name="deleteFailed" path="page.book.delete.failed" />
 	        
 	        <!-- Search -->
 	        <forward name="search" path="/book.do?op=search" redirect="true"/>
 	        
 	        <!-- Manage Copies -->
 	        <forward name="manageCopiesErrors" path="/book.do?op=manageCopies" redirect="true"/>
-	        <forward name="manageCopiesSuccess" path="page.confirmManageBookCopies" />
-	        <forward name="manageCopiesFailed" path="page.failedManageBookCopies" />
+	        <forward name="manageCopiesSuccess" path="page.book.managecopies.confirm" />
+	        <forward name="manageCopiesFailed" path="page.book.managecopies.failed" />
         </action>
         
         
         
         <!-- Customer -->
         <action path="/customer" type="com.github.jcpp.jathenaeum.actions.CustomerAction" parameter="op">
-        	<forward name="add" path="page.addCustomer"/>
-        	<forward name="edit" path="page.editCustomer"/>
-        	<forward name="delete" path="page.deleteCustomer"/>
-        	<forward name="viewAll" path="page.viewAllCustomers"/>
+        	<forward name="add" path="page.customer.add"/>
+        	<forward name="edit" path="page.customer.edit"/>
+        	<forward name="delete" path="page.customer.delete"/>
+        	<forward name="viewAll" path="page.customer.viewall"/>
         </action>
         
         <!-- Customer Operations -->
@@ -165,31 +165,31 @@
 	        parameter="op">
 	        <!-- Add -->
 	        <forward name="addErrors" path="/customer.do?op=add" redirect="true"/>
-	        <forward name="addSuccess" path="page.confirmCustomerInsert"/>
-	        <forward name="addFailed" path="page.failedCustomerInsert"/>
+	        <forward name="addSuccess" path="page.customer.add.confirm"/>
+	        <forward name="addFailed" path="page.customer.add.failed"/>
 	        
 	        <!-- Edit -->
 	        <forward name="editErrors" path="/customer.do?op=edit" redirect="true"/>
-	        <forward name="editSuccess" path="page.confirmCustomerEdit" />
-	        <forward name="editFailed" path="page.failedCustomerEdit" />
+	        <forward name="editSuccess" path="page.customer.edit.confirm" />
+	        <forward name="editFailed" path="page.customer.edit.failed" />
 	        
 	        <!-- Delete -->
 	        <forward name="deleteErrors" path="/customer.do?op=delete" redirect="true"/>
-	        <forward name="deleteSuccess" path="page.confirmCustomerDelete" />
-	        <forward name="deleteFailed" path="page.failedCustomerDelete" />
+	        <forward name="deleteSuccess" path="page.customer.delete.confirm" />
+	        <forward name="deleteFailed" path="page.customer.delete.failed" />
         </action>
         
         
         <!-- Loan -->
         <action path="/loan" type="com.github.jcpp.jathenaeum.actions.LoanAction" parameter="op">
-        	<forward name="add" path="page.addLoan"/>
-        	<forward name="edit" path="page.editLoan"/>
-        	<forward name="delete" path="page.deleteLoan"/>
-        	<forward name="viewAll" path="page.viewAllLoans"/>
-        	<forward name="search" path="page.searchLoans"/>
-        	<forward name="noBooks" path="page.noBooks" />
-        	<forward name="noCopies" path="page.noCopies" />
-        	<forward name="noCustomers" path="page.noCustomers" />
+        	<forward name="add" path="page.loan.add"/>
+        	<forward name="edit" path="page.loan.edit"/>
+        	<forward name="delete" path="page.loan.delete"/>
+        	<forward name="viewAll" path="page.loan.viewall"/>
+        	<forward name="search" path="page.loan.search"/>
+        	<forward name="noBooks" path="page.book.none" />
+        	<forward name="noCopies" path="page.copy.none" />
+        	<forward name="noCustomers" path="page.customer.none" />
         </action>
         
         <!-- Loan Operations -->
@@ -202,18 +202,18 @@
 	        parameter="op">
 	        <!-- Add -->
 	        <forward name="addErrors" path="/loan.do?op=add" redirect="true"/>
-	        <forward name="addSuccess" path="page.confirmLoanInsert"/>
-	        <forward name="addFailed" path="page.failedLoanInsert"/>
+	        <forward name="addSuccess" path="page.loan.add.confirm"/>
+	        <forward name="addFailed" path="page.loan.add.failed"/>
 	        
 	        <!-- Edit -->
 	        <forward name="editErrors" path="/loan.do?op=edit" redirect="true"/>
-	        <forward name="editSuccess" path="page.confirmLoanEdit" />
-	        <forward name="editFailed" path="page.failedLoanEdit" />
+	        <forward name="editSuccess" path="page.loan.edit.confirm" />
+	        <forward name="editFailed" path="page.loan.edit.failed" />
 	        
 	        <!-- Delete -->
 	        <forward name="deleteErrors" path="/loan.do?op=delete" redirect="true"/>
-	        <forward name="deleteSuccess" path="page.confirmLoanDelete" />
-	        <forward name="deleteFailed" path="page.failedLoanDelete" />
+	        <forward name="deleteSuccess" path="page.loan.delete.confirm" />
+	        <forward name="deleteFailed" path="page.loan.delete.failed" />
 	        
 	        <!-- Search -->
 	        <forward name="search" path="/loan.do?op=search" redirect="true"/>
