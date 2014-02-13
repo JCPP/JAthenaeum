@@ -102,7 +102,7 @@
 	<!-- Add Author -->
 	<definition name="page.author.add" extends="base.definition.bootstrap">
 		<put name="title" value="Add Author" />
-		<put name="body" value="/layout/author/addAuthor.jsp" />
+		<put name="body" value="/layout/author/add.jsp" />
 		<put name="style" value="css/signup.css" />
 	</definition>
 	
@@ -110,20 +110,20 @@
 	<definition name="page.author.add.confirm" extends="base.definition.bootstrap">
 		<put name="redirect" value="index.do" />
 		<put name="title" value="Confirm Insert Author" />
-		<put name="body" value="/layout/author/confirmAuthorInsert.jsp" />
+		<put name="body" value="/layout/author/confirmInsert.jsp" />
 	</definition>
 	
 	<!-- Failed insert -->
 	<definition name="page.author.add.failed" extends="base.definition.bootstrap">
 		<put name="redirect" value="index.do" />
 		<put name="title" value="Failed Insert Author" />
-		<put name="body" value="/layout/author/failedAuthorInsert.jsp" />
+		<put name="body" value="/layout/author/failedInsert.jsp" />
 	</definition>
 	
 	<!-- Edit Author -->
 	<definition name="page.author.edit" extends="base.definition.bootstrap">
 		<put name="title" value="Edit Author" />
-		<put name="body" value="/layout/author/editAuthor.jsp" />
+		<put name="body" value="/layout/author/edit.jsp" />
 		<put name="style" value="css/signup.css" />
 	</definition>
 	
@@ -131,20 +131,20 @@
 	<definition name="page.author.edit.confirm" extends="base.definition.bootstrap">
 		<put name="redirect" value="index.do" />
 		<put name="title" value="Confirm Edit Author" />
-		<put name="body" value="/layout/author/confirmAuthorEdit.jsp" />
+		<put name="body" value="/layout/author/confirmEdit.jsp" />
 	</definition>
 	
 	<!-- Failed edit -->
 	<definition name="page.author.edit.failed" extends="base.definition.bootstrap">
 		<put name="redirect" value="index.do" />
 		<put name="title" value="Failed Edit Author" />
-		<put name="body" value="/layout/author/failedAuthorEdit.jsp" />
+		<put name="body" value="/layout/author/failedEdit.jsp" />
 	</definition>
 	
 	<!-- Delete Author -->
 	<definition name="page.author.delete" extends="base.definition.bootstrap">
 		<put name="title" value="Delete Author" />
-		<put name="body" value="/layout/author/deleteAuthor.jsp" />
+		<put name="body" value="/layout/author/delete.jsp" />
 		<put name="style" value="css/signup.css" />
 	</definition>
 	
@@ -152,14 +152,14 @@
 	<definition name="page.author.delete.confirm" extends="base.definition.bootstrap">
 		<put name="redirect" value="index.do" />
 		<put name="title" value="Confirm Delete Author" />
-		<put name="body" value="/layout/author/confirmAuthorDelete.jsp" />
+		<put name="body" value="/layout/author/confirmDelete.jsp" />
 	</definition>
 	
 	<!-- Failed delete -->
 	<definition name="page.author.delete.failed" extends="base.definition.bootstrap">
 		<put name="redirect" value="index.do" />
 		<put name="title" value="Failed Delete Author" />
-		<put name="body" value="/layout/author/failedAuthorDelete.jsp" />
+		<put name="body" value="/layout/author/failedDelete.jsp" />
 	</definition>
 	
 	<!-- View All -->
@@ -177,14 +177,14 @@
 	<!-- No authors -->
 	<definition name="page.author.none" extends="base.definition.bootstrap">
 		<put name="title" value="No Authors" />
-		<put name="body" value="/layout/book/noAuthors.jsp" />
+		<put name="body" value="/layout/author/noAuthors.jsp" />
 	</definition>
 	
 	
 	<!-- Add Book -->
 	<definition name="page.book.add" extends="base.definition.bootstrap">
 		<put name="title" value="Add Book" />
-		<put name="body" value="/layout/book/addBook.jsp" />
+		<put name="body" value="/layout/book/add.jsp" />
 		<put name="style" value="css/signup.css" />
 	</definition>
 	
@@ -192,20 +192,20 @@
 	<definition name="page.book.add.confirm" extends="base.definition.bootstrap">
 		<put name="redirect" value="index.do" />
 		<put name="title" value="Confirm Insert Book" />
-		<put name="body" value="/layout/book/confirmBookInsert.jsp" />
+		<put name="body" value="/layout/book/confirmInsert.jsp" />
 	</definition>
 	
 	<!-- Failed insert -->
 	<definition name="page.book.add.failed" extends="base.definition.bootstrap">
 		<put name="redirect" value="index.do" />
 		<put name="title" value="Failed Insert Book" />
-		<put name="body" value="/layout/book/failedBookInsert.jsp" />
+		<put name="body" value="/layout/book/failedInsert.jsp" />
 	</definition>
 	
 	<!-- Edit Book -->
 	<definition name="page.book.edit" extends="base.definition.bootstrap">
 		<put name="title" value="Edit Book" />
-		<put name="body" value="/layout/book/editBook.jsp" />
+		<put name="body" value="/layout/book/edit.jsp" />
 		<put name="style" value="css/signup.css" />
 	</definition>
 	
@@ -213,20 +213,20 @@
 	<definition name="page.book.edit.confirm" extends="base.definition.bootstrap">
 		<put name="redirect" value="index.do" />
 		<put name="title" value="Confirm Edit Book" />
-		<put name="body" value="/layout/book/confirmBookEdit.jsp" />
+		<put name="body" value="/layout/book/confirmEdit.jsp" />
 	</definition>
 	
 	<!-- Failed edit -->
 	<definition name="page.book.edit.failed" extends="base.definition.bootstrap">
 		<put name="redirect" value="index.do" />
 		<put name="title" value="Failed Edit Book" />
-		<put name="body" value="/layout/book/failedBookEdit.jsp" />
+		<put name="body" value="/layout/book/failedEdit.jsp" />
 	</definition>
 	
 	<!-- Delete Book -->
 	<definition name="page.book.delete" extends="base.definition.bootstrap">
 		<put name="title" value="Delete Book" />
-		<put name="body" value="/layout/book/deleteBook.jsp" />
+		<put name="body" value="/layout/book/delete.jsp" />
 		<put name="style" value="css/signup.css" />
 	</definition>
 	
@@ -234,14 +234,14 @@
 	<definition name="page.book.delete.confirm" extends="base.definition.bootstrap">
 		<put name="redirect" value="index.do" />
 		<put name="title" value="Confirm Delete Book" />
-		<put name="body" value="/layout/book/confirmBookDelete.jsp" />
+		<put name="body" value="/layout/book/confirmDelete.jsp" />
 	</definition>
 	
 	<!-- Failed delete -->
 	<definition name="page.book.delete.failed" extends="base.definition.bootstrap">
 		<put name="redirect" value="index.do" />
 		<put name="title" value="Failed Delete Book" />
-		<put name="body" value="/layout/book/failedBookDelete.jsp" />
+		<put name="body" value="/layout/book/failedDelete.jsp" />
 	</definition>
 	
 	<!-- View All -->
@@ -280,13 +280,13 @@
 	<!-- No books -->
 	<definition name="page.book.none" extends="base.definition.bootstrap">
 		<put name="title" value="No Books" />
-		<put name="body" value="/layout/loan/noBooks.jsp" />
+		<put name="body" value="/layout/book/noBooks.jsp" />
 	</definition>
 	
 	<!-- No copies -->
 	<definition name="page.copy.none" extends="base.definition.bootstrap">
 		<put name="title" value="No Copies" />
-		<put name="body" value="/layout/loan/noCopies.jsp" />
+		<put name="body" value="/layout/book/noCopies.jsp" />
 	</definition>
 	
 	
@@ -363,7 +363,7 @@
 	<!-- No customers -->
 	<definition name="page.customer.none" extends="base.definition.bootstrap">
 		<put name="title" value="No Customers" />
-		<put name="body" value="/layout/loan/noCustomers.jsp" />
+		<put name="body" value="/layout/customer/noCustomers.jsp" />
 	</definition>
 	
 	
