@@ -5,7 +5,12 @@ package com.github.jcpp.jathenaeum;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.text.ParseException;
 import java.util.Date;
+
+import com.github.jcpp.jathenaeum.beans.AuthorForm;
+import com.github.jcpp.jathenaeum.utils.Converter;
+import com.github.jcpp.jathenaeum.utils.Validator;
 
 
 /**
@@ -44,6 +49,25 @@ public class Author {
 		bornDate = resultSet.getDate(5);
 		biography = resultSet.getString(6);
 	}
+	
+	/**
+	 * Create an Author instance from an AuthorForm.
+	 * @param authorForm
+	 * @throws ParseException 
+	 */
+	public Author(AuthorForm authorForm) throws ParseException {
+		name = authorForm.getName();
+		surname = authorForm.getSurname();
+		photo = authorForm.getPhoto();
+		
+		if(Validator.isValidDate(authorForm.getBornDate())){
+			bornDate = Converter.fromStringToDate(authorForm.getBornDate());
+		}
+		
+		biography = authorForm.getBiography();
+	}
+
+
 	/**
 	 * @return the id
 	 */

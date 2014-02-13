@@ -18,8 +18,6 @@ import org.apache.struts.actions.DispatchAction;
 import com.github.jcpp.jathenaeum.Author;
 import com.github.jcpp.jathenaeum.beans.AuthorForm;
 import com.github.jcpp.jathenaeum.db.dao.AuthorDAO;
-import com.github.jcpp.jathenaeum.utils.Converter;
-import com.github.jcpp.jathenaeum.utils.Validator;
 
 /**
  * 
@@ -78,18 +76,8 @@ public class AuthorAction extends DispatchAction {
 		}
 		
 		if(authorForm != null){
-			
 			//Overwrite the attributes
-			author.setName(authorForm.getName());
-			author.setSurname(authorForm.getSurname());
-			author.setPhoto(authorForm.getPhoto());
-			
-			if(Validator.isValidDate(authorForm.getBornDate())){
-				author.setBornDate(Converter.fromStringToDate(authorForm.getBornDate()));
-			}
-			
-			author.setBiography(authorForm.getBiography());
-			
+			author = new Author(authorForm);
 		}
 		
 		
@@ -164,18 +152,8 @@ public class AuthorAction extends DispatchAction {
 		Author author = new Author();
 		
 		if(authorForm != null){
-			
 			//Overwrite the attributes
-			author.setName(authorForm.getName());
-			author.setSurname(authorForm.getSurname());
-			author.setPhoto(authorForm.getPhoto());
-			
-			if(Validator.isValidDate(authorForm.getBornDate())){
-				author.setBornDate(Converter.fromStringToDate(authorForm.getBornDate()));
-			}
-			
-			
-			author.setBiography(authorForm.getBiography());
+			author = new Author(authorForm);
 		}
 			
 		
