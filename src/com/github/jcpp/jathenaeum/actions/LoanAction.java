@@ -18,9 +18,7 @@ import org.apache.struts.actions.DispatchAction;
 import com.github.jcpp.jathenaeum.Book;
 import com.github.jcpp.jathenaeum.Customer;
 import com.github.jcpp.jathenaeum.Loan;
-import com.github.jcpp.jathenaeum.beans.BookForm;
 import com.github.jcpp.jathenaeum.beans.LoanForm;
-import com.github.jcpp.jathenaeum.db.dao.AuthorDAO;
 import com.github.jcpp.jathenaeum.db.dao.BookDAO;
 import com.github.jcpp.jathenaeum.db.dao.CustomerDAO;
 import com.github.jcpp.jathenaeum.db.dao.LoanDAO;
@@ -117,23 +115,8 @@ public class LoanAction extends DispatchAction {
 		}
 		
 		if(loanForm != null){
-			
 			//Overwrite the attributes
-			loan.setCustomerCardNumber(Integer.parseInt(loanForm.getCustomerCardNumber()));
-			loan.setCopyId(Integer.parseInt(loanForm.getBookId()));
-			
-			if(Validator.isValidDate(loanForm.getStartDate())){
-				loan.setStartDate(Converter.fromStringToDate(loanForm.getStartDate()));
-			}
-			
-			if(Validator.isValidDate(loanForm.getEndDate())){
-				loan.setEndDate(Converter.fromStringToDate(loanForm.getEndDate()));
-			}
-			
-			if(loanForm.getReturned() != null){
-				loan.setReturned(true);
-			}
-			
+			loan = new Loan(loanForm);
 		}
 		
 		
@@ -212,26 +195,15 @@ public class LoanAction extends DispatchAction {
 		Loan loan = new Loan();
 		
 		if(loanForm != null){
-			
 			//Overwrite the attributes
+			loan = new Loan(loanForm);
+			
 			if(Validator.isValidInt(loanForm.getCustomerCardNumber())){
 				loan.setCustomerCardNumber(Integer.parseInt(loanForm.getCustomerCardNumber()));
 			}
 			
 			if(Validator.isValidInt(loanForm.getBookId())){
 				loan.setCopyId(Integer.parseInt(loanForm.getBookId()));
-			}
-			
-			if(Validator.isValidDate(loanForm.getStartDate())){
-				loan.setStartDate(Converter.fromStringToDate(loanForm.getStartDate()));
-			}
-			
-			if(Validator.isValidDate(loanForm.getEndDate())){
-				loan.setEndDate(Converter.fromStringToDate(loanForm.getEndDate()));
-			}
-			
-			if(loanForm.getReturned() != null){
-				loan.setReturned(true);
 			}
 		}
 			

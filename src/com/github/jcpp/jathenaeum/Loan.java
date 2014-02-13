@@ -5,7 +5,12 @@ package com.github.jcpp.jathenaeum;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.text.ParseException;
 import java.util.Date;
+
+import com.github.jcpp.jathenaeum.beans.LoanForm;
+import com.github.jcpp.jathenaeum.utils.Converter;
+import com.github.jcpp.jathenaeum.utils.Validator;
 
 /**
  * Loan class.
@@ -43,6 +48,29 @@ public class Loan {
 		returned = resultSet.getBoolean(6);
 	}
 	
+	/**
+	 * Create a Loan instance from a LoanForm.
+	 * @param loanForm
+	 * @throws ParseException 
+	 */
+	public Loan(LoanForm loanForm) throws ParseException {
+		customerCardNumber = Integer.parseInt(loanForm.getCustomerCardNumber());
+		copyId = Integer.parseInt(loanForm.getBookId());
+		
+		if(Validator.isValidDate(loanForm.getStartDate())){
+			startDate = Converter.fromStringToDate(loanForm.getStartDate());
+		}
+		
+		if(Validator.isValidDate(loanForm.getEndDate())){
+			endDate = Converter.fromStringToDate(loanForm.getEndDate());
+		}
+		
+		if(loanForm.getReturned() != null){
+			returned = true;
+		}
+	}
+
+
 	/**
 	 * @return the id
 	 */
