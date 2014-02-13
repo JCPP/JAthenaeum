@@ -45,13 +45,7 @@ public class LoanDAO {
 			Loan loan;
 			
 			while(resultSet.next()){
-				loan = new Loan();
-				loan.setId(resultSet.getInt(1));
-				loan.setCustomerCardNumber(resultSet.getInt(2));
-				loan.setCopyId(resultSet.getInt(3));
-				loan.setStartDate(resultSet.getDate(4));
-				loan.setEndDate(resultSet.getDate(5));
-				loan.setReturned(resultSet.getBoolean(6));
+				loan = new Loan(resultSet);
 				loans.add(loan);
 			}
 			
@@ -96,13 +90,7 @@ public class LoanDAO {
 			con.commit();
 			
 			if(resultSet.next()){
-				loan = new Loan();
-				loan.setId(resultSet.getInt(1));
-				loan.setCustomerCardNumber(resultSet.getInt(2));
-				loan.setCopyId(resultSet.getInt(3));
-				loan.setStartDate(resultSet.getDate(4));
-				loan.setEndDate(resultSet.getDate(5));
-				loan.setReturned(resultSet.getBoolean(6));
+				loan = new Loan(resultSet);
 			}
 			else{
 				throw new LoanNotFoundException();
@@ -149,13 +137,7 @@ public class LoanDAO {
 			Loan loan;
 			
 			while(resultSet.next()){
-				loan = new Loan();
-				loan.setId(resultSet.getInt(1));
-				loan.setCustomerCardNumber(resultSet.getInt(2));
-				loan.setCopyId(resultSet.getInt(3));
-				loan.setStartDate(resultSet.getDate(4));
-				loan.setEndDate(resultSet.getDate(5));
-				loan.setReturned(resultSet.getBoolean(6));
+				loan = new Loan(resultSet);
 				loans.add(loan);
 			}
 			
@@ -200,13 +182,7 @@ public class LoanDAO {
 			Loan loan;
 			
 			while(resultSet.next()){
-				loan = new Loan();
-				loan.setId(resultSet.getInt(1));
-				loan.setCustomerCardNumber(resultSet.getInt(2));
-				loan.setCopyId(resultSet.getInt(3));
-				loan.setStartDate(resultSet.getDate(4));
-				loan.setEndDate(resultSet.getDate(5));
-				loan.setReturned(resultSet.getBoolean(6));
+				loan = new Loan(resultSet);
 				loans.add(loan);
 			}
 			
@@ -530,13 +506,7 @@ public class LoanDAO {
 			Loan loan;
 			
 			while(resultSet.next()){
-				loan = new Loan();
-				loan.setId(resultSet.getInt(1));
-				loan.setCustomerCardNumber(resultSet.getInt(2));
-				loan.setCopyId(resultSet.getInt(3));
-				loan.setStartDate(resultSet.getDate(4));
-				loan.setEndDate(resultSet.getDate(5));
-				loan.setReturned(resultSet.getBoolean(6));
+				loan = new Loan(resultSet);
 				
 				loans.add(loan);
 				

@@ -3,6 +3,8 @@
  */
 package com.github.jcpp.jathenaeum;
 
+import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.Date;
 
 /**
@@ -19,6 +21,27 @@ public class Loan {
 	private Date endDate;
 	private boolean returned;
 	
+	/**
+	 * Create a Loan instance.
+	 */
+	public Loan(){
+		
+	}
+	
+	
+	/**
+	 * Create a Loan instance from a ResultSet.
+	 * @param resultSet
+	 * @throws SQLException 
+	 */
+	public Loan(ResultSet resultSet) throws SQLException {
+		id = resultSet.getInt(1);
+		customerCardNumber = resultSet.getInt(2);
+		copyId = resultSet.getInt(3);
+		startDate = resultSet.getDate(4);
+		endDate = resultSet.getDate(5);
+		returned = resultSet.getBoolean(6);
+	}
 	
 	/**
 	 * @return the id
