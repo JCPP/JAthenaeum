@@ -3,6 +3,8 @@
  */
 package com.github.jcpp.jathenaeum;
 
+import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.Date;
 
 
@@ -19,6 +21,26 @@ public class User {
 	private String surname;
 	private Date bornDate;
 	
+	/**
+	 * Create a User instance.
+	 */
+	public User(){
+		
+	}
+	
+	/**
+	 * Create an User instance from a ResultSet.
+	 * @param resultSet
+	 * @throws SQLException 
+	 */
+	public User(ResultSet resultSet) throws SQLException {
+		id = resultSet.getInt(1);
+		email = resultSet.getString(2);
+		password = resultSet.getString(3);
+		name = resultSet.getString(4);
+		surname = resultSet.getString(5);
+		bornDate = resultSet.getDate(6);
+	}
 	/**
 	 * @return the email
 	 */

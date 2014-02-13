@@ -46,13 +46,7 @@ public class UserDAO {
 			con.commit();
 			
 			if(resultSet.next()){
-				user = new User();
-				user.setId(resultSet.getInt(1));
-				user.setEmail(resultSet.getString(2));
-				user.setPassword(resultSet.getString(3));
-				user.setName(resultSet.getString(4));
-				user.setSurname(resultSet.getString(5));
-				user.setBornDate(resultSet.getDate(6));
+				user = new User(resultSet);
 			}
 			else{
 				throw new LoginException();
@@ -100,13 +94,7 @@ public class UserDAO {
 			con.commit();
 			
 			if(resultSet.next()){
-				user = new User();
-				user.setId(resultSet.getInt(1));
-				user.setEmail(resultSet.getString(2));
-				user.setPassword(resultSet.getString(3));
-				user.setName(resultSet.getString(4));
-				user.setSurname(resultSet.getString(5));
-				user.setBornDate(resultSet.getDate(6));
+				user = new User(resultSet);
 			}
 			else{
 				throw new UserNotFound();
