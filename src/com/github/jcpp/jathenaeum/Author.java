@@ -3,6 +3,8 @@
  */
 package com.github.jcpp.jathenaeum;
 
+import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.Date;
 
 
@@ -21,6 +23,27 @@ public class Author {
 	private String biography;
 	
 	
+	/**
+	 * Create an Author instance.
+	 */
+	public Author(){
+		
+	}
+	
+	
+	/**
+	 * Create an Author instance from a resultSet
+	 * @param resultSet
+	 * @throws SQLException 
+	 */
+	public Author(ResultSet resultSet) throws SQLException {
+		id = resultSet.getInt(1);
+		name = resultSet.getString(2);
+		surname = resultSet.getString(3);
+		photo = resultSet.getString(4);
+		bornDate = resultSet.getDate(5);
+		biography = resultSet.getString(6);
+	}
 	/**
 	 * @return the id
 	 */

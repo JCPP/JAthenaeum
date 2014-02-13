@@ -13,12 +13,9 @@ import java.text.ParseException;
 import java.util.ArrayList;
 
 import com.github.jcpp.jathenaeum.Author;
-import com.github.jcpp.jathenaeum.Book;
 import com.github.jcpp.jathenaeum.beans.AuthorForm;
-import com.github.jcpp.jathenaeum.beans.BookForm;
 import com.github.jcpp.jathenaeum.db.Database;
 import com.github.jcpp.jathenaeum.exceptions.AuthorNotFoundException;
-import com.github.jcpp.jathenaeum.exceptions.RegistrationException;
 import com.github.jcpp.jathenaeum.utils.Converter;
 
 /**
@@ -46,13 +43,7 @@ public class AuthorDAO {
 			Author author;
 			
 			while(resultSet.next()){
-				author = new Author();
-				author.setId(resultSet.getInt(1));
-				author.setName(resultSet.getString(2));
-				author.setSurname(resultSet.getString(3));
-				author.setPhoto(resultSet.getString(4));
-				author.setBornDate(resultSet.getDate(5));
-				author.setBiography(resultSet.getString(6));
+				author = new Author(resultSet);
 				authors.add(author);
 			}
 			
@@ -98,13 +89,7 @@ public class AuthorDAO {
 			con.commit();
 			
 			if(resultSet.next()){
-				author = new Author();
-				author.setId(resultSet.getInt(1));
-				author.setName(resultSet.getString(2));
-				author.setSurname(resultSet.getString(3));
-				author.setPhoto(resultSet.getString(4));
-				author.setBornDate(resultSet.getDate(5));
-				author.setBiography(resultSet.getString(6));
+				author = new Author(resultSet);
 			}
 			else{
 				throw new AuthorNotFoundException();
@@ -150,13 +135,7 @@ public class AuthorDAO {
 			Author author;
 			
 			while(resultSet.next()){
-				author = new Author();
-				author.setId(resultSet.getInt(1));
-				author.setName(resultSet.getString(2));
-				author.setSurname(resultSet.getString(3));
-				author.setPhoto(resultSet.getString(4));
-				author.setBornDate(resultSet.getDate(5));
-				author.setBiography(resultSet.getString(6));
+				author = new Author(resultSet);
 				authors.add(author);
 			}
 			
@@ -388,13 +367,7 @@ public class AuthorDAO {
 			Author author;
 			
 			while(resultSet.next()){
-				author = new Author();
-				author.setId(resultSet.getInt(1));
-				author.setName(resultSet.getString(2));
-				author.setSurname(resultSet.getString(3));
-				author.setPhoto(resultSet.getString(4));
-				author.setBornDate(resultSet.getDate(5));
-				author.setBiography(resultSet.getString(6));
+				author = new Author(resultSet);
 				
 				authors.add(author);
 				
