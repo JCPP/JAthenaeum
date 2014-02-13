@@ -18,7 +18,9 @@ import org.apache.struts.actions.DispatchAction;
 import com.github.jcpp.jathenaeum.Book;
 import com.github.jcpp.jathenaeum.Customer;
 import com.github.jcpp.jathenaeum.Loan;
+import com.github.jcpp.jathenaeum.beans.BookForm;
 import com.github.jcpp.jathenaeum.beans.LoanForm;
+import com.github.jcpp.jathenaeum.db.dao.AuthorDAO;
 import com.github.jcpp.jathenaeum.db.dao.BookDAO;
 import com.github.jcpp.jathenaeum.db.dao.CustomerDAO;
 import com.github.jcpp.jathenaeum.db.dao.LoanDAO;
@@ -191,6 +193,66 @@ public class LoanAction extends DispatchAction {
 		ArrayList<Loan> loans = LoanDAO.getAll();
 		request.setAttribute("loans", loans);
 		actionTarget = "viewAll";
+		return mapping.findForward(actionTarget);
+	}
+	
+	
+	public ActionForward search(ActionMapping mapping, ActionForm form,
+			HttpServletRequest request, HttpServletResponse response)
+					throws Exception {
+		String actionTarget = null;
+		
+		ArrayList<Book> books = BookDAO.getAll();
+		ArrayList<Customer> customers = CustomerDAO.getAll();
+		
+		HttpSession session = request.getSession();
+		ArrayList<Loan> loans = (ArrayList<Loan>) session.getAttribute("loans");
+		LoanForm loanForm = (LoanForm) session.getAttribute("form");
+		
+		Loan loan = new Loan();
+		
+		if(loanForm != null){
+			
+			//Overwrite the attributes
+			if(Validator.isValidInt(loanForm.getCustomerCardNumber())){
+				loan.setCustomerCardNumber(Integer.parseInt(loanForm.getCustomerCardNumber()));
+			}
+			
+			if(Validator.isValidInt(loanForm.getBookId())){
+				loan.setCopyId(Integer.parseInt(loanForm.getBookId()));
+			}
+			
+			if(Validator.isValidDate(loanForm.getStartDate())){
+				loan.setStartDate(Converter.fromStringToDate(loanForm.getStartDate()));
+			}
+			
+			if(Validator.isValidDate(loanForm.getEndDate())){
+				loan.setEndDate(Converter.fromStringToDate(loanForm.getEndDate()));
+			}
+			
+			if(loanForm.getReturned() != null){
+				loan.setReturned(true);
+			}
+		}
+			
+		
+		if(session.getAttribute("loans") == null){
+			System.out.println("No loans found..getting all.");
+			loans = LoanDAO.getAll();
+		}
+		else{
+			request.setAttribute("search", true);
+		}
+		
+		//Remove attributes from session
+		session.removeAttribute("loans");
+		session.removeAttribute("form");
+		
+		request.setAttribute("loan", loan);
+		request.setAttribute("loans", loans);
+		request.setAttribute("books", books);
+		request.setAttribute("customers", customers);
+		actionTarget = "search";
 		return mapping.findForward(actionTarget);
 	}
 

@@ -15,8 +15,8 @@
 		  <thead>
 		  	<tr>
 		  		<th>ID</th>
-		  		<th>CustomerCardNumber</th>
-		  		<th>CopyID</th>
+		  		<th>Customer Card Number</th>
+		  		<th>Copy ID</th>
 		  		<th>Start Date</th>
 		  		<th>End Date</th>
 		  		<th>Returned</th>

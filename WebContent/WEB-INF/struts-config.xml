@@ -184,8 +184,9 @@
         <action path="/loan" type="com.github.jcpp.jathenaeum.actions.LoanAction" parameter="op">
         	<forward name="add" path="page.addLoan"/>
         	<forward name="edit" path="page.editLoan"/>
-        	<forward name="viewAll" path="page.viewAllLoans"/>
         	<forward name="delete" path="page.deleteLoan"/>
+        	<forward name="viewAll" path="page.viewAllLoans"/>
+        	<forward name="search" path="page.searchLoans"/>
         	<forward name="noBooks" path="page.noBooks" />
         	<forward name="noCopies" path="page.noCopies" />
         	<forward name="noCustomers" path="page.noCustomers" />
@@ -213,6 +214,9 @@
 	        <forward name="deleteErrors" path="/loan.do?op=delete" redirect="true"/>
 	        <forward name="deleteSuccess" path="page.confirmLoanDelete" />
 	        <forward name="deleteFailed" path="page.failedLoanDelete" />
+	        
+	        <!-- Search -->
+	        <forward name="search" path="/loan.do?op=search" redirect="true"/>
         </action>
         
 	</action-mappings>

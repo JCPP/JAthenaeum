@@ -438,4 +438,10 @@
 		<put name="body" value="/layout/loan/viewAll.jsp" />
 	</definition>
 	
+	<!-- Search -->
+	<definition name="page.searchLoans" extends="base.definition.bootstrap">
+		<put name="title" value="Search Loans" />
+		<put name="body" value="/layout/loan/search.jsp" />
+	</definition>
+	
 </tiles-definitions>

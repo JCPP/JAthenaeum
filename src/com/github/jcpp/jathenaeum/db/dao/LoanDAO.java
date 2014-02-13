@@ -9,12 +9,16 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.sql.Types;
+import java.text.ParseException;
 import java.util.ArrayList;
 
+import com.github.jcpp.jathenaeum.Copy;
 import com.github.jcpp.jathenaeum.Loan;
+import com.github.jcpp.jathenaeum.beans.LoanForm;
 import com.github.jcpp.jathenaeum.db.Database;
 import com.github.jcpp.jathenaeum.exceptions.LoanNotFoundException;
 import com.github.jcpp.jathenaeum.utils.Converter;
+import com.github.jcpp.jathenaeum.utils.Validator;
 
 /**
  * DAO of Loan.
@@ -397,6 +401,162 @@ public class LoanDAO {
 			}
 		}
 		return id;
+	}
+	
+	
+	/**
+	 * Search all the loans that has the form fields.
+	 * @param loanForm the form with all the fields.
+	 * @return Returns an ArrayList<Loan> with all the found loans.
+	 */
+	public static ArrayList<Loan> search(LoanForm loanForm){
+		Connection con = db.getConnection();
+		PreparedStatement stmt = null;
+		ArrayList<Loan> loans = new ArrayList<Loan>();
+		ArrayList<Copy> copies = new ArrayList<Copy>();
+
+		try {
+			con.setAutoCommit(false);
+			
+			String firstPart = "SELECT L.* FROM Loan L WHERE (L.CustomerCardNumber = ? OR ? = '') AND (L.CopyID ";
+			
+			if(Validator.isValidInt(loanForm.getBookId())){
+				copies = CopyDAO.getAllByBookId(Integer.parseInt(loanForm.getBookId()));
+				
+				if(!copies.isEmpty()){
+					firstPart += "IN(";
+					
+					for(int i = 0; i < copies.size(); i++){
+						firstPart += "?,";
+					}
+					
+					//Delete last character
+					firstPart = firstPart.substring(0, firstPart.length()-1);
+					
+					if(!copies.isEmpty()){
+						firstPart += ")";
+					}
+				}
+				else{
+					firstPart += "= ?";
+				}
+			}
+			else{
+				firstPart += "= ?";
+			}
+			
+			String secondPart = " OR ? = '') AND (L.LoanStartDate = ? OR ? = '') AND (L.LoanEndDate = ? OR ? = '') AND (L.LoanReturned = ? OR ? = '')";
+			
+			final String select = firstPart + secondPart;
+			
+			int counter = 1;
+			
+			stmt = con.prepareStatement(select);
+			
+			//Customer Card Number
+			if(Validator.isValidInt(loanForm.getCustomerCardNumber())){
+				stmt.setInt(counter++, Integer.parseInt(loanForm.getCustomerCardNumber()));
+				stmt.setInt(counter++, Integer.parseInt(loanForm.getCustomerCardNumber()));
+			}
+			else{
+				stmt.setString(counter++, "");
+				stmt.setString(counter++, "");
+			}
+			
+			
+			//Copy ID
+			if(!copies.isEmpty()){
+				for(int i = 0; i < copies.size(); i++){
+					stmt.setInt(counter++, copies.get(i).getId());
+				}
+				stmt.setString(counter++, "PINGAS");
+			}
+			else{
+				stmt.setString(counter++, "");
+				stmt.setString(counter++, "");
+			}
+			
+			//Start Date
+			try {
+				if(Validator.isValidDate(loanForm.getStartDate())){
+					stmt.setDate(counter++, Converter.fromUtilDateToSqlDate(Converter.fromStringToDate(loanForm.getStartDate())));
+					stmt.setDate(counter++, Converter.fromUtilDateToSqlDate(Converter.fromStringToDate(loanForm.getStartDate())));
+				}
+				else{
+					stmt.setString(counter++, "");
+					stmt.setString(counter++, "");
+				}
+				
+			} catch (ParseException e) {
+				
+			}
+			
+			//End Date
+			try {
+				if(Validator.isValidDate(loanForm.getEndDate())){
+					stmt.setDate(counter++, Converter.fromUtilDateToSqlDate(Converter.fromStringToDate(loanForm.getEndDate())));
+					stmt.setDate(counter++, Converter.fromUtilDateToSqlDate(Converter.fromStringToDate(loanForm.getEndDate())));
+				}
+				else{
+					stmt.setString(counter++, "");
+					stmt.setString(counter++, "");
+				}
+			} catch (ParseException e) {
+				
+			}
+			
+			System.out.println("Query: " + stmt.toString());
+			
+			//Returned
+			if(loanForm.getReturned() == null){
+				stmt.setBoolean(counter++, false);
+				stmt.setBoolean(counter++, false);
+			}
+			else{
+				stmt.setBoolean(counter++, true);
+				stmt.setBoolean(counter++, true);
+			}
+			
+			System.out.println("Query: " + stmt.toString());
+			
+			ResultSet resultSet = stmt.executeQuery();
+			con.commit();
+			Loan loan;
+			
+			while(resultSet.next()){
+				loan = new Loan();
+				loan.setId(resultSet.getInt(1));
+				loan.setCustomerCardNumber(resultSet.getInt(2));
+				loan.setCopyId(resultSet.getInt(3));
+				loan.setStartDate(resultSet.getDate(4));
+				loan.setEndDate(resultSet.getDate(5));
+				loan.setReturned(resultSet.getBoolean(6));
+				
+				loans.add(loan);
+				
+				System.out.println("Found: " + loan.getId());
+			}
+
+		} catch (SQLException sqle) {
+			sqle.printStackTrace();
+			try {
+				con.rollback();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+		} finally {
+			try {
+				if (stmt != null) {
+					stmt.close();
+					stmt = null;
+				}
+				db.closeConnection(con);
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+		}
+		
+		return loans;
 	}
 
 }
