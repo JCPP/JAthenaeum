@@ -76,11 +76,8 @@ public class CustomerAction extends DispatchAction {
 		}
 		
 		if(customerForm != null){
-			
 			//Overwrite the attributes
-			customer.setEmail(customerForm.getEmail());
-			customer.setName(customerForm.getName());
-			customer.setSurname(customerForm.getSurname());
+			customer = new Customer(customerForm);
 		}
 		
 		

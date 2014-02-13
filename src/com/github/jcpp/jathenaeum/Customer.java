@@ -6,6 +6,8 @@ package com.github.jcpp.jathenaeum;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
+import com.github.jcpp.jathenaeum.beans.CustomerForm;
+
 /**
  * Customer class.
  * @author <a href="https://github.com/DavidePastore">DavidePastore</a>
@@ -36,6 +38,17 @@ public class Customer {
 		name = resultSet.getString(3);
 		surname = resultSet.getString(4);
 	}
+	
+	/**
+	 * Create a Customer instance from a CustomerForm.
+	 * @param customerForm
+	 */
+	public Customer(CustomerForm customerForm) {
+		email = customerForm.getEmail();
+		name = customerForm.getName();
+		surname = customerForm.getSurname();
+	}
+
 	/**
 	 * @return the cardNumber
 	 */
