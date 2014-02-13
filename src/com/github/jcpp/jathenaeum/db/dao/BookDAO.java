@@ -44,13 +44,7 @@ public class BookDAO {
 			Book book;
 			
 			while(resultSet.next()){
-				book = new Book();
-				book.setId(resultSet.getInt(1));
-				book.setTitle(resultSet.getString(2));
-				book.setCover(resultSet.getString(3));
-				book.setGenre(resultSet.getString(4));
-				book.setIsbnCode(resultSet.getString(5));
-				book.setDescription(resultSet.getString(6));
+				book = new Book(resultSet);
 				books.add(book);
 			}
 			
@@ -93,13 +87,7 @@ public class BookDAO {
 			Book book;
 			
 			while(resultSet.next()){
-				book = new Book();
-				book.setId(resultSet.getInt(1));
-				book.setTitle(resultSet.getString(2));
-				book.setCover(resultSet.getString(3));
-				book.setGenre(resultSet.getString(4));
-				book.setIsbnCode(resultSet.getString(5));
-				book.setDescription(resultSet.getString(6));
+				book = new Book(resultSet);
 				book.setAuthors(AuthorDAO.getAllByLibroId(book.getId()));
 				
 				books.add(book);
@@ -148,13 +136,7 @@ public class BookDAO {
 				int numberOfCopies = CopyDAO.getNumberByBookId(bookId);
 				
 				if(numberOfCopies > 0){
-					book = new Book();
-					book.setId(bookId);
-					book.setTitle(resultSet.getString(2));
-					book.setCover(resultSet.getString(3));
-					book.setGenre(resultSet.getString(4));
-					book.setIsbnCode(resultSet.getString(5));
-					book.setDescription(resultSet.getString(6));
+					book = new Book(resultSet);
 					book.setNumberOfCopies(numberOfCopies);
 					books.add(book);
 				}
@@ -206,13 +188,7 @@ public class BookDAO {
 				System.out.printf("Free copy for %d: %d\n", bookId, numberOfCopies);
 				
 				if(numberOfCopies > 0){
-					book = new Book();
-					book.setId(bookId);
-					book.setTitle(resultSet.getString(2));
-					book.setCover(resultSet.getString(3));
-					book.setGenre(resultSet.getString(4));
-					book.setIsbnCode(resultSet.getString(5));
-					book.setDescription(resultSet.getString(6));
+					book = new Book(resultSet);
 					book.setNumberOfCopies(numberOfCopies);
 					books.add(book);
 				}
@@ -258,13 +234,7 @@ public class BookDAO {
 			Book book;
 			
 			while(resultSet.next()){
-				book = new Book();
-				book.setId(resultSet.getInt(1));
-				book.setTitle(resultSet.getString(2));
-				book.setCover(resultSet.getString(3));
-				book.setGenre(resultSet.getString(4));
-				book.setIsbnCode(resultSet.getString(5));
-				book.setDescription(resultSet.getString(6));
+				book = new Book(resultSet);
 				book.setAuthors(AuthorDAO.getAllByLibroId(book.getId()));
 				book.setNumberOfCopies(CopyDAO.getNumberByBookId(book.getId()));
 				books.add(book);
@@ -312,13 +282,7 @@ public class BookDAO {
 			con.commit();
 			
 			if(resultSet.next()){
-				book = new Book();
-				book.setId(resultSet.getInt(1));
-				book.setTitle(resultSet.getString(2));
-				book.setCover(resultSet.getString(3));
-				book.setGenre(resultSet.getString(4));
-				book.setIsbnCode(resultSet.getString(5));
-				book.setDescription(resultSet.getString(6));
+				book = new Book(resultSet);
 			}
 			else{
 				throw new BookNotFoundException();
@@ -661,13 +625,7 @@ public class BookDAO {
 			Book book;
 			
 			while(resultSet.next()){
-				book = new Book();
-				book.setId(resultSet.getInt(1));
-				book.setTitle(resultSet.getString(2));
-				book.setCover(resultSet.getString(3));
-				book.setGenre(resultSet.getString(4));
-				book.setIsbnCode(resultSet.getString(5));
-				book.setDescription(resultSet.getString(6));
+				book = new Book(resultSet);
 				book.setAuthors(AuthorDAO.getAllByLibroId(book.getId()));
 				
 				books.add(book);

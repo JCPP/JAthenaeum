@@ -35,6 +35,7 @@ public class Writes {
 		bookId = resultSet.getInt(2);
 		authorId = resultSet.getInt(3);
 	}
+	
 	/**
 	 * @return the id
 	 */

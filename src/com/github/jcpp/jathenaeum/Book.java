@@ -3,6 +3,8 @@
  */
 package com.github.jcpp.jathenaeum;
 
+import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.ArrayList;
 
 /**
@@ -20,6 +22,27 @@ public class Book {
 	private ArrayList<Author> authors;
 	private int numberOfCopies;
 	
+	/**
+	 * Create a Book instance.
+	 */
+	public Book(){
+		
+	}
+	
+	
+	/**
+	 * Create a Book instance from a ResultSet.
+	 * @param resultSet
+	 * @throws SQLException 
+	 */
+	public Book(ResultSet resultSet) throws SQLException {
+		id = resultSet.getInt(1);
+		title = resultSet.getString(2);
+		cover = resultSet.getString(3);
+		genre = resultSet.getString(4);
+		isbnCode = resultSet.getString(5);
+		description = resultSet.getString(6);
+	}
 	
 	/**
 	 * @return the id
