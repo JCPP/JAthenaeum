@@ -19,8 +19,6 @@ import org.apache.struts.actions.DispatchAction;
 import com.github.jcpp.jathenaeum.Author;
 import com.github.jcpp.jathenaeum.beans.AuthorForm;
 import com.github.jcpp.jathenaeum.db.dao.AuthorDAO;
-import com.github.jcpp.jathenaeum.utils.Converter;
-import com.github.jcpp.jathenaeum.utils.Validator;
 
 /**
  * 
@@ -54,17 +52,8 @@ public class AuthorActionDo extends DispatchAction {
 		
 		
 		if(form != null){
-			author.setName(uf.getName());
-			author.setSurname(uf.getSurname());
-			author.setPhoto(uf.getPhoto());
+			author = new Author(uf);
 			
-			if(Validator.isValidDate(uf.getBornDate())){
-				author.setBornDate(Converter.fromStringToDate(uf.getBornDate()));
-			}
-			
-			author.setBiography(uf.getBiography());
-
-
 			try{
 				AuthorDAO.insert(author);
 				actionTarget = "addSuccess";
@@ -104,17 +93,8 @@ public class AuthorActionDo extends DispatchAction {
 		}
 
 		if(form != null){
+			author = new Author(uf);
 			author.setId(id);
-			author.setName(uf.getName());
-			author.setSurname(uf.getSurname());
-			author.setPhoto(uf.getPhoto());
-			
-			if(Validator.isValidDate(uf.getBornDate())){
-				author.setBornDate(Converter.fromStringToDate(uf.getBornDate()));
-			}
-			
-			author.setBiography(uf.getBiography());
-
 
 			try{
 				AuthorDAO.update(author);
