@@ -185,6 +185,7 @@
         	<forward name="add" path="page.addLoan"/>
         	<forward name="edit" path="page.editLoan"/>
         	<forward name="viewAll" path="page.viewAllLoans"/>
+        	<forward name="delete" path="page.deleteLoan"/>
         	<forward name="noBooks" path="page.noBooks" />
         	<forward name="noCopies" path="page.noCopies" />
         	<forward name="noCustomers" path="page.noCustomers" />
@@ -207,6 +208,11 @@
 	        <forward name="editErrors" path="/loan.do?op=edit" redirect="true"/>
 	        <forward name="editSuccess" path="page.confirmLoanEdit" />
 	        <forward name="editFailed" path="page.failedLoanEdit" />
+	        
+	        <!-- Delete -->
+	        <forward name="deleteErrors" path="/loan.do?op=delete" redirect="true"/>
+	        <forward name="deleteSuccess" path="page.confirmLoanDelete" />
+	        <forward name="deleteFailed" path="page.failedLoanDelete" />
         </action>
         
 	</action-mappings>

@@ -16,8 +16,10 @@ import org.apache.struts.actions.DispatchAction;
 
 import com.github.jcpp.jathenaeum.Copy;
 import com.github.jcpp.jathenaeum.Loan;
+import com.github.jcpp.jathenaeum.beans.CustomerForm;
 import com.github.jcpp.jathenaeum.beans.LoanForm;
 import com.github.jcpp.jathenaeum.db.dao.CopyDAO;
+import com.github.jcpp.jathenaeum.db.dao.CustomerDAO;
 import com.github.jcpp.jathenaeum.db.dao.LoanDAO;
 import com.github.jcpp.jathenaeum.utils.Converter;
 
@@ -125,6 +127,28 @@ public class LoanActionDo extends DispatchAction {
 			//Update the loan
 			LoanDAO.update(loan);
 			actionTarget = "editSuccess";
+		}
+
+		return mapping.findForward(actionTarget);
+	}
+	
+	
+	public ActionForward delete(ActionMapping mapping, ActionForm form,
+			HttpServletRequest request, HttpServletResponse response)
+					throws Exception {
+		String actionTarget = null;
+		
+		LoanForm uf = (LoanForm) form;
+		int id = Integer.parseInt(request.getParameter("id"));
+
+		if(form != null){
+			try{
+				LoanDAO.delete(id);
+				actionTarget = "deleteSuccess";
+
+			}catch(Exception e){
+				actionTarget = "deleteFailed";
+			}
 		}
 
 		return mapping.findForward(actionTarget);

@@ -340,7 +340,7 @@
 	<definition name="page.failedCustomerDelete" extends="base.definition.bootstrap">
 		<put name="redirect" value="index.do" />
 		<put name="title" value="Failed Delete Customer" />
-		<put name="body" value="/layout/customer/failedCustomerDelete.jsp" />
+		<put name="body" value="/layout/customer/failedDelete.jsp" />
 	</definition>
 	
 	<!-- View All -->
@@ -409,6 +409,27 @@
 		<put name="redirect" value="index.do" />
 		<put name="title" value="Failed Edit Loan" />
 		<put name="body" value="/layout/loan/failedEdit.jsp" />
+	</definition>
+	
+	<!-- Delete Loan -->
+	<definition name="page.deleteLoan" extends="base.definition.bootstrap">
+		<put name="title" value="Delete Loan" />
+		<put name="body" value="/layout/loan/delete.jsp" />
+		<put name="style" value="css/signup.css" />
+	</definition>
+	
+	<!-- Confirm delete -->
+	<definition name="page.confirmLoanDelete" extends="base.definition.bootstrap">
+		<put name="redirect" value="index.do" />
+		<put name="title" value="Confirm Delete Loan" />
+		<put name="body" value="/layout/loan/confirmDelete.jsp" />
+	</definition>
+	
+	<!-- Failed delete -->
+	<definition name="page.failedLoanDelete" extends="base.definition.bootstrap">
+		<put name="redirect" value="index.do" />
+		<put name="title" value="Failed Delete Loan" />
+		<put name="body" value="/layout/loan/failedDelete.jsp" />
 	</definition>
 	
 	<!-- View All -->

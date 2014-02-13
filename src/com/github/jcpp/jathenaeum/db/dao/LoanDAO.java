@@ -355,5 +355,48 @@ public class LoanDAO {
 		}
 		return loan.getId();
 	}
+	
+	
+	/**
+	 * Delete a loan.
+	 * @param id the id of the loan to delete. 
+	 * @return Returns the id of the deleted loan. 
+	 */
+	public static long delete(int id){
+		Connection con = db.getConnection();
+		PreparedStatement stmt = null;
+		long result = 0;
+
+		try {
+			con.setAutoCommit(false);
+			final String delete = "DELETE FROM Loan WHERE LoanID = ?";
+			stmt = con.prepareStatement(delete);
+			stmt.setInt(1, id);
+			
+			result = stmt.executeUpdate();
+			
+			con.commit();
+			
+
+		} catch (SQLException sqle) {
+			sqle.printStackTrace();
+			try {
+				con.rollback();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+		} finally {
+			try {
+				if (stmt != null) {
+					stmt.close();
+					stmt = null;
+				}
+				db.closeConnection(con);
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+		}
+		return id;
+	}
 
 }
