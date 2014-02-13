@@ -22,7 +22,6 @@ import com.github.jcpp.jathenaeum.beans.LoanForm;
 import com.github.jcpp.jathenaeum.db.dao.BookDAO;
 import com.github.jcpp.jathenaeum.db.dao.CustomerDAO;
 import com.github.jcpp.jathenaeum.db.dao.LoanDAO;
-import com.github.jcpp.jathenaeum.utils.Converter;
 import com.github.jcpp.jathenaeum.utils.Validator;
 
 /**
@@ -53,12 +52,7 @@ public class LoanAction extends DispatchAction {
 		
 		/* Add the already selected book and and customer */
 		if(loanForm != null){
-			loan.setCustomerCardNumber(Integer.parseInt(loanForm.getCustomerCardNumber()));
-			loan.setCopyId(Integer.parseInt(loanForm.getBookId()));
-
-			if(loanForm.getReturned() != null){
-				loan.setReturned(true);
-			}
+			loan = new Loan(loanForm);
 		}
 		
 		//Remove attributes from session
@@ -197,14 +191,6 @@ public class LoanAction extends DispatchAction {
 		if(loanForm != null){
 			//Overwrite the attributes
 			loan = new Loan(loanForm);
-			
-			if(Validator.isValidInt(loanForm.getCustomerCardNumber())){
-				loan.setCustomerCardNumber(Integer.parseInt(loanForm.getCustomerCardNumber()));
-			}
-			
-			if(Validator.isValidInt(loanForm.getBookId())){
-				loan.setCopyId(Integer.parseInt(loanForm.getBookId()));
-			}
 		}
 			
 		

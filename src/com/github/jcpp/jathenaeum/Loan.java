@@ -54,8 +54,13 @@ public class Loan {
 	 * @throws ParseException 
 	 */
 	public Loan(LoanForm loanForm) throws ParseException {
-		customerCardNumber = Integer.parseInt(loanForm.getCustomerCardNumber());
-		copyId = Integer.parseInt(loanForm.getBookId());
+		if(Validator.isValidInt(loanForm.getCustomerCardNumber())){
+			copyId = Integer.parseInt(loanForm.getBookId());
+			
+		}
+		if(Validator.isValidInt(loanForm.getBookId())){
+			customerCardNumber = Integer.parseInt(loanForm.getCustomerCardNumber());
+		}
 		
 		if(Validator.isValidDate(loanForm.getStartDate())){
 			startDate = Converter.fromStringToDate(loanForm.getStartDate());
@@ -67,6 +72,9 @@ public class Loan {
 		
 		if(loanForm.getReturned() != null){
 			returned = true;
+		}
+		else{
+			returned = false;
 		}
 	}
 

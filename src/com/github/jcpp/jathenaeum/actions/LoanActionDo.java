@@ -16,17 +16,11 @@ import org.apache.struts.action.ActionMapping;
 import org.apache.struts.action.ActionRedirect;
 import org.apache.struts.actions.DispatchAction;
 
-import com.github.jcpp.jathenaeum.Book;
 import com.github.jcpp.jathenaeum.Copy;
 import com.github.jcpp.jathenaeum.Loan;
-import com.github.jcpp.jathenaeum.beans.BookForm;
-import com.github.jcpp.jathenaeum.beans.CustomerForm;
 import com.github.jcpp.jathenaeum.beans.LoanForm;
-import com.github.jcpp.jathenaeum.db.dao.BookDAO;
 import com.github.jcpp.jathenaeum.db.dao.CopyDAO;
-import com.github.jcpp.jathenaeum.db.dao.CustomerDAO;
 import com.github.jcpp.jathenaeum.db.dao.LoanDAO;
-import com.github.jcpp.jathenaeum.utils.Converter;
 
 /**
  * @author <a href="https://github.com/DavidePastore">DavidePastore</a>
@@ -63,18 +57,8 @@ public class LoanActionDo extends DispatchAction {
 			Copy copy = CopyDAO.getOneFreeByBookId(Integer.parseInt(uf.getBookId()));
 			
 			//Set the loan
+			loan = new Loan(uf);
 			loan.setCopyId(copy.getId());
-			loan.setCustomerCardNumber(Integer.parseInt(uf.getCustomerCardNumber()));
-			loan.setStartDate(Converter.fromStringToDate(uf.getStartDate()));
-			loan.setEndDate(Converter.fromStringToDate(uf.getEndDate()));
-			
-			if(uf.getReturned() != null){
-				loan.setReturned(true);
-			}
-			else{
-				loan.setReturned(false);
-			}
-			
 			
 			//Insert the loan
 			LoanDAO.insert(loan);
@@ -114,20 +98,9 @@ public class LoanActionDo extends DispatchAction {
 			//Get a copy
 			Copy copy = CopyDAO.getOneFreeByBookId(Integer.parseInt(uf.getBookId()));
 			
-			
 			//Set the loan
-			loan.setId(id);
+			loan = new Loan(uf);
 			loan.setCopyId(copy.getId());
-			loan.setCustomerCardNumber(Integer.parseInt(uf.getCustomerCardNumber()));
-			loan.setStartDate(Converter.fromStringToDate(uf.getStartDate()));
-			loan.setEndDate(Converter.fromStringToDate(uf.getEndDate()));
-			
-			if(uf.getReturned() != null){
-				loan.setReturned(true);
-			}
-			else{
-				loan.setReturned(false);
-			}
 			
 			//Update the loan
 			LoanDAO.update(loan);
@@ -143,7 +116,7 @@ public class LoanActionDo extends DispatchAction {
 					throws Exception {
 		String actionTarget = null;
 		
-		LoanForm uf = (LoanForm) form;
+		LoanForm loanForm = (LoanForm) form;
 		int id = Integer.parseInt(request.getParameter("id"));
 
 		if(form != null){
