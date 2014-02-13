@@ -242,7 +242,7 @@ public class BookActionDo extends DispatchAction {
 		
 		if(form != null){
 			try{
-				books = BookDAO.searchWithAuthors(uf);
+				books = BookDAO.searchWithAuthorsAndCopies(uf);
 				
 				actionTarget = "search";
 				

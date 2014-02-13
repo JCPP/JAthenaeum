@@ -23,6 +23,7 @@ public class Book {
 	private String description;
 	private ArrayList<Author> authors;
 	private int numberOfCopies;
+	private int numberOfFreeCopies;
 	
 	/**
 	 * Create a Book instance.
@@ -154,6 +155,18 @@ public class Book {
 	 */
 	public void setNumberOfCopies(int numberOfCopies) {
 		this.numberOfCopies = numberOfCopies;
+	}
+	/**
+	 * @return the numberOfFreeCopies
+	 */
+	public int getNumberOfFreeCopies() {
+		return numberOfFreeCopies;
+	}
+	/**
+	 * @param numberOfFreeCopies the numberOfFreeCopies to set
+	 */
+	public void setNumberOfFreeCopies(int numberOfFreeCopies) {
+		this.numberOfFreeCopies = numberOfFreeCopies;
 	}
 	
 	

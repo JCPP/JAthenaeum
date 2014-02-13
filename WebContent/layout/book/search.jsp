@@ -56,6 +56,7 @@
 		  		<th>Authors</th>
 		  		<th>Genre</th>
 		  		<th>Isbn</th>
+		  		<th>Number of Free Copies</th>
 		  		<th>Number of Copies</th>
 		  		<th>Operations</th>
 		  	</tr>
@@ -79,6 +80,7 @@
 					</td>
 					<td>${booksId.genre}</td>
 					<td>${booksId.isbnCode}</td>
+					<td>${booksId.numberOfFreeCopies}</td>
 					<td>${booksId.numberOfCopies}</td>
 					<td>
 						<a class="btn btn-success" href="book.do?op=manageCopies&id=${booksId.id}" role="button">Manage copies &raquo;</a>

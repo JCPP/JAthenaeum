@@ -237,6 +237,7 @@ public class BookDAO {
 				book = new Book(resultSet);
 				book.setAuthors(AuthorDAO.getAllByLibroId(book.getId()));
 				book.setNumberOfCopies(CopyDAO.getNumberByBookId(book.getId()));
+				book.setNumberOfFreeCopies(CopyDAO.getFreeNumberByBookId(book.getId()));
 				books.add(book);
 			}
 			
@@ -580,9 +581,9 @@ public class BookDAO {
 	/**
 	 * Search all the books that has the form fields.
 	 * @param bookForm the form with all the fields.
-	 * @return Returns an ArrayList<Book> with all the found books.
+	 * @return Returns an ArrayList<Book> with all the found books with authors and copies.
 	 */
-	public static ArrayList<Book> searchWithAuthors(BookForm bookForm){
+	public static ArrayList<Book> searchWithAuthorsAndCopies(BookForm bookForm){
 		Connection con = db.getConnection();
 		PreparedStatement stmt = null;
 		ArrayList<Book> books = new ArrayList<Book>();
@@ -627,7 +628,8 @@ public class BookDAO {
 			while(resultSet.next()){
 				book = new Book(resultSet);
 				book.setAuthors(AuthorDAO.getAllByLibroId(book.getId()));
-				
+				book.setNumberOfCopies(CopyDAO.getNumberByBookId(book.getId()));
+				book.setNumberOfFreeCopies(CopyDAO.getFreeNumberByBookId(book.getId()));
 				books.add(book);
 				
 				System.out.println("Found: " + book.getTitle());
