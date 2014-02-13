@@ -411,4 +411,10 @@
 		<put name="body" value="/layout/loan/failedEdit.jsp" />
 	</definition>
 	
+	<!-- View All -->
+	<definition name="page.viewAllLoans" extends="base.definition.bootstrap">
+		<put name="title" value="Loans" />
+		<put name="body" value="/layout/loan/viewAll.jsp" />
+	</definition>
+	
 </tiles-definitions>

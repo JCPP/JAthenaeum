@@ -147,5 +147,17 @@ public class LoanAction extends DispatchAction {
 		actionTarget = "edit";
 		return mapping.findForward(actionTarget);
 	}
+	
+	
+	public ActionForward viewAll(ActionMapping mapping, ActionForm form,
+			HttpServletRequest request, HttpServletResponse response)
+					throws Exception {
+		String actionTarget = null;
+
+		ArrayList<Loan> loans = LoanDAO.getAll();
+		request.setAttribute("loans", loans);
+		actionTarget = "viewAll";
+		return mapping.findForward(actionTarget);
+	}
 
 }

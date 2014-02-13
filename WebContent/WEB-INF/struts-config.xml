@@ -184,6 +184,7 @@
         <action path="/loan" type="com.github.jcpp.jathenaeum.actions.LoanAction" parameter="op">
         	<forward name="add" path="page.addLoan"/>
         	<forward name="edit" path="page.editLoan"/>
+        	<forward name="viewAll" path="page.viewAllLoans"/>
         	<forward name="noBooks" path="page.noBooks" />
         	<forward name="noCopies" path="page.noCopies" />
         	<forward name="noCustomers" path="page.noCustomers" />
