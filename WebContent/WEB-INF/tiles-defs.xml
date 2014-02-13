@@ -180,6 +180,13 @@
 		<put name="body" value="/layout/author/noAuthors.jsp" />
 	</definition>
 	
+	<!-- Invalid id -->
+	<definition name="page.author.id.invalid" extends="base.definition.bootstrap">
+		<put name="title" value="Invalid Author ID" />
+		<put name="body" value="/layout/author/invalidId.jsp" />
+	</definition>
+	
+	
 	
 	<!-- Add Book -->
 	<definition name="page.book.add" extends="base.definition.bootstrap">

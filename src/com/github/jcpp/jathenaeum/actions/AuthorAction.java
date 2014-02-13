@@ -13,11 +13,13 @@ import org.apache.struts.action.ActionErrors;
 import org.apache.struts.action.ActionForm;
 import org.apache.struts.action.ActionForward;
 import org.apache.struts.action.ActionMapping;
+import org.apache.struts.action.ActionRedirect;
 import org.apache.struts.actions.DispatchAction;
 
 import com.github.jcpp.jathenaeum.Author;
 import com.github.jcpp.jathenaeum.beans.AuthorForm;
 import com.github.jcpp.jathenaeum.db.dao.AuthorDAO;
+import com.github.jcpp.jathenaeum.utils.Validator;
 
 /**
  * 
@@ -57,11 +59,17 @@ public class AuthorAction extends DispatchAction {
 					throws Exception {
 		String actionTarget = null;
 		
-		String id = request.getParameter("id");
+		AuthorForm uf = (AuthorForm) form;
 		
-		if(request.getParameter("id") == null){
-			System.out.println("ID not present.");
+		//Check the id
+		if(!Validator.isValidAuthorId(request.getParameter("id"))){
+			actionTarget = "invalidId";
+			
+    		ActionRedirect redirect = new ActionRedirect(mapping.findForward(actionTarget));
+    		return redirect;
 		}
+		
+		String id = request.getParameter("id");
 		
 		Author author = AuthorDAO.getById(Integer.parseInt(id));
 		
@@ -99,11 +107,17 @@ public class AuthorAction extends DispatchAction {
 					throws Exception {
 		String actionTarget = null;
 		
-		String id = request.getParameter("id");
+		AuthorForm uf = (AuthorForm) form;
 		
-		if(request.getParameter("id") == null){
-			System.out.println("ID not present.");
+		//Check the id
+		if(!Validator.isValidAuthorId(request.getParameter("id"))){
+			actionTarget = "invalidId";
+			
+    		ActionRedirect redirect = new ActionRedirect(mapping.findForward(actionTarget));
+    		return redirect;
 		}
+		
+		String id = request.getParameter("id");
 		
 		Author author = AuthorDAO.getById(Integer.parseInt(id));
 		

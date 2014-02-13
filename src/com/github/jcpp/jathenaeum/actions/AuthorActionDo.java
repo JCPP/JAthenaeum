@@ -74,9 +74,17 @@ public class AuthorActionDo extends DispatchAction {
 		
 		Author author = new Author();
 		AuthorForm uf = (AuthorForm) form;
-		int id = Integer.parseInt(request.getParameter("id"));
 		
+		//Check the id
+		if(!uf.validateId(mapping, request).isEmpty()){
+			actionTarget = "invalidId";
+			
+    		ActionRedirect redirect = new ActionRedirect(mapping.findForward(actionTarget));
+    		return redirect;
+		}
+				
 		ActionErrors actionErrors = uf.validate(mapping, request);
+		int id = Integer.parseInt(request.getParameter("id"));
 		
 		//If there are some errors, redirect to the form page
 		if(!actionErrors.isEmpty()){
@@ -91,6 +99,8 @@ public class AuthorActionDo extends DispatchAction {
 			redirect.addParameter("id", Integer.toString(id));
 			return redirect;
 		}
+		
+		
 
 		if(form != null){
 			author = new Author(uf);
@@ -115,7 +125,31 @@ public class AuthorActionDo extends DispatchAction {
 		String actionTarget = null;
 		
 		AuthorForm uf = (AuthorForm) form;
+		
+		//Check the id
+		if(!uf.validateId(mapping, request).isEmpty()){
+			actionTarget = "invalidId";
+			
+    		ActionRedirect redirect = new ActionRedirect(mapping.findForward(actionTarget));
+    		return redirect;
+		}
+		
+		ActionErrors actionErrors = uf.validate(mapping, request);
 		int id = Integer.parseInt(request.getParameter("id"));
+		
+		//If there are some errors, redirect to the form page
+		if(!actionErrors.isEmpty()){
+			actionTarget = "deleteErrors";
+			saveErrors(request, actionErrors); //Save the errors
+			
+			HttpSession session = request.getSession();
+    		session.setAttribute("errors", actionErrors);
+    		session.setAttribute("form", uf);
+			
+			ActionRedirect redirect = new ActionRedirect(mapping.findForward(actionTarget));
+			redirect.addParameter("id", Integer.toString(id));
+			return redirect;
+		}
 
 		if(form != null){
 			try{

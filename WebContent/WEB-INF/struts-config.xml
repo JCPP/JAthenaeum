@@ -71,6 +71,7 @@
         	<forward name="delete" path="page.author.delete"/>
         	<forward name="viewAll" path="page.author.viewall"/>
         	<forward name="search" path="page.author.search"/>
+        	<forward name="invalidId" path="page.author.id.invalid"/>
         </action>
         
         <!-- Author Operations -->
@@ -98,6 +99,9 @@
 	        
 	        <!-- Search -->
 	        <forward name="search" path="/author.do?op=search" redirect="true"/>
+	        
+	        <!-- Errors -->
+	        <forward name="invalidId" path="page.author.id.invalid"/>
         </action>
         
         

@@ -8,6 +8,8 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.regex.Pattern;
 
+import com.github.jcpp.jathenaeum.db.dao.AuthorDAO;
+
 /**
  * Class for commons validation methods.
  * @author <a href="https://github.com/DavidePastore">DavidePastore</a>
@@ -82,6 +84,21 @@ public class Validator {
 	    }
 	    // only got here if we didn't return false
 	    return true;
+	}
+	
+	
+	/**
+	 * Check if this is a valid Author Id.
+	 * @param authorId the Author ID.
+	 * @return True if the Author ID is valid, false otherwise.
+	 */
+	public static boolean isValidAuthorId(String authorId){
+		if(Validator.isValidInt(authorId)){
+			return AuthorDAO.exists(Integer.parseInt(authorId));
+		}
+		else{
+			return false;
+		}
 	}
 
 }

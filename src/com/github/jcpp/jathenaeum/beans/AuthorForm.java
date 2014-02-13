@@ -7,6 +7,7 @@ import org.apache.struts.action.ActionForm;
 import org.apache.struts.action.ActionMapping;
 import org.apache.struts.action.ActionMessage;
 
+import com.github.jcpp.jathenaeum.db.dao.AuthorDAO;
 import com.github.jcpp.jathenaeum.utils.Validator;
 
 public class AuthorForm extends ActionForm{
@@ -91,6 +92,29 @@ public class AuthorForm extends ActionForm{
 			if(!Validator.isValidDate(bornDate)){
 				errors.add("bornDate", new ActionMessage("signup.borndate.invalid"));
 			}
+		}
+		
+		return errors;
+	}
+	
+	/**
+	 * Validate the id parameter of the GET request.
+	 * @param mapping
+	 * @param request
+	 * @return
+	 */
+	public ActionErrors validateId(ActionMapping mapping,
+			HttpServletRequest request) {
+		ActionErrors errors = new ActionErrors();
+		
+		if(request.getParameter("id") == null){
+			errors.add("id", new ActionMessage("author.id.empty"));
+		}
+		else if(!Validator.isValidInt(request.getParameter("id"))){
+			errors.add("id", new ActionMessage("author.id.invalid"));
+		}
+		else if(!AuthorDAO.exists(Integer.parseInt(request.getParameter("id")))){
+			errors.add("id", new ActionMessage("author.id.invalid"));
 		}
 		
 		return errors;
