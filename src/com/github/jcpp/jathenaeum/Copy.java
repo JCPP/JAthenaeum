@@ -23,7 +23,7 @@ public class Copy {
 	}
 	
 	/**
-	 * Create a Copy instance from a ResultSet
+	 * Create a Copy instance from a ResultSet.
 	 * @param resultSet
 	 * @throws SQLException 
 	 */

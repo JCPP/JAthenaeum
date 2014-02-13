@@ -3,6 +3,9 @@
  */
 package com.github.jcpp.jathenaeum;
 
+import java.sql.ResultSet;
+import java.sql.SQLException;
+
 /**
  * Customer class.
  * @author <a href="https://github.com/DavidePastore">DavidePastore</a>
@@ -15,6 +18,24 @@ public class Customer {
 	private String name;
 	private String surname;
 	
+	/**
+	 * Create a Customer instance.
+	 */
+	public Customer(){
+		
+	}
+	
+	/**
+	 * Create a Customer instance from a ResultSet.
+	 * @param resultSet
+	 * @throws SQLException 
+	 */
+	public Customer(ResultSet resultSet) throws SQLException {
+		cardNumber = resultSet.getInt(1);
+		email = resultSet.getString(2);
+		name = resultSet.getString(3);
+		surname = resultSet.getString(4);
+	}
 	/**
 	 * @return the cardNumber
 	 */

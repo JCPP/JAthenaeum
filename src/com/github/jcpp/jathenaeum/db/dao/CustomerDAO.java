@@ -39,11 +39,7 @@ private static Database db = Database.getInstance();
 			Customer customer;
 			
 			while(resultSet.next()){
-				customer = new Customer();
-				customer.setCardNumber(resultSet.getInt(1));
-				customer.setEmail(resultSet.getString(2));
-				customer.setName(resultSet.getString(3));
-				customer.setSurname(resultSet.getString(4));
+				customer = new Customer(resultSet);
 				customers.add(customer);
 			}
 			
@@ -88,11 +84,7 @@ private static Database db = Database.getInstance();
 			con.commit();
 			
 			if(resultSet.next()){
-				customer = new Customer();
-				customer.setCardNumber(resultSet.getInt(1));
-				customer.setEmail(resultSet.getString(2));
-				customer.setName(resultSet.getString(3));
-				customer.setSurname(resultSet.getString(4));
+				customer = new Customer(resultSet);
 			}
 			else{
 				throw new CustomerNotFoundException();
@@ -189,11 +181,7 @@ private static Database db = Database.getInstance();
 			ResultSet resultSet = stmt.executeQuery();
 			
 			if(resultSet.next()){
-				customer = new Customer();
-				customer.setCardNumber(resultSet.getInt(1));
-				customer.setEmail(resultSet.getString(2));
-				customer.setName(resultSet.getString(3));
-				customer.setSurname(resultSet.getString(4));
+				customer = new Customer(resultSet);
 			}
 			else{
 				throw new CustomerNotFoundException();
