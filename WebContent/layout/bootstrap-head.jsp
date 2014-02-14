@@ -10,7 +10,7 @@
 <logic:notEqual name="redirect" value="">
 	<meta http-equiv="refresh" content="3;url=<tiles:getAsString name="redirect" />" />
 </logic:notEqual>
-<!-- <link rel="shortcut icon" href="../../docs-assets/ico/favicon.png"> -->
+<link rel="shortcut icon" href="image/favicon.ico">
 
 <title><tiles:getAsString name="title" /> - JAthenaeum</title>
 
