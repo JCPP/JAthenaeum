@@ -9,6 +9,7 @@ import java.util.Date;
 import java.util.regex.Pattern;
 
 import com.github.jcpp.jathenaeum.db.dao.AuthorDAO;
+import com.github.jcpp.jathenaeum.db.dao.BookDAO;
 import com.github.jcpp.jathenaeum.db.dao.CustomerDAO;
 import com.github.jcpp.jathenaeum.db.dao.LoanDAO;
 
@@ -127,6 +128,21 @@ public class Validator {
 	public static boolean isValidLoanId(String loanId){
 		if(Validator.isValidInt(loanId)){
 			return LoanDAO.exists(Integer.parseInt(loanId));
+		}
+		else{
+			return false;
+		}
+	}
+	
+	
+	/**
+	 * Check if this is a valid Book Id.
+	 * @param bookId the Book ID.
+	 * @return True if the Book ID is valid, false otherwise.
+	 */
+	public static boolean isValidBookId(String bookId){
+		if(Validator.isValidInt(bookId)){
+			return BookDAO.exists(Integer.parseInt(bookId));
 		}
 		else{
 			return false;

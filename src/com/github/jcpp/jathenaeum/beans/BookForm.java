@@ -11,6 +11,8 @@ import org.apache.struts.action.ActionForm;
 import org.apache.struts.action.ActionMapping;
 import org.apache.struts.action.ActionMessage;
 
+import com.github.jcpp.jathenaeum.db.dao.BookDAO;
+import com.github.jcpp.jathenaeum.db.dao.LoanDAO;
 import com.github.jcpp.jathenaeum.utils.Validator;
 
 
@@ -176,7 +178,23 @@ public class BookForm extends ActionForm {
 			errors.add("numberOfCopies", new ActionMessage("book.numberofcopies.invalid"));
 		}
 		
+		return errors;
+	}
+	
+	
+	public ActionErrors validateId(ActionMapping mapping,
+			HttpServletRequest request) {
+		ActionErrors errors = new ActionErrors();
 		
+		if(request.getParameter("id") == null){
+			errors.add("id", new ActionMessage("book.id.empty"));
+		}
+		else if(!Validator.isValidInt(request.getParameter("id"))){
+			errors.add("id", new ActionMessage("book.id.invalid"));
+		}
+		else if(!BookDAO.exists(Integer.parseInt(request.getParameter("id")))){
+			errors.add("id", new ActionMessage("book.id.invalid"));
+		}
 		
 		return errors;
 	}

@@ -114,6 +114,7 @@
         	<forward name="viewAll" path="page.book.viewall"/>
         	<forward name="search" path="page.book.search"/>
         	<forward name="manageCopies" path="page.book.managecopies"/>
+        	<forward name="invalidId" path="page.book.id.invalid"/>
         	<forward name="noAuthors" path="page.author.none" />
         </action>
         
@@ -147,6 +148,9 @@
 	        <forward name="manageCopiesErrors" path="/book.do?op=manageCopies" redirect="true"/>
 	        <forward name="manageCopiesSuccess" path="page.book.managecopies.confirm" />
 	        <forward name="manageCopiesFailed" path="page.book.managecopies.failed" />
+	        
+	        <!-- Errors -->
+	        <forward name="invalidId" path="page.book.id.invalid"/>
         </action>
         
         
