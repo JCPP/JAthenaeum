@@ -8,6 +8,7 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import org.apache.struts.action.Action;
+import org.apache.struts.action.ActionErrors;
 import org.apache.struts.action.ActionForm;
 import org.apache.struts.action.ActionForward;
 import org.apache.struts.action.ActionMapping;
@@ -28,17 +29,28 @@ public class SigninAction extends Action {
 		String actionTarget = null;
 		
 		User user = new User();
-		//ActionMessages errors_mesg = new ActionMessages();
+		HttpSession session = request.getSession();
+		
+		ActionErrors actionErrors = (ActionErrors) session.getAttribute("errors");
+		
+		if(actionErrors != null){
+			//Save the errors in this action
+			saveErrors(request, actionErrors);
+		}
+		
 		SigninForm uf = (SigninForm) form;
         if(form != null){
         	user.setEmail(uf.getEmail());
         	user.setPassword(uf.getPassword());
         	
-        	HttpSession session = request.getSession();
+        	session = request.getSession();
     		session.setAttribute("user", user);
     		
     		actionTarget = "success";
         }
+        
+        //Remove attributes from session
+  		session.removeAttribute("errors");
 
 		return mapping.findForward(actionTarget);
 	}

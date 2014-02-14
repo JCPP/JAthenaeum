@@ -13,6 +13,7 @@ import com.github.jcpp.jathenaeum.User;
 import com.github.jcpp.jathenaeum.beans.UserRegisterForm;
 import com.github.jcpp.jathenaeum.db.dao.UserDAO;
 import com.github.jcpp.jathenaeum.utils.Converter;
+import com.github.jcpp.jathenaeum.utils.Redirector;
 import com.github.jcpp.jathenaeum.utils.Validator;
 
 public class UserRegisterAction extends Action{
@@ -21,7 +22,7 @@ public class UserRegisterAction extends Action{
 	public ActionForward execute(ActionMapping mapping, ActionForm form,
 			HttpServletRequest request, HttpServletResponse response)
 			throws Exception {
-		String action_target = null;
+		String actionTarget = null;
 		
 		User user = new User();
 		//ActionMessages errors_mesg = new ActionMessages();
@@ -39,19 +40,20 @@ public class UserRegisterAction extends Action{
         	
         	try{
         		if(UserDAO.register(user)){
-        			action_target = "success";
+        			actionTarget = "success";
         		}
         		
+        		//Auto login
         		HttpSession session = request.getSession();
         		session.setAttribute("user", user);
         		
         	}catch(Exception e){
-        		action_target = "failed";
+        		actionTarget = "failed";
         		//throw new RegistrationException();
         	}
         }
 
-		return mapping.findForward(action_target);
+		return mapping.findForward(actionTarget);
 	}
 
 	

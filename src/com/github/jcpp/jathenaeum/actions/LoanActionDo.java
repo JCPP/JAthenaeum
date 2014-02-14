@@ -21,6 +21,8 @@ import com.github.jcpp.jathenaeum.Loan;
 import com.github.jcpp.jathenaeum.beans.LoanForm;
 import com.github.jcpp.jathenaeum.db.dao.CopyDAO;
 import com.github.jcpp.jathenaeum.db.dao.LoanDAO;
+import com.github.jcpp.jathenaeum.utils.Redirector;
+import com.github.jcpp.jathenaeum.utils.Validator;
 
 /**
  * @author <a href="https://github.com/DavidePastore">DavidePastore</a>
@@ -33,6 +35,11 @@ public class LoanActionDo extends DispatchAction {
 					throws Exception {
 		String actionTarget = null;
 		
+		HttpSession session = request.getSession();
+		if(!Validator.isLogged(session)){
+			return Redirector.loginRequiredRedirect(mapping, session);
+		}
+		
 		Loan loan = new Loan();
 		LoanForm uf = (LoanForm) form;
 		
@@ -43,7 +50,6 @@ public class LoanActionDo extends DispatchAction {
 			actionTarget = "addErrors";
 			saveErrors(request, actionErrors); //Save the errors
 			
-			HttpSession session = request.getSession();
     		session.setAttribute("errors", actionErrors);
     		session.setAttribute("form", uf);
 			
@@ -74,6 +80,11 @@ public class LoanActionDo extends DispatchAction {
 					throws Exception {
 		String actionTarget = null;
 		
+		HttpSession session = request.getSession();
+		if(!Validator.isLogged(session)){
+			return Redirector.loginRequiredRedirect(mapping, session);
+		}
+		
 		Loan loan = new Loan();
 		LoanForm uf = (LoanForm) form;
 		
@@ -93,7 +104,6 @@ public class LoanActionDo extends DispatchAction {
 			actionTarget = "editErrors";
 			saveErrors(request, actionErrors); //Save the errors
 			
-			HttpSession session = request.getSession();
     		session.setAttribute("errors", actionErrors);
     		session.setAttribute("form", uf);
 			
@@ -124,6 +134,11 @@ public class LoanActionDo extends DispatchAction {
 			HttpServletRequest request, HttpServletResponse response)
 					throws Exception {
 		String actionTarget = null;
+		
+		HttpSession session = request.getSession();
+		if(!Validator.isLogged(session)){
+			return Redirector.loginRequiredRedirect(mapping, session);
+		}
 		
 		LoanForm loanForm = (LoanForm) form;
 		
@@ -157,6 +172,11 @@ public class LoanActionDo extends DispatchAction {
 					throws Exception {
 		String actionTarget = null;
 		
+		HttpSession session = request.getSession();
+		if(!Validator.isLogged(session)){
+			return Redirector.loginRequiredRedirect(mapping, session);
+		}
+		
 		LoanForm uf = (LoanForm) form;
 		
 		//ActionErrors actionErrors = uf.validate(mapping, request);
@@ -185,7 +205,6 @@ public class LoanActionDo extends DispatchAction {
 				
 				actionTarget = "search";
 				
-				HttpSession session = request.getSession();
 	    		session.setAttribute("loans", loans);
 	    		session.setAttribute("form", uf);
 				
@@ -208,6 +227,11 @@ public class LoanActionDo extends DispatchAction {
 			HttpServletRequest request, HttpServletResponse response)
 					throws Exception {
 		String actionTarget = null;
+		
+		HttpSession session = request.getSession();
+		if(!Validator.isLogged(session)){
+			return Redirector.loginRequiredRedirect(mapping, session);
+		}
 		
 		Loan loan = new Loan();
 		LoanForm uf = (LoanForm) form;

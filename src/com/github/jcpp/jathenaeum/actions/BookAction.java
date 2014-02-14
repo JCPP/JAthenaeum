@@ -22,6 +22,7 @@ import com.github.jcpp.jathenaeum.beans.BookForm;
 import com.github.jcpp.jathenaeum.db.dao.AuthorDAO;
 import com.github.jcpp.jathenaeum.db.dao.BookDAO;
 import com.github.jcpp.jathenaeum.db.dao.CopyDAO;
+import com.github.jcpp.jathenaeum.utils.Redirector;
 import com.github.jcpp.jathenaeum.utils.Validator;
 
 /**
@@ -35,11 +36,15 @@ public class BookAction extends DispatchAction {
 			HttpServletRequest request, HttpServletResponse response)
 					throws Exception {
 		String actionTarget = null;
+		
+		HttpSession session = request.getSession();
+		if(!Validator.isLogged(session)){
+			return Redirector.loginRequiredRedirect(mapping, session);
+		}
 
 		ArrayList<Author> authors = AuthorDAO.getAll();
 		ArrayList<Author> selectedAuthors = new ArrayList<Author>();
 		
-		HttpSession session = request.getSession();
 		ActionErrors actionErrors = (ActionErrors) session.getAttribute("errors");
 		BookForm bookForm = (BookForm) session.getAttribute("form");
 		
@@ -91,6 +96,11 @@ public class BookAction extends DispatchAction {
 					throws Exception {
 		String actionTarget = null;
 		
+		HttpSession session = request.getSession();
+		if(!Validator.isLogged(session)){
+			return Redirector.loginRequiredRedirect(mapping, session);
+		}
+		
 		//Check the id
 		if(!Validator.isValidBookId(request.getParameter("id"))){
 			actionTarget = "invalidId";
@@ -105,7 +115,6 @@ public class BookAction extends DispatchAction {
 		ArrayList<Author> authors = AuthorDAO.getAll();
 		ArrayList<Author> bookAuthors = AuthorDAO.getAllByLibroId(book.getId());
 		
-		HttpSession session = request.getSession();
 		ActionErrors actionErrors = (ActionErrors) session.getAttribute("errors");
 		BookForm bookForm = (BookForm) session.getAttribute("form");
 		
@@ -157,6 +166,11 @@ public class BookAction extends DispatchAction {
 					throws Exception {
 		String actionTarget = null;
 		
+		HttpSession session = request.getSession();
+		if(!Validator.isLogged(session)){
+			return Redirector.loginRequiredRedirect(mapping, session);
+		}
+		
 		//Check the id
 		if(!Validator.isValidBookId(request.getParameter("id"))){
 			actionTarget = "invalidId";
@@ -169,7 +183,6 @@ public class BookAction extends DispatchAction {
 		
 		Book book = BookDAO.getById(Integer.parseInt(id));
 		
-		HttpSession session = request.getSession();
 		ActionErrors actionErrors = (ActionErrors) session.getAttribute("errors");
 		
 		
@@ -194,6 +207,11 @@ public class BookAction extends DispatchAction {
 			HttpServletRequest request, HttpServletResponse response)
 					throws Exception {
 		String actionTarget = null;
+		
+		HttpSession session = request.getSession();
+		if(!Validator.isLogged(session)){
+			return Redirector.loginRequiredRedirect(mapping, session);
+		}
 
 		ArrayList<Book> books = BookDAO.getAllWithAuthors();
 		request.setAttribute("books", books);
@@ -208,6 +226,10 @@ public class BookAction extends DispatchAction {
 		String actionTarget = null;
 		
 		HttpSession session = request.getSession();
+		if(!Validator.isLogged(session)){
+			return Redirector.loginRequiredRedirect(mapping, session);
+		}
+		
 		ArrayList<Book> books = (ArrayList<Book>) session.getAttribute("books");
 		BookForm bookForm = (BookForm) session.getAttribute("form");
 		
@@ -242,6 +264,11 @@ public class BookAction extends DispatchAction {
 					throws Exception {
 		String actionTarget = null;
 		
+		HttpSession session = request.getSession();
+		if(!Validator.isLogged(session)){
+			return Redirector.loginRequiredRedirect(mapping, session);
+		}
+		
 		//Check the id
 		if(!Validator.isValidBookId(request.getParameter("id"))){
 			actionTarget = "invalidId";
@@ -252,7 +279,6 @@ public class BookAction extends DispatchAction {
 		
 		String id = request.getParameter("id");
 		
-		HttpSession session = request.getSession();
 		BookForm bookForm = (BookForm) session.getAttribute("form");
 		ActionErrors actionErrors = (ActionErrors) session.getAttribute("errors");
 		

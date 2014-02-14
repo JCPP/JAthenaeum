@@ -23,6 +23,7 @@ import com.github.jcpp.jathenaeum.beans.LoanForm;
 import com.github.jcpp.jathenaeum.db.dao.BookDAO;
 import com.github.jcpp.jathenaeum.db.dao.CustomerDAO;
 import com.github.jcpp.jathenaeum.db.dao.LoanDAO;
+import com.github.jcpp.jathenaeum.utils.Redirector;
 import com.github.jcpp.jathenaeum.utils.Validator;
 
 /**
@@ -36,12 +37,16 @@ public class LoanAction extends DispatchAction {
 			HttpServletRequest request, HttpServletResponse response)
 					throws Exception {
 		String actionTarget = null;
+		
+		HttpSession session = request.getSession();
+		if(!Validator.isLogged(session)){
+			return Redirector.loginRequiredRedirect(mapping, session);
+		}
 
 		ArrayList<Book> booksWithCopies = BookDAO.getAllWithAtLeastOneFreeCopy();
 		int numberOfBook = BookDAO.getNumber();
 		ArrayList<Customer> customers = CustomerDAO.getAll();
 		
-		HttpSession session = request.getSession();
 		ActionErrors actionErrors = (ActionErrors) session.getAttribute("errors");
 		LoanForm loanForm = (LoanForm) session.getAttribute("form");
 		Loan loan = new Loan();
@@ -88,6 +93,11 @@ public class LoanAction extends DispatchAction {
 					throws Exception {
 		String actionTarget = null;
 		
+		HttpSession session = request.getSession();
+		if(!Validator.isLogged(session)){
+			return Redirector.loginRequiredRedirect(mapping, session);
+		}
+		
 		//Check the id
 		if(!Validator.isValidLoanId(request.getParameter("id"))){
 			actionTarget = "invalidId";
@@ -103,7 +113,6 @@ public class LoanAction extends DispatchAction {
 		
 		Loan loan = LoanDAO.getById(Integer.parseInt(id));
 		
-		HttpSession session = request.getSession();
 		ActionErrors actionErrors = (ActionErrors) session.getAttribute("errors");
 		LoanForm loanForm = (LoanForm) session.getAttribute("form");
 		
@@ -138,6 +147,11 @@ public class LoanAction extends DispatchAction {
 					throws Exception {
 		String actionTarget = null;
 		
+		HttpSession session = request.getSession();
+		if(!Validator.isLogged(session)){
+			return Redirector.loginRequiredRedirect(mapping, session);
+		}
+		
 		//Check the id
 		if(!Validator.isValidLoanId(request.getParameter("id"))){
 			actionTarget = "invalidId";
@@ -150,7 +164,6 @@ public class LoanAction extends DispatchAction {
 		
 		Loan loan = LoanDAO.getById(Integer.parseInt(id));
 		
-		HttpSession session = request.getSession();
 		ActionErrors actionErrors = (ActionErrors) session.getAttribute("errors");
 		
 		
@@ -175,6 +188,11 @@ public class LoanAction extends DispatchAction {
 			HttpServletRequest request, HttpServletResponse response)
 					throws Exception {
 		String actionTarget = null;
+		
+		HttpSession session = request.getSession();
+		if(!Validator.isLogged(session)){
+			return Redirector.loginRequiredRedirect(mapping, session);
+		}
 
 		ArrayList<Loan> loans = LoanDAO.getAll();
 		request.setAttribute("loans", loans);
@@ -188,10 +206,14 @@ public class LoanAction extends DispatchAction {
 					throws Exception {
 		String actionTarget = null;
 		
+		HttpSession session = request.getSession();
+		if(!Validator.isLogged(session)){
+			return Redirector.loginRequiredRedirect(mapping, session);
+		}
+		
 		ArrayList<Book> books = BookDAO.getAll();
 		ArrayList<Customer> customers = CustomerDAO.getAll();
 		
-		HttpSession session = request.getSession();
 		ArrayList<Loan> loans = (ArrayList<Loan>) session.getAttribute("loans");
 		LoanForm loanForm = (LoanForm) session.getAttribute("form");
 		
@@ -228,6 +250,11 @@ public class LoanAction extends DispatchAction {
 			HttpServletRequest request, HttpServletResponse response)
 					throws Exception {
 		String actionTarget = null;
+		
+		HttpSession session = request.getSession();
+		if(!Validator.isLogged(session)){
+			return Redirector.loginRequiredRedirect(mapping, session);
+		}
 
 		ArrayList<Loan> loans = LoanDAO.getAllExpired();
 		request.setAttribute("loans", loans);

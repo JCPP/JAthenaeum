@@ -17,6 +17,8 @@ import org.apache.struts.actions.DispatchAction;
 import com.github.jcpp.jathenaeum.Customer;
 import com.github.jcpp.jathenaeum.beans.CustomerForm;
 import com.github.jcpp.jathenaeum.db.dao.CustomerDAO;
+import com.github.jcpp.jathenaeum.utils.Redirector;
+import com.github.jcpp.jathenaeum.utils.Validator;
 
 /**
  * @author <a href="https://github.com/DavidePastore">DavidePastore</a>
@@ -28,6 +30,11 @@ public class CustomerActionDo extends DispatchAction {
 			HttpServletRequest request, HttpServletResponse response)
 					throws Exception {
 		String actionTarget = null;
+		
+		HttpSession session = request.getSession();
+		if(!Validator.isLogged(session)){
+			return Redirector.loginRequiredRedirect(mapping, session);
+		}
 		
 		Customer customer = new Customer();
 		CustomerForm uf = (CustomerForm) form;
@@ -41,7 +48,6 @@ public class CustomerActionDo extends DispatchAction {
 			actionTarget = "addErrors";
 			saveErrors(request, actionErrors); //Save the errors
 			
-			HttpSession session = request.getSession();
     		session.setAttribute("errors", actionErrors);
     		session.setAttribute("form", uf);
 			
@@ -71,6 +77,11 @@ public class CustomerActionDo extends DispatchAction {
 					throws Exception {
 		String actionTarget = null;
 		
+		HttpSession session = request.getSession();
+		if(!Validator.isLogged(session)){
+			return Redirector.loginRequiredRedirect(mapping, session);
+		}
+		
 		Customer customer = new Customer();
 		CustomerForm uf = (CustomerForm) form;
 		
@@ -97,7 +108,6 @@ public class CustomerActionDo extends DispatchAction {
 			actionTarget = "editErrors";
 			saveErrors(request, actionErrors); //Save the errors
 			
-			HttpSession session = request.getSession();
     		session.setAttribute("errors", actionErrors);
     		session.setAttribute("form", uf);
 			
@@ -127,6 +137,11 @@ public class CustomerActionDo extends DispatchAction {
 			HttpServletRequest request, HttpServletResponse response)
 					throws Exception {
 		String actionTarget = null;
+		
+		HttpSession session = request.getSession();
+		if(!Validator.isLogged(session)){
+			return Redirector.loginRequiredRedirect(mapping, session);
+		}
 		
 		CustomerForm uf = (CustomerForm) form;
 		

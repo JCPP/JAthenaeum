@@ -19,6 +19,7 @@ import org.apache.struts.actions.DispatchAction;
 import com.github.jcpp.jathenaeum.Customer;
 import com.github.jcpp.jathenaeum.beans.CustomerForm;
 import com.github.jcpp.jathenaeum.db.dao.CustomerDAO;
+import com.github.jcpp.jathenaeum.utils.Redirector;
 import com.github.jcpp.jathenaeum.utils.Validator;
 
 /**
@@ -33,6 +34,10 @@ public class CustomerAction extends DispatchAction {
 		String actionTarget = null;
 		
 		HttpSession session = request.getSession();
+		if(!Validator.isLogged(session)){
+			return Redirector.loginRequiredRedirect(mapping, session);
+		}
+		
 		ActionErrors actionErrors = (ActionErrors) session.getAttribute("errors");
 		CustomerForm customerForm = (CustomerForm) session.getAttribute("form");
 		
@@ -59,6 +64,11 @@ public class CustomerAction extends DispatchAction {
 					throws Exception {
 		String actionTarget = null;
 		
+		HttpSession session = request.getSession();
+		if(!Validator.isLogged(session)){
+			return Redirector.loginRequiredRedirect(mapping, session);
+		}
+		
 		//Check the id
 		if(!Validator.isValidCustomerId(request.getParameter("id"))){
 			actionTarget = "invalidId";
@@ -71,7 +81,6 @@ public class CustomerAction extends DispatchAction {
 		
 		Customer customer = CustomerDAO.getById(Integer.parseInt(id));
 		
-		HttpSession session = request.getSession();
 		ActionErrors actionErrors = (ActionErrors) session.getAttribute("errors");
 		CustomerForm customerForm = (CustomerForm) session.getAttribute("form");
 		
@@ -105,6 +114,11 @@ public class CustomerAction extends DispatchAction {
 					throws Exception {
 		String actionTarget = null;
 		
+		HttpSession session = request.getSession();
+		if(!Validator.isLogged(session)){
+			return Redirector.loginRequiredRedirect(mapping, session);
+		}
+		
 		if(!Validator.isValidCustomerId(request.getParameter("id"))){
 			actionTarget = "invalidId";
 			
@@ -116,7 +130,6 @@ public class CustomerAction extends DispatchAction {
 		
 		Customer customer = CustomerDAO.getById(Integer.parseInt(id));
 		
-		HttpSession session = request.getSession();
 		ActionErrors actionErrors = (ActionErrors) session.getAttribute("errors");
 		
 		
@@ -141,6 +154,11 @@ public class CustomerAction extends DispatchAction {
 			HttpServletRequest request, HttpServletResponse response)
 					throws Exception {
 		String actionTarget = null;
+		
+		HttpSession session = request.getSession();
+		if(!Validator.isLogged(session)){
+			return Redirector.loginRequiredRedirect(mapping, session);
+		}
 
 		ArrayList<Customer> customers = CustomerDAO.getAll();
 		request.setAttribute("customers", customers);

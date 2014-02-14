@@ -13,12 +13,14 @@ import org.apache.struts.action.ActionErrors;
 import org.apache.struts.action.ActionForm;
 import org.apache.struts.action.ActionForward;
 import org.apache.struts.action.ActionMapping;
+import org.apache.struts.action.ActionMessage;
 import org.apache.struts.action.ActionRedirect;
 import org.apache.struts.actions.DispatchAction;
 
 import com.github.jcpp.jathenaeum.Author;
 import com.github.jcpp.jathenaeum.beans.AuthorForm;
 import com.github.jcpp.jathenaeum.db.dao.AuthorDAO;
+import com.github.jcpp.jathenaeum.utils.Redirector;
 import com.github.jcpp.jathenaeum.utils.Validator;
 
 /**
@@ -34,6 +36,11 @@ public class AuthorAction extends DispatchAction {
 		String actionTarget = null;
 		
 		HttpSession session = request.getSession();
+		
+		if(!Validator.isLogged(session)){
+			return Redirector.loginRequiredRedirect(mapping, session);
+		}
+		
 		ActionErrors actionErrors = (ActionErrors) session.getAttribute("errors");
 		AuthorForm authorForm = (AuthorForm) session.getAttribute("form");
 		
@@ -59,6 +66,11 @@ public class AuthorAction extends DispatchAction {
 					throws Exception {
 		String actionTarget = null;
 		
+		HttpSession session = request.getSession();
+		if(!Validator.isLogged(session)){
+			return Redirector.loginRequiredRedirect(mapping, session);
+		}
+		
 		//Check the id
 		if(!Validator.isValidAuthorId(request.getParameter("id"))){
 			actionTarget = "invalidId";
@@ -71,7 +83,6 @@ public class AuthorAction extends DispatchAction {
 		
 		Author author = AuthorDAO.getById(Integer.parseInt(id));
 		
-		HttpSession session = request.getSession();
 		ActionErrors actionErrors = (ActionErrors) session.getAttribute("errors");
 		AuthorForm authorForm = (AuthorForm) session.getAttribute("form");
 		
@@ -105,6 +116,11 @@ public class AuthorAction extends DispatchAction {
 					throws Exception {
 		String actionTarget = null;
 		
+		HttpSession session = request.getSession();
+		if(!Validator.isLogged(session)){
+			return Redirector.loginRequiredRedirect(mapping, session);
+		}
+		
 		//Check the id
 		if(!Validator.isValidAuthorId(request.getParameter("id"))){
 			actionTarget = "invalidId";
@@ -117,7 +133,6 @@ public class AuthorAction extends DispatchAction {
 		
 		Author author = AuthorDAO.getById(Integer.parseInt(id));
 		
-		HttpSession session = request.getSession();
 		ActionErrors actionErrors = (ActionErrors) session.getAttribute("errors");
 		
 		
@@ -142,6 +157,11 @@ public class AuthorAction extends DispatchAction {
 			HttpServletRequest request, HttpServletResponse response)
 					throws Exception {
 		String actionTarget = null;
+		
+		HttpSession session = request.getSession();
+		if(!Validator.isLogged(session)){
+			return Redirector.loginRequiredRedirect(mapping, session);
+		}
 
 		ArrayList<Author> authors = AuthorDAO.getAll();
 		request.setAttribute("authors", authors);
@@ -156,6 +176,10 @@ public class AuthorAction extends DispatchAction {
 		String actionTarget = null;
 		
 		HttpSession session = request.getSession();
+		if(!Validator.isLogged(session)){
+			return Redirector.loginRequiredRedirect(mapping, session);
+		}
+		
 		ArrayList<Author> authors = (ArrayList<Author>) session.getAttribute("authors");
 		AuthorForm authorForm = (AuthorForm) session.getAttribute("form");
 		

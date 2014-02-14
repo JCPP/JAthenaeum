@@ -72,6 +72,7 @@
         	<forward name="viewAll" path="page.author.viewall"/>
         	<forward name="search" path="page.author.search"/>
         	<forward name="invalidId" path="page.author.id.invalid"/>
+        	<forward name="loginRequired" path="page.user.signin"/>
         </action>
         
         <!-- Author Operations -->
@@ -102,6 +103,7 @@
 	        
 	        <!-- Errors -->
 	        <forward name="invalidId" path="page.author.id.invalid"/>
+	        <forward name="loginRequired" path="page.user.signin"/>
         </action>
         
         
@@ -116,6 +118,7 @@
         	<forward name="manageCopies" path="page.book.managecopies"/>
         	<forward name="invalidId" path="page.book.id.invalid"/>
         	<forward name="noAuthors" path="page.author.none" />
+        	<forward name="loginRequired" path="page.user.signin"/>
         </action>
         
         <!-- Book Operations -->
@@ -151,6 +154,7 @@
 	        
 	        <!-- Errors -->
 	        <forward name="invalidId" path="page.book.id.invalid"/>
+	        <forward name="loginRequired" path="page.user.signin"/>
         </action>
         
         
@@ -162,6 +166,7 @@
         	<forward name="delete" path="page.customer.delete"/>
         	<forward name="viewAll" path="page.customer.viewall"/>
         	<forward name="invalidId" path="page.customer.id.invalid"/>
+        	<forward name="loginRequired" path="page.user.signin"/>
         </action>
         
         <!-- Customer Operations -->
@@ -189,6 +194,7 @@
 	        
 	        <!-- Errors -->
 	        <forward name="invalidId" path="page.customer.id.invalid"/>
+	        <forward name="loginRequired" path="page.user.signin"/>
         </action>
         
         
@@ -204,6 +210,7 @@
         	<forward name="noBooks" path="page.book.none" />
         	<forward name="noCopies" path="page.copy.none" />
         	<forward name="noCustomers" path="page.customer.none" />
+        	<forward name="loginRequired" path="page.user.signin"/>
         </action>
         
         <!-- Loan Operations -->
@@ -238,6 +245,7 @@
 	        
 	        <!-- Errors -->
 	        <forward name="invalidId" path="page.loan.id.invalid"/>
+	        <forward name="loginRequired" path="page.user.signin"/>
         </action>
         
 	</action-mappings>

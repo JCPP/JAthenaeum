@@ -8,6 +8,8 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.regex.Pattern;
 
+import javax.servlet.http.HttpSession;
+
 import com.github.jcpp.jathenaeum.db.dao.AuthorDAO;
 import com.github.jcpp.jathenaeum.db.dao.BookDAO;
 import com.github.jcpp.jathenaeum.db.dao.CustomerDAO;
@@ -147,6 +149,15 @@ public class Validator {
 		else{
 			return false;
 		}
+	}
+	
+	/**
+	 * Check if the user is logged.
+	 * @param session the HttpSession object.
+	 * @return True if the user is logged, false otherwise.
+	 */
+	public static boolean isLogged(HttpSession session){
+		return session.getAttribute("user") != null;
 	}
 
 }

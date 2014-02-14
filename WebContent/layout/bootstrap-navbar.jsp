@@ -20,53 +20,60 @@
 			<ul class="nav navbar-nav navbar-left">
 				<li><a href="#">Link</a></li>
 				<li><a href="#">Link</a></li>
-				<li class="dropdown
-				<% if(((String)title).contains("Book")){
-					out.write("active");
-				}%>
-				"><a href="#" class="dropdown-toggle"
-					data-toggle="dropdown">Book <b class="caret"></b></a>
-					<ul class="dropdown-menu">
-						<li><a href="book.do?op=add">Add</a></li>
-						<li><a href="book.do?op=viewAll">View All</a></li>
-						<li><a href="book.do?op=search">Search</a></li>
-					</ul></li>
-				
-				<li class="dropdown
-				<% if(((String)title).contains("Author")){
-					out.write("active");
-				}%>
-				"><a href="#" class="dropdown-toggle"
-					data-toggle="dropdown">Author <b class="caret"></b></a>
-					<ul class="dropdown-menu">
-						<li><a href="author.do?op=add">Add</a></li>
-						<li><a href="author.do?op=viewAll">View All</a></li>
-						<li><a href="author.do?op=search">Search</a></li>
-					</ul></li>
+				<!-- User present -->
+				<logic:present name="user" scope="session">
+					<li class="dropdown
+					<% if(((String)title).contains("Book")){
+						out.write("active");
+					}%>
+					"><a href="#" class="dropdown-toggle"
+						data-toggle="dropdown">Book <b class="caret"></b></a>
+						<ul class="dropdown-menu">
+							<li><a href="book.do?op=add">Add</a></li>
+							<li><a href="book.do?op=viewAll">View All</a></li>
+							<li><a href="book.do?op=search">Search</a></li>
+						</ul>
+					</li>
 					
-				<li class="dropdown
-				<% if(((String)title).contains("Customer")){
-					out.write("active");
-				}%>
-				"><a href="#" class="dropdown-toggle"
-					data-toggle="dropdown">Customer <b class="caret"></b></a>
-					<ul class="dropdown-menu">
-						<li><a href="customer.do?op=add">Add</a></li>
-						<li><a href="customer.do?op=viewAll">View All</a></li>
-					</ul></li>
-					
-				<li class="dropdown
-				<% if(((String)title).contains("Loan")){
-					out.write("active");
-				}%>
-				"><a href="#" class="dropdown-toggle"
-					data-toggle="dropdown">Loan <b class="caret"></b></a>
-					<ul class="dropdown-menu">
-						<li><a href="loan.do?op=add">Add</a></li>
-						<li><a href="loan.do?op=viewAll">View All</a></li>
-						<li><a href="loan.do?op=viewAllExpired">View All Expired</a></li>
-						<li><a href="loan.do?op=search">Search</a></li>
-					</ul></li>
+					<li class="dropdown
+					<% if(((String)title).contains("Author")){
+						out.write("active");
+					}%>
+					"><a href="#" class="dropdown-toggle"
+						data-toggle="dropdown">Author <b class="caret"></b></a>
+						<ul class="dropdown-menu">
+							<li><a href="author.do?op=add">Add</a></li>
+							<li><a href="author.do?op=viewAll">View All</a></li>
+							<li><a href="author.do?op=search">Search</a></li>
+						</ul>
+					</li>
+						
+					<li class="dropdown
+					<% if(((String)title).contains("Customer")){
+						out.write("active");
+					}%>
+					"><a href="#" class="dropdown-toggle"
+						data-toggle="dropdown">Customer <b class="caret"></b></a>
+						<ul class="dropdown-menu">
+							<li><a href="customer.do?op=add">Add</a></li>
+							<li><a href="customer.do?op=viewAll">View All</a></li>
+						</ul>
+					</li>
+						
+					<li class="dropdown
+					<% if(((String)title).contains("Loan")){
+						out.write("active");
+					}%>
+					"><a href="#" class="dropdown-toggle"
+						data-toggle="dropdown">Loan <b class="caret"></b></a>
+						<ul class="dropdown-menu">
+							<li><a href="loan.do?op=add">Add</a></li>
+							<li><a href="loan.do?op=viewAll">View All</a></li>
+							<li><a href="loan.do?op=viewAllExpired">View All Expired</a></li>
+							<li><a href="loan.do?op=search">Search</a></li>
+						</ul>
+					</li>
+				</logic:present>
 			</ul>
 			<div class="nav navbar-nav navbar-right">
 				<!-- User not present -->

@@ -12,6 +12,9 @@ import org.apache.struts.action.ActionForward;
 import org.apache.struts.action.ActionMapping;
 import org.apache.struts.actions.ForwardAction;
 
+import com.github.jcpp.jathenaeum.utils.Redirector;
+import com.github.jcpp.jathenaeum.utils.Validator;
+
 /**
  * Logout action.
  * @author <a href="https://github.com/DavidePastore">DavidePastore</a>
@@ -23,12 +26,16 @@ public class LogoutAction extends ForwardAction {
 	public ActionForward execute(ActionMapping mapping, ActionForm form,
 			HttpServletRequest request, HttpServletResponse response)
 					throws Exception {
-		String action_target = null;
-
+		String actionTarget = null;
+		
 		HttpSession session = request.getSession();
+		if(!Validator.isLogged(session)){
+			return Redirector.loginRequiredRedirect(mapping, session);
+		}
+
 		session.removeAttribute("user");
-		action_target = "success";
-		return mapping.findForward(action_target);
+		actionTarget = "success";
+		return mapping.findForward(actionTarget);
 	}
 
 

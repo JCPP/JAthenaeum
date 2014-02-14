@@ -19,6 +19,8 @@ import org.apache.struts.actions.DispatchAction;
 import com.github.jcpp.jathenaeum.Author;
 import com.github.jcpp.jathenaeum.beans.AuthorForm;
 import com.github.jcpp.jathenaeum.db.dao.AuthorDAO;
+import com.github.jcpp.jathenaeum.utils.Redirector;
+import com.github.jcpp.jathenaeum.utils.Validator;
 
 /**
  * 
@@ -32,6 +34,11 @@ public class AuthorActionDo extends DispatchAction {
 					throws Exception {
 		String actionTarget = null;
 		
+		HttpSession session = request.getSession();
+		if(!Validator.isLogged(session)){
+			return Redirector.loginRequiredRedirect(mapping, session);
+		}
+		
 		Author author = new Author();
 		AuthorForm uf = (AuthorForm) form;
 		
@@ -42,7 +49,6 @@ public class AuthorActionDo extends DispatchAction {
 			actionTarget = "addErrors";
 			saveErrors(request, actionErrors); //Save the errors
 			
-			HttpSession session = request.getSession();
     		session.setAttribute("errors", actionErrors);
     		session.setAttribute("form", uf);
 			
@@ -72,6 +78,11 @@ public class AuthorActionDo extends DispatchAction {
 					throws Exception {
 		String actionTarget = null;
 		
+		HttpSession session = request.getSession();
+		if(!Validator.isLogged(session)){
+			return Redirector.loginRequiredRedirect(mapping, session);
+		}
+		
 		Author author = new Author();
 		AuthorForm uf = (AuthorForm) form;
 		
@@ -91,7 +102,6 @@ public class AuthorActionDo extends DispatchAction {
 			actionTarget = "editErrors";
 			saveErrors(request, actionErrors); //Save the errors
 			
-			HttpSession session = request.getSession();
     		session.setAttribute("errors", actionErrors);
     		session.setAttribute("form", uf);
 			
@@ -99,7 +109,6 @@ public class AuthorActionDo extends DispatchAction {
 			redirect.addParameter("id", Integer.toString(id));
 			return redirect;
 		}
-		
 		
 
 		if(form != null){
@@ -124,6 +133,11 @@ public class AuthorActionDo extends DispatchAction {
 					throws Exception {
 		String actionTarget = null;
 		
+		HttpSession session = request.getSession();
+		if(!Validator.isLogged(session)){
+			return Redirector.loginRequiredRedirect(mapping, session);
+		}
+		
 		AuthorForm uf = (AuthorForm) form;
 		
 		//Check the id
@@ -142,7 +156,6 @@ public class AuthorActionDo extends DispatchAction {
 			actionTarget = "deleteErrors";
 			saveErrors(request, actionErrors); //Save the errors
 			
-			HttpSession session = request.getSession();
     		session.setAttribute("errors", actionErrors);
     		session.setAttribute("form", uf);
 			
@@ -169,6 +182,11 @@ public class AuthorActionDo extends DispatchAction {
 			HttpServletRequest request, HttpServletResponse response)
 					throws Exception {
 		String actionTarget = null;
+		
+		HttpSession session = request.getSession();
+		if(!Validator.isLogged(session)){
+			return Redirector.loginRequiredRedirect(mapping, session);
+		}
 		
 		AuthorForm uf = (AuthorForm) form;
 		
@@ -198,7 +216,6 @@ public class AuthorActionDo extends DispatchAction {
 				
 				actionTarget = "search";
 				
-				HttpSession session = request.getSession();
 	    		session.setAttribute("authors", authors);
 	    		session.setAttribute("form", uf);
 				

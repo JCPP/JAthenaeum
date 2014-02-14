@@ -22,6 +22,8 @@ import com.github.jcpp.jathenaeum.beans.BookForm;
 import com.github.jcpp.jathenaeum.db.dao.BookDAO;
 import com.github.jcpp.jathenaeum.db.dao.CopyDAO;
 import com.github.jcpp.jathenaeum.db.dao.WritesDAO;
+import com.github.jcpp.jathenaeum.utils.Redirector;
+import com.github.jcpp.jathenaeum.utils.Validator;
 
 /**
  * 
@@ -35,6 +37,11 @@ public class BookActionDo extends DispatchAction {
 					throws Exception {
 		String actionTarget = null;
 		
+		HttpSession session = request.getSession();
+		if(!Validator.isLogged(session)){
+			return Redirector.loginRequiredRedirect(mapping, session);
+		}
+		
 		Book book = new Book();
 		BookForm uf = (BookForm) form;
 		
@@ -45,7 +52,6 @@ public class BookActionDo extends DispatchAction {
 			actionTarget = "addErrors";
 			saveErrors(request, actionErrors); //Save the errors
 			
-			HttpSession session = request.getSession();
     		session.setAttribute("errors", actionErrors);
     		session.setAttribute("form", uf);
 			
@@ -88,6 +94,11 @@ public class BookActionDo extends DispatchAction {
 					throws Exception {
 		String actionTarget = null;
 		
+		HttpSession session = request.getSession();
+		if(!Validator.isLogged(session)){
+			return Redirector.loginRequiredRedirect(mapping, session);
+		}
+		
 		Book book = new Book();
 		BookForm uf = (BookForm) form;
 		
@@ -107,7 +118,6 @@ public class BookActionDo extends DispatchAction {
 			actionTarget = "editErrors";
 			saveErrors(request, actionErrors); //Save the errors
 			
-			HttpSession session = request.getSession();
     		session.setAttribute("errors", actionErrors);
     		session.setAttribute("form", uf);
 			
@@ -167,6 +177,11 @@ public class BookActionDo extends DispatchAction {
 			HttpServletRequest request, HttpServletResponse response)
 					throws Exception {
 		String actionTarget = null;
+		
+		HttpSession session = request.getSession();
+		if(!Validator.isLogged(session)){
+			return Redirector.loginRequiredRedirect(mapping, session);
+		}
 		
 		BookForm uf = (BookForm) form;
 		
@@ -236,6 +251,11 @@ public class BookActionDo extends DispatchAction {
 					throws Exception {
 		String actionTarget = null;
 		
+		HttpSession session = request.getSession();
+		if(!Validator.isLogged(session)){
+			return Redirector.loginRequiredRedirect(mapping, session);
+		}
+		
 		BookForm uf = (BookForm) form;
 		
 		//ActionErrors actionErrors = uf.validate(mapping, request);
@@ -264,7 +284,6 @@ public class BookActionDo extends DispatchAction {
 				
 				actionTarget = "search";
 				
-				HttpSession session = request.getSession();
 	    		session.setAttribute("books", books);
 	    		session.setAttribute("form", uf);
 				
@@ -288,6 +307,11 @@ public class BookActionDo extends DispatchAction {
 					throws Exception {
 		String actionTarget = null;
 		
+		HttpSession session = request.getSession();
+		if(!Validator.isLogged(session)){
+			return Redirector.loginRequiredRedirect(mapping, session);
+		}
+		
 		BookForm uf = (BookForm) form;
 		
 		//Check the id
@@ -306,7 +330,6 @@ public class BookActionDo extends DispatchAction {
 			actionTarget = "manageCopiesErrors";
 			saveErrors(request, actionErrors); //Save the errors
 			
-			HttpSession session = request.getSession();
     		session.setAttribute("errors", actionErrors);
     		session.setAttribute("form", uf);
 			
