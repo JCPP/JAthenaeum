@@ -118,6 +118,49 @@ public class LoanDAO {
 		return null;
 	}
 	
+	
+	/**
+	 * Returns true if it finds the loan, false otherwise.
+	 * @param loanId the ID of the Customer.
+	 * @return Returns true it if finds the loan, false otherwise.
+	 */
+	public static boolean exists(int loanId){
+		Connection con = db.getConnection();
+		boolean result = false;
+		PreparedStatement stmt = null;
+		try {
+			con.setAutoCommit(false);
+			final String select = "SELECT * FROM Loan WHERE LoanID = ?";
+			stmt = con.prepareStatement(select);
+			stmt.setInt(1, loanId);
+			ResultSet resultSet = stmt.executeQuery();
+			con.commit();
+			
+			if(resultSet.next()){
+				result = true;
+			}
+			
+		} catch (SQLException sqle) {
+			sqle.printStackTrace();
+			try {
+				con.rollback();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+		} finally {
+			try {
+				if (stmt != null) {
+					stmt.close();
+					stmt = null;
+				}
+				db.closeConnection(con);
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+		}
+		return result;
+	}
+	
 
 	/**
 	 * Get all Loan instances of an User.

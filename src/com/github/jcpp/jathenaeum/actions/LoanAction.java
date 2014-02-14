@@ -13,6 +13,7 @@ import org.apache.struts.action.ActionErrors;
 import org.apache.struts.action.ActionForm;
 import org.apache.struts.action.ActionForward;
 import org.apache.struts.action.ActionMapping;
+import org.apache.struts.action.ActionRedirect;
 import org.apache.struts.actions.DispatchAction;
 
 import com.github.jcpp.jathenaeum.Book;
@@ -87,14 +88,18 @@ public class LoanAction extends DispatchAction {
 					throws Exception {
 		String actionTarget = null;
 		
-		ArrayList<Book> books = BookDAO.getAllWithAtLeastOneFreeCopy();
-		ArrayList<Customer> customers = CustomerDAO.getAll();
+		//Check the id
+		if(!Validator.isValidLoanId(request.getParameter("id"))){
+			actionTarget = "invalidId";
+			
+    		ActionRedirect redirect = new ActionRedirect(mapping.findForward(actionTarget));
+    		return redirect;
+		}
 		
 		String id = request.getParameter("id");
 		
-		if(request.getParameter("id") == null){
-			System.out.println("ID not present.");
-		}
+		ArrayList<Book> books = BookDAO.getAllWithAtLeastOneFreeCopy();
+		ArrayList<Customer> customers = CustomerDAO.getAll();
 		
 		Loan loan = LoanDAO.getById(Integer.parseInt(id));
 		
@@ -133,11 +138,15 @@ public class LoanAction extends DispatchAction {
 					throws Exception {
 		String actionTarget = null;
 		
-		String id = request.getParameter("id");
-		
-		if(request.getParameter("id") == null){
-			System.out.println("ID not present.");
+		//Check the id
+		if(!Validator.isValidLoanId(request.getParameter("id"))){
+			actionTarget = "invalidId";
+			
+    		ActionRedirect redirect = new ActionRedirect(mapping.findForward(actionTarget));
+    		return redirect;
 		}
+		
+		String id = request.getParameter("id");
 		
 		Loan loan = LoanDAO.getById(Integer.parseInt(id));
 		

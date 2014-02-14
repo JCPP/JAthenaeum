@@ -195,6 +195,7 @@
         	<forward name="delete" path="page.loan.delete"/>
         	<forward name="viewAll" path="page.loan.viewall"/>
         	<forward name="search" path="page.loan.search"/>
+        	<forward name="invalidId" path="page.loan.id.invalid"/>
         	<forward name="noBooks" path="page.book.none" />
         	<forward name="noCopies" path="page.copy.none" />
         	<forward name="noCustomers" path="page.customer.none" />
@@ -225,6 +226,9 @@
 	        
 	        <!-- Search -->
 	        <forward name="search" path="/loan.do?op=search" redirect="true"/>
+	        
+	        <!-- Errors -->
+	        <forward name="invalidId" path="page.loan.id.invalid"/>
         </action>
         
 	</action-mappings>

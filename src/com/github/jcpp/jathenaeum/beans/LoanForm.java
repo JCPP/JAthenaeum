@@ -13,6 +13,8 @@ import org.apache.struts.action.ActionForm;
 import org.apache.struts.action.ActionMapping;
 import org.apache.struts.action.ActionMessage;
 
+import com.github.jcpp.jathenaeum.db.dao.CustomerDAO;
+import com.github.jcpp.jathenaeum.db.dao.LoanDAO;
 import com.github.jcpp.jathenaeum.utils.Converter;
 import com.github.jcpp.jathenaeum.utils.Validator;
 
@@ -136,6 +138,23 @@ public class LoanForm extends ActionForm {
 				e.printStackTrace();
 			}
 			
+		}
+		
+		return errors;
+	}
+	
+	public ActionErrors validateId(ActionMapping mapping,
+			HttpServletRequest request) {
+		ActionErrors errors = new ActionErrors();
+		
+		if(request.getParameter("id") == null){
+			errors.add("id", new ActionMessage("loan.id.empty"));
+		}
+		else if(!Validator.isValidInt(request.getParameter("id"))){
+			errors.add("id", new ActionMessage("loan.id.invalid"));
+		}
+		else if(!LoanDAO.exists(Integer.parseInt(request.getParameter("id")))){
+			errors.add("id", new ActionMessage("loan.id.invalid"));
 		}
 		
 		return errors;

@@ -456,4 +456,10 @@
 		<put name="body" value="/layout/loan/search.jsp" />
 	</definition>
 	
+	<!-- Invalid id -->
+	<definition name="page.loan.id.invalid" extends="base.definition.bootstrap">
+		<put name="title" value="Invalid Loan ID" />
+		<put name="body" value="/layout/loan/invalidId.jsp" />
+	</definition>
+	
 </tiles-definitions>

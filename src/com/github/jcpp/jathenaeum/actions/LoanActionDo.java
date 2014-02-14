@@ -76,9 +76,17 @@ public class LoanActionDo extends DispatchAction {
 		
 		Loan loan = new Loan();
 		LoanForm uf = (LoanForm) form;
-		int id = Integer.parseInt(request.getParameter("id"));
+		
+		//Check the id
+		if(!uf.validateId(mapping, request).isEmpty()){
+			actionTarget = "invalidId";
+			
+    		ActionRedirect redirect = new ActionRedirect(mapping.findForward(actionTarget));
+    		return redirect;
+		}
 		
 		ActionErrors actionErrors = uf.validate(mapping, request);
+		int id = Integer.parseInt(request.getParameter("id"));
 		
 		//If there are some errors, redirect to the form page
 		if(!actionErrors.isEmpty()){
@@ -117,6 +125,16 @@ public class LoanActionDo extends DispatchAction {
 		String actionTarget = null;
 		
 		LoanForm loanForm = (LoanForm) form;
+		
+		//Check the id
+		if(!loanForm.validateId(mapping, request).isEmpty()){
+			actionTarget = "invalidId";
+			
+    		ActionRedirect redirect = new ActionRedirect(mapping.findForward(actionTarget));
+    		return redirect;
+		}
+		
+		
 		int id = Integer.parseInt(request.getParameter("id"));
 
 		if(form != null){

@@ -10,6 +10,7 @@ import java.util.regex.Pattern;
 
 import com.github.jcpp.jathenaeum.db.dao.AuthorDAO;
 import com.github.jcpp.jathenaeum.db.dao.CustomerDAO;
+import com.github.jcpp.jathenaeum.db.dao.LoanDAO;
 
 /**
  * Class for commons validation methods.
@@ -111,6 +112,21 @@ public class Validator {
 	public static boolean isValidCustomerId(String customerId){
 		if(Validator.isValidInt(customerId)){
 			return CustomerDAO.exists(Integer.parseInt(customerId));
+		}
+		else{
+			return false;
+		}
+	}
+	
+	
+	/**
+	 * Check if this is a valid Loan Id.
+	 * @param loanId the Loan ID.
+	 * @return True if the Loan ID is valid, false otherwise.
+	 */
+	public static boolean isValidLoanId(String loanId){
+		if(Validator.isValidInt(loanId)){
+			return LoanDAO.exists(Integer.parseInt(loanId));
 		}
 		else{
 			return false;
