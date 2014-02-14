@@ -78,14 +78,14 @@
 			<div class="nav navbar-nav navbar-right">
 				<!-- User not present -->
 				<logic:notPresent name="user" scope="session">
-					<a class="btn btn-default" href="signup.do">Sign up</a>
-					<a class="btn btn-default navbar-btn" href="signin.do">Sign in</a>
+					<a class="btn btn-default" href="user.do?op=signup">Sign up</a>
+					<a class="btn btn-default navbar-btn" href="user.do?op=login">Login</a>
 				</logic:notPresent>
 				
 				<!-- User present -->
 				<logic:present name="user" scope="session">
 					<a class="btn btn-default navbar-btn" href="/manageAccount.do">Manage Account</a>
-					<a class="btn btn-default navbar-btn" href="logout.do">Logout</a>
+					<a class="btn btn-default navbar-btn" href="user.do?op=logout">Logout</a>
 				</logic:present>
 			</div>
 		</div>

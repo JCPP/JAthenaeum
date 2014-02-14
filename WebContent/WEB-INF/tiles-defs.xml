@@ -32,28 +32,6 @@
 	</definition>
 	
 	
-
-	<!-- Sign in page -->
-	<definition name="page.user.signin" extends="base.definition.bootstrap">
-		<put name="title" value="Signin" />
-		<put name="body" value="/layout/user/signin.jsp" />
-		<put name="style" value="css/signin.css" />
-	</definition>
-	
-	<!-- Failed sign in -->
-	<definition name="page.user.signin.failed" extends="base.definition.bootstrap">
-		<put name="title" value="Failed Sign In" />
-		<put name="body" value="/layout/user/failedSignin.jsp" />
-	</definition>
-	
-	<!-- Confirm sign in -->
-	<definition name="page.user.signin.confirm" extends="base.definition.bootstrap">
-		<put name="redirect" value="index.do" />
-		<put name="title" value="Confirm Sign In" />
-		<put name="body" value="/layout/user/confirmSignin.jsp" />
-	</definition>
-	
-	
 	
 	<!-- Sign up page -->
 	<definition name="page.user.signup" extends="base.definition.bootstrap">
@@ -65,17 +43,35 @@
 	<!-- Failed sign up -->
 	<definition name="page.user.signup.failed" extends="base.definition.bootstrap">
 		<put name="title" value="Failed Signup" />
-		<put name="body" value="/layout/user/failedRegistration.jsp" />
+		<put name="body" value="/layout/user/failedSignup.jsp" />
 	</definition>
 	
 	<!-- Confirm sign up -->
 	<definition name="page.user.signup.confirm" extends="base.definition.bootstrap">
 		<put name="redirect" value="index.do" />
 		<put name="title" value="Confirm Signup" />
-		<put name="body" value="/layout/user/confirmRegistration.jsp" />
+		<put name="body" value="/layout/user/confirmSignup.jsp" />
 	</definition>
 	
+	<!-- Login page -->
+	<definition name="page.user.login" extends="base.definition.bootstrap">
+		<put name="title" value="Login" />
+		<put name="body" value="/layout/user/login.jsp" />
+		<put name="style" value="css/signin.css" />
+	</definition>
 	
+	<!-- Failed login -->
+	<definition name="page.user.login.failed" extends="base.definition.bootstrap">
+		<put name="title" value="Failed Login" />
+		<put name="body" value="/layout/user/failedLogin.jsp" />
+	</definition>
+	
+	<!-- Confirm login -->
+	<definition name="page.user.login.confirm" extends="base.definition.bootstrap">
+		<put name="redirect" value="index.do" />
+		<put name="title" value="Confirm Login" />
+		<put name="body" value="/layout/user/confirmLogin.jsp" />
+	</definition>
 	
 	<!-- Logout -->
 	<definition name="page.user.logout" extends="base.definition.bootstrap">

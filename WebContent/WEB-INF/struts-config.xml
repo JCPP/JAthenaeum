@@ -6,9 +6,6 @@
 
 <struts-config>
 	<form-beans>
-		<!-- User -->
-		<form-bean name="registerform" type="com.github.jcpp.jathenaeum.beans.UserRegisterForm"/>
-		<form-bean name="signinform" type="com.github.jcpp.jathenaeum.beans.SigninForm"/>
 		
 		<!-- Author -->
 		<form-bean name="authorForm" type="com.github.jcpp.jathenaeum.beans.AuthorForm"/>
@@ -21,6 +18,9 @@
 		
 		<!-- Loan -->
 		<form-bean name="loanForm" type="com.github.jcpp.jathenaeum.beans.LoanForm"/>
+		
+		<!-- User -->
+		<form-bean name="userForm" type="com.github.jcpp.jathenaeum.beans.UserForm"/>
 	</form-beans>
 	
 	<global-forwards>
@@ -29,39 +29,6 @@
 	
 	<action-mappings>
 		<action path="/index" type="com.github.jcpp.jathenaeum.actions.IndexAction" parameter="page.index" />
-		
-		<!-- User -->
-		<action path="/signup" type="org.apache.struts.actions.ForwardAction" parameter="page.user.signup" />
-		<action
-	        path="/doRegister"
-	        type="com.github.jcpp.jathenaeum.actions.UserRegisterAction"
-	        name="registerform"
-	        scope="request"
-	        validate="true"
-	        input="/signup.do"
-	        cancellable="true">
-	        <forward name="success" path="page.user.signup.confirm"/>
-	        <forward name="failed" path="page.user.signup.failed"/>
-        </action>
-        
-        <action path="/signin" type="org.apache.struts.actions.ForwardAction" parameter="page.user.signin" />
-        <action
-	        path="/doSignin"
-	        type="com.github.jcpp.jathenaeum.actions.SigninAction"
-	        name="signinform"
-	        scope="request"
-	        validate="true"
-	        input="/signin.do"
-	        cancellable="true">
-	        <forward name="success" path="page.user.signin.confirm"/>
-	        <forward name="failed" path="page.user.signin.failed"/>
-        </action>
-        
-        <action path="/logout" type="com.github.jcpp.jathenaeum.actions.LogoutAction" parameter="page.user.logout">
-	        <forward name="success" path="page.user.logout.confirm"/>
-	        <forward name="failed" path="page.user.logout.failed"/>
-        </action>
-        
         
         
         <!-- Author -->
@@ -246,6 +213,35 @@
 	        <!-- Errors -->
 	        <forward name="invalidId" path="page.loan.id.invalid"/>
 	        <forward name="loginRequired" path="page.user.signin"/>
+        </action>
+        
+        
+        
+        <!-- User -->
+        <action path="/user" type="com.github.jcpp.jathenaeum.actions.UserAction" parameter="op">
+        	<forward name="signup" path="page.user.signup"/>
+        	<forward name="login" path="page.user.login"/>
+        	<forward name="logoutSuccess" path="page.user.logout.confirm"/>
+	        <forward name="logoutFailed" path="page.user.logout.failed"/>
+        </action>
+        
+        <!-- User Operations -->
+        <action
+	        path="/doUser"
+	        type="com.github.jcpp.jathenaeum.actions.UserActionDo"
+	        name="userForm"
+	        scope="request"
+	        validate="false"
+	        parameter="op">
+	        <!-- Sign Up -->
+	        <forward name="signupErrors" path="/user.do?op=signup" redirect="true"/>
+	        <forward name="signupSuccess" path="page.user.signup.confirm"/>
+	        <forward name="signupFailed" path="page.user.signup.failed"/>
+	        
+	        <!-- Login -->
+	        <forward name="loginErrors" path="/user.do?op=login" redirect="true"/>
+	        <forward name="loginSuccess" path="page.user.login.confirm"/>
+	        <forward name="loginFailed" path="page.user.login.failed"/>
         </action>
         
 	</action-mappings>

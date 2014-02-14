@@ -10,7 +10,7 @@ import org.apache.struts.action.ActionForward;
 import org.apache.struts.action.ActionMapping;
 
 import com.github.jcpp.jathenaeum.User;
-import com.github.jcpp.jathenaeum.beans.UserRegisterForm;
+import com.github.jcpp.jathenaeum.beans.UserForm;
 import com.github.jcpp.jathenaeum.db.dao.UserDAO;
 import com.github.jcpp.jathenaeum.utils.Converter;
 import com.github.jcpp.jathenaeum.utils.Redirector;
@@ -26,7 +26,7 @@ public class UserRegisterAction extends Action{
 		
 		User user = new User();
 		//ActionMessages errors_mesg = new ActionMessages();
-        UserRegisterForm uf = (UserRegisterForm) form;
+        UserForm uf = (UserForm) form;
         if(form != null){
         	user.setEmail(uf.getEmail());
         	user.setPassword(uf.getPassword());

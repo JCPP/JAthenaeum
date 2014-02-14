@@ -5,7 +5,12 @@ package com.github.jcpp.jathenaeum;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.text.ParseException;
 import java.util.Date;
+
+import com.github.jcpp.jathenaeum.beans.UserForm;
+import com.github.jcpp.jathenaeum.utils.Converter;
+import com.github.jcpp.jathenaeum.utils.Validator;
 
 
 /**
@@ -41,6 +46,22 @@ public class User {
 		surname = resultSet.getString(5);
 		bornDate = resultSet.getDate(6);
 	}
+	/**
+	 * Create an User instance from a ResultSet.
+	 * @param uf
+	 * @throws ParseException 
+	 */
+	public User(UserForm uf) throws ParseException{
+		email = uf.getEmail();
+    	password = uf.getPassword();
+    	name = uf.getName();
+    	surname = uf.getSurname();
+    	
+    	if(Validator.isValidDate(uf.getBornDate())){
+    		bornDate = Converter.fromStringToDate(uf.getBornDate());
+		}
+	}
+
 	/**
 	 * @return the email
 	 */

@@ -11,9 +11,10 @@ import org.apache.struts.action.ActionMapping;
 import org.apache.struts.action.ActionMessage;
 
 import com.github.jcpp.jathenaeum.db.dao.UserDAO;
+import com.github.jcpp.jathenaeum.exceptions.LoginException;
 import com.github.jcpp.jathenaeum.utils.Validator;
 
-public class UserRegisterForm extends ActionForm{
+public class UserForm extends ActionForm{
 	
 	private String email;
 	private String password;
@@ -25,7 +26,7 @@ public class UserRegisterForm extends ActionForm{
 	
 	/*METODI*/
 	
-	public UserRegisterForm() {
+	public UserForm() {
 		super();
 	}
 	
@@ -67,7 +68,49 @@ public class UserRegisterForm extends ActionForm{
 	}
 	
 	
-	public ActionErrors validate(ActionMapping mapping,
+	public ActionErrors validateLogin(ActionMapping mapping,
+			HttpServletRequest request) {
+		ActionErrors errors = new ActionErrors();
+		
+		/*
+		System.out.println("email: " + email);
+		System.out.println("password: " + password);
+		*/
+		
+		//Check email
+		if(email == null || email.isEmpty()){
+			errors.add("email", new ActionMessage("user.email.empty"));
+		}
+		
+		if(!Validator.isValidEmail(email)){
+			errors.add("email", new ActionMessage("user.email.invalid"));
+		}
+		
+		if(email != null && !UserDAO.exists(email)){
+			errors.add("email", new ActionMessage("user.login.invalid"));
+		}
+		
+		
+		//Check password and password control
+		if(password == null || password.isEmpty()) {
+			errors.add("password", new ActionMessage("user.password.empty"));
+		}
+		
+		
+		//Check the user/password combination
+		try {
+			UserDAO.login(email, password);
+		} catch (LoginException e) {
+			if(errors.isEmpty()){
+				errors.add("email", new ActionMessage("user.login.invalid"));
+			}
+		}
+		
+		return errors;
+	}
+	
+	
+	public ActionErrors validateSignUp(ActionMapping mapping,
 			HttpServletRequest request) {
 		ActionErrors errors = new ActionErrors();
 		
