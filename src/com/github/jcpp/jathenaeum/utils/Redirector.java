@@ -25,7 +25,7 @@ public class Redirector {
 	 */
 	public static ActionForward loginRequiredRedirect(ActionMapping mapping, HttpSession session){
 		ActionErrors actionErrors = new ActionErrors();
-		actionErrors.add("loginrequired", new ActionMessage("signin.user.login.required"));
+		actionErrors.add("loginrequired", new ActionMessage("user.login.required"));
 		session.setAttribute("errors", actionErrors);
 		return mapping.findForward("loginRequired");
 	}

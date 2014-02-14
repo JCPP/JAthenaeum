@@ -68,28 +68,28 @@ public class SigninForm extends ActionForm {
 		
 		//Check email
 		if(email == null || email.isEmpty()){
-			errors.add("email", new ActionMessage("signup.email.empty"));
+			errors.add("email", new ActionMessage("user.email.empty"));
 		}
 		
 		if(!Validator.isValidEmail(email)){
-			errors.add("email", new ActionMessage("signup.email.invalid"));
+			errors.add("email", new ActionMessage("user.email.invalid"));
 		}
 		
 		if(email != null && !UserDAO.exists(email)){
-			errors.add("email", new ActionMessage("signin.user.invalid"));
+			errors.add("email", new ActionMessage("user.login.invalid"));
 		}
 		
 		
 		//Check password and password control
 		if(password == null || password.isEmpty()) {
-			errors.add("password", new ActionMessage("signup.password.empty"));
+			errors.add("password", new ActionMessage("user.password.empty"));
 		}
 		
 		try {
 			UserDAO.login(email, password);
 		} catch (LoginException e) {
 			if(errors.isEmpty()){
-				errors.add("email", new ActionMessage("signin.user.invalid"));
+				errors.add("email", new ActionMessage("user.login.invalid"));
 			}
 		}
 		

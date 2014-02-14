@@ -84,11 +84,11 @@ public class CustomerForm extends ActionForm {
 		
 		//Check email
 		if(email == null || email.isEmpty()){
-			errors.add("email", new ActionMessage("signup.email.empty"));
+			errors.add("email", new ActionMessage("user.email.empty"));
 		}
 		
 		if(!Validator.isValidEmail(email)){
-			errors.add("email", new ActionMessage("signup.email.invalid"));
+			errors.add("email", new ActionMessage("user.email.invalid"));
 		}
 		
 		return errors;

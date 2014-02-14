@@ -82,31 +82,31 @@ public class UserRegisterForm extends ActionForm{
 		
 		//Check email
 		if(email == null || email.isEmpty()){
-			errors.add("email", new ActionMessage("signup.email.empty"));
+			errors.add("email", new ActionMessage("user.email.empty"));
 		}
 		
 		if(!Validator.isValidEmail(email)){
-			errors.add("email", new ActionMessage("signup.email.invalid"));
+			errors.add("email", new ActionMessage("user.email.invalid"));
 		}
 		
 		if(email != null && UserDAO.exists(email)){
-			errors.add("email", new ActionMessage("signup.email.exists"));
+			errors.add("email", new ActionMessage("user.email.exists"));
 		}
 		
 		
 		//Check password and password control
 		if(password == null || password.isEmpty()) {
-			errors.add("password", new ActionMessage("signup.password.empty"));
+			errors.add("password", new ActionMessage("user.password.empty"));
 		}
 		
 		if(!password.equals(passwordControl)) {
-			errors.add("password", new ActionMessage("signup.password.different"));
+			errors.add("password", new ActionMessage("user.password.different"));
 		}
 		
 		//Check born date
 		if(bornDate != null && !bornDate.isEmpty()){
 			if(!Validator.isValidDate(bornDate)){
-				errors.add("bornDate", new ActionMessage("signup.borndate.invalid"));
+				errors.add("bornDate", new ActionMessage("user.borndate.invalid"));
 			}
 		}
 		

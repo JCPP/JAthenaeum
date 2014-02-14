@@ -89,7 +89,7 @@ public class AddAuthorForm extends ActionForm{
 		//Check born date
 		if(bornDate != null && !bornDate.isEmpty()){
 			if(!Validator.isValidDate(bornDate)){
-				errors.add("bornDate", new ActionMessage("signup.borndate.invalid"));
+				errors.add("bornDate", new ActionMessage("user.borndate.invalid"));
 			}
 		}
 		
