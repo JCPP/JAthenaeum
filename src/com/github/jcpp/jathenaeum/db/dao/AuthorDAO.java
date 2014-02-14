@@ -118,9 +118,9 @@ public class AuthorDAO {
 	}
 	
 	/**
-	 * Returns true if find the author, false otherwise.
+	 * Returns true it if finds the author, false otherwise.
 	 * @param id the id of the Author.
-	 * @return Returns true if find the author, false otherwise.
+	 * @return Returns true if it finds the author, false otherwise.
 	 */
 	public static boolean exists(int id){
 		Connection con = db.getConnection();

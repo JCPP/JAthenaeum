@@ -13,11 +13,13 @@ import org.apache.struts.action.ActionErrors;
 import org.apache.struts.action.ActionForm;
 import org.apache.struts.action.ActionForward;
 import org.apache.struts.action.ActionMapping;
+import org.apache.struts.action.ActionRedirect;
 import org.apache.struts.actions.DispatchAction;
 
 import com.github.jcpp.jathenaeum.Customer;
 import com.github.jcpp.jathenaeum.beans.CustomerForm;
 import com.github.jcpp.jathenaeum.db.dao.CustomerDAO;
+import com.github.jcpp.jathenaeum.utils.Validator;
 
 /**
  * @author <a href="https://github.com/DavidePastore">DavidePastore</a>
@@ -57,11 +59,15 @@ public class CustomerAction extends DispatchAction {
 					throws Exception {
 		String actionTarget = null;
 		
-		String id = request.getParameter("id");
-		
-		if(request.getParameter("id") == null){
-			System.out.println("ID not present.");
+		//Check the id
+		if(!Validator.isValidCustomerId(request.getParameter("id"))){
+			actionTarget = "invalidId";
+			
+    		ActionRedirect redirect = new ActionRedirect(mapping.findForward(actionTarget));
+    		return redirect;
 		}
+		
+		String id = request.getParameter("id");
 		
 		Customer customer = CustomerDAO.getById(Integer.parseInt(id));
 		
@@ -99,11 +105,14 @@ public class CustomerAction extends DispatchAction {
 					throws Exception {
 		String actionTarget = null;
 		
-		String id = request.getParameter("id");
-		
-		if(request.getParameter("id") == null){
-			System.out.println("ID not present.");
+		if(!Validator.isValidCustomerId(request.getParameter("id"))){
+			actionTarget = "invalidId";
+			
+    		ActionRedirect redirect = new ActionRedirect(mapping.findForward(actionTarget));
+    		return redirect;
 		}
+		
+		String id = request.getParameter("id");
 		
 		Customer customer = CustomerDAO.getById(Integer.parseInt(id));
 		

@@ -114,6 +114,49 @@ private static Database db = Database.getInstance();
 	
 	
 	/**
+	 * Returns true if it finds the customer, false otherwise.
+	 * @param cardNumber the card number of the Customer.
+	 * @return Returns true it if finds the customer, false otherwise.
+	 */
+	public static boolean exists(int cardNumber){
+		Connection con = db.getConnection();
+		boolean result = false;
+		PreparedStatement stmt = null;
+		try {
+			con.setAutoCommit(false);
+			final String select = "SELECT * FROM Customer WHERE CustomerCardNumber = ?";
+			stmt = con.prepareStatement(select);
+			stmt.setInt(1, cardNumber);
+			ResultSet resultSet = stmt.executeQuery();
+			con.commit();
+			
+			if(resultSet.next()){
+				result = true;
+			}
+			
+		} catch (SQLException sqle) {
+			sqle.printStackTrace();
+			try {
+				con.rollback();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+		} finally {
+			try {
+				if (stmt != null) {
+					stmt.close();
+					stmt = null;
+				}
+				db.closeConnection(con);
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+		}
+		return result;
+	}
+	
+	
+	/**
 	 * Insert a new customer.
 	 * @param customer the customer to insert.
 	 * @return Returns the id of the inserted customer. 

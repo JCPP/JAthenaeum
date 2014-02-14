@@ -9,6 +9,7 @@ import java.util.Date;
 import java.util.regex.Pattern;
 
 import com.github.jcpp.jathenaeum.db.dao.AuthorDAO;
+import com.github.jcpp.jathenaeum.db.dao.CustomerDAO;
 
 /**
  * Class for commons validation methods.
@@ -95,6 +96,21 @@ public class Validator {
 	public static boolean isValidAuthorId(String authorId){
 		if(Validator.isValidInt(authorId)){
 			return AuthorDAO.exists(Integer.parseInt(authorId));
+		}
+		else{
+			return false;
+		}
+	}
+	
+	
+	/**
+	 * Check if this is a valid Customer Id.
+	 * @param customerId the Customer ID.
+	 * @return True if the Customer ID is valid, false otherwise.
+	 */
+	public static boolean isValidCustomerId(String customerId){
+		if(Validator.isValidInt(customerId)){
+			return CustomerDAO.exists(Integer.parseInt(customerId));
 		}
 		else{
 			return false;

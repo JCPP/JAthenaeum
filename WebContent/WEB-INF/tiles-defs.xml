@@ -373,6 +373,12 @@
 		<put name="body" value="/layout/customer/noCustomers.jsp" />
 	</definition>
 	
+	<!-- Invalid id -->
+	<definition name="page.customer.id.invalid" extends="base.definition.bootstrap">
+		<put name="title" value="Invalid Customer ID" />
+		<put name="body" value="/layout/customer/invalidId.jsp" />
+	</definition>
+	
 	
 	
 	<!-- Add Loan -->

@@ -73,9 +73,17 @@ public class CustomerActionDo extends DispatchAction {
 		
 		Customer customer = new Customer();
 		CustomerForm uf = (CustomerForm) form;
-		int id = Integer.parseInt(request.getParameter("id"));
+		
+		//Check the id
+		if(!uf.validateId(mapping, request).isEmpty()){
+			actionTarget = "invalidId";
+			
+    		ActionRedirect redirect = new ActionRedirect(mapping.findForward(actionTarget));
+    		return redirect;
+		}
 		
 		ActionErrors actionErrors = uf.validate(mapping, request);
+		int id = Integer.parseInt(request.getParameter("id"));
 		
 		customer = CustomerDAO.getById(id);
 		
@@ -121,6 +129,15 @@ public class CustomerActionDo extends DispatchAction {
 		String actionTarget = null;
 		
 		CustomerForm uf = (CustomerForm) form;
+		
+		//Check the id
+		if(!uf.validateId(mapping, request).isEmpty()){
+			actionTarget = "invalidId";
+			
+    		ActionRedirect redirect = new ActionRedirect(mapping.findForward(actionTarget));
+    		return redirect;
+		}
+		
 		int id = Integer.parseInt(request.getParameter("id"));
 
 		if(form != null){

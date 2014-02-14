@@ -10,6 +10,7 @@ import org.apache.struts.action.ActionForm;
 import org.apache.struts.action.ActionMapping;
 import org.apache.struts.action.ActionMessage;
 
+import com.github.jcpp.jathenaeum.db.dao.AuthorDAO;
 import com.github.jcpp.jathenaeum.db.dao.CustomerDAO;
 import com.github.jcpp.jathenaeum.utils.Validator;
 
@@ -100,6 +101,24 @@ public class CustomerForm extends ActionForm {
 		
 		if(CustomerDAO.getNumberByEmail(email) > 0){
 			errors.add("email", new ActionMessage("customer.email.alreadyused"));
+		}
+		
+		return errors;
+	}
+	
+	
+	public ActionErrors validateId(ActionMapping mapping,
+			HttpServletRequest request) {
+		ActionErrors errors = new ActionErrors();
+		
+		if(request.getParameter("id") == null){
+			errors.add("id", new ActionMessage("customer.id.empty"));
+		}
+		else if(!Validator.isValidInt(request.getParameter("id"))){
+			errors.add("id", new ActionMessage("customer.id.invalid"));
+		}
+		else if(!CustomerDAO.exists(Integer.parseInt(request.getParameter("id")))){
+			errors.add("id", new ActionMessage("customer.id.invalid"));
 		}
 		
 		return errors;

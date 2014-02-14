@@ -59,8 +59,6 @@ public class AuthorAction extends DispatchAction {
 					throws Exception {
 		String actionTarget = null;
 		
-		AuthorForm uf = (AuthorForm) form;
-		
 		//Check the id
 		if(!Validator.isValidAuthorId(request.getParameter("id"))){
 			actionTarget = "invalidId";
@@ -106,8 +104,6 @@ public class AuthorAction extends DispatchAction {
 			HttpServletRequest request, HttpServletResponse response)
 					throws Exception {
 		String actionTarget = null;
-		
-		AuthorForm uf = (AuthorForm) form;
 		
 		//Check the id
 		if(!Validator.isValidAuthorId(request.getParameter("id"))){

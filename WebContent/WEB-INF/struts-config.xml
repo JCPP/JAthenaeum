@@ -157,6 +157,7 @@
         	<forward name="edit" path="page.customer.edit"/>
         	<forward name="delete" path="page.customer.delete"/>
         	<forward name="viewAll" path="page.customer.viewall"/>
+        	<forward name="invalidId" path="page.customer.id.invalid"/>
         </action>
         
         <!-- Customer Operations -->
@@ -181,6 +182,9 @@
 	        <forward name="deleteErrors" path="/customer.do?op=delete" redirect="true"/>
 	        <forward name="deleteSuccess" path="page.customer.delete.confirm" />
 	        <forward name="deleteFailed" path="page.customer.delete.failed" />
+	        
+	        <!-- Errors -->
+	        <forward name="invalidId" path="page.customer.id.invalid"/>
         </action>
         
         
