@@ -468,6 +468,20 @@
 		<put name="body" value="/layout/loan/search.jsp" />
 	</definition>
 	
+	<!-- Confirm Return -->
+	<definition name="page.loan.returns.confirm" extends="base.definition.bootstrap">
+		<put name="redirect" value="index.do" />
+		<put name="title" value="Return Loan" />
+		<put name="body" value="/layout/loan/confirmReturn.jsp" />
+	</definition>
+	
+	<!-- Failed Return -->
+	<definition name="page.loan.returns.failed" extends="base.definition.bootstrap">
+		<put name="redirect" value="index.do" />
+		<put name="title" value="Return Loan" />
+		<put name="body" value="/layout/loan/failedReturn.jsp" />
+	</definition>
+	
 	<!-- Invalid id -->
 	<definition name="page.loan.id.invalid" extends="base.definition.bootstrap">
 		<put name="title" value="Invalid Loan ID" />

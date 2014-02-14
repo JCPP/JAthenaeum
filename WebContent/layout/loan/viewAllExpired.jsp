@@ -32,6 +32,9 @@
 					<td>${loansId.endDate.date}/${loansId.endDate.month+1}/${loansId.endDate.year+1900}</td>
 					<td>${loansId.returned}</td>
 					<td>
+						<logic:equal name="loansId" property="returned" value="false">
+							<a class="btn btn-success" href="doLoan.do?op=returns&id=${loansId.id}" role="button">Returns &raquo;</a>
+						</logic:equal>
 						<a class="btn btn-default" href="loan.do?op=edit&id=${loansId.id}" role="button">Edit &raquo;</a>
 						<a class="btn btn-danger" href="loan.do?op=delete&id=${loansId.id}" role="button">Delete &raquo;</a>
 					</td>

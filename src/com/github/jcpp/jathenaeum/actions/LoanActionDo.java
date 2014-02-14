@@ -202,5 +202,41 @@ public class LoanActionDo extends DispatchAction {
 
 		return mapping.findForward(actionTarget);
 	}
+	
+	
+	public ActionForward returns(ActionMapping mapping, ActionForm form,
+			HttpServletRequest request, HttpServletResponse response)
+					throws Exception {
+		String actionTarget = null;
+		
+		Loan loan = new Loan();
+		LoanForm uf = (LoanForm) form;
+		
+		//Check the id
+		if(!uf.validateId(mapping, request).isEmpty()){
+			actionTarget = "invalidId";
+			
+    		ActionRedirect redirect = new ActionRedirect(mapping.findForward(actionTarget));
+    		return redirect;
+		}
+		
+		//ActionErrors actionErrors = uf.validate(mapping, request);
+		int id = Integer.parseInt(request.getParameter("id"));
+
+		if(form != null){
+			//Set the loan
+			loan = LoanDAO.getById(id);
+			loan.setReturned(true);
+			
+			//Update the loan
+			LoanDAO.update(loan);
+			actionTarget = "returnSuccess";
+		}
+		else{
+			actionTarget = "returnFailed";
+		}
+
+		return mapping.findForward(actionTarget);
+	}
 
 }

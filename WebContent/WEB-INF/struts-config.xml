@@ -232,6 +232,10 @@
 	        <!-- Search -->
 	        <forward name="search" path="/loan.do?op=search" redirect="true"/>
 	        
+	        <!-- Returns -->
+	        <forward name="returnSuccess" path="page.loan.returns.confirm" />
+	        <forward name="returnFailed" path="page.loan.returns.failed" />
+	        
 	        <!-- Errors -->
 	        <forward name="invalidId" path="page.loan.id.invalid"/>
         </action>

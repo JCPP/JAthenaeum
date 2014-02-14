@@ -399,8 +399,6 @@ public class LoanDAO {
 			
 			stmt.setInt(6, loan.getId());
 			
-			System.out.println("Query: " + stmt.toString());
-			
 			result = stmt.executeUpdate();
 			
 			con.commit();
