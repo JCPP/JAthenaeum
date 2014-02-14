@@ -108,6 +108,7 @@ public class LoanActionDo extends DispatchAction {
 			
 			//Set the loan
 			loan = new Loan(uf);
+			loan.setId(id);
 			loan.setCopyId(copy.getId());
 			
 			//Update the loan

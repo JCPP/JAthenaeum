@@ -56,7 +56,6 @@ public class Loan {
 	public Loan(LoanForm loanForm) throws ParseException {
 		if(Validator.isValidInt(loanForm.getCustomerCardNumber())){
 			copyId = Integer.parseInt(loanForm.getBookId());
-			
 		}
 		if(Validator.isValidInt(loanForm.getBookId())){
 			customerCardNumber = Integer.parseInt(loanForm.getCustomerCardNumber());
