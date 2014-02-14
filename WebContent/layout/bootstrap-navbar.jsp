@@ -64,6 +64,7 @@
 					<ul class="dropdown-menu">
 						<li><a href="loan.do?op=add">Add</a></li>
 						<li><a href="loan.do?op=viewAll">View All</a></li>
+						<li><a href="loan.do?op=viewAllExpired">View All Expired</a></li>
 						<li><a href="loan.do?op=search">Search</a></li>
 					</ul></li>
 			</ul>

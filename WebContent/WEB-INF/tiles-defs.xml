@@ -456,6 +456,12 @@
 		<put name="body" value="/layout/loan/viewAll.jsp" />
 	</definition>
 	
+	<!-- View All Expired -->
+	<definition name="page.loan.viewallexpired" extends="base.definition.bootstrap">
+		<put name="title" value="Expired Loans" />
+		<put name="body" value="/layout/loan/viewAllExpired.jsp" />
+	</definition>
+	
 	<!-- Search -->
 	<definition name="page.loan.search" extends="base.definition.bootstrap">
 		<put name="title" value="Search Loans" />

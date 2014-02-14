@@ -11,6 +11,7 @@ import java.sql.Statement;
 import java.sql.Types;
 import java.text.ParseException;
 import java.util.ArrayList;
+import java.util.Date;
 
 import com.github.jcpp.jathenaeum.Copy;
 import com.github.jcpp.jathenaeum.Loan;
@@ -41,6 +42,51 @@ public class LoanDAO {
 			con.setAutoCommit(false);
 			final String select = "SELECT * FROM Loan";
 			stmt = con.prepareStatement(select);
+			ResultSet resultSet = stmt.executeQuery();
+			Loan loan;
+			
+			while(resultSet.next()){
+				loan = new Loan(resultSet);
+				loans.add(loan);
+			}
+			
+			con.commit();
+		} catch (SQLException sqle) {
+			sqle.printStackTrace();
+			try {
+				con.rollback();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+		} finally {
+			try {
+				if (stmt != null) {
+					stmt.close();
+					stmt = null;
+				}
+				db.closeConnection(con);
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+		}
+		return loans;
+	}
+	
+	
+	/**
+	 * Get all expired Loan instances.
+	 * @return Returns all expired Loan in an ArrayList<Loan>.
+	 */
+	public static ArrayList<Loan> getAllExpired(){
+		Connection con = db.getConnection();
+		ArrayList<Loan> loans = new ArrayList<Loan>();
+		PreparedStatement stmt = null;
+		try {
+			con.setAutoCommit(false);
+			final String select = "SELECT * FROM Loan WHERE LoanReturned = FALSE AND LoanEndDate < ?";
+			stmt = con.prepareStatement(select);
+			stmt.setDate(1, Converter.fromUtilDateToSqlDate(new Date()));
+			
 			ResultSet resultSet = stmt.executeQuery();
 			Loan loan;
 			

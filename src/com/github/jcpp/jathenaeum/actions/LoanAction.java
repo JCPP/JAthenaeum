@@ -222,5 +222,17 @@ public class LoanAction extends DispatchAction {
 		actionTarget = "search";
 		return mapping.findForward(actionTarget);
 	}
+	
+	
+	public ActionForward viewAllExpired(ActionMapping mapping, ActionForm form,
+			HttpServletRequest request, HttpServletResponse response)
+					throws Exception {
+		String actionTarget = null;
+
+		ArrayList<Loan> loans = LoanDAO.getAllExpired();
+		request.setAttribute("loans", loans);
+		actionTarget = "viewAllExpired";
+		return mapping.findForward(actionTarget);
+	}
 
 }
