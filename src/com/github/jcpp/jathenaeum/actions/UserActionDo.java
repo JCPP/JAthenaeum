@@ -15,7 +15,6 @@ import org.apache.struts.action.ActionRedirect;
 import org.apache.struts.actions.DispatchAction;
 
 import com.github.jcpp.jathenaeum.User;
-import com.github.jcpp.jathenaeum.beans.LoginForm;
 import com.github.jcpp.jathenaeum.beans.UserForm;
 import com.github.jcpp.jathenaeum.db.dao.UserDAO;
 
@@ -39,7 +38,6 @@ public class UserActionDo extends DispatchAction {
 		//If there are some errors, redirect to the form page
 		if(!actionErrors.isEmpty()){
 			actionTarget = "signupErrors";
-			saveErrors(request, actionErrors); //Save the errors
 			
     		session.setAttribute("errors", actionErrors);
     		session.setAttribute("form", uf);
@@ -86,7 +84,6 @@ public class UserActionDo extends DispatchAction {
 		//If there are some errors, redirect to the form page
 		if(!actionErrors.isEmpty()){
 			actionTarget = "loginErrors";
-			saveErrors(request, actionErrors); //Save the errors
 			
     		session.setAttribute("errors", actionErrors);
     		session.setAttribute("form", uf);

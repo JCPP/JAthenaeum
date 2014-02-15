@@ -48,7 +48,6 @@ public class LoanActionDo extends DispatchAction {
 		//If there are some errors, redirect to the form page
 		if(!actionErrors.isEmpty()){
 			actionTarget = "addErrors";
-			saveErrors(request, actionErrors); //Save the errors
 			
     		session.setAttribute("errors", actionErrors);
     		session.setAttribute("form", uf);
@@ -102,7 +101,6 @@ public class LoanActionDo extends DispatchAction {
 		//If there are some errors, redirect to the form page
 		if(!actionErrors.isEmpty()){
 			actionTarget = "editErrors";
-			saveErrors(request, actionErrors); //Save the errors
 			
     		session.setAttribute("errors", actionErrors);
     		session.setAttribute("form", uf);
@@ -185,7 +183,6 @@ public class LoanActionDo extends DispatchAction {
 		/*
 		if(!actionErrors.isEmpty()){
 			actionTarget = "deleteErrors";
-			saveErrors(request, actionErrors); //Save the errors
 			
 			HttpSession session = request.getSession();
     		session.setAttribute("errors", actionErrors);
