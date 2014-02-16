@@ -19,6 +19,17 @@ Realizzare un’applicazione per la gestione di una biblioteca. L’applicazione
 Documentation
 -------------
 
+### Libraries ###
+The project uses some libraries to simplify and facilitate the work for the creation of the web application:
+
+* Struts;
+* MySql connector.
+
+For a more precise and detailed list, please take a look at the [ivy.xml](https://github.com/JCPP/JAthenaeum/blob/master/ivy.xml) file.
+
+**Note**: most of the libraries that are downloaded after running the build, are dependencies of the libraries mentioned above.
+
+
 
 What you need
 -------------
