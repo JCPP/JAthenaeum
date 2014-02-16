@@ -13,7 +13,7 @@
 		value=""
 	</logic:empty>
 	<logic:notEmpty name="editAuthorForm" property="bornDate">
-		value="${author.bornDate.date}/${author.bornDate.month+1}/${author.bornDate.year+1900}"
+		value="${editAuthorForm.bornDate.date}/${editAuthorForm.bornDate.month+1}/${editAuthorForm.bornDate.year+1900}"
 	</logic:notEmpty>
 	>
 	<textarea name="biography" class="form-control" rows="3" placeholder="Biography">${editAuthorForm.biography}</textarea>
