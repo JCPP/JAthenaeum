@@ -71,6 +71,38 @@ This is the **Extensive Logical Schema**:
 |               | AuthorID           | Integer | 11   | No      | Yes         | Yes      |                       |
 
 
+
+### UML Diagrams ###
+
+For best viewing I preferred to divide the diagrams.
+
+#### Author ####
+
+![Author UML Diagram](https://raw.github.com/JCPP/JAthenaeum/master/doc/classes%20diagram/generated/Author.png)
+
+
+#### Book - Copy- Writes ####
+
+![Book - Copy - Writes UML Diagram](https://raw.github.com/JCPP/JAthenaeum/master/doc/classes%20diagram/generated/Book-Copy-Writes.png)
+
+
+#### Customer ####
+
+![Customer UML Diagram](https://raw.github.com/JCPP/JAthenaeum/master/doc/classes%20diagram/generated/Customer.png)
+
+
+#### Loan ####
+
+![Loan UML Diagram](https://raw.github.com/JCPP/JAthenaeum/master/doc/classes%20diagram/generated/Loan.png)
+
+
+#### User ####
+
+![User UML Diagram](https://raw.github.com/JCPP/JAthenaeum/master/doc/classes%20diagram/generated/User.png)
+
+
+
+
 ### Libraries ###
 
 #### Java side ####
