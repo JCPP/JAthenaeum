@@ -40,6 +40,279 @@ The project uses [bootstrap](http://getbootstrap.com/), the most popular front-e
 
 
 
+### Pages ###
+
+For simplicity will be shown an example of a single operation.
+
+#### Struts Config ####
+
+This project uses a *struts-config.xml* for the configurations of the framework.
+It has a **form-bean** for each **element**.
+For example **user** is defined as follows:
+
+```xml
+<!-- User -->
+<form-bean name="userForm" type="com.github.jcpp.jathenaeum.beans.UserForm"/>
+```
+
+All the action (apart from the index) are managed using a dispatch action. I prefer it because I can centralize all requests and avoid generating redundant code for similar actions.
+
+I added another division between the action that show a form and the action that instead analyze the data and add/update/delete items in the database.
+
+
+Here are the actions for the user:
+
+```xml
+<!-- User -->
+<action path="/user" type="com.github.jcpp.jathenaeum.actions.UserAction" parameter="op">
+	<forward name="signup" path="page.user.signup"/>
+	<forward name="login" path="page.user.login"/>
+	<forward name="logoutSuccess" path="page.user.logout.confirm"/>
+ <forward name="logoutFailed" path="page.user.logout.failed"/>
+ <forward name="alreadyLogged" path="page.user.login.already"/>
+ <forward name="loginRequired" path="page.user.login"/>
+</action>
+
+<!-- User Operations -->
+<action
+ path="/doUser"
+ type="com.github.jcpp.jathenaeum.actions.UserActionDo"
+ name="userForm"
+ scope="request"
+ validate="false"
+ parameter="op">
+ <!-- Sign Up -->
+ <forward name="signupErrors" path="/user.do?op=signup" redirect="true"/>
+ <forward name="signupSuccess" path="page.user.signup.confirm"/>
+ <forward name="signupFailed" path="page.user.signup.failed"/>
+ 
+ <!-- Login -->
+ <forward name="loginErrors" path="/user.do?op=login" redirect="true"/>
+ <forward name="loginSuccess" path="page.user.login.confirm"/>
+ <forward name="loginFailed" path="page.user.login.failed"/>
+ 
+ <!-- Errors -->
+ <forward name="alreadyLogged" path="page.user.login.already"/>
+</action>
+```
+
+The dispatch action uses the **op** parameter to differentiate one from another operation.
+
+
+#### Actions #####
+
+As mentioned earlier, for each item I preferred to manage two action: one for operations and write/update/delete and to display the form and any input errors. 
+**But why?**
+
+* the form elements of struts are not versatile:
+   * you can't add custom attribute and bootstrap do it sometimes (like **required**, **placeholder** or **autofocus**);
+   * you can't use the **date** type for **input** elements;
+   * restricts your freedom.
+
+
+##### Forms #####
+
+As an example see **UserAction.signup(...)**:
+
+
+```java
+public ActionForward signup(ActionMapping mapping, ActionForm form,
+			HttpServletRequest request, HttpServletResponse response)
+			throws Exception {
+	String actionTarget = null;
+	
+	HttpSession session = request.getSession();
+	if(Validator.isLogged(session)){
+		return mapping.findForward("alreadyLogged");
+	}
+
+	ActionErrors actionErrors = (ActionErrors) session.getAttribute("errors");
+	UserForm userForm = (UserForm) session.getAttribute("form");
+	
+	if(actionErrors != null){
+		//Save the errors in this action
+		saveErrors(request, actionErrors);
+	}
+	
+	//Remove attributes from session
+	session.removeAttribute("errors");
+	session.removeAttribute("form");
+	
+
+	//Set the request
+	request.setAttribute("signupForm", userForm);
+	actionTarget = "signup";
+	
+	return mapping.findForward(actionTarget);
+}
+```
+
+It first check if the user is already logged in and in this case redirect him to the **alreadyLogged** page. Now read all errors and the form from session. If actionErrors is not equal to null, save errors within the action. 
+This step is done to allow struts to save all the errors and then display them using:
+
+```html
+<html:errors/>
+```
+
+At this point it can remove all saved objects from the session. Then we set the form to allow struts to use bean or jsp native print. As a last step, it redirects the user to **signup** forward.
+
+
+
+##### Operations #####
+
+As an example see **UserActionDo.signup(...)**:
+
+
+```java
+public ActionForward signup(ActionMapping mapping, ActionForm form,
+			HttpServletRequest request, HttpServletResponse response)
+			throws Exception {
+	String actionTarget = null;
+	
+	HttpSession session = request.getSession();
+	if(Validator.isLogged(session)){
+		return Redirector.alreadyLoggedRedirect(mapping, session);
+	}
+	
+	UserForm uf = (UserForm) form;
+	
+	ActionErrors actionErrors = uf.validateSignUp(mapping, request);
+	
+	//If there are some errors, redirect to the form page
+	if(!actionErrors.isEmpty()){
+		actionTarget = "signupErrors";
+		
+		session.setAttribute("errors", actionErrors);
+		session.setAttribute("form", uf);
+		
+		ActionRedirect redirect = new ActionRedirect(mapping.findForward(actionTarget));
+		return redirect;
+	}
+	
+	User user;
+	
+ if(form != null){
+ 	user = new User(uf);
+ 	
+ 	try{
+ 		if(UserDAO.register(user)){
+ 			actionTarget = "signupSuccess";
+ 		}
+ 		
+ 		//Auto login
+ 		session.setAttribute("user", user);
+ 		
+ 	}catch(Exception e){
+ 		actionTarget = "signupFailed";
+ 	}
+ }
+ else{
+ 	actionTarget = "signupFailed";
+ }
+
+	return mapping.findForward(actionTarget);
+}
+```
+
+It first check if the user is already logged in and in this case redirect him to the **alreadyLogged** page. Now read the form and validate it. If it founds some errors, redirect the user to the form page. If the form is not null, then try to register the new user and auto login. If a problem arises during the registration, the the user will be redirect in an error page, otherwise, it will be informed of the success.
+
+
+#### Tiles ####
+
+This project uses [struts tiles](https://github.com/JCPP/JAthenaeum/blob/master/WebContent/WEB-INF/tiles-defs.xml) to manage the pages.
+Ultimately, all the pages inherit the characteristics of **base.definition.bootstrap**, defined thus:
+
+```xml
+<!-- Base Tiles Bootstrap Definition -->
+<definition name="base.definition.bootstrap" path="/layout/bootstrap-layout.jsp">
+ <put name="style" value="/css/style.css" />
+ <put name="jumbotronEnabled" value="false" />
+ <put name="navbarEnabled" value="true" />
+ <put name="footerEnabled" value="true" />
+ <put name="redirect" value="" />
+ <put name="head" value="/layout/bootstrap-head.jsp" />
+ <put name="jumbotron" value="/layout/bootstrap-jumbotron.jsp" />
+ <put name="navbar" value="/layout/bootstrap-navbar.jsp" />
+ <put name="footer" value="/layout/bootstrap-footer.jsp" />
+</definition>
+```
+
+where:
+
+* **style** defines the css file to load;
+* **jumbotronEnabled** defines if the Jumbotron element must be shown;
+* **navbarEnabled** defines if the navbar element must be shown;
+* **footerEnabled** defines if the footer element must be shown;
+* **redirect** defines the page where you'll be redirect in 3 seconds (if the value is empty, this will not be considered);
+* **head** defines the page to load for the head;
+* **jumbotron** defines the page to load for the jumbotron element;
+* **navbar** defines the page to load for the navbar element;
+* **footer** defines the page to load for the footer element.
+
+At this point, each page extends that stated above, greatly simplifying the statement.
+I used a standard for naming pages: page.**element**.**operation**.**result**, where:
+* **element** defines the element on which you are doing the operation (for example **user** or **customer**);
+* **operation** defines the operation (for example **signup** or **add**);
+* **result** (optional) defines the result of the operation (for example: **failed** or **confirm**).
+
+You can take a look at the declaration of the pages to the functionality of the signup:
+
+```xml
+<!-- Sign up page -->
+<definition name="page.user.signup" extends="base.definition.bootstrap">
+ <put name="title" value="Signup" />
+ <put name="body" value="/layout/user/signup.jsp" />
+ <put name="style" value="css/signup.css" />
+</definition>
+
+<!-- Failed sign up -->
+<definition name="page.user.signup.failed" extends="base.definition.bootstrap">
+ <put name="title" value="Failed Signup" />
+ <put name="body" value="/layout/user/failedSignup.jsp" />
+</definition>
+
+<!-- Confirm sign up -->
+<definition name="page.user.signup.confirm" extends="base.definition.bootstrap">
+ <put name="redirect" value="index.do" />
+ <put name="title" value="Confirm Signup" />
+ <put name="body" value="/layout/user/confirmSignup.jsp" />
+</definition>
+```
+
+**page.user.signup** defines a custom style, while **page.user.signup.confirm** defines a redirect after the signup.
+
+
+Now take a look at signup.jsp:
+
+```html
+<%@ page contentType="text/html; charset=iso-8859-1" language="java" %>
+<%@ taglib uri="http://struts.apache.org/tags-bean" prefix="bean" %>
+<%@ taglib uri="http://struts.apache.org/tags-html" prefix="html" %>
+
+<html:errors/>
+
+<form class="form-signup" role="form" action="doUser.do?op=signup" method="post" name="signupForm">
+	<h2 class="form-signup-heading">Sign Up</h2>
+	<input type="email" name="email" class="form-control" placeholder="Email address" value="${signupForm.email}" required autofocus>
+	<input type="password" name="password" class="form-control" placeholder="Password" required>
+	<input type="password" name="passwordControl" class="form-control" placeholder="Retype Password" required>
+	<input type="text" name="name" class="form-control" placeholder="Name" value="${signupForm.name}">
+	<input type="text" name="surname" class="form-control" placeholder="Surname" value="${signupForm.surname}">
+	<input type="date" name="bornDate" class="form-control" placeholder="01/02/1970" value="${signupForm.bornDate}">
+	<button class="btn btn-lg btn-primary btn-block" type="submit">Sign up</button>
+</form>
+```
+
+It prints all the errors if any and show the form with the value set by **UserAction**. This is the only page that has different content of all the layout (apart from the definition of tiles that can avoid showing for example the jumbotron).
+
+
+
+##### Structure #####
+
+The pages are divided into sub-folders based on the element. All the **.jsp** files are in the WebContent/layout directory. Here we can also find the files that build the layout.
+
+
+
 ### Tools ###
 
 The project uses some tools to simplify and facilitate the work for the creation of the web application:
