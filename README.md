@@ -1,7 +1,7 @@
 JAthenaeum
 ==========
 
-![JAthenaeum](https://raw.github.com/JCPP/JAthenaeum/master/WebContent/image/logo.png)
+![JAthenaeum](https://raw.github.com/JCPP/JAthenaeum/master/WebContent/image/logoonlybook.png)
 
 Java Web Application to handle a library.
 
