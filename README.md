@@ -576,3 +576,19 @@ After login you will be redirect to the home page that will show you the operati
 ##### Search #####
 
 ![Search Loans](https://raw.github.com/JCPP/JAthenaeum/master/doc/screenshots/SearchLoans.PNG)
+
+
+
+
+#### User ####
+
+
+##### Login #####
+
+![User Login](https://raw.github.com/JCPP/JAthenaeum/master/doc/screenshots/UserLogin.PNG)
+
+
+##### Sign Up #####
+
+![User Sign Up](https://raw.github.com/JCPP/JAthenaeum/master/doc/screenshots/UserSignUp.PNG)
+
