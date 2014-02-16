@@ -19,6 +19,7 @@ Realizzare un’applicazione per la gestione di una biblioteca. L’applicazione
 Documentation
 -------------
 
+
 ### Libraries ###
 
 #### Java side ####
@@ -36,6 +37,16 @@ For a more precise and detailed list, please take a look at the [ivy.xml](https:
 #### Front-End side #####
 
 The project uses [bootstrap](http://getbootstrap.com/), the most popular front-end framework for developing responsive, mobile first projects on the web.
+
+
+
+### Tools ###
+
+The project uses some tools to simplify and facilitate the work for the creation of the web application:
+
+* [Eclipse](http://eclipse.org/): an integrated development environment (IDE);
+* [Ivy](http://ant.apache.org/ivy/): The agile dependency manager.
+
 
 
 What you need
