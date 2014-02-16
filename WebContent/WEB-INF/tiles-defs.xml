@@ -93,6 +93,12 @@
 		<put name="body" value="/layout/user/confirmLogout.jsp" />
 	</definition>
 	
+	<!-- Already Logged -->
+	<definition name="page.user.login.already" extends="base.definition.bootstrap">
+		<put name="title" value="Already Logged" />
+		<put name="body" value="/layout/user/alreadyLogged.jsp" />
+	</definition>
+	
 	
 	
 	<!-- Add Author -->

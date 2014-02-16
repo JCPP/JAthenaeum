@@ -17,6 +17,8 @@ import org.apache.struts.actions.DispatchAction;
 import com.github.jcpp.jathenaeum.User;
 import com.github.jcpp.jathenaeum.beans.UserForm;
 import com.github.jcpp.jathenaeum.db.dao.UserDAO;
+import com.github.jcpp.jathenaeum.utils.Redirector;
+import com.github.jcpp.jathenaeum.utils.Validator;
 
 /**
  * @author <a href="https://github.com/DavidePastore">DavidePastore</a>
@@ -30,6 +32,9 @@ public class UserActionDo extends DispatchAction {
 		String actionTarget = null;
 		
 		HttpSession session = request.getSession();
+		if(Validator.isLogged(session)){
+			return Redirector.alreadyLoggedRedirect(mapping, session);
+		}
 		
 		UserForm uf = (UserForm) form;
 		
@@ -76,6 +81,9 @@ public class UserActionDo extends DispatchAction {
 		String actionTarget = null;
 		
 		HttpSession session = request.getSession();
+		if(Validator.isLogged(session)){
+			return Redirector.alreadyLoggedRedirect(mapping, session);
+		}
 
 		UserForm uf = (UserForm) form;
 		

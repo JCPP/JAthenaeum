@@ -13,7 +13,6 @@ import org.apache.struts.action.ActionForward;
 import org.apache.struts.action.ActionMapping;
 import org.apache.struts.actions.DispatchAction;
 
-import com.github.jcpp.jathenaeum.beans.LoginForm;
 import com.github.jcpp.jathenaeum.beans.UserForm;
 import com.github.jcpp.jathenaeum.utils.Redirector;
 import com.github.jcpp.jathenaeum.utils.Validator;
@@ -30,6 +29,9 @@ public class UserAction extends DispatchAction {
 		String actionTarget = null;
 		
 		HttpSession session = request.getSession();
+		if(Validator.isLogged(session)){
+			return mapping.findForward("alreadyLogged");
+		}
 
 		ActionErrors actionErrors = (ActionErrors) session.getAttribute("errors");
 		UserForm userForm = (UserForm) session.getAttribute("form");
@@ -57,12 +59,16 @@ public class UserAction extends DispatchAction {
 		String actionTarget = null;
 		
 		HttpSession session = request.getSession();
+		if(Validator.isLogged(session)){
+			return mapping.findForward("alreadyLogged");
+		}
 
 		ActionErrors actionErrors = (ActionErrors) session.getAttribute("errors");
 		UserForm userForm = (UserForm) session.getAttribute("form");
 		
 		if(actionErrors != null){
 			//Save the errors in this action
+			System.out.println("Saving errors in login!");
 			saveErrors(request, actionErrors);
 		}
 		
@@ -86,7 +92,8 @@ public class UserAction extends DispatchAction {
 		
 		HttpSession session = request.getSession();
 		if(!Validator.isLogged(session)){
-			return Redirector.loginRequiredRedirect(mapping, session);
+			saveErrors(request, Validator.getLoginRequiredError());
+			return mapping.findForward("loginRequired");
 		}
 
 		session.removeAttribute("user");

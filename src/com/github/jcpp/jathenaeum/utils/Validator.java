@@ -10,6 +10,9 @@ import java.util.regex.Pattern;
 
 import javax.servlet.http.HttpSession;
 
+import org.apache.struts.action.ActionErrors;
+import org.apache.struts.action.ActionMessage;
+
 import com.github.jcpp.jathenaeum.db.dao.AuthorDAO;
 import com.github.jcpp.jathenaeum.db.dao.BookDAO;
 import com.github.jcpp.jathenaeum.db.dao.CustomerDAO;
@@ -158,6 +161,20 @@ public class Validator {
 	 */
 	public static boolean isLogged(HttpSession session){
 		return session.getAttribute("user") != null;
+	}
+	
+	
+	public static ActionErrors getAlreadyLoggedError(){
+		ActionErrors actionErrors = new ActionErrors();
+		actionErrors.add("alreadylogged", new ActionMessage("user.login.already"));
+		return actionErrors;
+	}
+	
+	
+	public static ActionErrors getLoginRequiredError(){
+		ActionErrors actionErrors = new ActionErrors();
+		actionErrors.add("loginrequired", new ActionMessage("user.login.required"));
+		return actionErrors;
 	}
 
 }
