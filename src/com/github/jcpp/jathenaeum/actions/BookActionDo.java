@@ -318,7 +318,7 @@ public class BookActionDo extends DispatchAction {
     		return redirect;
 		}
 		
-		ActionErrors actionErrors = uf.validate(mapping, request);
+		ActionErrors actionErrors = uf.validateNumberOfCopies(mapping, request);
 		int id = Integer.parseInt(request.getParameter("id"));
 		
 		//If there are some errors, redirect to the form page
