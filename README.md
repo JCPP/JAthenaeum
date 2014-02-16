@@ -20,6 +20,9 @@ Documentation
 -------------
 
 ### Libraries ###
+
+#### Java side ####
+
 The project uses some libraries to simplify and facilitate the work for the creation of the web application:
 
 * Struts;
@@ -29,6 +32,10 @@ For a more precise and detailed list, please take a look at the [ivy.xml](https:
 
 **Note**: most of the libraries that are downloaded after running the build, are dependencies of the libraries mentioned above.
 
+
+#### Front-End side #####
+
+The project uses [bootstrap](http://getbootstrap.com/), the most popular front-end framework for developing responsive, mobile first projects on the web.
 
 
 What you need
