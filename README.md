@@ -65,9 +65,9 @@ Here are the actions for the user:
 ```xml
 <!-- User -->
 <action path="/user" type="com.github.jcpp.jathenaeum.actions.UserAction" parameter="op">
-	<forward name="signup" path="page.user.signup"/>
-	<forward name="login" path="page.user.login"/>
-	<forward name="logoutSuccess" path="page.user.logout.confirm"/>
+ <forward name="signup" path="page.user.signup"/>
+ <forward name="login" path="page.user.login"/>
+ <forward name="logoutSuccess" path="page.user.logout.confirm"/>
  <forward name="logoutFailed" path="page.user.logout.failed"/>
  <forward name="alreadyLogged" path="page.user.login.already"/>
  <forward name="loginRequired" path="page.user.login"/>
