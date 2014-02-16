@@ -18,8 +18,6 @@
 		<div class="collapse navbar-collapse"
 			id="bs-example-navbar-collapse-1">
 			<ul class="nav navbar-nav navbar-left">
-				<li><a href="#">Link</a></li>
-				<li><a href="#">Link</a></li>
 				<!-- User present -->
 				<logic:present name="user" scope="session">
 					<li class="dropdown
@@ -84,7 +82,7 @@
 				
 				<!-- User present -->
 				<logic:present name="user" scope="session">
-					<a class="btn btn-default navbar-btn" href="/manageAccount.do">Manage Account</a>
+					<!--<a class="btn btn-default navbar-btn" href="/manageAccount.do">Manage Account</a> -->
 					<a class="btn btn-default navbar-btn" href="user.do?op=logout">Logout</a>
 				</logic:present>
 			</div>
