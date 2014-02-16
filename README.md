@@ -438,4 +438,141 @@ How it works
 1. Import in Eclipse;
 2. Run build.xml (with **retrieve** option);
 3. Go to [url](http://localhost:8080/JAthenaeum/index.do) (if your server is listening on 8080 port);
-4. Laugh hysterically
+4. Laugh hysterically.
+
+
+### Let's get into JAthenaeum ###
+
+The application uses a system with limited access: only registered users can access the system. You are free to create your own account and use it to login. If you entered the example data, you will be able to login using:
+**test@test.it** and **test**.
+
+After login you will be redirect to the home page that will show you the operations that you can do. In reality, these are not all because some of them are related to a single element.
+
+
+#### Home Page ####
+
+![Home Page](https://raw.github.com/JCPP/JAthenaeum/master/doc/screenshots/HomePage.png)
+
+
+
+#### Author ####
+
+
+##### Add #####
+
+![Add Author](https://raw.github.com/JCPP/JAthenaeum/master/doc/screenshots/AddAuthor.PNG)
+
+
+##### Edit #####
+
+![Edit Author](https://raw.github.com/JCPP/JAthenaeum/master/doc/screenshots/EditAuthor.PNG)
+
+
+##### Delete #####
+
+![Delete Author](https://raw.github.com/JCPP/JAthenaeum/master/doc/screenshots/DeleteAuthor.PNG)
+
+
+##### View All #####
+
+![View All Authors](https://raw.github.com/JCPP/JAthenaeum/master/doc/screenshots/ViewAllAuthors.PNG)
+
+
+##### Search #####
+
+![Search Authors](https://raw.github.com/JCPP/JAthenaeum/master/doc/screenshots/SearchAuthors.PNG)
+
+
+
+
+#### Book ####
+
+
+##### Add #####
+
+![Add Book](https://raw.github.com/JCPP/JAthenaeum/master/doc/screenshots/AddBook.PNG)
+
+
+##### Edit #####
+
+![Edit Book](https://raw.github.com/JCPP/JAthenaeum/master/doc/screenshots/EditBook.PNG)
+
+
+##### Delete #####
+
+![Delete Book](https://raw.github.com/JCPP/JAthenaeum/master/doc/screenshots/DeleteBook.PNG)
+
+
+##### Manage Copies #####
+
+![Manage Book Copies](https://raw.github.com/JCPP/JAthenaeum/master/doc/screenshots/ManageBookCopies.PNG)
+
+
+##### View All #####
+
+![View All Books](https://raw.github.com/JCPP/JAthenaeum/master/doc/screenshots/ViewAllBooks.PNG)
+
+
+##### Search #####
+
+![Search Books](https://raw.github.com/JCPP/JAthenaeum/master/doc/screenshots/SearchBooks.PNG)
+
+
+
+
+#### Customer ####
+
+
+##### Add #####
+
+![Add Customer](https://raw.github.com/JCPP/JAthenaeum/master/doc/screenshots/AddCustomer.PNG)
+
+
+##### Edit #####
+
+![Edit Customer](https://raw.github.com/JCPP/JAthenaeum/master/doc/screenshots/EditCustomer.PNG)
+
+
+##### Delete #####
+
+![Delete Customer](https://raw.github.com/JCPP/JAthenaeum/master/doc/screenshots/DeleteCustomer.PNG)
+
+
+##### View All #####
+
+![View All Customers](https://raw.github.com/JCPP/JAthenaeum/master/doc/screenshots/ViewAllCustomers.PNG)
+
+
+
+
+#### Loan ####
+
+
+##### Add #####
+
+![Add Loan](https://raw.github.com/JCPP/JAthenaeum/master/doc/screenshots/AddLoan.PNG)
+
+
+##### Edit #####
+
+![Edit Loan](https://raw.github.com/JCPP/JAthenaeum/master/doc/screenshots/EditLoan.PNG)
+
+
+##### Delete #####
+
+![Delete Loan](https://raw.github.com/JCPP/JAthenaeum/master/doc/screenshots/DeleteLoan.PNG)
+
+
+##### View All #####
+
+![View All Loans](https://raw.github.com/JCPP/JAthenaeum/master/doc/screenshots/ViewAllLoans.PNG)
+
+
+##### View All Expired #####
+
+![View All Expired Loans](https://raw.github.com/JCPP/JAthenaeum/master/doc/screenshots/ViewAllExpiredLoans.PNG)
+
+
+##### Search #####
+
+![Search Loans](https://raw.github.com/JCPP/JAthenaeum/master/doc/screenshots/SearchLoans.PNG)
