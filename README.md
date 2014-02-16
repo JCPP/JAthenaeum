@@ -71,6 +71,38 @@ This is the **Extensive Logical Schema**:
 |               | AuthorID           | Integer | 11   | No      | Yes         | Yes      |                       |
 
 
+
+### UML Diagrams ###
+
+For best viewing I preferred to divide the diagrams.
+
+#### Author ####
+
+![Author UML Diagram](https://raw.github.com/JCPP/JAthenaeum/master/doc/classes%20diagram/generated/Author.png)
+
+
+#### Book - Copy- Writes ####
+
+![Book - Copy - Writes UML Diagram](https://raw.github.com/JCPP/JAthenaeum/master/doc/classes%20diagram/generated/Book-Copy-Writes.png)
+
+
+#### Customer ####
+
+![Customer UML Diagram](https://raw.github.com/JCPP/JAthenaeum/master/doc/classes%20diagram/generated/Customer.png)
+
+
+#### Loan ####
+
+![Loan UML Diagram](https://raw.github.com/JCPP/JAthenaeum/master/doc/classes%20diagram/generated/Loan.png)
+
+
+#### User ####
+
+![User UML Diagram](https://raw.github.com/JCPP/JAthenaeum/master/doc/classes%20diagram/generated/User.png)
+
+
+
+
 ### Libraries ###
 
 #### Java side ####
@@ -376,6 +408,8 @@ The project uses some tools to simplify and facilitate the work for the creation
 What you need
 -------------
 
+### Eclipse Side ###
+
 * Java EE Eclipse or Eclipse with all the necessary plugin for Java EE;
 * IvyDE;
 * Tomcat v.6;
@@ -387,7 +421,15 @@ What you need
   * Name: **basedir**
   * Value: **${project_loc}**
 * Set **Targeted Runtimes** for the project;
-* Press **F5** on the project name in the **Project Explorer**.
+* Press **F5** on the project name in the **Project Explorer**;
+
+
+### MySql Side ###
+
+* Start the MySql service;
+* Edit the **WebContent/META-INF/context.xml** file with your info (username and password);
+* Create the database using the **sql/query.sql** file;
+* Add the example data using the **sql/insert.sql** file.
 
 
 How it works
