@@ -34,41 +34,41 @@ The **E-R model** is the following:
 This is the **Extensive Logical Schema**:
 
 
-| Table Name    | Field Name         | Type    | Size | Primary | Foreign Key | Not Null | Description           |
-| ------------- |:------------------:| -----:  |-----:|--------:|------------:|---------:|----------------------:|
-| **User**      | UserID             | Integer | 11   | Yes     | No          | No       |                       |
-|               | UserEmail          | String  | 50   | No      | No          | Yes      |                       |
-|               | UserPassword       | String  | 50   | No      | No          | Yes      |                       |
-|               | UserName           | String  | 50   | No      | No          | No       |                       |
-|               | UserSurname        | String  | 50   | No      | No          | No       |                       |
-|               | UserBornDate       | Date    | 10   | No      | No          | No       |                       |
-| **Customer**  | CustomerCardNumber | Integer | 11   | Yes     | No          | No       |                       |
-|               | CustomerEmail      | String  | 50   | No      | No          | Yes      |                       |
-|               | CustomerName       | String  | 50   | No      | No          | Yes      |                       |
-|               | CustomerSurname    | String  | 50   | No      | No          | Yes      |                       |
-| **Book**      | BookID             | Integer | 11   | Yes     | No          | No       |                       |
-|               | BookTitle          | String  | 50   | No      | No          | Yes      |                       |
-|               | BookCover          | String  | 200  | No      | No          | No       | The path to the cover |
-|               | BookGenre          | String  | 50   | No      | No          | No       |                       |
-|               | BookIsbnCode       | String  | 13   | No      | No          | No       |                       |
-|               | BookDescription    | String  | 500  | No      | No          | No       |                       |
-| **Copy**      | CopyID             | Integer | 11   | Yes     | No          | No       |                       |
-|               | BookID             | Integer | 11   | No      | Yes         | Yes      |                       |
-| **Loan**      | LoanID             | Integer | 11   | Yes     | No          | No       | Customer ↔ Copy       |
-|               | CustomerCardNumber | Integer | 11   | No      | Yes         | Yes      |                       |
-|               | CopyID             | Integer | 11   | No      | Yes         | Yes      |                       |
-|               | LoanStartDate      | Date    | 10   | No      | No          | Yes      |                       |
-|               | LoanEndDate        | Date    | 10   | No      | No          | Yes      |                       |
-|               | LoanReturned       | Boolean |      | No      | No          | Yes      |                       |
-| **Author**    | AuthorID           | Integer | 11   | Yes     | No          | No       |                       |
-|               | AuthorName         | String  | 50   | No      | No          | Yes      |                       |
-|               | AuthorSurname      | String  | 50   | No      | No          | Yes      |                       |
-|               | AuthorPhoto        | String  | 200  | No      | No          | No       | The path to the photo |
-|               | AuthorBornDate     | Date    | 10   | No      | No          | No       |                       |
-|               | AuthorBiography    | String  | 1000 | No      | No          | No       |                       |
-| **Writes**    | WritesID           | Integer | 11   | Yes     | No          | No       | Author ↔ Book         |
-|               | BookID             | Integer | 11   | No      | Yes         | Yes      |                       |
-|               | AuthorID           | Integer | 11   | No      | Yes         | Yes      |                       |
+| Table Name    | Field Name         | Type    | Size  | Primary | Foreign Key | Not Null | Description           |
+| ------------- |:------------------:| -----:  |------:|--------:|------------:|---------:|----------------------:|
+| **User**      | UserID             | Integer | 11    | Yes     | No          | No       |                       |
+|               | UserEmail          | String  | 50    | No      | No          | Yes      |                       |
+|               | UserPassword       | String  | 50    | No      | No          | Yes      |                       |
+|               | UserName           | String  | 50    | No      | No          | No       |                       |
+|               | UserSurname        | String  | 50    | No      | No          | No       |                       |
+|               | UserBornDate       | Date    | 10    | No      | No          | No       |                       |
+| **Customer**  | CustomerCardNumber | Integer | 11    | Yes     | No          | No       |                       |
+|               | CustomerEmail      | String  | 50    | No      | No          | Yes      |                       |
+|               | CustomerName       | String  | 50    | No      | No          | Yes      |                       |
+|               | CustomerSurname    | String  | 50    | No      | No          | Yes      |                       |
+| **Book**      | BookID             | Integer | 11    | Yes     | No          | No       |                       |
+|               | BookTitle          | String  | 50    | No      | No          | Yes      |                       |
+|               | BookCover          | String  | 200   | No      | No          | No       | The path to the cover |
+|               | BookGenre          | String  | 50    | No      | No          | No       |                       |
+|               | BookIsbnCode       | String  | 13    | No      | No          | No       |                       |
+|               | BookDescription    | String  | 10000 | No      | No          | No       |                       |
+| **Copy**      | CopyID             | Integer | 11    | Yes     | No          | No       |                       |
+|               | BookID             | Integer | 11    | No      | Yes         | Yes      |                       |
+| **Loan**      | LoanID             | Integer | 11    | Yes     | No          | No       | Customer ↔ Copy       |
+|               | CustomerCardNumber | Integer | 11    | No      | Yes         | Yes      |                       |
+|               | CopyID             | Integer | 11    | No      | Yes         | Yes      |                       |
+|               | LoanStartDate      | Date    | 10    | No      | No          | Yes      |                       |
+|               | LoanEndDate        | Date    | 10    | No      | No          | Yes      |                       |
+|               | LoanReturned       | Boolean |       | No      | No          | Yes      |                       |
+| **Author**    | AuthorID           | Integer | 11    | Yes     | No          | No       |                       |
+|               | AuthorName         | String  | 50    | No      | No          | Yes      |                       |
+|               | AuthorSurname      | String  | 50    | No      | No          | Yes      |                       |
+|               | AuthorPhoto        | String  | 200   | No      | No          | No       | The path to the photo |
+|               | AuthorBornDate     | Date    | 10    | No      | No          | No       |                       |
+|               | AuthorBiography    | String  | 20000 | No      | No          | No       |                       |
+| **Writes**    | WritesID           | Integer | 11    | Yes     | No          | No       | Author ↔ Book         |
+|               | BookID             | Integer | 11    | No      | Yes         | Yes      |                       |
+|               | AuthorID           | Integer | 11    | No      | Yes         | Yes      |                       |
 
 
 
