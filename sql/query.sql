@@ -33,7 +33,7 @@ CREATE TABLE Book (
 	BookCover varchar(200),
 	BookGenre varchar(50),
 	BookIsbnCode varchar(13),
-	BookDescription varchar(500)
+	BookDescription varchar(10000)
 );
 
 
@@ -71,7 +71,7 @@ CREATE TABLE Author (
 	AuthorSurname varchar(50) NOT NULL,
 	AuthorPhoto varchar(200),
 	AuthorBornDate date,
-	AuthorBiography varchar(1000)
+	AuthorBiography varchar(20000)
 );
 
 
