@@ -592,3 +592,12 @@ After login you will be redirect to the home page that will show you the operati
 
 ![User Sign Up](https://raw.github.com/JCPP/JAthenaeum/master/doc/screenshots/UserSignUp.PNG)
 
+
+
+Team Members
+------------
+
+* [JCPP](https://github.com/JCPP):
+  * [Davide Pastore](https://github.com/DavidePastore);
+  * [Matteo Calò](https://github.com/Wanted92);
+  * [Alessandro Pendinelli](https://github.com/pendy03).
