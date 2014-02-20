@@ -18,7 +18,6 @@
 </logic:notEqual>
 
 <form class="form-inline" role="form" action="doBook.do?op=search" method="post" name="searchBookForm">
-	<h2 class="form-signup-heading">Search Books</h2>
 	<input type="text" name="title" class="form-control" placeholder="Title" value="${book.title}" autofocus>
 	<input type="text" name="cover" class="form-control" placeholder="Cover" value="${book.cover}">
 	<input type="text" name="genre" class="form-control" placeholder="Genre" value="${book.genre}">

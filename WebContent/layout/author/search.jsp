@@ -11,7 +11,6 @@
 </logic:notEqual>
 
 <form class="form-inline" role="form" action="doAuthor.do?op=search" method="post" name="searchAuthorForm">
-	<h2 class="form-signup-heading">Search Authors</h2>
 	<input type="text" name="name" class="form-control" placeholder="Name" value="${author.name}" autofocus>
 	<input type="text" name="surname" class="form-control" placeholder="Surname" value="${author.surname}">
 	<input type="text" name="photo" class="form-control" placeholder="Photo URL" value="${author.photo}">
